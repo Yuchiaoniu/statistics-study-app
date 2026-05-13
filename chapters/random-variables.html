@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>隨機變數 · 統計學學習工具</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <a href="../" class="logo">統計學學習工具</a>
+      <ul>
+        <li><a href="../chapters/syllabus.html">課程目錄</a></li>
+        <li><a href="../chapters/glossary.html">速查</a></li>
+        <li><a href="../chapters/random-variables.html">隨機變數</a></li>
+        <li><a href="../chapters/continuous-distributions.html">連續型分配</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>第 2 章 · 隨機變數</h1>
+
+    <div class="concept">
+      <h3>觀念 1：機率分配的本質</h3>
+      <p>「分配」字面意義就是「分一分、配一配」。<strong>機率分配 = 把總機率 1 這塊餅分配給所有可能結果的規則</strong>。</p>
+      <p>本質是一個函數：</p>
+      <ul>
+        <li>輸入：可能的結果（x 值）</li>
+        <li>輸出：對應的機率（離散）或機率密度（連續）</li>
+      </ul>
+      <p>滿足兩條公理：</p>
+      <div class="formula">$$P(x) \geq 0 \quad \text{且} \quad \sum_x P(x) = 1 \text{ 或 } \int_{-\infty}^{\infty} f(x)\,dx = 1$$</div>
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$P(x)$</dt><dd>隨機變數取值 $x$ 的機率（離散），值介於 0 到 1 之間</dd>
+          <dt>$\geq$</dt><dd>「大於或等於」</dd>
+          <dt>$\sum$</dt><dd>希臘字 sigma，意思是「加總」——把後面的東西全部加起來</dd>
+          <dt>$\int$</dt><dd>「積分」符號，是拉長的 S，代表連續版本的「加總」</dd>
+          <dt>$-\infty,\ \infty$</dt><dd>負無窮大、正無窮大（積分從整條實數線走過）</dd>
+          <dt>$f(x)$</dt><dd>機率密度函數（連續），給定 $x$ 輸出該點的「密度」</dd>
+          <dt>$dx$</dt><dd>對 $x$ 的微小寬度，要跟 $f(x)$ 相乘才會變成機率</dd>
+        </dl>
+      </div>
+
+      <h4>為何連續型 P(X = x₀) = 0？</h4>
+      <p>連續型有<strong>無限多個</strong>可能值要瓜分總機率 1，每個單點分到的就是「無限小」即 0。機率藏在密度中，必須對一段區間積分才不為零。</p>
+    </div>
+
+    <div class="concept">
+      <h3>觀念 2：PMF / PDF / CDF</h3>
+      <p><strong>三個英文縮寫的全名：</strong></p>
+      <ul>
+        <li><strong>PMF</strong> = Probability <strong>M</strong>ass Function（機率質量函數，離散用）</li>
+        <li><strong>PDF</strong> = Probability <strong>D</strong>ensity Function（機率密度函數,連續用）</li>
+        <li><strong>CDF</strong> = <strong>C</strong>umulative Distribution Function（累積分配函數，通用）</li>
+      </ul>
+
+      <h4>離散 vs 連續 CDF</h4>
+      <ul>
+        <li><strong>離散型 CDF</strong>：階梯函數，每個可能值處跳一階，跳高 = 該點 PMF</li>
+        <li><strong>連續型 CDF</strong>：平滑曲線，沒有跳點，<span style="font-family:monospace">PDF = F'(x)</span></li>
+      </ul>
+
+      <figure class="concept-image">
+        <span class="label">📖 講義原圖</span>
+        <img src="../images/random-variables/discrete-vs-continuous-cdf.png" alt="離散 CDF 階梯 vs 連續 CDF 平滑曲線">
+        <figcaption>左：離散 CDF 是階梯函數（有跳點）；右：連續 CDF 是平滑曲線（無跳點）</figcaption>
+      </figure>
+
+      <figure class="concept-image">
+        <span class="label">📖 講義原圖</span>
+        <img src="../images/random-variables/continuous-formal-definition.png" alt="連續型隨機變數的正式定義">
+        <figcaption>連續型隨機變數的正式定義：F(x) = P(X ≤ x) = ∫f(x)dx</figcaption>
+      </figure>
+
+      <div class="misconception">
+        <strong>⚠ 最常見的誤解：PDF 不是機率！</strong>
+        <table class="compare">
+          <thead>
+            <tr><th>情境</th><th>對嗎？</th><th>說明</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>離散：PMF $f(3) = 0.4$ → $P(X = 3) = 0.4$</td>
+              <td class="ok">✓</td>
+              <td>PMF 的值「就是」機率</td>
+            </tr>
+            <tr>
+              <td>連續：PDF $f(3) = 0.4$ → $P(X = 3) = 0.4$</td>
+              <td class="bad">✗</td>
+              <td>PDF 不是機率；連續型 $P(X = 3) = 0$，永遠</td>
+            </tr>
+            <tr>
+              <td>連續：PDF $f(x) = 2$ 是合法 PDF</td>
+              <td class="ok">✓</td>
+              <td>PDF 值可以 &gt; 1，例如 $U(0, 0.5)$ 的 $f(x) = 2$</td>
+            </tr>
+            <tr>
+              <td>連續：機率需要積分才出得來</td>
+              <td class="ok">✓</td>
+              <td>$P(a \le X \le b) = \int_a^b f(x)\,dx$（曲線下面積）</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="punchline">PMF 是「<strong>機率</strong>」（probability mass），PDF 是「<strong>機率密度</strong>」（probability density）。<strong>密度 × 寬度 = 機率</strong>，這就是為什麼連續型一定要積分。</p>
+      </div>
+
+      <p>對單點機率的拆解：</p>
+      <div class="formula">$$P(X = x_0) = F(x_0) - F(x_0^-)$$</div>
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$X$</dt><dd>隨機變數（大寫，表示「會變動的量」）</dd>
+          <dt>$x_0$</dt><dd>某個特定的數值（小寫，下標 0 只是標籤，不是次方）</dd>
+          <dt>$P(X = x_0)$</dt><dd>「$X$ 剛好等於 $x_0$ 這件事的機率」</dd>
+          <dt>$F$</dt><dd>累積分配函數（CDF），$F(x) = P(X \le x)$</dd>
+          <dt>$x_0^-$</dt><dd>「從左邊逼近 $x_0$」的位置——也就是 $x_0$ 之前的瞬間。負號不是次方，是「左極限」記號</dd>
+        </dl>
+      </div>
+      <p>離散型：跳高（&gt; 0）；連續型：等於 0（CDF 左連續且右連續）。</p>
+    </div>
+
+    <div class="concept">
+      <h3>觀念 3：Σ 與 ∫ 的統一性</h3>
+      <p>積分本質就是「<strong>無限多個無限薄條的加總</strong>」。</p>
+      <div class="formula">$$\int_a^b f(x)\,dx = \lim_{n\to\infty} \sum_{i=1}^{n} f(x_i)\,\Delta x$$</div>
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$\int_a^b$</dt><dd>從 $a$ 積分到 $b$（$a$ 是下限、$b$ 是上限）</dd>
+          <dt>$f(x_i)$</dt><dd>函數 $f$ 在第 $i$ 個取樣點的值，可想像為一根長方形的「高度」</dd>
+          <dt>$\Delta x$</dt><dd>每根長方形的「寬度」（$\Delta$ 是希臘字 delta，表示「微小差異」）</dd>
+          <dt>$f(x_i)\,\Delta x$</dt><dd>「高 × 寬」= 一根長方形的面積</dd>
+          <dt>$\sum_{i=1}^{n}$</dt><dd>把 $n$ 根長方形的面積加起來</dd>
+          <dt>$\lim_{n\to\infty}$</dt><dd>讓 $n$ 趨近無限大（也就是讓寬度趨近 0、根數趨近無限）</dd>
+        </dl>
+      </div>
+      <p><strong>∫ 符號就是拉長的 S，S 來自 Sum（加總）。</strong></p>
+      <p>差別在於：</p>
+      <ul>
+        <li>離散：可數的「機率塊」 → 用 Σ 一顆顆加</li>
+        <li>連續：不可數，需切成無限薄條 → 用 ∫ 取極限</li>
+      </ul>
+      <p>底層邏輯都是「把該區間內的所有機率聚合起來」。</p>
+
+      <figure class="concept-image">
+        <span class="label">📖 講義原圖</span>
+        <img src="../images/random-variables/histogram-to-smooth-curve.png" alt="直方圖過渡到平滑曲線">
+        <figcaption>「若把間距逐漸變小」：離散直方圖的極限就是連續 PDF 曲線</figcaption>
+      </figure>
+    </div>
+
+    <div class="concept">
+      <h3>觀念 4：機率「藏在面積裡」（連續型專屬）</h3>
+      <p>離散型的 PMF 值「就是」機率；但連續型的 PDF 值不是機率——機率藏在<strong>曲線下的面積</strong>。下圖把這件事畫出來：</p>
+
+      <div class="area-viz">
+        <canvas id="area-viz-canvas"></canvas>
+      </div>
+
+      <div class="area-controls">
+        <label>a = <input type="number" id="area-a" value="-0.7" step="0.1" min="-3.5" max="3.5"></label>
+        <label>b = <input type="number" id="area-b" value="1.2" step="0.1" min="-3.5" max="3.5"></label>
+        <span class="area-output">P(a ≤ X ≤ b) = <strong id="area-result">—</strong></span>
+      </div>
+
+      <div class="formula">$$P(a \le X \le b) = \int_a^b f(x)\,dx = \text{曲線下面積}$$</div>
+
+      <p>把 a 拖到 −∞、b 拖到 ∞，整條曲線下的面積會恰好等於 <strong>1</strong>，這就是「總機率 = 1」的視覺呈現。</p>
+      <p>所以連續型的兩個關鍵口訣：</p>
+      <ul>
+        <li><strong>PDF f(x) 不是機率</strong>，是「機率密度」（單位寬度的機率）</li>
+        <li><strong>機率 = 曲線下的面積</strong>，要靠 ∫ 算出來，不能用「點的高度」</li>
+      </ul>
+    </div>
+
+    <section class="quiz-section">
+      <h2>選擇題 · 機率分配本質</h2>
+      <div id="quiz-essence"></div>
+    </section>
+
+    <section class="quiz-section">
+      <h2>選擇題 · PMF / PDF / CDF</h2>
+      <div id="quiz-pmf-pdf-cdf"></div>
+    </section>
+  </main>
+
+  <script src="../js/quiz.js"></script>
+  <script src="../js/area-viz.js"></script>
+  <script>
+    loadQuiz('probability-essence', 'quiz-essence');
+    loadQuiz('pmf-pdf-cdf', 'quiz-pmf-pdf-cdf');
+  </script>
+</body>
+</html>

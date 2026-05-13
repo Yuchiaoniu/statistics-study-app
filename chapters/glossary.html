@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>專詞 &amp; 公式速查 · 統計學學習工具</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <a href="../" class="logo">統計學學習工具</a>
+      <ul>
+        <li><a href="../chapters/syllabus.html">課程目錄</a></li>
+        <li><a href="../chapters/glossary.html">速查</a></li>
+        <li><a href="../chapters/random-variables.html">隨機變數</a></li>
+        <li><a href="../chapters/continuous-distributions.html">連續型分配</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>專詞 &amp; 公式速查</h1>
+    <p class="subtitle">所有講義出現過的統計學專有名詞與公式整理。點選類別標題可展開 / 收合。</p>
+
+    <div class="anchor-bar">
+      <a href="#terms">📖 統計學專詞</a>
+      <a href="#formulas">📐 公式速查</a>
+    </div>
+
+    <h2 id="terms" class="section-title">統計學專詞</h2>
+    <p class="section-intro">不重複地列出所有在講義中出現過的專詞，依類別分組。每個專詞含中英對照與口語化解釋。</p>
+
+    <details class="term-group" open>
+      <summary>1. 基礎概念</summary>
+      <dl class="glossary-list">
+        <dt>隨機變數 <span class="en">Random Variable</span></dt>
+        <dd>會隨機取不同數值的變數，通常用大寫字母 X、Y 表示。它本身不是一個固定的數，而是「會隨實驗結果變化的數量」。</dd>
+
+        <dt>機率 <span class="en">Probability</span></dt>
+        <dd>一件事發生的可能性，用 0 到 1 之間的數值表示。0 = 絕不發生、1 = 必然發生、0.5 = 一半機率。</dd>
+
+        <dt>樣本空間 <span class="en">Sample Space</span></dt>
+        <dd>一個隨機實驗所有可能結果的集合，常用 $\Omega$ 表示。例：丟一顆骰子的樣本空間是 $\{1,2,3,4,5,6\}$。</dd>
+
+        <dt>事件 <span class="en">Event</span></dt>
+        <dd>樣本空間的子集合，代表我們關心的「某些結果」。例：擲骰子「出現偶數」是事件 $\{2,4,6\}$。</dd>
+
+        <dt>機率分配 <span class="en">Probability Distribution</span></dt>
+        <dd>把「總機率 = 1」這塊餅分配給所有可能結果的規則。本質上是一個函數（輸入結果，輸出機率或密度）。</dd>
+
+        <dt>母體 <span class="en">Population</span></dt>
+        <dd>研究者感興趣的「所有測量值」的集合。例如：想了解全台灣樹的碳儲量，母體就是全台每棵樹的碳儲量資料。</dd>
+
+        <dt>樣本 <span class="en">Sample</span></dt>
+        <dd>從母體中抽出的一個子集，用來「代表」母體做推論。母體通常太大無法全測，所以靠樣本來「猜」母體長相。</dd>
+      </dl>
+    </details>
+
+    <details class="term-group">
+      <summary>2. 離散 vs 連續</summary>
+      <dl class="glossary-list">
+        <dt>離散型隨機變數 <span class="en">Discrete Random Variable</span></dt>
+        <dd>只能取「可數」個值（例如：整數 0, 1, 2, ...）。例：丟硬幣 10 次正面數、書中錯字數。</dd>
+
+        <dt>連續型隨機變數 <span class="en">Continuous Random Variable</span></dt>
+        <dd>可以取數線上某段區間內「不可數」個值。例：等公車時間、體重、溫度。</dd>
+
+        <dt>可數 / 不可數 <span class="en">Countable / Uncountable</span></dt>
+        <dd>可數 = 可以一個一個列舉出來（如 $1, 2, 3, \ldots$）；不可數 = 列不完（如 $[0, 1]$ 區間內所有實數）。</dd>
+
+        <dt>機率質量函數 <span class="en">Probability Mass Function (PMF)</span></dt>
+        <dd>離散型專用。輸入 $x$、輸出 $P(X=x)$，<strong>函數值就是機率本身</strong>。</dd>
+
+        <dt>機率密度函數 <span class="en">Probability Density Function (PDF)</span></dt>
+        <dd>連續型專用。輸入 $x$、輸出該點的「密度」。<strong>注意：密度不是機率！</strong> 機率要積分後才出來。</dd>
+
+        <dt>累積分配函數 <span class="en">Cumulative Distribution Function (CDF)</span></dt>
+        <dd>$F(x) = P(X \le x)$。「到 $x$ 為止累積了多少機率」。離散型是階梯函數，連續型是平滑曲線。</dd>
+
+        <dt>機率密度 <span class="en">Probability Density</span></dt>
+        <dd>「每單位寬度的機率」，類似物理的「密度 = 質量/體積」。要乘上寬度 $dx$ 才會變成機率。</dd>
+
+        <dt>階梯函數 <span class="en">Step Function</span></dt>
+        <dd>離散型 CDF 的圖形樣貌。每個可能值處會「跳一階」，跳高度 = 該點 PMF。</dd>
+
+        <dt>跳點 <span class="en">Jump Point</span></dt>
+        <dd>離散型 CDF 在可能值 $x_i$ 處的不連續位置。$P(X = x_i) = F(x_i) - F(x_i^-)$。</dd>
+      </dl>
+    </details>
+
+    <details class="term-group">
+      <summary>3. 分配的特徵數</summary>
+      <dl class="glossary-list">
+        <dt>期望值 <span class="en">Expected Value</span></dt>
+        <dd>$E(X)$ 或 $\mu$，分配的「平均位置」。離散型 $E(X) = \sum x \cdot P(X=x)$；連續型 $E(X) = \int x f(x)\, dx$。</dd>
+
+        <dt>變異數 <span class="en">Variance</span></dt>
+        <dd>$\mathrm{Var}(X)$ 或 $\sigma^2$，衡量分配的「離散程度」。值越大代表資料越分散。</dd>
+
+        <dt>標準差 <span class="en">Standard Deviation</span></dt>
+        <dd>$\sigma = \sqrt{\mathrm{Var}(X)}$，變異數的平方根，<strong>跟原始資料同單位</strong>，比變異數更好詮釋。</dd>
+
+        <dt>動差母函數 <span class="en">Moment Generating Function (MGF)</span></dt>
+        <dd>$M(t) = E(e^{tX})$，是個「生成器」：對它求 1 階導數得 $E(X)$、2 階導數得 $E(X^2)$。</dd>
+
+        <dt>線性性質 <span class="en">Linearity</span></dt>
+        <dd>$E(aX+b) = aE(X) + b$；$\mathrm{Var}(aX+b) = a^2 \mathrm{Var}(X)$。注意變異數中「+b」不影響但「a」要平方。</dd>
+      </dl>
+    </details>
+
+    <details class="term-group">
+      <summary>4. 機率公理與運算規則</summary>
+      <dl class="glossary-list">
+        <dt>機率公理 <span class="en">Probability Axioms (Kolmogorov)</span></dt>
+        <dd>三條：① 非負性 $P(A) \ge 0$、② 規範性 $P(\Omega) = 1$、③ 可加性（互斥事件 $P(A \cup B) = P(A) + P(B)$）。</dd>
+
+        <dt>條件機率 <span class="en">Conditional Probability</span></dt>
+        <dd>$P(A \mid B) = \dfrac{P(A \cap B)}{P(B)}$。「在 $B$ 發生的條件下 $A$ 發生」的機率。</dd>
+
+        <dt>獨立性 <span class="en">Independence</span></dt>
+        <dd>$A$、$B$ 獨立 ⇔ $P(A \cap B) = P(A) P(B)$。等價於 $P(A \mid B) = P(A)$（「$B$ 是否發生不影響 $A$」）。</dd>
+
+        <dt>互斥事件 <span class="en">Mutually Exclusive</span></dt>
+        <dd>$A \cap B = \emptyset$，兩事件不可能同時發生。注意：<strong>互斥 ≠ 獨立</strong>（兩非零事件若互斥則必不獨立）。</dd>
+
+        <dt>貝氏定理 <span class="en">Bayes' Theorem</span></dt>
+        <dd>$P(A \mid B) = \dfrac{P(B \mid A) P(A)}{P(B)}$。用「事後條件」反推「事前機率」。</dd>
+
+        <dt>全機率公式 <span class="en">Law of Total Probability</span></dt>
+        <dd>$P(B) = \sum_i P(B \mid A_i) P(A_i)$，把 $B$ 的機率拆解為各種情境的加權和。</dd>
+      </dl>
+    </details>
+
+    <details class="term-group">
+      <summary>5. 離散型分配</summary>
+      <dl class="glossary-list">
+        <dt>二項分配 <span class="en">Binomial Distribution, $B(n, p)$</span></dt>
+        <dd>$n$ 次獨立伯努利試驗中成功次數。例：丟硬幣 10 次正面數。</dd>
+
+        <dt>波松分配 <span class="en">Poisson Distribution, $\mathrm{Poisson}(\lambda)$</span></dt>
+        <dd>單位時間/空間內隨機事件發生次數。例：每小時客服電話數。特色：$E(X) = \mathrm{Var}(X) = \lambda$。</dd>
+
+        <dt>超幾何分配 <span class="en">Hypergeometric Distribution</span></dt>
+        <dd>「<strong>不放回</strong>」抽樣的成功數。例：從 20 顆球（8 紅 12 白）抽 5 顆中的紅球數。對應放回版本的二項分配。</dd>
+
+        <dt>幾何分配 <span class="en">Geometric Distribution</span></dt>
+        <dd>「首次成功」前的試驗次數。例：第幾次丟硬幣才出現正面。具有無記憶性。</dd>
+
+        <dt>負二項分配 <span class="en">Negative Binomial Distribution</span></dt>
+        <dd>「第 $r$ 次成功」前的試驗次數。幾何分配是 $r=1$ 的特例。</dd>
+
+        <dt>波松過程 <span class="en">Poisson Process</span></dt>
+        <dd>事件依固定速率 $\lambda$ 隨機發生的過程。<strong>次數</strong>服從波松分配，<strong>等待時間</strong>服從指數分配。</dd>
+
+        <dt>波松近似二項 <span class="en">Poisson Approximation to Binomial</span></dt>
+        <dd>當 $n \ge 20$ 且 $np \le 7$ 時，$B(n, p) \approx \mathrm{Poisson}(\lambda = np)$，計算更方便。</dd>
+      </dl>
+    </details>
+
+    <details class="term-group">
+      <summary>6. 連續型分配</summary>
+      <dl class="glossary-list">
+        <dt>連續型均勻分配 <span class="en">Continuous Uniform Distribution, $U(a, b)$</span></dt>
+        <dd>X 在 $[a, b]$ 內每個位置密度相同的分配。PDF 是水平直線、CDF 是斜直線。例：等公車時間。</dd>
+
+        <dt>常態分配 <span class="en">Normal Distribution, $N(\mu, \sigma^2)$</span></dt>
+        <dd>對稱鐘形曲線，自然界與測量誤差最常見。$\mu$ 控制位置、$\sigma$ 控制胖瘦。</dd>
+
+        <dt>標準常態分配 <span class="en">Standard Normal, $N(0, 1)$</span></dt>
+        <dd>$\mu = 0, \sigma = 1$ 的常態。任意常態可透過 $Z = (X-\mu)/\sigma$ 轉成標準常態。</dd>
+
+        <dt>高斯分配 <span class="en">Gauss Distribution</span></dt>
+        <dd>常態分配的別名，紀念 Gauss 對此分配的研究貢獻。另有「鐘形分配」（因外型）。</dd>
+
+        <dt>反曲點 <span class="en">Inflection Point</span></dt>
+        <dd>曲線的凹凸方向改變的位置。常態曲線在 $\mu - \sigma$ 與 $\mu + \sigma$ 處各有一個反曲點。</dd>
+
+        <dt>中位數 <span class="en">Median, $M_e$</span></dt>
+        <dd>把資料由小排到大後位於正中央的值。常態分配中 $M_e = \mu$（同等於平均數）。</dd>
+
+        <dt>眾數 <span class="en">Mode, $M_o$</span></dt>
+        <dd>資料中出現最頻繁的值。常態分配中 $M_o = \mu = M_e$（三者相等是常態獨特特徵）。</dd>
+
+        <dt>Z 化 / 標準化 <span class="en">Z-score Transformation</span></dt>
+        <dd>把 $X \sim N(\mu, \sigma^2)$ 透過 $Z = (X-\mu)/\sigma$ 轉成 $Z \sim N(0,1)$ 的過程。</dd>
+
+        <dt>標準常態分配表 <span class="en">Z Table / Standard Normal Table</span></dt>
+        <dd>事先建好的 $N(0,1)$ 累積機率對照表。任意常態先 Z 化後就能查此表得機率。</dd>
+
+        <dt>大數法則 <span class="en">Law of Large Numbers</span></dt>
+        <dd>當樣本數 $n$ 趨近無窮，樣本平均數會收斂到母體平均數。是 CLT 的近親。</dd>
+
+        <dt>Z 分配對稱性 <span class="en">Symmetry of Z</span></dt>
+        <dd>標準常態以 0 為中心對稱：$P(Z > 0) = P(Z < 0) = 0.5$、$P(-z < Z < 0) = P(0 < Z < z)$、$P(Z < -z) = P(Z > z)$。是查表必備的轉換。</dd>
+
+        <dt>反查 z 值 <span class="en">Inverse Z Lookup</span></dt>
+        <dd>給定機率反推 z 值的過程。例：題目給「前 15%」要找 z，先換成 $P(0 \le Z \le z) = 0.35$ 再從 Z 表反查得 z ≈ 1.04。</dd>
+
+        <dt>常態近似二項 <span class="en">Normal Approximation to Binomial</span></dt>
+        <dd>當 $np \ge 5$ 且 $n(1-p) \ge 5$ 時，$B(n,p) \approx N(np, np(1-p))$。讓二項計算可用 Z 表完成。</dd>
+
+        <dt>指數分配 <span class="en">Exponential Distribution, $\mathrm{Exp}(\lambda)$</span></dt>
+        <dd>波松過程「事件之間的等待時間」。$\lambda$ 為發生率。特色：具有無記憶性。</dd>
+
+        <dt>卡方分配 <span class="en">Chi-square Distribution, $\chi^2$</span></dt>
+        <dd>$n$ 個獨立 $N(0,1)$ 的平方和。用於變異數推論、適合度檢定。</dd>
+
+        <dt>t 分配 <span class="en">Student's t-distribution</span></dt>
+        <dd>小樣本（母體 $\sigma$ 未知）做平均數推論時用。比常態尾巴稍胖。</dd>
+
+        <dt>F 分配 <span class="en">F-distribution</span></dt>
+        <dd>兩個卡方分配（各除以自由度）之比。用於變異數比較、ANOVA。</dd>
+      </dl>
+    </details>
+
+    <details class="term-group">
+      <summary>7. 連續型核心性質</summary>
+      <dl class="glossary-list">
+        <dt>單點機率為 0</dt>
+        <dd>連續型 $P(X = x_0) = 0$ 永遠成立，因為「點」的區間長度為 0。所以連續型「≤」和「&lt;」可以互換。</dd>
+
+        <dt>三大性質</dt>
+        <dd>合法的 PDF 必須滿足：① $f(x) \ge 0$、② $\int f(x)\,dx = 1$、③ $P(c \le X \le d) = \int_c^d f(x)\,dx$。</dd>
+
+        <dt>標準化 <span class="en">Standardization</span></dt>
+        <dd>$Z = \dfrac{X - \mu}{\sigma}$，把任意常態變成標準常態 $N(0,1)$。先中心化（−μ）再縮放（÷σ）。</dd>
+
+        <dt>無記憶性 <span class="en">Memoryless Property</span></dt>
+        <dd>$P(X > s+t \mid X > s) = P(X > t)$。「過去多久不影響未來等待時間」。只有指數分配與幾何分配具有。</dd>
+
+        <dt>68-95-99.7 法則 <span class="en">Empirical Rule</span></dt>
+        <dd>常態分配中：$\mu \pm \sigma$ 涵蓋 68%、$\mu \pm 2\sigma$ 涵蓋 95%、$\mu \pm 3\sigma$ 涵蓋 99.7%。</dd>
+      </dl>
+    </details>
+
+    <details class="term-group">
+      <summary>8. 抽樣與推論（先備觀念）</summary>
+      <dl class="glossary-list">
+        <dt>樣本平均數 <span class="en">Sample Mean</span></dt>
+        <dd>$\bar X = \dfrac{1}{n}\sum X_i$，是個隨機變數，其分配稱為「抽樣分配」。</dd>
+
+        <dt>抽樣分配 <span class="en">Sampling Distribution</span></dt>
+        <dd>樣本統計量（如 $\bar X$）本身的機率分配。是統計推論的核心。</dd>
+
+        <dt>標準誤 <span class="en">Standard Error</span></dt>
+        <dd>樣本統計量的標準差，例如 $\sigma_{\bar X} = \sigma / \sqrt{n}$。<strong>不是</strong>母體標準差。</dd>
+
+        <dt>中央極限定理 <span class="en">Central Limit Theorem (CLT)</span></dt>
+        <dd>當 $n$ 夠大（一般 $n \ge 30$），無論母體分配，$\bar X$ 近似服從 $N(\mu, \sigma^2/n)$。讓常態變得「處處可用」。</dd>
+      </dl>
+    </details>
+
+    <h2 id="formulas" class="section-title">公式速查</h2>
+    <p class="section-intro">所有講義出現過的公式，依分配分組。每條公式底下都有符號逐項解釋。</p>
+
+    <details class="formula-group" open>
+      <summary>通用公式（適用所有分配）</summary>
+
+      <div class="formula-card">
+        <h4>機率公理（規範性）</h4>
+        <div class="formula">$$\sum_x P(X=x) = 1 \quad \text{或} \quad \int_{-\infty}^{\infty} f(x)\,dx = 1$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$P(X=x)$</dt><dd>離散型機率質量函數</dd>
+            <dt>$f(x)$</dt><dd>連續型機率密度函數</dd>
+            <dt>$\sum$ 與 $\int$</dt><dd>離散用加總、連續用積分，本質都是「把所有機率加起來」</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h4>累積分配函數 CDF</h4>
+        <div class="formula">$$F(x) = P(X \le x) = \int_{-\infty}^{x} f(t)\,dt$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$F(x)$</dt><dd>累積分配函數，到 $x$ 為止累積的機率</dd>
+            <dt>$\int_{-\infty}^{x}$</dt><dd>從負無窮積分到 $x$（PDF 曲線下面積）</dd>
+            <dt>$f(t)$</dt><dd>PDF（用 $t$ 做積分變數避免和上限 $x$ 衝突）</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h4>離散型單點機率拆解</h4>
+        <div class="formula">$$P(X = x_0) = F(x_0) - F(x_0^-)$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$x_0^-$</dt><dd>從左邊逼近 $x_0$，「跳之前的瞬間」（負號不是次方，是左極限）</dd>
+            <dt>$F(x_0) - F(x_0^-)$</dt><dd>離散型 = 跳的高度（即 PMF）；連續型 = 0（CDF 連續無跳）</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h4>區間機率（神級公式）</h4>
+        <div class="formula">$$P(a \le X \le b) = F(b) - F(a)$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$F(b), F(a)$</dt><dd>CDF 在兩端點的值</dd>
+            <dt>連續型 ≤ 與 &lt; 等價</dt><dd>因 $P(X=a)=P(X=b)=0$，加不加等號不影響</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h4>黎曼和（積分本質）</h4>
+        <div class="formula">$$\int_a^b f(x)\,dx = \lim_{n \to \infty} \sum_{i=1}^n f(x_i)\,\Delta x$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$\Delta x$</dt><dd>每根長方形的寬度（$\Delta$ = 微小差異）</dd>
+            <dt>$f(x_i)\,\Delta x$</dt><dd>第 $i$ 根長方形的面積</dd>
+            <dt>$\lim_{n \to \infty}$</dt><dd>讓根數趨近無限多、寬度趨近 0</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h4>連續型期望值</h4>
+        <div class="formula">$$\mu = E(X) = \int_{-\infty}^{\infty} x \cdot f(x)\,dx$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$x \cdot f(x)$</dt><dd>「值 × 密度」（對應離散型 $x \cdot P(X=x)$）</dd>
+            <dt>$\int x f(x)\,dx$</dt><dd>沿整條數線把「值 × 密度」加總</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h4>連續型變異數</h4>
+        <div class="formula">$$\sigma^2 = \mathrm{Var}(X) = \int_{-\infty}^{\infty} (x-\mu)^2 \cdot f(x)\,dx$$</div>
+        <div class="formula">$$\mathrm{Var}(X) = E(X^2) - [E(X)]^2 \quad \text{（化簡）}$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$(x - \mu)^2$</dt><dd>每個 $x$ 距離平均的偏差平方</dd>
+            <dt>$E(X^2)$</dt><dd>$X$ 平方後的期望值 $= \int x^2 f(x)\,dx$</dd>
+            <dt>化簡式</dt><dd>實戰好用：先算 $E(X^2)$，再減 $[E(X)]^2$</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h4>線性性質</h4>
+        <div class="formula">$$E(aX + b) = a\,E(X) + b,\quad \mathrm{Var}(aX + b) = a^2\,\mathrm{Var}(X)$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$a, b$</dt><dd>常數（不是隨機變數）</dd>
+            <dt>$b$ 對 Var 無影響</dt><dd>因為「平移」不改變分散程度</dd>
+            <dt>$a$ 要平方</dt><dd>因為變異數是「平方單位」</dd>
+          </dl>
+        </div>
+      </div>
+    </details>
+
+    <details class="formula-group">
+      <summary>二項分配 $B(n, p)$</summary>
+
+      <div class="formula-card">
+        <h4>PMF</h4>
+        <div class="formula">$$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$n$</dt><dd>試驗總次數</dd>
+            <dt>$k$</dt><dd>成功次數（0 ≤ k ≤ n）</dd>
+            <dt>$p$</dt><dd>單次試驗成功機率</dd>
+            <dt>$\binom{n}{k}$</dt><dd>組合數 $\dfrac{n!}{k!(n-k)!}$，「n 取 k」</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h4>期望值與變異數</h4>
+        <div class="formula">$$E(X) = np,\quad \mathrm{Var}(X) = np(1-p)$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$np$</dt><dd>「試驗次數 × 成功率」= 平均成功次數</dd>
+            <dt>$1-p$</dt><dd>失敗機率，常用 $q$ 表示</dd>
+          </dl>
+        </div>
+      </div>
+    </details>
+
+    <details class="formula-group">
+      <summary>波松分配 $\mathrm{Poisson}(\lambda)$</summary>
+
+      <div class="formula-card">
+        <h4>PMF</h4>
+        <div class="formula">$$P(X = k) = \frac{e^{-\lambda} \lambda^k}{k!}$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$\lambda$</dt><dd>平均發生次數（速率參數）</dd>
+            <dt>$k$</dt><dd>觀察到的發生次數（0, 1, 2, ...）</dd>
+            <dt>$e$</dt><dd>自然指數底 $\approx 2.71828$</dd>
+            <dt>$k!$</dt><dd>$k$ 階乘 $= k \times (k-1) \times \cdots \times 1$</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h4>期望值與變異數（同值！）</h4>
+        <div class="formula">$$E(X) = \mathrm{Var}(X) = \lambda$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$E = \mathrm{Var}$</dt><dd>波松分配的獨特性質：平均數 = 變異數</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h4>波松近似二項條件</h4>
+        <div class="formula">$$B(n, p) \approx \mathrm{Poisson}(\lambda = np) \quad \text{當 } n \ge 20,\ np \le 7$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$n \ge 20$</dt><dd>試驗數要夠大</dd>
+            <dt>$np \le 7$</dt><dd>成功率要夠小（事件「罕見」）</dd>
+            <dt>$\lambda = np$</dt><dd>讓兩分配的期望值相等</dd>
+          </dl>
+        </div>
+      </div>
+    </details>
+
+    <details class="formula-group">
+      <summary>連續型均勻分配 $U(a, b)$</summary>
+
+      <div class="formula-card">
+        <h4>PDF</h4>
+        <div class="formula">$$f(x) = \begin{cases} \dfrac{1}{b-a}, & a \le x \le b \\ 0, & \text{otherwise} \end{cases}$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$a, b$</dt><dd>分配的下界與上界（兩個參數）</dd>
+            <dt>$\dfrac{1}{b-a}$</dt><dd>定值密度，圖形是水平線</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h4>CDF</h4>
+        <div class="formula">$$F(x) = \frac{x - a}{b - a},\quad a \le x \le b$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$x - a$</dt><dd>從下界往右走的距離</dd>
+            <dt>$b - a$</dt><dd>整個區間長度</dd>
+            <dt>$\dfrac{x-a}{b-a}$</dt><dd>「走過的比例」就是累積機率（線性增加）</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h4>期望值、變異數、標準差</h4>
+        <div class="formula">$$E(X) = \frac{a+b}{2},\quad \mathrm{Var}(X) = \frac{(b-a)^2}{12},\quad \sigma = \sqrt{\frac{(b-a)^2}{12}}$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$\dfrac{a+b}{2}$</dt><dd>就是區間「中點」</dd>
+            <dt>$(b-a)^2 / 12$</dt><dd>區間長度的平方除以 12</dd>
+            <dt>12 的由來</dt><dd>由 $E(X^2) - [E(X)]^2$ 化簡得到的固定係數</dd>
+          </dl>
+        </div>
+      </div>
+    </details>
+
+    <details class="formula-group">
+      <summary>常態分配 $N(\mu, \sigma^2)$</summary>
+
+      <div class="formula-card">
+        <h4>PDF</h4>
+        <div class="formula">$$f(x) = \frac{1}{\sigma\sqrt{2\pi}}\,\exp\!\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$\mu$</dt><dd>平均數，曲線中心</dd>
+            <dt>$\sigma$</dt><dd>標準差，曲線胖瘦</dd>
+            <dt>$\dfrac{1}{\sigma\sqrt{2\pi}}$</dt><dd>正規化常數（讓總面積 = 1）</dd>
+            <dt>$\exp(\cdot)$</dt><dd>$e$ 的某次方，等同 $e^{(\cdot)}$</dd>
+            <dt>$(x-\mu)^2$</dt><dd>離中心的距離平方，所以曲線左右對稱</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h4>標準化</h4>
+        <div class="formula">$$Z = \frac{X - \mu}{\sigma},\quad Z \sim N(0, 1)$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$Z$</dt><dd>標準化後的變數，服從 $N(0, 1)$</dd>
+            <dt>$X - \mu$</dt><dd>中心化：把平均移到 0</dd>
+            <dt>除以 $\sigma$</dt><dd>縮放：把標準差變成 1</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h4>Z 表查表的四種對應</h4>
+        <div class="formula">$$\begin{aligned}
+P(Z \le z) &= 0.5 + P(0 \le Z \le z) \\
+P(Z > z) &= 0.5 - P(0 \le Z \le z) \\
+P(-z \le Z \le z) &= 2 \cdot P(0 \le Z \le z) \\
+P(-z_1 \le Z \le z_2) &= P(0 \le Z \le z_1) + P(0 \le Z \le z_2)
+\end{aligned}$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>Z 表內值</dt><dd>多數教科書列出 $P(0 \le Z \le z)$（半邊面積），須加減 0.5 轉成左尾/右尾</dd>
+            <dt>跨 0 的區間</dt><dd>拆成左半邊 + 右半邊，左邊用對稱換成正 z 查</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h4>常態近似二項分配</h4>
+        <div class="formula">$$B(n, p) \xrightarrow{np \ge 5,\ n(1-p) \ge 5} N\!\left(np,\ np(1-p)\right)$$</div>
+        <div class="formula">$$Z = \frac{X - np}{\sqrt{np(1-p)}} \approx N(0, 1)$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$np$</dt><dd>二項分配的期望值（取代常態 $\mu$）</dd>
+            <dt>$np(1-p)$</dt><dd>二項分配的變異數（取代常態 $\sigma^2$）</dd>
+            <dt>條件 $np, n(1-p) \ge 5$</dt><dd>確保 $n$ 大且 $p$ 不極端，常態近似才可靠</dd>
+            <dt>與波松近似的差別</dt><dd>波松近似條件是 $n \ge 20$ 且 $np \le 7$（罕見事件）；常態近似則需 $p$ 不太極端</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h4>68-95-99.7 經驗法則</h4>
+        <div class="formula">$$P(\mu - k\sigma \le X \le \mu + k\sigma) \approx \begin{cases} 0.6827, & k=1 \\ 0.9545, & k=2 \\ 0.9973, & k=3 \end{cases}$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$k$</dt><dd>「幾個標準差」的倍數</dd>
+            <dt>常用更精確值</dt><dd>$k=1.96$ 對應雙尾 95%、$k=2.58$ 對應 99%</dd>
+          </dl>
+        </div>
+      </div>
+    </details>
+
+    <details class="formula-group">
+      <summary>指數分配 $\mathrm{Exp}(\lambda)$</summary>
+
+      <div class="formula-card">
+        <h4>PDF 與 CDF</h4>
+        <div class="formula">$$f(x) = \lambda e^{-\lambda x},\quad F(x) = 1 - e^{-\lambda x},\quad x \ge 0$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$\lambda$</dt><dd>事件發生速率（每單位時間平均次數）</dd>
+            <dt>$e^{-\lambda x}$</dt><dd>「沒發生事件直到 $x$」的機率（指數衰減）</dd>
+            <dt>$1 - e^{-\lambda x}$</dt><dd>「在 $x$ 之前已發生事件」的機率（累積）</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h4>期望值與變異數</h4>
+        <div class="formula">$$E(X) = \frac{1}{\lambda},\quad \mathrm{Var}(X) = \frac{1}{\lambda^2}$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$1/\lambda$</dt><dd>平均等待時間（速率倒數）</dd>
+            <dt>$\sigma = 1/\lambda$</dt><dd>標準差 = 期望值（指數分配特色）</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h4>無記憶性</h4>
+        <div class="formula">$$P(X > s + t \mid X > s) = P(X > t)$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$\mid$（豎線）</dt><dd>條件機率符號，「在...條件下」</dd>
+            <dt>$s$</dt><dd>已等過的時間</dd>
+            <dt>$t$</dt><dd>還想再等的時間</dd>
+            <dt>意義</dt><dd>「過去等多久不影響未來等待分配」</dd>
+          </dl>
+        </div>
+      </div>
+    </details>
+
+    <details class="formula-group">
+      <summary>抽樣分配與 CLT</summary>
+
+      <div class="formula-card">
+        <h4>樣本平均數的分配</h4>
+        <div class="formula">$$E(\bar X) = \mu,\quad \mathrm{Var}(\bar X) = \frac{\sigma^2}{n},\quad \sigma_{\bar X} = \frac{\sigma}{\sqrt{n}}$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$\bar X$</dt><dd>樣本平均數（隨機變數）</dd>
+            <dt>$n$</dt><dd>樣本數</dd>
+            <dt>$\sigma_{\bar X}$</dt><dd>樣本平均數的標準差，稱為「標準誤」</dd>
+            <dt>$\sigma / \sqrt{n}$</dt><dd>標準誤公式：樣本越大誤差越小</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h4>中央極限定理 (CLT)</h4>
+        <div class="formula">$$\bar X \;\overset{\text{大 } n}{\approx}\; N\!\left(\mu, \frac{\sigma^2}{n}\right)$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>大 $n$</dt><dd>實務上 $n \ge 30$ 即可</dd>
+            <dt>不論母體分配</dt><dd>CLT 不要求原母體常態，只要 $n$ 夠大就好</dd>
+            <dt>用途</dt><dd>讓常態查表變得「處處可用」於估計與檢定</dd>
+          </dl>
+        </div>
+      </div>
+    </details>
+
+    <p class="back-to-top"><a href="#top">↑ 回最上方</a></p>
+  </main>
+</body>
+</html>

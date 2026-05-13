@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>連續型機率分配 · 統計學學習工具</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <a href="../" class="logo">統計學學習工具</a>
+      <ul>
+        <li><a href="../chapters/syllabus.html">課程目錄</a></li>
+        <li><a href="../chapters/glossary.html">速查</a></li>
+        <li><a href="../chapters/random-variables.html">隨機變數</a></li>
+        <li><a href="../chapters/continuous-distributions.html">連續型分配</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>第 4 章 · 連續型機率分配</h1>
+
+    <h2 class="section-title">基礎觀念</h2>
+    <p class="section-intro">在進入具體分配（均勻、常態、指數）之前，先把連續型的「通用規則」整理好。所有具體分配都按下列規則運作。</p>
+
+    <figure class="concept-image">
+      <span class="label">📖 講義原圖</span>
+      <img src="../images/continuous-foundation/pdf-not-probability.png" alt="PDF 不是機率（紅字警告）">
+      <figcaption>講義紅字提醒：「間斷型的 f(x) 表示 x 的機率，而連續型的 f(x) 不是機率函數」</figcaption>
+    </figure>
+
+    <figure class="concept-image">
+      <span class="label">📖 講義原圖</span>
+      <img src="../images/continuous-foundation/area-equals-probability.png" alt="曲線下面積就是機率">
+      <figcaption>「由曲線下與橫軸所夾之面積，即為此連續型隨機變數出現在此區間的機率」</figcaption>
+    </figure>
+
+    <div class="concept">
+      <h3>① PDF 三大性質</h3>
+      <p>一個函數 $f(x)$ 要能被稱為「合法的機率密度函數」，必須同時滿足以下三條：</p>
+
+      <ol class="numbered-list">
+        <li>
+          <strong>非負性</strong>
+          <div class="formula">$$f(x) \ge 0 \quad \text{對所有 } x$$</div>
+          密度不能是負的，否則積分會出現「負面積」，無意義。
+        </li>
+        <li>
+          <strong>規範性（總面積 = 1）</strong>
+          <div class="formula">$$\int_{-\infty}^{\infty} f(x)\,dx = 1$$</div>
+          整條曲線下、跟 X 軸圍成的總面積 = 1（總機率公理的連續版本）。
+        </li>
+        <li>
+          <strong>區間機率 = 區間積分</strong>
+          <div class="formula">$$P(c \le X \le d) = \int_c^d f(x)\,dx \ge 0$$</div>
+          想算 X 落在某段範圍的機率？對該段積分（= 曲線下面積）。
+        </li>
+      </ol>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$f(x)$</dt><dd>機率密度函數（PDF），輸入 $x$、輸出密度</dd>
+          <dt>$\int_{-\infty}^{\infty}$</dt><dd>對整條實數線積分</dd>
+          <dt>$c,\ d$</dt><dd>要查詢機率的區間端點（$c < d$）</dd>
+          <dt>$\int_c^d f(x)\,dx$</dt><dd>$[c, d]$ 內曲線下面積，就是該區間的機率</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="concept">
+      <h3>② CDF 與「F(b) − F(a)」神級公式</h3>
+      <figure class="concept-image">
+        <span class="label">📖 講義原圖</span>
+        <img src="../images/continuous-foundation/single-point-and-cdf.png" alt="單點機率為 0 與 CDF 引入">
+        <figcaption>連續型 P(X = x) = 0；CDF 是「從負無窮累積到 x」的面積</figcaption>
+      </figure>
+      <p>連續型有一個額外重要的工具：<strong>累積分配函數</strong>（cumulative distribution function, c.d.f.）。</p>
+
+      <div class="formula">$$F(x) = P(X \le x) = \int_{-\infty}^{x} f(t)\,dt$$</div>
+
+      <p>CDF 把「從負無窮一路積分到 $x$」這件事打包成一個函數，方便重複查詢。直觀上 $F(x)$ 就是「<strong>到 $x$ 為止累積了多少機率</strong>」。</p>
+
+      <div class="punchline-box">
+        <strong>神級公式（期末考必考）</strong>
+        <div class="formula">$$P(a \le X \le b) = P(a < X < b) = F(b) - F(a)$$</div>
+        <p>兩個威力一次到位：</p>
+        <ul>
+          <li><strong>不用真的積分</strong>：只要 CDF 在兩端點的值相減就好（常態查表就是這個邏輯）</li>
+          <li><strong>≤ 和 &lt; 完全等價</strong>：因為連續型 $P(X = a) = 0$，差一個點的機率是 0</li>
+        </ul>
+      </div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$F(x)$</dt><dd>累積分配函數（CDF），輸入位置 $x$，輸出「到 $x$ 為止的累積機率」</dd>
+          <dt>$P(X \le x)$</dt><dd>「$X$ 不超過 $x$ 的機率」</dd>
+          <dt>$F(b) - F(a)$</dt><dd>從 −∞ 累到 $b$ 的面積，減掉從 −∞ 累到 $a$ 的面積 = 剛好 $[a, b]$ 之間的面積</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="concept">
+      <h3>③ 三種陰影區域：中段、左尾、右尾</h3>
+      <figure class="concept-image">
+        <span class="label">📖 講義原圖</span>
+        <img src="../images/continuous-foundation/three-shadings.png" alt="中段與右尾兩種陰影區域">
+        <figcaption>上：兩點之間 P(a&lt;X&lt;b)；下：右尾 P(X&gt;b)</figcaption>
+      </figure>
+      <p>連續型機率永遠對應「曲線下的某塊陰影面積」，但「想算的範圍」不同，陰影位置也不同：</p>
+
+      <table class="compare wide">
+        <thead>
+          <tr><th>想算什麼</th><th>陰影位置</th><th>用 CDF 怎麼算</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>中段</strong> $P(a \le X \le b)$</td>
+            <td>$a$ 到 $b$ 之間</td>
+            <td>$F(b) - F(a)$</td>
+          </tr>
+          <tr>
+            <td><strong>左尾</strong> $P(X \le b)$</td>
+            <td>$-\infty$ 到 $b$</td>
+            <td>$F(b)$</td>
+          </tr>
+          <tr>
+            <td><strong>右尾</strong> $P(X > b)$</td>
+            <td>$b$ 到 $+\infty$</td>
+            <td>$1 - F(b)$</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="note-soft">考試常常題目混合使用：例如「成績高於 80 的機率」是右尾、「成績低於 60 的機率」是左尾、「成績介於 60 到 90 之間」是中段。看到題目先判斷是哪一種，再代公式。</p>
+    </div>
+
+    <div class="concept">
+      <h3>④ 期望值與變異數（積分版）</h3>
+      <p>連續型的 $E(X)$、$\mathrm{Var}(X)$ 跟離散型「<strong>定義一致、性質一致</strong>」，差別只在：</p>
+      <p class="punchline-mini">把離散型的 $\sum$ <strong>換成</strong> $\int$、把 $P(X=x)$ <strong>換成</strong> $f(x)\,dx$，就是連續型的公式。</p>
+
+      <div class="formula">$$\mu = E(X) = \int_{-\infty}^{\infty} x \cdot f(x)\,dx$$</div>
+      <div class="formula">$$\sigma^2 = \mathrm{Var}(X) = E[(X-\mu)^2] = \int_{-\infty}^{\infty} (x-\mu)^2\, f(x)\,dx$$</div>
+      <div class="formula">$$\sigma = \sqrt{\mathrm{Var}(X)}$$</div>
+
+      <div class="punchline-box">
+        <strong>計算神器（實戰常用）</strong>
+        <div class="formula">$$\mathrm{Var}(X) = E(X^2) - [E(X)]^2$$</div>
+        <p>實際算題時，先算 $E(X^2) = \int x^2\, f(x)\,dx$，再減掉 $[E(X)]^2$。比直接套定義式 $\int(x-\mu)^2 f(x)\,dx$ 容易得多。</p>
+      </div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$x \cdot f(x)$</dt><dd>「值 × 密度」——對應離散型的 $x \cdot P(X=x)$</dd>
+          <dt>$\int x\, f(x)\, dx$</dt><dd>沿整條數線把「值 × 密度」加總，得到平均</dd>
+          <dt>$(x - \mu)^2$</dt><dd>每個 $x$ 距離平均的「偏差平方」</dd>
+          <dt>$E(X^2)$</dt><dd>$X$ 平方後的期望值，要先算 $\int x^2\, f(x)\,dx$</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="concept summary-pillars">
+      <h3>四大支柱速查</h3>
+      <p>所有連續型分配的觀念都站在這四根支柱上：</p>
+      <div class="pillar-grid">
+        <div class="pillar">
+          <div class="pillar-icon">①</div>
+          <strong>總面積 = 1</strong>
+          <p>$\int_{-\infty}^{\infty} f(x)\,dx = 1$</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">②</div>
+          <strong>單點機率 = 0</strong>
+          <p>$P(X = a) = 0$ 永遠成立；≤ 與 &lt; 可互換</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">③</div>
+          <strong>積分萬用</strong>
+          <p>機率、期望值、變異數三者都靠 $\int$</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">④</div>
+          <strong>CDF 是累積積分</strong>
+          <p>$F(x) = \int_{-\infty}^{x} f(t)\,dt$；區間機率 = $F(b) - F(a)$</p>
+        </div>
+      </div>
+    </div>
+
+    <section class="quiz-section">
+      <h2>選擇題 · 連續型基礎</h2>
+      <div id="quiz-continuous-foundation"></div>
+    </section>
+
+    <h2 class="section-title">具體分配</h2>
+    <p class="section-intro">下面三個分配都遵守上面四大支柱，差別只在 PDF 長什麼樣子、$E(X)$ 與 $\mathrm{Var}(X)$ 怎麼算。</p>
+
+    <div class="concept">
+      <h3>均勻分配 U(a, b)</h3>
+      <figure class="concept-image compact">
+        <span class="label">📖 講義原圖</span>
+        <img src="../images/continuous-foundation/uniform-definition.png" alt="均勻分配 PDF 方形圖">
+        <figcaption>均勻分配的 PDF 是方形：高度 1/(b−a)、總面積 A = 1</figcaption>
+      </figure>
+      <div class="formula">$$f(x) = \frac{1}{b - a},\quad a \le x \le b$$</div>
+      <div class="formula">$$E(X) = \frac{a + b}{2},\quad Var(X) = \frac{(b-a)^2}{12}$$</div>
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$U(a, b)$</dt><dd>「Uniform」均勻分配，在 $[a, b]$ 範圍內每個位置的密度都一樣</dd>
+          <dt>$a,\ b$</dt><dd>分配的下界與上界（$a < b$）</dd>
+          <dt>$f(x)$</dt><dd>機率密度函數。對均勻分配是定值 $\dfrac{1}{b-a}$，畫出來是一條水平線</dd>
+          <dt>$E(X)$</dt><dd>期望值（Expected Value），就是「平均數」</dd>
+          <dt>$Var(X)$</dt><dd>變異數（Variance），衡量資料分散程度。標準差 $\sigma = \sqrt{Var(X)}$</dd>
+        </dl>
+      </div>
+      <p>每個點的密度都一樣，是最簡單的連續分配。<strong>等公車</strong>是典型應用。</p>
+      <div id="chart-uniform"></div>
+    </div>
+
+    <section class="quiz-section">
+      <h2>選擇題 · 均勻分配</h2>
+      <div id="quiz-uniform"></div>
+    </section>
+
+    <div class="concept">
+      <h3>常態分配 N(μ, σ²)</h3>
+      <div class="formula">$$f(x) = \frac{1}{\sigma\sqrt{2\pi}}\,e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$</div>
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$N(\mu, \sigma^2)$</dt><dd>常態分配，第一個參數是平均數、第二個是「變異數」（不是標準差！）</dd>
+          <dt>$\mu$</dt><dd>讀作「mu」。平均數，決定鐘形曲線的中心位置（左右平移）</dd>
+          <dt>$\sigma$</dt><dd>讀作「sigma」。標準差，決定曲線的胖瘦：$\sigma$ 越大越扁、越平坦</dd>
+          <dt>$\sigma^2$</dt><dd>變異數，是標準差的平方</dd>
+          <dt>$\pi$</dt><dd>圓周率 $\approx 3.14159$</dd>
+          <dt>$e$</dt><dd>自然指數的底 $\approx 2.71828$</dd>
+          <dt>$(x-\mu)^2$</dt><dd>「離平均數的距離平方」——這就是為何曲線左右對稱：$x$ 偏左還是偏右一樣遠，密度一樣</dd>
+        </dl>
+      </div>
+      <h4>歷史與別名</h4>
+      <p>常態分配理論最早由法國數學家 <strong>De Moivre</strong> 提出，約一百年後由 <strong>Gauss</strong> 與 <strong>Laplace</strong> 進一步研究。因此它有多個名稱：</p>
+      <ul>
+        <li><strong>常態分配</strong>（normal distribution）</li>
+        <li><strong>鐘形分配</strong>（bell-shaped distribution）— 因外型而得名</li>
+        <li><strong>高斯分配</strong>（Gauss distribution）— 紀念 Gauss</li>
+      </ul>
+
+      <h4>為何重要？</h4>
+      <p>自然界與人類行為的大群體資料**大部分都呈現常態分配**（身高、體重、測量誤差、IQ 等）。即使原始資料非常態，當樣本數 $n$ 很大時，根據<strong>大數法則</strong>與<strong>中央極限定理</strong>也可以用常態近似。它是<strong>推論統計的基礎</strong>。</p>
+
+      <figure class="concept-image">
+        <span class="label">📖 講義原圖</span>
+        <img src="../images/normal/bell-curve.png" alt="鐘形曲線兩側無限延伸">
+        <figcaption>常態曲線：左右對稱、兩側無限延伸但永遠不交 X 軸</figcaption>
+      </figure>
+
+      <h4>常態曲線的 8 大特性</h4>
+      <ol class="numbered-list">
+        <li><strong>連續且非負</strong>：$f(x) \ge 0$ 對所有 $x$。</li>
+        <li><strong>總面積 = 1</strong>：$\int_{-\infty}^{\infty} f(x)\,dx = 1$。</li>
+        <li><strong>兩個參數</strong>：$\mu$（位置）與 $\sigma^2$（變異數），記為 $X \sim N(\mu, \sigma^2)$。</li>
+        <li><strong>對稱於 μ</strong>：故 <strong>μ = M<sub>e</sub> = M<sub>o</sub></strong>（平均數 = 中位數 = 眾數），這是常態分配的獨特特徵。</li>
+        <li><strong>σ 控制胖瘦</strong>：σ 愈大資料愈分散（矮胖）、σ 愈小資料愈集中（高瘦）。</li>
+        <li><strong>反曲點</strong>：在 $\mu - \sigma$ 與 $\mu + \sigma$ 處各有一個反曲點（在這兩點，曲線的凹凸方向改變）。</li>
+        <li><strong>無限延伸</strong>：X 範圍 $-\infty < x < \infty$，曲線永遠不與 X 軸相交。</li>
+        <li><strong>經驗法則</strong>：以 μ 為中心、$\pm k\sigma$ 區間的機率：見下表。</li>
+      </ol>
+
+      <figure class="concept-image">
+        <span class="label">📖 講義原圖</span>
+        <img src="../images/normal/sigma-affects-shape.png" alt="σ 大小影響曲線胖瘦">
+        <figcaption>N(0, 0.16) 高瘦、N(0, 1) 矮胖——σ 越大越分散</figcaption>
+      </figure>
+
+      <figure class="concept-image">
+        <span class="label">📖 講義原圖</span>
+        <img src="../images/normal/empirical-rule-visual.png" alt="68-95-99.7 經驗法則視覺">
+        <figcaption>μ±σ 涵蓋 68.26%、μ±2σ 涵蓋 95.44%、μ±3σ 涵蓋 99.74%</figcaption>
+      </figure>
+
+      <div class="punchline-box">
+        <strong>68-95-99.7 經驗法則完整數值</strong>
+        <table class="compare wide">
+          <thead>
+            <tr><th>區間</th><th>涵蓋機率</th><th>大致比例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>$\mu \pm 1\sigma$</td><td>0.6826</td><td>≈ 68%</td></tr>
+            <tr><td>$\mu \pm 2\sigma$</td><td>0.9544</td><td>≈ 95%</td></tr>
+            <tr><td>$\mu \pm 3\sigma$</td><td>0.9974</td><td>≈ 99.7%</td></tr>
+            <tr><td>$\mu \pm 4\sigma$</td><td>$\approx 1$</td><td>幾乎全部</td></tr>
+          </tbody>
+        </table>
+        <p>更精確的雙尾 95% 用 $\pm 1.96\sigma$、99% 用 $\pm 2.58\sigma$。</p>
+      </div>
+
+      <h4>標準化（Z 化）</h4>
+      <p>常態 PDF 沒有解析積分解，且每組 $(\mu, \sigma^2)$ 都不同，不可能為每組做一張表。<strong>解法</strong>：把任意 $X \sim N(\mu, \sigma^2)$ 透過下列公式轉為標準常態：</p>
+      <div class="formula">$$Z = \frac{X - \mu}{\sigma},\quad Z \sim N(0, 1)$$</div>
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$Z$</dt><dd>標準化後的變數，服從 $N(0, 1)$（標準常態）</dd>
+          <dt>$X - \mu$</dt><dd>中心化（centering）：把平均移到 0</dd>
+          <dt>除以 $\sigma$</dt><dd>縮放（scaling）：把標準差變成 1</dd>
+          <dt>查 Z 表</dt><dd>標準常態的累積機率值已事先做成「Z 機率分配表」，查表即可</dd>
+        </dl>
+      </div>
+
+      <div class="punchline-mini">
+        <strong>標準化的不變性</strong>：機率值不變，只換尺度。$P(a &lt; X &lt; b) = P\left(\dfrac{a-\mu}{\sigma} &lt; Z &lt; \dfrac{b-\mu}{\sigma}\right)$
+      </div>
+
+      <figure class="concept-image">
+        <span class="label">📖 講義原圖</span>
+        <img src="../images/normal/standardization-concept.png" alt="標準化的概念圖（兩張對照）">
+        <figcaption>上：原 N(μ, σ) 中的 P(a&lt;X&lt;b)；下：對應到 N(0,1) 中相同的陰影機率</figcaption>
+      </figure>
+
+      <h4>Z 分配的對稱性</h4>
+      <p>標準常態 $Z \sim N(0, 1)$ 是<strong>以 0 為中心的對稱分配</strong>，這帶來幾個查表必備的等式：</p>
+      <ul>
+        <li>$P(Z > 0) = P(Z < 0) = 0.5$（左右各佔一半）</li>
+        <li>$P(-z &lt; Z &lt; 0) = P(0 &lt; Z &lt; z)$（負半邊可換成正半邊查）</li>
+        <li>$P(Z &lt; -z) = P(Z &gt; z)$（左尾 = 對稱右尾）</li>
+      </ul>
+
+      <h4>Z 表的結構（重要！）</h4>
+      <figure class="concept-image">
+        <span class="label">📖 講義原圖</span>
+        <img src="../images/standard-normal/z-table.png" alt="標準常態分配表（部分）">
+        <figcaption>標準常態分配表：列出 P(0 ≤ Z ≤ z) 的值。例：z = 1.00 → 0.3413</figcaption>
+      </figure>
+      <p>大多數教科書的 Z 表查的是 <strong>$P(0 \le Z \le z)$</strong>（從中心到 z），而<strong>不是</strong>從 $-\infty$ 到 z 的完整 CDF。要算其他形式必須先換算：</p>
+
+      <table class="compare wide">
+        <thead>
+          <tr><th>想算什麼</th><th>查表轉換</th><th>例（z = 1.0）</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>$P(0 \le Z \le z)$</td><td>直接查表</td><td>0.3413</td></tr>
+          <tr><td>$P(Z \le z)$（左尾累積）</td><td>$0.5 + P(0 \le Z \le z)$</td><td>0.8413</td></tr>
+          <tr><td>$P(Z &gt; z)$（右尾）</td><td>$0.5 - P(0 \le Z \le z)$</td><td>0.1587</td></tr>
+          <tr><td>$P(-z \le Z \le z)$（對稱中段）</td><td>$2 \times P(0 \le Z \le z)$</td><td>0.6826</td></tr>
+          <tr><td>$P(-z_1 \le Z \le z_2)$（跨 0）</td><td>$P(0 \le Z \le z_1) + P(0 \le Z \le z_2)$</td><td>—</td></tr>
+        </tbody>
+      </table>
+
+      <figure class="concept-image">
+        <span class="label">📖 講義原圖</span>
+        <img src="../images/standard-normal/right-tail-example.png" alt="右尾 P(Z>0.72) 例題視覺">
+        <figcaption>例題：求 P(Z &gt; 0.72)。先查白色面積 P(0 ≤ Z ≤ 0.72) = 0.2642，再用 0.5 − 0.2642 = 0.2358</figcaption>
+      </figure>
+
+      <figure class="concept-image">
+        <span class="label">📖 講義原圖</span>
+        <img src="../images/standard-normal/middle-example.png" alt="跨 0 中段 P(-0.12≤Z≤0.72) 例題視覺">
+        <figcaption>例題：求 P(−0.12 ≤ Z ≤ 0.72)。跨 0 拆兩塊：0.0478 + 0.2642 = 0.3120</figcaption>
+      </figure>
+
+      <div class="punchline-box">
+        <strong>查表口訣</strong>
+        <ul>
+          <li><strong>畫圖再算</strong>：先在常態曲線上塗出要找的陰影，再決定怎麼用 0.5 加減半邊機率</li>
+          <li><strong>跨 0 拆兩塊</strong>：跨 0 的區間機率 = 兩個半邊相加</li>
+          <li><strong>負值換正</strong>：碰到負 z 用對稱換成正 z 再查</li>
+        </ul>
+      </div>
+
+      <h4>反查 z 值</h4>
+      <p>有些題目給你機率、要你反推 z（例如「成績前 15% 的最低分數」）。流程：</p>
+      <ol>
+        <li>把題目要求轉成 $P(0 \le Z \le z) = \text{某數}$</li>
+        <li>從 Z 表內文反查最接近的 z 值</li>
+        <li>若題目要的是 X 而非 Z，再用 $X = \mu + z\sigma$ 還原</li>
+      </ol>
+
+      <figure class="concept-image">
+        <span class="label">📖 講義原圖</span>
+        <img src="../images/standard-normal/inverse-z-example.png" alt="反查 z 例題：大學聯考">
+        <figcaption>反查 z 例題：給定機率 0.15，反推 z ≈ 1.04，最後得 a = 604</figcaption>
+      </figure>
+
+      <div class="punchline-box">
+        <strong>反查 z 範例：大學聯考</strong>
+        <p>X ~ N(500, 100²)，國立大學錄取前 15%，求最低分數 a。</p>
+        <p>$P(X \ge a) = 0.15 \Rightarrow P(Z \ge \frac{a-500}{100}) = 0.15$</p>
+        <p>$\Rightarrow P(0 \le Z \le \frac{a-500}{100}) = 0.35$</p>
+        <p>查 Z 表：$\frac{a-500}{100} \approx 1.04 \Rightarrow a = 500 + 1.04 \times 100 = \boxed{604}$</p>
+      </div>
+
+      <h4>常態近似二項分配</h4>
+      <p>當試驗次數 $n$ 大、且成功率 $p$ 不太極端時，二項分配可以用常態分配近似計算，比階乘公式快得多。</p>
+      <div class="formula">$$B(n, p) \xrightarrow{\;np \ge 5,\ n(1-p) \ge 5\;} N(\mu = np,\ \sigma^2 = np(1-p))$$</div>
+      <div class="formula">$$Z = \frac{X - np}{\sqrt{np(1-p)}} \approx N(0, 1)$$</div>
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$np$</dt><dd>二項分配的期望值（平均成功次數）</dd>
+          <dt>$np(1-p)$</dt><dd>二項分配的變異數</dd>
+          <dt>$\sqrt{np(1-p)}$</dt><dd>標準差，用於 Z 化</dd>
+          <dt>近似條件 $np \ge 5,\ n(1-p) \ge 5$</dt><dd>確保 $n$ 大且 $p$ 不太極端（不接近 0 或 1）</dd>
+        </dl>
+      </div>
+
+      <h4>互動圖表</h4>
+      <p>拖 <strong>μ</strong> 看曲線左右平移、拖 <strong>σ</strong> 看曲線胖瘦變化：</p>
+      <div id="chart-normal"></div>
+    </div>
+
+    <section class="quiz-section">
+      <h2>選擇題 · 常態分配</h2>
+      <div id="quiz-normal"></div>
+    </section>
+
+    <div class="concept">
+      <h3>指數分配 Exp(λ)</h3>
+      <div class="formula">$$f(x) = \lambda e^{-\lambda x},\quad x \ge 0$$</div>
+      <div class="formula">$$E(X) = \frac{1}{\lambda},\quad Var(X) = \frac{1}{\lambda^2}$$</div>
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$\mathrm{Exp}(\lambda)$</dt><dd>指數分配（Exponential），描述事件之間的等待時間</dd>
+          <dt>$\lambda$</dt><dd>讀作「lambda」。速率參數：每單位時間平均發生 $\lambda$ 次事件</dd>
+          <dt>$e^{-\lambda x}$</dt><dd>「$e$ 的負 $\lambda x$ 次方」。$x$ 越大這項越小，所以 PDF 從高處衰減</dd>
+          <dt>$E(X) = 1/\lambda$</dt><dd>平均等待時間：事件越頻繁（$\lambda$ 大），平均等的時間越短</dd>
+          <dt>$x \ge 0$</dt><dd>等待時間不能為負，所以 $x$ 從 0 開始</dd>
+        </dl>
+      </div>
+      <p>描述「<strong>波松過程兩次事件之間的等待時間</strong>」。λ 越大事件越頻繁，平均等待時間 1/λ 越短。</p>
+      <div id="chart-exponential"></div>
+    </div>
+
+    <section class="quiz-section">
+      <h2>選擇題 · 指數分配</h2>
+      <div id="quiz-exponential"></div>
+    </section>
+
+    <div class="concept">
+      <h3>無記憶性（指數分配的特色）</h3>
+      <div class="formula">$$P(X > s + t \mid X > s) = P(X > t)$$</div>
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$X$</dt><dd>隨機變數（這裡代表「等待時間」或「壽命」）</dd>
+          <dt>$s$</dt><dd>已經等過的時間</dd>
+          <dt>$t$</dt><dd>還想再等的時間</dd>
+          <dt>$\mid$（豎線）</dt><dd>條件機率符號，讀作「在...條件下」。$P(A \mid B)$ = 已知 $B$ 發生時 $A$ 發生的機率</dd>
+          <dt>左式 $P(X > s+t \mid X > s)$</dt><dd>「已經等了 $s$ 時間，再等到超過 $s+t$」的條件機率</dd>
+          <dt>右式 $P(X > t)$</dt><dd>「從頭開始等，等超過 $t$」的機率</dd>
+          <dt>兩式相等</dt><dd>表示「過去等了多久不影響未來」——無記憶性</dd>
+        </dl>
+      </div>
+      <p>「<strong>已經等多久，完全不影響未來的等待時間分配</strong>」。物理意義：元件不會老化。連續型中只有指數分配、離散型中只有幾何分配具有此性質。</p>
+      <p>不適合人類壽命（會老化），但適合電子元件、放射性衰變、客服電話間隔。</p>
+    </div>
+
+    <section class="quiz-section">
+      <h2>選擇題 · 無記憶性</h2>
+      <div id="quiz-memoryless"></div>
+    </section>
+  </main>
+
+  <script src="../js/chart-panel.js"></script>
+  <script src="../js/quiz.js"></script>
+  <script>
+    createChartPanel({ container: document.getElementById('chart-uniform'), distribution: 'uniform' });
+    createChartPanel({ container: document.getElementById('chart-normal'), distribution: 'normal' });
+    createChartPanel({ container: document.getElementById('chart-exponential'), distribution: 'exponential' });
+    loadQuiz('continuous-foundation', 'quiz-continuous-foundation');
+    loadQuiz('uniform', 'quiz-uniform');
+    loadQuiz('normal', 'quiz-normal');
+    loadQuiz('exponential', 'quiz-exponential');
+    loadQuiz('memoryless', 'quiz-memoryless');
+  </script>
+</body>
+</html>

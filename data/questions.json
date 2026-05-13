@@ -1,0 +1,1010 @@
+[
+  {
+    "id": "contfound-easy-001",
+    "chapter": "continuous-distributions",
+    "concept": "continuous-foundation",
+    "prompt": "下列何者「不是」連續型 PDF 必須滿足的性質？",
+    "options": [
+      "f(x) ≥ 0 對所有 x 成立",
+      "∫f(x)dx 在全域積分等於 1",
+      "f(x) ≤ 1 對所有 x 成立",
+      "P(a ≤ X ≤ b) = ∫ₐᵇ f(x)dx"
+    ],
+    "correct_index": 2,
+    "explanation": "PDF 的值「可以」超過 1，因為 f(x) 是密度不是機率。例如 U(0, 0.5) 的 f(x) = 2。只有「面積」（也就是真正的機率）必須 ≤ 1。"
+  },
+  {
+    "id": "contfound-easy-002",
+    "chapter": "continuous-distributions",
+    "concept": "continuous-foundation",
+    "prompt": "F(x) 在連續型代表什麼？",
+    "options": [
+      "X = x 的機率",
+      "X ≤ x 的累積機率（從 −∞ 累積到 x 的面積）",
+      "X 的平均數",
+      "X 的標準差"
+    ],
+    "correct_index": 1,
+    "explanation": "F(x) = P(X ≤ x) = ∫_{-∞}^x f(t)dt，是「從 −∞ 累積到 x」的機率，也就是 PDF 曲線下從負無窮到 x 的面積。"
+  },
+  {
+    "id": "contfound-001",
+    "chapter": "continuous-distributions",
+    "concept": "continuous-foundation",
+    "prompt": "已知 F(2) = 0.3, F(5) = 0.8，求 P(2 ≤ X ≤ 5)。",
+    "options": [
+      "0.3",
+      "0.5",
+      "0.8",
+      "1.1"
+    ],
+    "correct_index": 1,
+    "explanation": "用神級公式 P(a ≤ X ≤ b) = F(b) − F(a) = 0.8 − 0.3 = 0.5。完全不必去積分，直接用 CDF 兩端點相減。"
+  },
+  {
+    "id": "contfound-002",
+    "chapter": "continuous-distributions",
+    "concept": "continuous-foundation",
+    "prompt": "X 為連續型隨機變數。比較 P(X = 3) 與 P(X = 3.5)。",
+    "options": [
+      "P(X = 3) 較大",
+      "P(X = 3.5) 較大",
+      "兩者都等於 0",
+      "視 PDF 形狀決定"
+    ],
+    "correct_index": 2,
+    "explanation": "連續型在任何單點的機率都恆為 0，無論該點密度多高。所以 P(X = 3) = P(X = 3.5) = 0。機率藏在區間（面積）裡，不在點上。"
+  },
+  {
+    "id": "contfound-003",
+    "chapter": "continuous-distributions",
+    "concept": "continuous-foundation",
+    "prompt": "下列哪個式子計算連續型「右尾機率」P(X > b)？",
+    "options": [
+      "F(b)",
+      "1 − F(b)",
+      "F(b) − F(0)",
+      "f(b)"
+    ],
+    "correct_index": 1,
+    "explanation": "因為總機率 = 1，所以 P(X > b) = 1 − P(X ≤ b) = 1 − F(b)。例如常態分配查表通常給左尾 F(b)，要算右尾就用 1 − F(b)。"
+  },
+  {
+    "id": "contfound-004",
+    "chapter": "continuous-distributions",
+    "concept": "continuous-foundation",
+    "prompt": "連續型 X 的期望值公式為何？（與離散型 Σ x·P(X=x) 對應）",
+    "options": [
+      "E(X) = ∫ f(x) dx",
+      "E(X) = ∫ x · f(x) dx",
+      "E(X) = Σ x · f(x)",
+      "E(X) = x · F(x)"
+    ],
+    "correct_index": 1,
+    "explanation": "連續型 E(X) = ∫_{-∞}^∞ x · f(x) dx。對應離散型 Σ x · P(X=x)：把 Σ 換成 ∫、把 P(X=x) 換成 f(x)dx。"
+  },
+  {
+    "id": "contfound-005",
+    "chapter": "continuous-distributions",
+    "concept": "continuous-foundation",
+    "prompt": "下列何者是計算 Var(X) 的「實戰神器」公式？",
+    "options": [
+      "Var(X) = E(X) − μ",
+      "Var(X) = E(X²) − [E(X)]²",
+      "Var(X) = [E(X)]² − E(X²)",
+      "Var(X) = √E(X)"
+    ],
+    "correct_index": 1,
+    "explanation": "Var(X) = E(X²) − [E(X)]² 比定義式 ∫(x−μ)² f(x) dx 容易算。流程：先算 E(X²) = ∫x² f(x) dx，再減掉 [E(X)]²。"
+  },
+  {
+    "id": "contfound-006",
+    "chapter": "continuous-distributions",
+    "concept": "continuous-foundation",
+    "prompt": "連續型隨機變數 P(a ≤ X ≤ b) 與 P(a < X < b) 的關係？",
+    "options": [
+      "前者較大，因為含端點",
+      "後者較大，因為不含端點少了限制",
+      "兩者完全相等，因為單點機率 = 0",
+      "視分配種類而定"
+    ],
+    "correct_index": 2,
+    "explanation": "連續型 P(X = a) = P(X = b) = 0，所以加不加等號完全沒差：P(a ≤ X ≤ b) = P(a < X < b) = P(a ≤ X < b) = P(a < X ≤ b)。離散型才需要區分。"
+  },
+  {
+    "id": "essence-easy-001",
+    "chapter": "random-variables",
+    "concept": "probability-essence",
+    "prompt": "「機率」用日常語言來說最接近下列何者？",
+    "options": [
+      "一件事情實際發生的次數",
+      "一件事情發生的可能性大小（從 0 到 1）",
+      "一件事情的重要程度",
+      "一件事情花費的時間"
+    ],
+    "correct_index": 1,
+    "explanation": "機率是用一個 0 到 1 之間的數字描述「某件事發生的可能性大小」。0 = 絕不發生、1 = 一定發生、0.5 = 一半機會。"
+  },
+  {
+    "id": "essence-easy-002",
+    "chapter": "random-variables",
+    "concept": "probability-essence",
+    "prompt": "把所有可能結果的機率全部加起來，總和必須等於多少？",
+    "options": [
+      "0",
+      "0.5",
+      "1",
+      "視情況而定"
+    ],
+    "correct_index": 2,
+    "explanation": "機率公理規定：所有可能結果的機率總和 = 1。這就是「分配」的精神——把總共 1 單位的機率分給各個結果。"
+  },
+  {
+    "id": "essence-easy-003",
+    "chapter": "random-variables",
+    "concept": "probability-essence",
+    "prompt": "P(X = 3) = 0.4 這串符號的意思是？",
+    "options": [
+      "隨機變數 X 等於 3 的機率是 0.4",
+      "X 的第 3 個值是 0.4",
+      "X 的平均數是 0.4",
+      "把 3 跟 X 相乘等於 0.4"
+    ],
+    "correct_index": 0,
+    "explanation": "P() 表示「機率」，X 是隨機變數，「X = 3」是一個事件。所以 P(X = 3) = 0.4 讀作：「X 等於 3 這件事的機率是 0.4」。"
+  },
+  {
+    "id": "essence-001",
+    "chapter": "random-variables",
+    "concept": "probability-essence",
+    "prompt": "「機率分配」一詞中「分配」指的是什麼？",
+    "options": [
+      "把樣本空間切成等大的部分",
+      "把總機率 1 分配給各個可能結果的規則",
+      "把隨機變數轉換成另一個變數",
+      "把連續分配近似為離散分配的方法"
+    ],
+    "correct_index": 1,
+    "explanation": "分配的字面意義是「分一分、配一配」，機率分配就是把總共 1 單位的機率按某個規則分配給所有可能結果。每個結果分到的機率非負，且全部加總為 1。"
+  },
+  {
+    "id": "essence-002",
+    "chapter": "random-variables",
+    "concept": "probability-essence",
+    "prompt": "下列何者不是機率公理（Kolmogorov 三大公理）的內容？",
+    "options": [
+      "P(A) ≥ 0",
+      "P(樣本空間) = 1",
+      "互斥事件可加 P(A∪B) = P(A) + P(B)",
+      "P(A) = P(B) 時 A、B 必相等"
+    ],
+    "correct_index": 3,
+    "explanation": "機率公理只有三條：非負性、規範性（總機率 = 1）、可加性。兩事件機率相等不代表事件本身相等，例如丟硬幣的「正面」和「反面」P 都 = 0.5 但兩者不同。"
+  },
+  {
+    "id": "essence-003",
+    "chapter": "random-variables",
+    "concept": "probability-essence",
+    "prompt": "若 X 為連續型隨機變數，下列敘述何者正確？",
+    "options": [
+      "P(X = 3) > 0 因為 3 是可能值",
+      "P(X = 3) = 0 因為連續分配的單點機率必為 0",
+      "P(X = 3) 取決於分配的種類",
+      "連續型隨機變數沒有 P(X = a) 的概念"
+    ],
+    "correct_index": 1,
+    "explanation": "連續型隨機變數有無限多個可能值，每個單點分到的機率是「無限小」即 0。機率藏在密度 f(x) 中，必須對一段區間積分才有非零的機率。"
+  },
+  {
+    "id": "essence-004",
+    "chapter": "random-variables",
+    "concept": "probability-essence",
+    "prompt": "已知 X 是離散型隨機變數，P(X=1)=0.3, P(X=2)=0.4, P(X=3)=0.2，則 P(X=4) 必為多少（假設只有 1, 2, 3, 4 四種可能）？",
+    "options": [
+      "0.0",
+      "0.1",
+      "0.25",
+      "無法判定"
+    ],
+    "correct_index": 1,
+    "explanation": "因為總機率必須等於 1，所以 P(X=4) = 1 - 0.3 - 0.4 - 0.2 = 0.1。這是機率公理「規範性」的直接應用。"
+  },
+  {
+    "id": "essence-005",
+    "chapter": "random-variables",
+    "concept": "probability-essence",
+    "prompt": "下列何者最能描述「機率分配是一個函數」這句話的意思？",
+    "options": [
+      "分配是用來計算平均數的工具",
+      "輸入一個可能結果，輸出對應的機率或機率密度",
+      "分配只能是線性函數",
+      "分配就是 CDF"
+    ],
+    "correct_index": 1,
+    "explanation": "機率分配本質是一個「對應規則」：給定一個可能結果，告訴你它對應到的機率（離散）或機率密度（連續）。這就是函數的定義。"
+  },
+  {
+    "id": "pmfcdf-easy-001",
+    "chapter": "random-variables",
+    "concept": "pmf-pdf-cdf",
+    "prompt": "PMF 中的「M」是哪個英文單字的縮寫？",
+    "options": [
+      "Mean（平均數）",
+      "Mass（質量）",
+      "Maximum（最大值）",
+      "Measure（測量）"
+    ],
+    "correct_index": 1,
+    "explanation": "PMF = Probability Mass Function。Mass（質量）的比喻：把機率想像成可以「秤重」的塊狀東西，每個離散值都有自己的一塊。"
+  },
+  {
+    "id": "pmfcdf-easy-002",
+    "chapter": "random-variables",
+    "concept": "pmf-pdf-cdf",
+    "prompt": "CDF 中的「C」代表什麼意思？",
+    "options": [
+      "Continuous（連續的）",
+      "Cumulative（累積的）",
+      "Conditional（條件的）",
+      "Constant（常數的）"
+    ],
+    "correct_index": 1,
+    "explanation": "CDF = Cumulative Distribution Function（累積分配函數）。Cumulative 的意思是「從最小值一路累加到目前這個 x 為止」。"
+  },
+  {
+    "id": "pmfcdf-easy-003",
+    "chapter": "random-variables",
+    "concept": "pmf-pdf-cdf",
+    "prompt": "F(5) = 0.8 這個 CDF 值的意思是？",
+    "options": [
+      "X 等於 5 的機率是 0.8",
+      "X 小於或等於 5 的機率是 0.8",
+      "X 大於 5 的機率是 0.8",
+      "X 的平均數是 5，標準差是 0.8"
+    ],
+    "correct_index": 1,
+    "explanation": "CDF 的定義 F(x) = P(X ≤ x)。所以 F(5) = 0.8 表示「X 不超過 5」的機率是 0.8。對應地，P(X > 5) = 1 − 0.8 = 0.2。"
+  },
+  {
+    "id": "pmfcdf-001",
+    "chapter": "random-variables",
+    "concept": "pmf-pdf-cdf",
+    "prompt": "PMF 與 PDF 的英文全名分別是？",
+    "options": [
+      "Probability Mass Function / Probability Density Function",
+      "Probability Mean Function / Probability Distribution Function",
+      "Possible Measure Function / Possible Density Function",
+      "Partial Mass Function / Partial Distribution Function"
+    ],
+    "correct_index": 0,
+    "explanation": "PMF = Probability Mass Function（機率質量函數，離散用）；PDF = Probability Density Function（機率密度函數，連續用）；CDF = Cumulative Distribution Function（累積分配函數，通用）。"
+  },
+  {
+    "id": "pmfcdf-002",
+    "chapter": "random-variables",
+    "concept": "pmf-pdf-cdf",
+    "prompt": "下列關於離散型 CDF 的敘述何者正確？",
+    "options": [
+      "是平滑連續曲線",
+      "是階梯函數，每個可能值處會跳一階",
+      "永遠等於 PMF",
+      "斜率即為 PMF"
+    ],
+    "correct_index": 1,
+    "explanation": "離散型 CDF 在每個可能值 xᵢ 處會「跳一階」，跳的高度等於該點的 PMF。連續型 CDF 才是平滑曲線。"
+  },
+  {
+    "id": "pmfcdf-003",
+    "chapter": "random-variables",
+    "concept": "pmf-pdf-cdf",
+    "prompt": "對於連續型隨機變數，PDF 與 CDF 的關係是？",
+    "options": [
+      "f(x) = F(x)",
+      "f(x) = F'(x)，即 PDF 是 CDF 的導數",
+      "F(x) = f'(x)，即 CDF 是 PDF 的導數",
+      "兩者沒有關係"
+    ],
+    "correct_index": 1,
+    "explanation": "對連續型 X，CDF 的定義為 F(x) = ∫₋∞^x f(t)dt。由微積分基本定理，f(x) = F'(x)。直觀理解：PDF 是 CDF 的「斜率」。"
+  },
+  {
+    "id": "pmfcdf-004",
+    "chapter": "random-variables",
+    "concept": "pmf-pdf-cdf",
+    "prompt": "已知 X 為連續型，CDF 為 F(x)。則 P(a ≤ X ≤ b) 等於？",
+    "options": [
+      "F(b) − F(a)",
+      "F(b) + F(a)",
+      "F(b) × F(a)",
+      "F((a+b)/2)"
+    ],
+    "correct_index": 0,
+    "explanation": "對連續型 X，P(a ≤ X ≤ b) = F(b) − F(a)。注意連續型不需區分 ≤ 與 <，因 P(X=a)=0。"
+  },
+  {
+    "id": "pmfcdf-005",
+    "chapter": "random-variables",
+    "concept": "pmf-pdf-cdf",
+    "prompt": "下列關於 PDF 的敘述何者錯誤？",
+    "options": [
+      "f(x) ≥ 0 對所有 x 成立",
+      "∫₋∞^∞ f(x) dx = 1",
+      "f(x) ≤ 1 對所有 x 成立",
+      "P(a ≤ X ≤ b) = ∫ₐ^b f(x) dx"
+    ],
+    "correct_index": 2,
+    "explanation": "PDF 的值可以大於 1，因為 f(x) 是「機率密度」而不是「機率」。例如 U(0, 0.5) 的 PDF 為 f(x) = 2。只有機率（積分後的面積）才必須 ≤ 1。"
+  },
+  {
+    "id": "uniform-easy-001",
+    "chapter": "continuous-distributions",
+    "concept": "uniform",
+    "prompt": "U(a, b) 中的「U」是哪個英文字的首字母？",
+    "options": [
+      "Unit（單位）",
+      "Uniform（均勻）",
+      "Universal（通用）",
+      "Unknown（未知）"
+    ],
+    "correct_index": 1,
+    "explanation": "U 代表 Uniform（均勻）。均勻分配的特色就是「在 [a, b] 區間內每個位置的密度都一樣」，沒有哪個值比較容易發生。"
+  },
+  {
+    "id": "uniform-easy-002",
+    "chapter": "continuous-distributions",
+    "concept": "uniform",
+    "prompt": "若 X ~ U(0, 1)，X 可能的值範圍是？",
+    "options": [
+      "只能取 0 或 1 兩個值",
+      "0 到 1 之間（含 0 和 1）的任何實數",
+      "整數 0、1",
+      "0.5 附近的某些數"
+    ],
+    "correct_index": 1,
+    "explanation": "U(0, 1) 的意思是「在 0 到 1 之間均勻地取一個實數」。可能的值是無限多個——包含 0.1、0.5、0.7777..., 等等任何 [0, 1] 內的實數。"
+  },
+  {
+    "id": "uniform-easy-003",
+    "chapter": "continuous-distributions",
+    "concept": "uniform",
+    "prompt": "均勻分配 U(a, b) 的 PDF 圖形長什麼樣子？",
+    "options": [
+      "鐘型曲線",
+      "向右遞減的指數曲線",
+      "一條水平的直線（在 [a, b] 之間）",
+      "階梯狀的線"
+    ],
+    "correct_index": 2,
+    "explanation": "因為每個 x 對應的密度都一樣（= 1/(b-a)），所以 PDF 是一條「水平的直線」，俗稱「方形分配」。"
+  },
+  {
+    "id": "uniform-001",
+    "chapter": "continuous-distributions",
+    "concept": "uniform",
+    "prompt": "若 X ~ U(0, 10)，則 PDF f(x) 的值為何？（在 0 ≤ x ≤ 10 的範圍內）",
+    "options": [
+      "1",
+      "1/10 = 0.1",
+      "10",
+      "隨 x 變化"
+    ],
+    "correct_index": 1,
+    "explanation": "均勻分配 U(a, b) 的 PDF 為 f(x) = 1/(b−a)。代入 a=0, b=10，得 f(x) = 1/10 = 0.1，且在 [0, 10] 內為定值。"
+  },
+  {
+    "id": "uniform-002",
+    "chapter": "continuous-distributions",
+    "concept": "uniform",
+    "prompt": "X ~ U(2, 8)，求 E(X) 與 Var(X)。",
+    "options": [
+      "E(X) = 5, Var(X) = 3",
+      "E(X) = 5, Var(X) = 6",
+      "E(X) = 5, Var(X) = 36/12 = 3",
+      "E(X) = 4, Var(X) = 2"
+    ],
+    "correct_index": 2,
+    "explanation": "均勻分配 E(X) = (a+b)/2 = (2+8)/2 = 5；Var(X) = (b−a)²/12 = 36/12 = 3。注意選項 1 與 3 的數值相同，但選項 3 完整呈現算式。"
+  },
+  {
+    "id": "uniform-003",
+    "chapter": "continuous-distributions",
+    "concept": "uniform",
+    "prompt": "公車每 10 分鐘一班，乘客隨機到達，等待時間 X ~ U(0, 10)。等待超過 7 分鐘的機率為何？",
+    "options": [
+      "0.3",
+      "0.5",
+      "0.7",
+      "0.07"
+    ],
+    "correct_index": 0,
+    "explanation": "P(X > 7) = (10−7)/10 = 0.3。均勻分配的區間機率 = 區間長度 / 總長度。"
+  },
+  {
+    "id": "uniform-004",
+    "chapter": "continuous-distributions",
+    "concept": "uniform",
+    "prompt": "下列關於均勻分配 U(a, b) 的敘述何者錯誤？",
+    "options": [
+      "PDF 為定值 1/(b−a)",
+      "CDF 為線性函數",
+      "中位數 = (a+b)/2",
+      "Var(X) = (b−a)/12"
+    ],
+    "correct_index": 3,
+    "explanation": "Var(X) = (b−a)²/12（要平方），不是 (b−a)/12。其他三項皆正確：PDF 定值、CDF 線性、中位數 = 平均數 = (a+b)/2。"
+  },
+  {
+    "id": "uniform-005",
+    "chapter": "continuous-distributions",
+    "concept": "uniform",
+    "prompt": "X ~ U(0, 12)，求 P(3 ≤ X ≤ 7)。",
+    "options": [
+      "1/3",
+      "4/12 = 1/3",
+      "7/12",
+      "4/7"
+    ],
+    "correct_index": 1,
+    "explanation": "P(3 ≤ X ≤ 7) = (7−3)/(12−0) = 4/12 = 1/3 ≈ 0.333。選項 1 與 2 數值相同但選項 2 顯示算式更清楚。"
+  },
+  {
+    "id": "normal-easy-001",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "常態分配 N(μ, σ²) 中的 μ 代表什麼？",
+    "options": [
+      "標準差",
+      "平均數",
+      "變異數",
+      "樣本數"
+    ],
+    "correct_index": 1,
+    "explanation": "μ（讀作「mu」）代表「平均數」（mean）。它決定鐘形曲線的中心位置——μ 改變時，整條曲線左右平移。"
+  },
+  {
+    "id": "normal-easy-002",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "常態分配 N(μ, σ²) 中的 σ 代表什麼？",
+    "options": [
+      "平均數",
+      "標準差",
+      "變異數",
+      "樣本數"
+    ],
+    "correct_index": 1,
+    "explanation": "σ（讀作「sigma」）代表「標準差」。σ² 才是「變異數」。σ 決定鐘形曲線的胖瘦——σ 大則曲線矮胖（資料分散），σ 小則高瘦（資料集中）。"
+  },
+  {
+    "id": "normal-easy-003",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "標準常態分配 N(0, 1) 的「標準」是指？",
+    "options": [
+      "最常使用的分配",
+      "μ = 0 且 σ = 1 的常態分配",
+      "資料已經整理好",
+      "考試標準答案"
+    ],
+    "correct_index": 1,
+    "explanation": "「標準」常態 = 平均數為 0、標準差為 1 的常態分配，記作 N(0, 1)，常用 Z 表示。所有其他常態都可透過 Z = (X − μ)/σ 轉換成標準常態。"
+  },
+  {
+    "id": "normal-easy-004",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "常態分配的曲線是什麼形狀？",
+    "options": [
+      "水平直線",
+      "向右遞減",
+      "鐘形（中間高、兩側對稱遞減）",
+      "階梯狀"
+    ],
+    "correct_index": 2,
+    "explanation": "常態分配的 PDF 形如鐘形（bell curve），左右對稱，中心位於 μ。離 μ 越遠機率密度越低，這也是為什麼極端值很少見。"
+  },
+  {
+    "id": "normal-hist-001",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "下列何者「不是」常態分配的別名？",
+    "options": [
+      "鐘形分配（bell-shaped distribution）",
+      "高斯分配（Gauss distribution）",
+      "泊松分配（Poisson distribution）",
+      "Normal distribution"
+    ],
+    "correct_index": 2,
+    "explanation": "泊松（波松）分配是離散型分配，與常態分配是不同的東西。常態分配因外型像鐘而稱鐘形分配，因 Gauss 的研究貢獻又稱高斯分配。"
+  },
+  {
+    "id": "normal-hist-002",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "對於常態分配 X ~ N(μ, σ²)，下列何者「不」成立？",
+    "options": [
+      "曲線左右對稱於 μ",
+      "μ = 中位數 = 眾數",
+      "f(x) 曲線會與 X 軸在某點相交",
+      "曲線下總面積等於 1"
+    ],
+    "correct_index": 2,
+    "explanation": "常態曲線兩側無限延伸但「永遠不會與 X 軸相交」（漸近 X 軸但永遠不碰到）。其他三項都正確：對稱、μ=Me=Mo、總面積=1 都是常態的基本性質。"
+  },
+  {
+    "id": "normal-hist-003",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "常態曲線的「反曲點」位於哪兩點？",
+    "options": [
+      "$\\mu \\pm \\sigma$",
+      "$\\mu \\pm 2\\sigma$",
+      "$\\mu$ 與 $\\mu + \\sigma$",
+      "$0$ 與 $\\mu$"
+    ],
+    "correct_index": 0,
+    "explanation": "常態曲線在 μ−σ 與 μ+σ 各有一個反曲點。反曲點是曲線「凹凸方向改變」的位置：μ±σ 之內曲線凹向下，之外凹向上。"
+  },
+  {
+    "id": "normal-empirical-001",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "P(μ − 3σ < X < μ + 3σ) 約等於？",
+    "options": [
+      "0.6826",
+      "0.9544",
+      "0.9974",
+      "1.0000"
+    ],
+    "correct_index": 2,
+    "explanation": "經驗法則完整版：μ±1σ → 0.6826、μ±2σ → 0.9544、μ±3σ → 0.9974、μ±4σ ≈ 1。"
+  },
+  {
+    "id": "normal-empirical-002",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "X ~ N(100, 25)，求 P(95 < X < 105) 約為何？（用經驗法則）",
+    "options": [
+      "0.6826",
+      "0.9544",
+      "0.9974",
+      "0.5000"
+    ],
+    "correct_index": 0,
+    "explanation": "σ² = 25 ⇒ σ = 5。95 = 100 − σ、105 = 100 + σ，所以是 μ ± 1σ 區間，機率 ≈ 0.6826。"
+  },
+  {
+    "id": "normal-z-001",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "為什麼要做 Z 化（標準化）？",
+    "options": [
+      "因為原始常態 PDF 沒有解析積分，且不同 (μ, σ²) 不可能各做一張表",
+      "因為 Z 化後機率值會變大",
+      "因為 Z 表只有整數值可查",
+      "因為 X 比 Z 難寫"
+    ],
+    "correct_index": 0,
+    "explanation": "常態 PDF 的積分沒有解析解（出現誤差函數 erf），且每組 (μ, σ²) 都不同；統一轉成 N(0, 1) 就只需一張 Z 表即可查所有常態。"
+  },
+  {
+    "id": "normal-z-002",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "X ~ N(60, 25)，求 P(55 < X < 70) 對應的 Z 區間？",
+    "options": [
+      "−5 < Z < 10",
+      "−1 < Z < 2",
+      "55 < Z < 70",
+      "−25 < Z < 25"
+    ],
+    "correct_index": 1,
+    "explanation": "σ = √25 = 5。Z = (X−μ)/σ：當 X=55 → Z=(55−60)/5=−1；當 X=70 → Z=(70−60)/5=2。所以對應 −1 < Z < 2。"
+  },
+  {
+    "id": "normal-ztable-001",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "教科書的標準常態分配表（Z 表）通常查的是哪一種機率？",
+    "options": [
+      "$P(Z \\le z)$ 從負無窮到 z 的左尾累積",
+      "$P(0 \\le Z \\le z)$ 從中心到 z 的半邊面積",
+      "$P(Z = z)$ 單點機率",
+      "$P(-z \\le Z \\le z)$ 對稱中段機率"
+    ],
+    "correct_index": 1,
+    "explanation": "多數教科書的 Z 表列出「中間到 z」的面積 $P(0 \\le Z \\le z)$。要算其他形式必須先把目標機率轉換成「半邊機率」的加減形式（如 $0.5 +$ 半邊或 $0.5 -$ 半邊）。"
+  },
+  {
+    "id": "normal-ztable-002",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "已知 $P(0 \\le Z \\le 1) = 0.3413$，求 $P(Z > 1)$。",
+    "options": [
+      "0.3413",
+      "0.6587",
+      "0.1587",
+      "0.8413"
+    ],
+    "correct_index": 2,
+    "explanation": "$P(Z > 1) = 0.5 - P(0 \\le Z \\le 1) = 0.5 - 0.3413 = 0.1587$。右尾 = 0.5 減半邊機率。"
+  },
+  {
+    "id": "normal-ztable-003",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "已知 $P(0 \\le Z \\le 0.72) = 0.2642$、$P(0 \\le Z \\le 0.12) = 0.0478$，求 $P(-0.12 \\le Z \\le 0.72)$。",
+    "options": [
+      "0.2164",
+      "0.3120",
+      "0.5000",
+      "0.2642"
+    ],
+    "correct_index": 1,
+    "explanation": "跨 0 的區間拆兩塊：$P(-0.12 \\le Z \\le 0) + P(0 \\le Z \\le 0.72)$。由對稱性 $P(-0.12 \\le Z \\le 0) = P(0 \\le Z \\le 0.12) = 0.0478$。所以答案 = 0.0478 + 0.2642 = 0.3120。"
+  },
+  {
+    "id": "normal-ztable-004",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "下列何者「不」是 Z 分配對稱性的直接結果？",
+    "options": [
+      "$P(Z > 0) = P(Z < 0) = 0.5$",
+      "$P(-z < Z < 0) = P(0 < Z < z)$",
+      "$P(Z < -z) = P(Z > z)$",
+      "$P(Z = 0) = 0.5$"
+    ],
+    "correct_index": 3,
+    "explanation": "$P(Z = 0) = 0$（連續型單點機率永遠為 0），不是 0.5。其他三項都是對稱性的正確推論。"
+  },
+  {
+    "id": "normal-reverse-001",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "X ~ N(500, 100²)，國立大學錄取前 15%。最低錄取分數約為多少？（已知 $P(0 \\le Z \\le 1.04) \\approx 0.35$）",
+    "options": [
+      "515",
+      "604",
+      "650",
+      "615"
+    ],
+    "correct_index": 1,
+    "explanation": "錄取前 15% 表示 P(X ≥ a) = 0.15 ⇒ P(0 ≤ Z ≤ (a−500)/100) = 0.5 − 0.15 = 0.35。反查 Z 表得 z ≈ 1.04，所以 a = 500 + 1.04 × 100 = 604。"
+  },
+  {
+    "id": "normal-reverse-002",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "已知 $P(Z > z) = 0.05$，z 約為何？（提示：$P(0 \\le Z \\le 1.645) \\approx 0.45$）",
+    "options": [
+      "1.282",
+      "1.645",
+      "1.960",
+      "2.576"
+    ],
+    "correct_index": 1,
+    "explanation": "$P(Z > z) = 0.05 \\Rightarrow P(0 \\le Z \\le z) = 0.5 - 0.05 = 0.45$。查 Z 表，最接近 0.45 的 z ≈ 1.645（單尾 95% 的經典臨界值）。"
+  },
+  {
+    "id": "normal-binomial-001",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "常態近似二項分配的條件是？",
+    "options": [
+      "$n \\ge 20$ 且 $np \\le 7$",
+      "$np \\ge 5$ 且 $n(1-p) \\ge 5$",
+      "$n \\ge 30$",
+      "$p$ 必須等於 0.5"
+    ],
+    "correct_index": 1,
+    "explanation": "常態近似二項條件：$np \\ge 5$ 且 $n(1-p) \\ge 5$。確保 $n$ 大且 $p$ 不太極端（不接近 0 或 1）。選項 1 的「$n \\ge 20$ 且 $np \\le 7$」是「波松近似二項」的條件，不要搞混。"
+  },
+  {
+    "id": "normal-binomial-002",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "已知 X ~ B(100, 0.4)，用常態近似後標準化的 Z 是？",
+    "options": [
+      "$Z = \\dfrac{X - 40}{\\sqrt{24}}$",
+      "$Z = \\dfrac{X - 40}{24}$",
+      "$Z = \\dfrac{X - 100}{0.4}$",
+      "$Z = \\dfrac{X - 0.4}{\\sqrt{100}}$"
+    ],
+    "correct_index": 0,
+    "explanation": "$\\mu = np = 100 \\times 0.4 = 40$、$\\sigma^2 = np(1-p) = 100 \\times 0.4 \\times 0.6 = 24$、$\\sigma = \\sqrt{24}$。$Z = (X - np)/\\sqrt{np(1-p)} = (X - 40)/\\sqrt{24}$。檢查條件：$np = 40 \\ge 5$、$n(1-p) = 60 \\ge 5$，可用。"
+  },
+  {
+    "id": "normal-z-003",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "標準化後機率值會如何變化？",
+    "options": [
+      "變大",
+      "變小",
+      "不變（只是換尺度）",
+      "永遠變成 0.5"
+    ],
+    "correct_index": 2,
+    "explanation": "Z 化是「等效轉換」：機率值完全不變，只是把 X 軸的單位改成「以 σ 為單位的距離」。P(a<X<b) = P((a−μ)/σ < Z < (b−μ)/σ)。"
+  },
+  {
+    "id": "normal-001",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "X ~ N(70, 100)（即 μ=70, σ²=100），標準化後 Z = ?",
+    "options": [
+      "Z = (X − 70) / 100",
+      "Z = (X − 70) / 10",
+      "Z = (X − 100) / 70",
+      "Z = X / 70"
+    ],
+    "correct_index": 1,
+    "explanation": "標準化公式 Z = (X − μ) / σ。注意 σ² = 100 ⇒ σ = 10，故 Z = (X − 70) / 10。常見錯誤是用變異數而非標準差來除。"
+  },
+  {
+    "id": "normal-002",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "標準常態分配的 68-95-99.7 法則中，「95%」對應的區間是？",
+    "options": [
+      "μ ± σ",
+      "μ ± 2σ",
+      "μ ± 3σ",
+      "μ ± 1.5σ"
+    ],
+    "correct_index": 1,
+    "explanation": "68-95-99.7 經驗法則：μ ± 1σ 涵蓋約 68%、μ ± 2σ 涵蓋約 95%、μ ± 3σ 涵蓋約 99.7%。更精確的 95% 區間用 1.96σ。"
+  },
+  {
+    "id": "normal-003",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "X ~ N(50, 16)，求 P(X > 58)。（用 Z 表近似值 Φ(2) ≈ 0.9772）",
+    "options": [
+      "0.0228",
+      "0.0668",
+      "0.1587",
+      "0.5000"
+    ],
+    "correct_index": 0,
+    "explanation": "σ = 4，Z = (58−50)/4 = 2。P(X > 58) = P(Z > 2) = 1 − Φ(2) = 1 − 0.9772 = 0.0228。"
+  },
+  {
+    "id": "normal-004",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "若 P(Z ≤ z) = 0.95（標準常態），z 約為？",
+    "options": [
+      "1.282",
+      "1.645",
+      "1.960",
+      "2.576"
+    ],
+    "correct_index": 1,
+    "explanation": "P(Z ≤ 1.645) ≈ 0.95（單尾 95%）。其他常用臨界值：1.282 對應 0.90、1.960 對應 0.975（雙尾 95%）、2.576 對應 0.995。"
+  },
+  {
+    "id": "normal-005",
+    "chapter": "continuous-distributions",
+    "concept": "normal",
+    "prompt": "常態分配中，下列何者最能描述 σ 變大的效應？",
+    "options": [
+      "曲線向右平移",
+      "曲線變高變瘦",
+      "曲線變矮變胖（更分散）",
+      "曲線形狀不變"
+    ],
+    "correct_index": 2,
+    "explanation": "σ 控制離散程度。σ 變大 → 資料更分散 → 曲線變矮變胖（總面積仍 = 1）。μ 控制位置（左右平移），σ 控制胖瘦。"
+  },
+  {
+    "id": "exp-easy-001",
+    "chapter": "continuous-distributions",
+    "concept": "exponential",
+    "prompt": "Exp(λ) 中的 λ（lambda）代表什麼？",
+    "options": [
+      "等待時間的平均值",
+      "事件發生的速率（每單位時間發生幾次）",
+      "標準差",
+      "樣本數"
+    ],
+    "correct_index": 1,
+    "explanation": "λ 是「速率」（rate），表示每單位時間內事件平均發生幾次。λ 越大代表事件越頻繁。注意：平均等待時間是 1/λ，不是 λ。"
+  },
+  {
+    "id": "exp-easy-002",
+    "chapter": "continuous-distributions",
+    "concept": "exponential",
+    "prompt": "下列哪個情境最適合用指數分配描述？",
+    "options": [
+      "考試成績",
+      "身高",
+      "下一個客人上門的等待時間",
+      "硬幣丟 10 次的正面數"
+    ],
+    "correct_index": 2,
+    "explanation": "指數分配專門描述「事件之間的等待時間」，例如下一通電話、下一個客人、下一次故障的時間。考試成績與身高接近常態；硬幣是離散二項分配。"
+  },
+  {
+    "id": "exp-easy-003",
+    "chapter": "continuous-distributions",
+    "concept": "exponential",
+    "prompt": "指數分配的 PDF 圖形長什麼樣子？",
+    "options": [
+      "鐘形對稱曲線",
+      "水平直線",
+      "從最高點開始向右遞減的曲線",
+      "階梯狀"
+    ],
+    "correct_index": 2,
+    "explanation": "指數 PDF f(x) = λe^(-λx) 在 x = 0 時最高（= λ），然後向右單調遞減到 0。直觀意義：等待時間越長越罕見。"
+  },
+  {
+    "id": "exp-001",
+    "chapter": "continuous-distributions",
+    "concept": "exponential",
+    "prompt": "指數分配 Exp(λ) 的 PDF 為何？",
+    "options": [
+      "f(x) = λx, x ≥ 0",
+      "f(x) = λe^(−λx), x ≥ 0",
+      "f(x) = e^(−x/λ), x ≥ 0",
+      "f(x) = 1/λ, 0 ≤ x ≤ λ"
+    ],
+    "correct_index": 1,
+    "explanation": "指數分配 Exp(λ) 的 PDF 為 f(x) = λe^(−λx)（x ≥ 0）。E(X) = 1/λ, Var(X) = 1/λ²。"
+  },
+  {
+    "id": "exp-002",
+    "chapter": "continuous-distributions",
+    "concept": "exponential",
+    "prompt": "電子元件壽命服從 Exp(λ)，平均壽命為 1000 小時，則 λ = ?",
+    "options": [
+      "1000",
+      "1/1000",
+      "10",
+      "0.5"
+    ],
+    "correct_index": 1,
+    "explanation": "E(X) = 1/λ = 1000 ⇒ λ = 1/1000 = 0.001。λ 的單位是「事件發生率」（每小時的故障率）。"
+  },
+  {
+    "id": "exp-003",
+    "chapter": "continuous-distributions",
+    "concept": "exponential",
+    "prompt": "X ~ Exp(λ=0.5)，求 P(X > 2)。",
+    "options": [
+      "e^(−1) ≈ 0.368",
+      "1 − e^(−1) ≈ 0.632",
+      "0.5",
+      "e^(−2) ≈ 0.135"
+    ],
+    "correct_index": 0,
+    "explanation": "指數分配的 P(X > t) = e^(−λt)。代入 λ=0.5, t=2，得 e^(−1) ≈ 0.368。"
+  },
+  {
+    "id": "exp-004",
+    "chapter": "continuous-distributions",
+    "concept": "exponential",
+    "prompt": "指數分配與波松分配的關係是？",
+    "options": [
+      "完全無關",
+      "波松記錄事件次數，指數記錄事件間的等待時間",
+      "兩者是同一個分配的不同寫法",
+      "指數是波松的近似"
+    ],
+    "correct_index": 1,
+    "explanation": "若波松過程的平均率為 λ（單位時間發生 λ 次事件），則事件之間的等待時間服從 Exp(λ)。兩者是「次數」與「時間」的對偶關係。"
+  },
+  {
+    "id": "exp-005",
+    "chapter": "continuous-distributions",
+    "concept": "exponential",
+    "prompt": "X ~ Exp(λ)，下列何者錯誤？",
+    "options": [
+      "E(X) = 1/λ",
+      "Var(X) = 1/λ²",
+      "標準差 = 1/λ",
+      "E(X) = λ"
+    ],
+    "correct_index": 3,
+    "explanation": "指數分配 E(X) = 1/λ，不是 λ。注意 λ 越大代表事件越頻繁，所以平均等待時間 1/λ 越短。標準差 = √Var = 1/λ 也等於期望值是指數分配的特色。"
+  },
+  {
+    "id": "memoryless-easy-001",
+    "chapter": "continuous-distributions",
+    "concept": "memoryless",
+    "prompt": "「無記憶性」用白話講最接近哪個意思？",
+    "options": [
+      "完全隨機，不受任何規律影響",
+      "已經等多久不影響未來的等待時間",
+      "事件絕對不會發生兩次",
+      "永遠記得上次發生的事"
+    ],
+    "correct_index": 1,
+    "explanation": "無記憶性 = 過程「沒有記憶」。已經等待的時間（過去）對未來再等多久的機率分配沒有任何影響。元件「不會因為用久了而比較容易壞」。"
+  },
+  {
+    "id": "memoryless-easy-002",
+    "chapter": "continuous-distributions",
+    "concept": "memoryless",
+    "prompt": "公式 P(X > s+t | X > s) = P(X > t) 中，符號「|」是什麼意思？",
+    "options": [
+      "或者",
+      "並且",
+      "在...條件下（條件機率）",
+      "等於"
+    ],
+    "correct_index": 2,
+    "explanation": "「|」是條件機率符號，讀作「在...條件下」。P(A | B) 表示「已知 B 發生的條件下，A 發生的機率」。所以公式讀作「已知 X 大於 s，再等到 X 大於 s+t 的機率」。"
+  },
+  {
+    "id": "memoryless-001",
+    "chapter": "continuous-distributions",
+    "concept": "memoryless",
+    "prompt": "「無記憶性」的數學表述為？",
+    "options": [
+      "P(X > s+t) = P(X > s) + P(X > t)",
+      "P(X > s+t | X > s) = P(X > t)",
+      "P(X = s+t) = P(X = s) × P(X = t)",
+      "E(X+t) = E(X) + t"
+    ],
+    "correct_index": 1,
+    "explanation": "無記憶性：給定已等待 s 時間，再等 t 時間以上的條件機率，等於從頭開始等 t 以上的機率。換言之「過去多久不影響未來」。"
+  },
+  {
+    "id": "memoryless-002",
+    "chapter": "continuous-distributions",
+    "concept": "memoryless",
+    "prompt": "下列何種分配具有無記憶性？",
+    "options": [
+      "常態分配",
+      "均勻分配",
+      "指數分配（連續）與幾何分配（離散）",
+      "二項分配"
+    ],
+    "correct_index": 2,
+    "explanation": "連續型中只有指數分配具有無記憶性；離散型中只有幾何分配具有此性質。這是兩者最大的特色。"
+  },
+  {
+    "id": "memoryless-003",
+    "chapter": "continuous-distributions",
+    "concept": "memoryless",
+    "prompt": "X ~ Exp(λ=1/100)（平均壽命 100 小時）。已知元件已運作 50 小時，再運作 30 小時以上的機率為何？",
+    "options": [
+      "e^(−0.8)",
+      "e^(−0.3)",
+      "e^(−0.5)",
+      "1 − e^(−0.3)"
+    ],
+    "correct_index": 1,
+    "explanation": "由無記憶性，P(X > 50+30 | X > 50) = P(X > 30) = e^(−λ×30) = e^(−30/100) = e^(−0.3) ≈ 0.741。過去運作多久完全不影響未來。"
+  },
+  {
+    "id": "memoryless-004",
+    "chapter": "continuous-distributions",
+    "concept": "memoryless",
+    "prompt": "無記憶性的「直觀意義」最接近哪個敘述？",
+    "options": [
+      "等待越久就越容易發生事件",
+      "等待越久就越不容易發生事件",
+      "不論已經等了多久，未來的等待時間分配都一樣",
+      "事件發生時間有固定週期"
+    ],
+    "correct_index": 2,
+    "explanation": "無記憶性 = 過程「不記得」自己已經跑了多久。物理意義：元件不會「老化」（不適合用於人類壽命，因人類會老化）。指數分配適合描述隨機故障。"
+  },
+  {
+    "id": "memoryless-005",
+    "chapter": "continuous-distributions",
+    "concept": "memoryless",
+    "prompt": "下列何者「不是」指數分配的合理應用情境？",
+    "options": [
+      "客服中心兩通電話之間的等待時間",
+      "燈泡的失效時間（假設失效是隨機事件）",
+      "人類壽命",
+      "放射性原子的衰變時間"
+    ],
+    "correct_index": 2,
+    "explanation": "人類壽命不適合指數分配，因為人會「老化」（年齡越大死亡風險越高），違反無記憶性。指數分配適合描述「隨機、不老化」的事件，如電子元件故障、原子衰變、客服電話間隔。"
+  }
+]
