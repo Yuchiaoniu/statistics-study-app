@@ -117,6 +117,18 @@
         <img src="../images/continuous-foundation/three-shadings.png" alt="中段與右尾兩種陰影區域">
         <figcaption>上：兩點之間 P(a&lt;X&lt;b)；下：右尾 P(X&gt;b)</figcaption>
       </figure>
+
+      <h4>互動：切換三種陰影</h4>
+      <p>點按鈕切換要算的範圍，看陰影位置與對應公式如何變化。a = −1, b = 1（固定示意）。</p>
+      <div class="shading-viz-wrap">
+        <div class="shading-controls">
+          <button class="viz-btn shading-btn active" data-mode="middle">中段 P(a ≤ X ≤ b)</button>
+          <button class="viz-btn shading-btn" data-mode="left">左尾 P(X ≤ b)</button>
+          <button class="viz-btn shading-btn" data-mode="right">右尾 P(X ≥ a)</button>
+        </div>
+        <canvas id="shading-viz-canvas"></canvas>
+        <div id="shading-formula" class="shading-formula"></div>
+      </div>
       <p>連續型機率永遠對應「曲線下的某塊陰影面積」，但「想算的範圍」不同，陰影位置也不同：</p>
 
       <table class="compare wide">
@@ -475,6 +487,7 @@
 
   <script src="../js/chart-panel.js"></script>
   <script src="../js/quiz.js"></script>
+  <script src="../js/shading-viz.js"></script>
   <script>
     createChartPanel({ container: document.getElementById('chart-uniform'), distribution: 'uniform' });
     createChartPanel({ container: document.getElementById('chart-normal'), distribution: 'normal' });

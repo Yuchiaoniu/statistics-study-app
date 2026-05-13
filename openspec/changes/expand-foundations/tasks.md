@@ -137,33 +137,33 @@
   - [x] 8.4.4 常態分配 4 張（鐘形、σ對形狀、經驗法則視覺、標準化概念圖）
   - [x] 8.4.5 標準常態 4 張（Z 表、右尾例題、跨0例題、反查 z 例題）
 
-## 9. 未來擴充 · 「圖片中出現過」的互動視覺化
+## 9. 已完成 · 「圖片中出現過」的互動視覺化
 
-> 這三個互動目前只有文字版說明，未來補上 Canvas 動畫會大幅提升直觀感。
-
-- [ ] 9.1 **離散→連續過渡動畫**（呼應 `histogram-to-smooth-curve.png`）
-  - [ ] 9.1.1 在「Σ 與 ∫ 統一性」觀念底下加 Canvas
-  - [ ] 9.1.2 「切得更細」按鈕：每按一次柱數翻倍（4 → 8 → 16 → ...）
-  - [ ] 9.1.3 寬度 → 0 時切換為平滑曲線，顯示「這就是積分」
-- [ ] 9.2 **離散 vs 連續 CDF 並排對照**（呼應 `discrete-vs-continuous-cdf.png`）
-  - [ ] 9.2.1 左右兩個 Canvas
-  - [ ] 9.2.2 左：階梯函數（離散）含跳點標示
-  - [ ] 9.2.3 右：平滑曲線（連續）
-  - [ ] 9.2.4 上方加注釋「離散有跳點 / 連續無跳點」
-- [ ] 9.3 **三種陰影區域視覺**（呼應 `three-shadings.png`）
-  - [ ] 9.3.1 三個並排小 Canvas（中段、左尾、右尾）
-  - [ ] 9.3.2 切換按鈕：點按鈕切換陰影位置
-  - [ ] 9.3.3 同步顯示對應的 CDF 表示式（F(b)−F(a) / F(b) / 1−F(b)）
+- [x] 9.1 **離散→連續過渡動畫**（`js/transition-viz.js`）
+  - [x] 9.1.1 在「Σ 與 ∫ 統一性」觀念底下加 Canvas
+  - [x] 9.1.2 「切得更細」按鈕：每按一次柱數翻倍（6 → 12 → 24 → ... → 128）
+  - [x] 9.1.3 柱數 ≥ 128 時自動切換為平滑曲線，公式從 Σ 變成 ∫
+  - [x] 9.1.4 綠色虛線疊放真實 PDF 作為「目標」對照
+- [x] 9.2 **離散 vs 連續 CDF 並排對照**（`js/cdf-compare.js`）
+  - [x] 9.2.1 左右兩個 Canvas
+  - [x] 9.2.2 左：離散 CDF 階梯函數，跳點處標出空心圈（左極限）與實心圈（跳到的高度）
+  - [x] 9.2.3 右：連續均勻 U(1,4) 的 CDF 平滑斜線
+  - [x] 9.2.4 各 Canvas 上方標註「離散 CDF / 連續 CDF」描述
+- [x] 9.3 **三種陰影區域互動視覺**（`js/shading-viz.js`）
+  - [x] 9.3.1 一個 Canvas + 三個切換按鈕（中段 / 左尾 / 右尾）
+  - [x] 9.3.2 點按鈕切換陰影位置，標籤同步更新
+  - [x] 9.3.3 下方公式區同步顯示 F(b)−F(a) / F(b) / 1−F(a)
+  - [x] 9.3.4 viz-btn.active 樣式（橘底白字）標示目前選中模式
 
 ## 10. 收尾與歸檔
 
 - [x] 10.1 確認 `openspec validate expand-foundations` 通過
 - [x] 10.2 更新 `memory/project_statistics_study_app.md` 加入本 change 演進歷史
-- [ ] 10.3 在瀏覽器人工驗收所有新內容（連續型基礎觀念視覺、課程目錄、area-viz 互動）
-- [ ] 10.4 完成第 8、9 段後 archive `expand-foundations`
-- [ ] 10.5 archive `build-mvp-rv-continuous`（已被取代）
-- [ ] 10.6 archive `convert-to-static-site`（架構轉換已完成）
-- [ ] 10.7 部署到 GitHub Pages、把線上網址寫入 README
+- [x] 10.3 在瀏覽器人工驗收所有新內容（使用者已確認）
+- [x] 10.4 完成第 8、9 段後 archive `expand-foundations`（本 commit 後執行）
+- [x] 10.5 archive `build-mvp-rv-continuous`（已被取代，本 commit 後執行）
+- [x] 10.6 archive `convert-to-static-site`（架構轉換已完成，本 commit 後執行）
+- [x] 10.7 部署到 GitHub Pages、把線上網址寫入 README — <https://yuchiaoniu.github.io/statistics-study-app/>
 
 ---
 

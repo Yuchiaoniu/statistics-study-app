@@ -77,6 +77,17 @@
         <figcaption>左：離散 CDF 是階梯函數（有跳點）；右：連續 CDF 是平滑曲線（無跳點）</figcaption>
       </figure>
 
+      <h4>互動：離散 vs 連續 CDF 並排</h4>
+      <p>下圖實際畫出兩種 CDF。左邊離散 CDF 在每個可能值處有「跳點」（標出空心圈表示左極限、實心圈表示跳到的高度）；右邊連續 CDF 是平滑斜線，沒有任何跳點。</p>
+      <div class="dual-canvas">
+        <div class="dual-half">
+          <canvas id="cdf-compare-discrete"></canvas>
+        </div>
+        <div class="dual-half">
+          <canvas id="cdf-compare-continuous"></canvas>
+        </div>
+      </div>
+
       <figure class="concept-image">
         <span class="label">📖 講義原圖</span>
         <img src="../images/random-variables/continuous-formal-definition.png" alt="連續型隨機變數的正式定義">
@@ -158,6 +169,18 @@
         <img src="../images/random-variables/histogram-to-smooth-curve.png" alt="直方圖過渡到平滑曲線">
         <figcaption>「若把間距逐漸變小」：離散直方圖的極限就是連續 PDF 曲線</figcaption>
       </figure>
+
+      <h4>互動：自己「切得更細」看極限</h4>
+      <p>下圖一開始有 6 根直方圖逼近一條鐘形 PDF（綠色虛線是真實曲線）。每按一次「切得更細」按鈕，柱數翻倍。試試看點到第 5 次以後，直方圖會自動變成平滑曲線——這就是<strong>積分 = 無限薄條的加總</strong>的視覺化證明。</p>
+      <div class="transition-viz-wrap">
+        <canvas id="transition-viz-canvas"></canvas>
+        <div class="transition-controls">
+          <span>柱數 n = <strong id="transition-n-label">6</strong></span>
+          <span class="transition-step" id="transition-step-label">$\sum_{i=1}^{6} f(x_i)\,\Delta x$</span>
+          <button id="transition-finer" class="viz-btn">切得更細 →</button>
+          <button id="transition-reset" class="viz-btn viz-btn-secondary">重置</button>
+        </div>
+      </div>
     </div>
 
     <div class="concept">
@@ -197,6 +220,8 @@
 
   <script src="../js/quiz.js"></script>
   <script src="../js/area-viz.js"></script>
+  <script src="../js/cdf-compare.js"></script>
+  <script src="../js/transition-viz.js"></script>
   <script>
     loadQuiz('probability-essence', 'quiz-essence');
     loadQuiz('pmf-pdf-cdf', 'quiz-pmf-pdf-cdf');
