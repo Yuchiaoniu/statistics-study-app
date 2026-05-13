@@ -1,6 +1,8 @@
 # 統計學學習工具 (statistics-study-app)
 
-互動式統計學學習網站。純靜態網頁，可部署到 GitHub Pages。
+🌐 **線上版**：<https://yuchiaoniu.github.io/statistics-study-app/>
+
+互動式統計學學習網站。純靜態網頁，部署在 GitHub Pages。
 
 **內容**：
 
