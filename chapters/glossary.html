@@ -33,6 +33,7 @@
     <div class="anchor-bar">
       <a href="#terms">📖 統計學專詞</a>
       <a href="#formulas">📐 公式速查</a>
+      <a href="#lookup">📊 查表工具</a>
     </div>
 
     <h2 id="terms" class="section-title">統計學專詞</h2>
@@ -255,6 +256,18 @@
 
         <dt>中央極限定理 <span class="en">Central Limit Theorem (CLT)</span></dt>
         <dd>當 $n$ 夠大（一般 $n \ge 30$），無論母體分配，$\bar X$ 近似服從 $N(\mu, \sigma^2/n)$。讓常態變得「處處可用」。</dd>
+
+        <dt>自由度 <span class="en">Degrees of Freedom, $\nu$ or df</span></dt>
+        <dd>樣本中「獨立資訊個數」。單樣本平均數推論時 $\nu = n - 1$（因為平均數已用掉一個自由度）。查 t 表必備的參數。</dd>
+
+        <dt>t 分配 <span class="en">Student's t-distribution, $t_\nu$</span></dt>
+        <dd>由 W. S. Gosset 以筆名「Student」發表。當小樣本（$n &lt; 30$）且母體 σ 未知時，用樣本標準差 $S$ 取代 σ 後的統計量服從 t 分配。形狀像常態但尾巴較胖；自由度 $\nu \to \infty$ 時 $t \to Z$。</dd>
+
+        <dt>臨界值 <span class="en">Critical Value, $t_{\nu, \alpha}$</span></dt>
+        <dd>在 t 分配（自由度 ν）下，右尾面積為 α 對應的 t 值。即 $P(t \ge t_{\nu, \alpha}) = \alpha$。例：$t_{10, 0.05} = 1.8125$ 表示「自由度 10 時，5% 機率落在 t > 1.8125」。</dd>
+
+        <dt>信賴水準 <span class="en">Confidence Level, $1-\alpha$</span></dt>
+        <dd>建構信賴區間時所選的把握度。常見 95%（$\alpha = 0.05$）、99%（$\alpha = 0.01$）。雙尾檢定時 α 平均分配到兩側，故查表用 $\alpha/2$。</dd>
       </dl>
     </details>
 
@@ -631,7 +644,123 @@ P(-z_1 \le Z \le z_2) &= P(0 \le Z \le z_1) + P(0 \le Z \le z_2)
       </div>
     </details>
 
+    <details class="formula-group">
+      <summary>t 分配對應（小樣本推論）</summary>
+
+      <div class="formula-card">
+        <h4>t 統計量（單樣本平均數）</h4>
+        <div class="formula">$$t = \frac{\bar X - \mu}{S / \sqrt{n}},\quad t \sim t_{\nu = n - 1}$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$\bar X$</dt><dd>樣本平均數</dd>
+            <dt>$\mu$</dt><dd>母體平均數（虛無假設值）</dd>
+            <dt>$S$</dt><dd>樣本標準差（用來取代未知的 σ）</dd>
+            <dt>$S / \sqrt{n}$</dt><dd>樣本平均數的標準誤（用 S 估計）</dd>
+            <dt>$\nu = n - 1$</dt><dd>自由度，因為樣本平均數已用掉一個</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h4>t 分配與 Z 分配對比</h4>
+        <table class="compare wide">
+          <thead><tr><th>使用情境</th><th>用哪個</th><th>統計量</th></tr></thead>
+          <tbody>
+            <tr><td>母體 σ 已知</td><td>Z 分配</td><td>$Z = \dfrac{\bar X - \mu}{\sigma / \sqrt{n}}$</td></tr>
+            <tr><td>大樣本 $n \ge 30$、σ 未知</td><td>Z 分配（用 S 近似）</td><td>$Z \approx \dfrac{\bar X - \mu}{S / \sqrt{n}}$</td></tr>
+            <tr><td>小樣本 $n &lt; 30$、σ 未知</td><td>t 分配</td><td>$t = \dfrac{\bar X - \mu}{S / \sqrt{n}}$</td></tr>
+          </tbody>
+        </table>
+        <div class="symbol-legend">
+          <strong>規律</strong>
+          <dl>
+            <dt>$\nu$ 越大</dt><dd>t 分配越接近 Z 分配（尾巴變瘦）</dd>
+            <dt>$\nu \to \infty$</dt><dd>$t_\nu \to Z$，兩者完全相同</dd>
+            <dt>$\nu = 120$ 時</dt><dd>$t_{120,\ 0.025} = 1.9799 \approx Z_{0.025} = 1.96$</dd>
+          </dl>
+        </div>
+      </div>
+    </details>
+
+    <h2 id="lookup" class="section-title">📊 查表工具</h2>
+    <p class="section-intro">即時計算的 Z 表與 t 表，解題時可直接驗證答案。比紙本表精確（4 位小數）、不限步進值。</p>
+
+    <div class="lookup-tool">
+      <h3>Z 表查詢（標準常態）</h3>
+      <p class="lookup-hint">輸入任意 z 值（範圍 -4 到 4），即時計算對應機率。下方四種模式可切換。</p>
+
+      <div class="lookup-controls">
+        <div class="lookup-input">
+          <label>z = </label>
+          <input type="number" id="ztable-z" value="1.96" step="0.01" min="-4" max="4">
+        </div>
+        <div class="lookup-modes">
+          <button class="viz-btn ztable-mode-btn active" data-mode="half">半邊 P(0 ≤ Z ≤ z)</button>
+          <button class="viz-btn ztable-mode-btn" data-mode="left">左尾 P(Z ≤ z)</button>
+          <button class="viz-btn ztable-mode-btn" data-mode="right">右尾 P(Z ≥ z)</button>
+          <button class="viz-btn ztable-mode-btn" data-mode="middle">雙側 P(−|z| ≤ Z ≤ |z|)</button>
+        </div>
+      </div>
+
+      <canvas id="ztable-canvas"></canvas>
+
+      <div class="lookup-result">
+        <div class="lookup-big-number">機率 = <span id="ztable-result-value">—</span></div>
+        <div id="ztable-result-formula" class="lookup-formula"></div>
+      </div>
+    </div>
+
+    <div class="lookup-tool">
+      <h3>t 表查詢（小樣本推論）</h3>
+      <p class="lookup-hint">輸入自由度 ν 與右尾面積 α，回傳臨界值 $t_{\nu, \alpha}$ 並對照 Z 值。</p>
+
+      <div id="ttable-wrap" class="lookup-controls">
+        <div class="lookup-input">
+          <label>自由度 ν = </label>
+          <input type="number" id="ttable-nu" value="10" step="1" min="1" max="200">
+        </div>
+        <div class="lookup-input">
+          <label>右尾 α = </label>
+          <select id="ttable-alpha">
+            <option value="0.20">0.20</option>
+            <option value="0.10">0.10</option>
+            <option value="0.05" selected>0.05</option>
+            <option value="0.025">0.025</option>
+            <option value="0.01">0.01</option>
+            <option value="0.005">0.005</option>
+            <option value="0.0025">0.0025</option>
+            <option value="0.001">0.001</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="lookup-quick">
+        <span class="lookup-quick-label">常用：</span>
+        <button class="viz-btn ttable-quick" data-alpha="0.05">單尾 95% (α=0.05)</button>
+        <button class="viz-btn ttable-quick" data-alpha="0.025">雙尾 95% (α=0.025)</button>
+        <button class="viz-btn ttable-quick" data-alpha="0.01">單尾 99% (α=0.01)</button>
+        <button class="viz-btn ttable-quick" data-alpha="0.005">雙尾 99% (α=0.005)</button>
+      </div>
+
+      <div class="lookup-result lookup-result-grid">
+        <div>
+          <div class="lookup-mini-label">臨界值 t<sub>ν, α</sub></div>
+          <div class="lookup-big-number" id="ttable-result-t">—</div>
+        </div>
+        <div>
+          <div class="lookup-mini-label">對應 Z 值</div>
+          <div class="lookup-big-number lookup-big-secondary" id="ttable-result-z">—</div>
+        </div>
+      </div>
+      <div id="ttable-result-formula" class="lookup-formula"></div>
+      <div id="ttable-result-note" class="lookup-note"></div>
+    </div>
+
     <p class="back-to-top"><a href="#top">↑ 回最上方</a></p>
   </main>
+
+  <script src="../js/ztable-lookup.js"></script>
+  <script src="../js/ttable-lookup.js"></script>
 </body>
 </html>
