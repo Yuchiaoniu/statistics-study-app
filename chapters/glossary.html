@@ -285,10 +285,19 @@
         <dd>用樣本資料判斷母體是否符合某假設的統計流程，標準五步驟：（1）設假設、（2）選 α、（3）算檢定統計量、（4）查臨界值、（5）作結論。</dd>
 
         <dt>虛無假設 <span class="en">Null Hypothesis, $H_0$</span></dt>
-        <dd>「沒有變化、沒有效果、沒有差異」的預設立場。檢定的目的是看樣本能否提供足夠證據「推翻」它。例：$H_0: \mu = 65$（體重沒變）。</dd>
+        <dd>「<strong>沒有變化、沒有效果、沒有差異</strong>」的保守預設立場——是檢定「想推翻」的對象。<br>
+        <strong>特徵</strong>：必含等號（=, ≤, ≥）；對應「現狀、無作為」；直到被證據推翻為止都採信。<br>
+        <strong>法庭比喻</strong>：被告無罪推定。檢方（樣本資料）必須提供足夠證據才能推翻「無罪」這個 $H_0$。<br>
+        <strong>反證法邏輯</strong>：假裝 $H_0$ 是對的 → 看資料有多離譜 → 若離譜到超過拒絕域，就推翻 $H_0$。</dd>
 
         <dt>對立假設 <span class="en">Alternative Hypothesis, $H_1$ or $H_a$</span></dt>
-        <dd>「想證明的事」。$H_1$ 寫對了，檢定才能朝你期望的方向走。三種寫法：$\neq$（雙尾）、$&gt;$（單尾右）、$&lt;$（單尾左）。例：「是否增加」→ $H_1: \mu &gt; 65$。</dd>
+        <dd>「<strong>想證明的事</strong>」，與 $H_0$ 互斥且窮舉所有可能。<br>
+        <strong>特徵</strong>：必<strong>不含</strong>等號（&gt;, &lt;, ≠）；對應「有變化、有效果、有差異」。<br>
+        <strong>口訣</strong>：「<strong>想證明什麼，放 $H_1$</strong>」。三種寫法配關鍵字：<br>
+        • $H_1: \mu &gt; \mu_0$（單尾右） — 關鍵字「<strong>增加、提升、超過</strong>」<br>
+        • $H_1: \mu &lt; \mu_0$（單尾左） — 關鍵字「<strong>減少、降低、不足</strong>」<br>
+        • $H_1: \mu \neq \mu_0$（雙尾） — 關鍵字「<strong>改變、不同</strong>」<br>
+        <strong>常見錯誤</strong>：把想證明的事寫進 $H_0$；或 $H_0/H_1$ 都不含等號（漏掉 $\mu = \mu_0$ 那一點）。</dd>
 
         <dt>顯著水準 $\alpha$ <span class="en">Significance Level</span></dt>
         <dd>「<strong>容許自己誤判的最大冒險率</strong>」，由研究者事先決定。技術上是「型 I 誤差的最大機率」。<br>
