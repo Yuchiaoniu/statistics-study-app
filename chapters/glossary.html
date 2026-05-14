@@ -106,8 +106,10 @@
         <dt>變異數 <span class="en">Variance</span></dt>
         <dd>$\mathrm{Var}(X)$ 或 $\sigma^2$，衡量分配的「離散程度」。值越大代表資料越分散。</dd>
 
-        <dt>標準差 <span class="en">Standard Deviation</span></dt>
-        <dd>$\sigma = \sqrt{\mathrm{Var}(X)}$，變異數的平方根，<strong>跟原始資料同單位</strong>，比變異數更好詮釋。</dd>
+        <dt>標準差 <span class="en">Standard Deviation, SD</span></dt>
+        <dd>$\sigma = \sqrt{\mathrm{Var}(X)}$，變異數的平方根，<strong>跟原始資料同單位</strong>，比變異數更好詮釋。<br>
+        <strong>注意分母不同</strong>：母體標準差 $\sigma$ 分母為 $N$；樣本標準差 $s$ 分母為 $n-1$（不偏估計）。<br>
+        $s = \sqrt{\frac{1}{n-1}\sum (x_i - \bar X)^2}$</dd>
 
         <dt>動差母函數 <span class="en">Moment Generating Function (MGF)</span></dt>
         <dd>$M(t) = E(e^{tX})$，是個「生成器」：對它求 1 階導數得 $E(X)$、2 階導數得 $E(X^2)$。</dd>
@@ -251,8 +253,10 @@
         <dt>抽樣分配 <span class="en">Sampling Distribution</span></dt>
         <dd>樣本統計量（如 $\bar X$）本身的機率分配。是統計推論的核心。</dd>
 
-        <dt>標準誤 <span class="en">Standard Error</span></dt>
-        <dd>樣本統計量的標準差，例如 $\sigma_{\bar X} = \sigma / \sqrt{n}$。<strong>不是</strong>母體標準差。</dd>
+        <dt>標準誤 <span class="en">Standard Error, SE</span></dt>
+        <dd>「<strong>樣本平均數 $\bar X$ 的標準差</strong>」，<strong>不是</strong>個別資料的標準差！<br>
+        $SE = \sigma/\sqrt n$（σ 已知）或 $SE = s/\sqrt n$（σ 未知）。<br>
+        除以 $\sqrt n$ 的直覺：抽 100 人算平均，誤差會比抽 1 人少 10 倍（$\sqrt{100}=10$）。</dd>
 
         <dt>中央極限定理 <span class="en">Central Limit Theorem (CLT)</span></dt>
         <dd>當 $n$ 夠大（一般 $n \ge 30$），無論母體分配，$\bar X$ 近似服從 $N(\mu, \sigma^2/n)$。讓常態變得「處處可用」。</dd>
@@ -268,6 +272,71 @@
 
         <dt>信賴水準 <span class="en">Confidence Level, $1-\alpha$</span></dt>
         <dd>建構信賴區間時所選的把握度。常見 95%（$\alpha = 0.05$）、99%（$\alpha = 0.01$）。雙尾檢定時 α 平均分配到兩側，故查表用 $\alpha/2$。</dd>
+      </dl>
+    </details>
+
+    <details class="term-group">
+      <summary>9. 假設檢定核心詞彙</summary>
+      <dl class="glossary-list">
+        <dt>個別資料 $x_i$ <span class="en">i-th observation</span></dt>
+        <dd>樣本中「第 $i$ 個」資料點。下標 $i$ 是編號（1, 2, ..., n），不是次方。例：5 位學生身高 170, 165, 178, 172, 169，則 $x_1=170, x_2=165, \ldots, x_5=169$。寫公式時用 $\sum x_i$ 比寫 $x_1+x_2+\ldots+x_n$ 簡潔。</dd>
+
+        <dt>假設檢定 <span class="en">Hypothesis Testing</span></dt>
+        <dd>用樣本資料判斷母體是否符合某假設的統計流程，標準五步驟：（1）設假設、（2）選 α、（3）算檢定統計量、（4）查臨界值、（5）作結論。</dd>
+
+        <dt>虛無假設 <span class="en">Null Hypothesis, $H_0$</span></dt>
+        <dd>「沒有變化、沒有效果、沒有差異」的預設立場。檢定的目的是看樣本能否提供足夠證據「推翻」它。例：$H_0: \mu = 65$（體重沒變）。</dd>
+
+        <dt>對立假設 <span class="en">Alternative Hypothesis, $H_1$ or $H_a$</span></dt>
+        <dd>「想證明的事」。$H_1$ 寫對了，檢定才能朝你期望的方向走。三種寫法：$\neq$（雙尾）、$&gt;$（單尾右）、$&lt;$（單尾左）。例：「是否增加」→ $H_1: \mu &gt; 65$。</dd>
+
+        <dt>顯著水準 $\alpha$ <span class="en">Significance Level</span></dt>
+        <dd>「<strong>容許自己誤判的最大冒險率</strong>」，由研究者事先決定。技術上是「型 I 誤差的最大機率」。<br>
+        <strong>冒險比喻</strong>：α = 5% 就像「我願意賭 95% 的把握，剩下 5% 的機率我會誤判」。α 越小越保守，但越難拒絕 $H_0$。<br>
+        常用值：0.10 / 0.05（最常見）/ 0.01 / 0.001。</dd>
+
+        <dt>信賴水準 $1-\alpha$ <span class="en">Confidence Level, CL</span></dt>
+        <dd>顯著水準的對立面，「<strong>有把握的程度</strong>」。$\alpha + (1-\alpha) = 1$。例：α = 0.05 ⇔ 信賴水準 = 0.95（95% 把握）。信賴區間是「用這個方法做 100 次，長期下來會有 (1−α)×100% 次包住真值」。</dd>
+
+        <dt>檢定統計量 <span class="en">Test Statistic</span></dt>
+        <dd><strong>不是單位，是「一個數字」</strong>——用樣本算出的「分數」，用來決定是否拒絕 $H_0$。<br>
+        常見類型：Z 統計量、t 統計量、卡方統計量、F 統計量。例：$Z = (\bar X - \mu_0)/(s/\sqrt n)$ 算出的值（如 2.5）就是檢定統計量。</dd>
+
+        <dt>拒絕域 <span class="en">Rejection Region / Critical Region</span></dt>
+        <dd>「<strong>檢定統計量落在這裡就拒絕 $H_0$</strong>」的範圍，由臨界值與檢定方向決定。<br>
+        單尾右尾：$Z &gt; Z_\alpha$；單尾左尾：$Z &lt; -Z_\alpha$；雙尾：$|Z| &gt; Z_{\alpha/2}$。</dd>
+
+        <dt>保留域 <span class="en">Retention / Acceptance Region</span></dt>
+        <dd>拒絕域的「補集」——檢定統計量落在這裡就<strong>不拒絕 $H_0$</strong>。<br>
+        <strong>⚠ 重要</strong>：「保留 $H_0$」<strong>不等於「接受 $H_0$ 是真的」</strong>！只是「證據不足以推翻」。類似法庭：判「無罪」不代表「無辜」，可能只是證據不足。</dd>
+
+        <dt>單尾檢定 <span class="en">One-tailed / One-sided Test</span></dt>
+        <dd>$H_1$ 寫成 $&gt;$ 或 $&lt;$（單向關心）。拒絕域只在一邊。題目關鍵字：「增加 / 減少 / 提升 / 超過 / 不足」。α=0.05 時臨界值 $Z = \pm 1.645$。</dd>
+
+        <dt>雙尾檢定 <span class="en">Two-tailed / Two-sided Test</span></dt>
+        <dd>$H_1$ 寫成 $\neq$（兩向都關心）。拒絕域分在兩邊各 α/2。題目關鍵字：「改變 / 不同」。α=0.05 時臨界值 $Z = \pm 1.96$（每側分 2.5%）。</dd>
+
+        <dt>Z 檢定 <span class="en">Z-test</span></dt>
+        <dd>用 Z 統計量做的假設檢定，適用：（a）σ 已知，或（b）大樣本 $n \ge 30$（用 $s$ 近似 σ）。</dd>
+
+        <dt>t 檢定 <span class="en">t-test</span></dt>
+        <dd>用 t 統計量做的假設檢定，適用：σ 未知且小樣本 $n &lt; 30$。臨界值要查 t 表（看自由度 $\nu = n-1$）。</dd>
+
+        <dt>p-value <span class="en">p-value</span></dt>
+        <dd>「如果 $H_0$ 真的成立，看到目前樣本（或更極端）的機率」。p 越小代表證據越強。<br>
+        <strong>決策規則</strong>：$p &lt; \alpha$ → 拒絕 $H_0$；$p \ge \alpha$ → 保留 $H_0$。<br>
+        例：p = 0.0062 表示「H₀ 為真時看到這種樣本的機率只有 0.62%」，證據相當有力。</dd>
+
+        <dt>型 I 誤差 <span class="en">Type I Error</span></dt>
+        <dd>$H_0$ <strong>實際為真</strong>，但你卻拒絕了它。「冤枉好人」。發生機率 = α。<br>
+        例：法庭把無辜的人判有罪。</dd>
+
+        <dt>型 II 誤差 <span class="en">Type II Error</span></dt>
+        <dd>$H_0$ <strong>實際為假</strong>，但你卻沒拒絕。「放過壞人」。發生機率記為 $\beta$。<br>
+        例：法庭把真兇判無罪。</dd>
+
+        <dt>檢定力 <span class="en">Statistical Power, $1-\beta$</span></dt>
+        <dd>「正確抓出 $H_0$ 為假」的能力 = $1-\beta$。提升檢定力的方法：增加樣本數 $n$、放寬 α、效應量越大越容易抓。</dd>
       </dl>
     </details>
 
@@ -641,6 +710,87 @@ P(-z_1 \le Z \le z_2) &= P(0 \le Z \le z_1) + P(0 \le Z \le z_2)
             <dt>用途</dt><dd>讓常態查表變得「處處可用」於估計與檢定</dd>
           </dl>
         </div>
+      </div>
+    </details>
+
+    <details class="formula-group">
+      <summary>假設檢定（五步驟與決策規則）</summary>
+
+      <div class="formula-card">
+        <h4>Z 統計量（大樣本平均數）</h4>
+        <div class="formula">$$Z = \frac{\bar X - \mu_0}{s / \sqrt{n}}$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$\bar X$</dt><dd>樣本平均數（用樣本算出）</dd>
+            <dt>$\mu_0$</dt><dd>虛無假設中的母體平均數（題目給定的值）</dd>
+            <dt>$s$</dt><dd>樣本標準差（σ 已知時改用 σ）</dd>
+            <dt>$s / \sqrt n$</dt><dd>標準誤 SE</dd>
+            <dt>適用</dt><dd>大樣本 $n \ge 30$，或 σ 已知</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h4>t 統計量（小樣本平均數）</h4>
+        <div class="formula">$$t = \frac{\bar X - \mu_0}{s / \sqrt{n}},\quad \nu = n - 1$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>公式</dt><dd>跟 Z 一樣，但分配是 $t_\nu$ 不是 $N(0,1)$</dd>
+            <dt>$\nu = n - 1$</dt><dd>自由度，查 t 表用</dd>
+            <dt>適用</dt><dd>小樣本 $n &lt; 30$ 且 σ 未知</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h4>拒絕域對照表（依檢定方向）</h4>
+        <table class="compare wide">
+          <thead>
+            <tr><th>檢定方向</th><th>$H_1$</th><th>拒絕域（Z 檢定）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>單尾右尾</td><td>$\mu &gt; \mu_0$</td><td>$Z &gt; Z_\alpha$（α=0.05 時 &gt; 1.645）</td></tr>
+            <tr><td>單尾左尾</td><td>$\mu &lt; \mu_0$</td><td>$Z &lt; -Z_\alpha$（α=0.05 時 &lt; −1.645）</td></tr>
+            <tr><td>雙尾</td><td>$\mu \neq \mu_0$</td><td>$|Z| &gt; Z_{\alpha/2}$（α=0.05 時 |Z|&gt;1.96）</td></tr>
+          </tbody>
+        </table>
+        <div class="symbol-legend">
+          <strong>記憶口訣</strong>
+          <dl>
+            <dt>看 $H_1$ 不等號方向</dt><dd>大於 → 右尾、小於 → 左尾、不等於 → 雙尾</dd>
+            <dt>雙尾要除 2</dt><dd>α 平均分到兩側，所以查 $Z_{\alpha/2}$（α=0.05 → 1.96，不是 1.645）</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h4>p-value 決策規則</h4>
+        <div class="formula">$$p\text{-value} = \begin{cases} P(Z &gt; |z_\text{樣}|) & \text{單尾} \\ 2 \cdot P(Z &gt; |z_\text{樣}|) & \text{雙尾} \end{cases}$$</div>
+        <div class="formula">$$p &lt; \alpha \Rightarrow \text{拒絕 } H_0;\quad p \ge \alpha \Rightarrow \text{保留 } H_0$$</div>
+        <div class="symbol-legend">
+          <strong>符號解釋</strong>
+          <dl>
+            <dt>$z_\text{樣}$</dt><dd>由樣本算出的 Z 統計量</dd>
+            <dt>單尾 p</dt><dd>只看一邊的尾端機率</dd>
+            <dt>雙尾 p</dt><dd>單尾結果乘 2（因為兩邊都要算）</dd>
+            <dt>意義</dt><dd>「如果 $H_0$ 為真，看到目前樣本（或更極端）的機率」</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="formula-card">
+        <h4>兩種誤差對照</h4>
+        <table class="compare wide">
+          <thead>
+            <tr><th>實際 / 決策</th><th>不拒絕 $H_0$</th><th>拒絕 $H_0$</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>$H_0$ 為真</td><td>✅ 正確（機率 $1-\alpha$）</td><td>❌ 型 I 誤差（機率 $\alpha$）「冤枉好人」</td></tr>
+            <tr><td>$H_0$ 為假</td><td>❌ 型 II 誤差（機率 $\beta$）「放過壞人」</td><td>✅ 檢定力（機率 $1-\beta$）</td></tr>
+          </tbody>
+        </table>
       </div>
     </details>
 
