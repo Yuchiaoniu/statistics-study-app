@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第 8-10 章 · 推論統計 · 統計學學習工具</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <a href="../" class="logo">統計學學習工具</a>
+      <ul>
+        <li><a href="../chapters/syllabus.html">課程目錄</a></li>
+        <li><a href="../chapters/mental-models.html">心智模型</a></li>
+        <li><a href="../chapters/glossary.html">速查</a></li>
+        <li><a href="../chapters/random-variables.html">隨機變數</a></li>
+        <li><a href="../chapters/continuous-distributions.html">連續型分配</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="../chapters/mental-models.html">← 心智模型</a>
+      <span> › M3 實驗與審判模型</span>
+    </div>
+
+    <h1>第 8-10 章 · 推論統計</h1>
+
+    <div class="punchline-box">
+      <strong>五步驟假設檢定框架（必背）</strong>
+      <ol>
+        <li><strong>步驟 1 建立假設</strong>：寫出 H₀（虛無假設）與 H₁（對立假設）</li>
+        <li><strong>步驟 2 選擇工具</strong>：σ已知用 Z；σ未知用 t；確認 α 與尾別</li>
+        <li><strong>步驟 3 計算統計量</strong>：代入公式算 Z 或 t</li>
+        <li><strong>步驟 4 臨界值</strong>：查表取得 Z_{α/2} 或 t_{α/2, df}，劃出拒絕域</li>
+        <li><strong>步驟 5 結論</strong>：統計量落在拒絕域 → 拒絕 H₀；否則無法拒絕</li>
+      </ol>
+    </div>
+
+    <div id="conf-interval-z" class="concept">
+      <h3>觀念 1：信賴區間（Z）— σ 已知</h3>
+      <p>「95% 信賴區間」的意思是：用這個方法反覆做 100 次，有 95 次的區間會包含真正的 μ。<strong>不是「μ 有 95% 機率在這個區間」</strong>——μ 是固定的，只有區間在變。</p>
+
+      <div class="formula">$$\bar{x} \pm Z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}$$</div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$\bar{x}$</dt><dd>樣本平均數，區間的中心點</dd>
+          <dt>$Z_{\alpha/2}$</dt><dd>標準常態臨界值；95% 時 α=0.05，α/2=0.025，$Z_{0.025}=1.96$</dd>
+          <dt>$\sigma/\sqrt{n}$</dt><dd>標準誤（SE）</dd>
+          <dt>$\pm$</dt><dd>往左右各延伸「誤差邊界（margin of error）」</dd>
+        </dl>
+      </div>
+
+      <h4>計算範例：95% 信賴區間</h4>
+      <p>已知：$\bar{x} = 100$，$\sigma = 10$，$n = 25$，信賴水準 95%（$Z_{0.025} = 1.96$）。</p>
+      <div class="formula">$$SE = \frac{10}{\sqrt{25}} = \frac{10}{5} = 2$$</div>
+      <div class="formula">$$CI = 100 \pm 1.96 \times 2 = 100 \pm 3.92 = (96.08,\ 103.92)$$</div>
+
+      <table class="compare wide">
+        <thead>
+          <tr><th>信賴水準</th><th>α</th><th>$Z_{\alpha/2}$</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>90%</td><td>0.10</td><td>1.645</td></tr>
+          <tr><td>95%</td><td>0.05</td><td>1.96</td></tr>
+          <tr><td>99%</td><td>0.01</td><td>2.576</td></tr>
+        </tbody>
+      </table>
+
+      <div class="punchline-box">
+        <strong>使用條件</strong>
+        <ul>
+          <li>母體標準差 σ <strong>已知</strong></li>
+          <li>n ≥ 30（CLT 成立）或母體本身常態</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="conf-interval-t" class="concept">
+      <h3>觀念 2：信賴區間（t）— σ 未知、小樣本</h3>
+      <p>實務上 σ 幾乎不會已知。當 σ 未知且樣本小（n &lt; 30），用樣本標準差 s 替代，並改用 <strong>t 分配</strong>——t 分配比 Z 更寬，為「用 s 估計 σ 的不確定性」付出代價。</p>
+
+      <div class="formula">$$\bar{x} \pm t_{\alpha/2,\,df} \cdot \frac{s}{\sqrt{n}}, \quad df = n - 1$$</div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$s$</dt><dd>樣本標準差（用來估計 σ）</dd>
+          <dt>$t_{\alpha/2,\,df}$</dt><dd>t 分配臨界值，需要同時指定顯著水準 α/2 與自由度 df</dd>
+          <dt>$df = n-1$</dt><dd>自由度（degrees of freedom）；用一個限制（計算 $\bar{x}$）後剩下 n−1 個「自由」的資料點</dd>
+        </dl>
+      </div>
+
+      <h4>計算範例：95% 信賴區間（t）</h4>
+      <p>已知：$\bar{x} = 50$，$s = 4$，$n = 9$，95%（$t_{0.025,\,8} = 2.306$）。</p>
+      <div class="formula">$$SE = \frac{s}{\sqrt{n}} = \frac{4}{\sqrt{9}} = \frac{4}{3} \approx 1.333$$</div>
+      <div class="formula">$$CI = 50 \pm 2.306 \times \frac{4}{3} = 50 \pm 3.075 = (46.92,\ 53.08)$$</div>
+
+      <h4>t vs Z：何時用哪個？</h4>
+      <table class="compare wide">
+        <thead>
+          <tr><th>條件</th><th>工具</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>σ 已知</td>
+            <td>Z 分配</td>
+          </tr>
+          <tr>
+            <td>σ 未知，n ≥ 30</td>
+            <td>t 分配（大樣本時 t ≈ Z）</td>
+          </tr>
+          <tr>
+            <td>σ 未知，n &lt; 30，母體常態</td>
+            <td>t 分配（必用）</td>
+          </tr>
+          <tr>
+            <td>σ 未知，n &lt; 30，母體非常態</td>
+            <td>無法直接用參數檢定</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="hypo-z" class="concept">
+      <h3>觀念 3：Z 假設檢定（單樣本）— σ 已知</h3>
+      <p>有一個數字宣稱「母體均值等於 μ₀」，我們用樣本數據來判斷：這個宣稱合理嗎？</p>
+
+      <div class="formula">$$Z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}}$$</div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$\mu_0$</dt><dd>H₀ 宣稱的母體均值（虛無值）</dd>
+          <dt>$\bar{x} - \mu_0$</dt><dd>樣本均值與假設值的差距</dd>
+          <dt>$\sigma / \sqrt{n}$</dt><dd>標準誤（SE），用來衡量差距「值幾個標準誤」</dd>
+          <dt>$Z$</dt><dd>Z 統計量：差距除以標準誤，得到「距離幾個標準差」</dd>
+        </dl>
+      </div>
+
+      <h4>完整五步驟範例</h4>
+      <p>已知 σ = 10，抽 n = 25 得 x̄ = 104。H₀: μ = 100，H₁: μ ≠ 100，α = 0.05（雙尾）。</p>
+
+      <ol class="numbered-list">
+        <li><strong>建立假設</strong>：H₀: μ = 100；H₁: μ ≠ 100</li>
+        <li><strong>選擇工具</strong>：σ 已知，用 Z 檢定；α = 0.05，雙尾，臨界值 ±1.96</li>
+        <li>
+          <strong>計算統計量</strong>：
+          <div class="formula">$$Z = \frac{104 - 100}{10 / \sqrt{25}} = \frac{4}{10/5} = \frac{4}{2} = 2.0$$</div>
+        </li>
+        <li><strong>臨界值</strong>：$Z_{0.025} = 1.96$；拒絕域 $|Z| > 1.96$</li>
+        <li><strong>結論</strong>：$|2.0| = 2.0 > 1.96$，落在拒絕域 → <strong>拒絕 H₀</strong>，有顯著證據顯示 μ ≠ 100</li>
+      </ol>
+
+      <div class="punchline-box">
+        <strong>雙尾 vs 單尾</strong>
+        <table class="compare wide">
+          <thead>
+            <tr><th>H₁</th><th>尾別</th><th>拒絕條件（α=0.05）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>μ ≠ μ₀</td><td>雙尾</td><td>|Z| &gt; 1.96</td></tr>
+            <tr><td>μ &gt; μ₀</td><td>右尾</td><td>Z &gt; 1.645</td></tr>
+            <tr><td>μ &lt; μ₀</td><td>左尾</td><td>Z &lt; −1.645</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="hypo-t" class="concept">
+      <h3>觀念 4：t 假設檢定（單樣本）— σ 未知</h3>
+      <p>結構與 Z 檢定完全相同，差別在於：用 s 替代 σ、查 t 表取得臨界值。</p>
+
+      <div class="formula">$$t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}}, \quad df = n - 1$$</div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$s$</dt><dd>樣本標準差（替代未知的 σ）</dd>
+          <dt>$df = n-1$</dt><dd>自由度，用於查 t 表的第二個索引</dd>
+        </dl>
+      </div>
+
+      <h4>完整五步驟範例</h4>
+      <p>已知 s = 6，抽 n = 9 得 x̄ = 54。H₀: μ = 50，H₁: μ ≠ 50，α = 0.05（雙尾）。</p>
+
+      <ol class="numbered-list">
+        <li><strong>建立假設</strong>：H₀: μ = 50；H₁: μ ≠ 50</li>
+        <li><strong>選擇工具</strong>：σ 未知，用 t 檢定；df = 9 − 1 = 8</li>
+        <li>
+          <strong>計算統計量</strong>：
+          <div class="formula">$$t = \frac{54 - 50}{6 / \sqrt{9}} = \frac{4}{6/3} = \frac{4}{2} = 2.0$$</div>
+        </li>
+        <li><strong>臨界值</strong>：查 t 表 $t_{0.025,\,8} = 2.306$；拒絕域 $|t| > 2.306$</li>
+        <li><strong>結論</strong>：$|2.0| = 2.0 &lt; 2.306$，未落在拒絕域 → <strong>無法拒絕 H₀</strong>，無顯著證據顯示 μ ≠ 50</li>
+      </ol>
+
+      <div class="punchline-box">
+        <strong>t 臨界值 &gt; Z 臨界值 的原因</strong>
+        <p>用 s 估計 σ 帶來額外不確定性，t 分配比 Z 更寬（尾巴更厚），所以臨界值更大。n 越大，df 越大，t 分配越接近 Z（df → ∞ 時完全一致）。</p>
+      </div>
+    </div>
+
+    <div id="two-sample-t" class="concept">
+      <h3>觀念 5：兩樣本 t 檢定</h3>
+      <p>比較兩組的母體均值是否相同。需要先用 <strong>F 檢定</strong>判斷兩組變異數是否相等，再決定用「合併變異數 t」或「非合併 t」。</p>
+
+      <h4>步驟一：F 檢定（變異數齊一性）</h4>
+      <div class="formula">$$F = \frac{s_1^2}{s_2^2} \quad (\text{令 } s_1^2 \ge s_2^2)$$</div>
+      <div class="formula">$$df_1 = n_1 - 1, \quad df_2 = n_2 - 1$$</div>
+
+      <h4>步驟二：合併變異數（Equal Variance）</h4>
+      <div class="formula">$$s_p^2 = \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2}$$</div>
+      <div class="formula">$$t = \frac{\bar{x}_1 - \bar{x}_2}{s_p\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}, \quad df = n_1 + n_2 - 2$$</div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$s_1^2,\ s_2^2$</dt><dd>兩組的樣本變異數</dd>
+          <dt>$F$</dt><dd>F 統計量：兩個變異數之比；若兩組變異數相等，F ≈ 1</dd>
+          <dt>$s_p^2$</dt><dd>合併變異數（pooled variance）——對兩組的 s² 做加權平均</dd>
+          <dt>$s_p$</dt><dd>合併標準差，$s_p = \sqrt{s_p^2}$</dd>
+          <dt>$df = n_1+n_2-2$</dt><dd>合併 t 的自由度</dd>
+        </dl>
+      </div>
+
+      <h4>完整範例：A 組 vs B 組</h4>
+      <p>A 組：$n_1=10,\ \bar{x}_1=1230,\ s_1^2=128$；B 組：$n_2=10,\ \bar{x}_2=1200,\ s_2^2=72$。H₀: μ₁ = μ₂，α = 0.05（雙尾）。</p>
+
+      <ol class="numbered-list">
+        <li>
+          <strong>F 檢定</strong>（先令大的在分子）：
+          <div class="formula">$$F = \frac{128}{72} \approx 1.78, \quad df_1 = 9,\ df_2 = 9$$</div>
+          查 F 表（α=0.05，df₁=9，df₂=9），臨界值 ≈ 3.18。1.78 &lt; 3.18 → <strong>不拒絕等變異數假設</strong>，使用合併 t。
+        </li>
+        <li>
+          <strong>合併變異數</strong>：
+          <div class="formula">$$s_p^2 = \frac{9 \times 128 + 9 \times 72}{10 + 10 - 2} = \frac{1152 + 648}{18} = \frac{1800}{18} = 100$$</div>
+          <div class="formula">$$s_p = \sqrt{100} = 10$$</div>
+        </li>
+        <li>
+          <strong>t 統計量</strong>：
+          <div class="formula">$$t = \frac{1230 - 1200}{10\sqrt{\frac{1}{10}+\frac{1}{10}}} = \frac{30}{10\sqrt{0.2}} = \frac{30}{10 \times 0.4472} = \frac{30}{4.472} \approx 6.71$$</div>
+        </li>
+        <li><strong>臨界值</strong>：$t_{0.025,\,18} = 2.101$；拒絕域 $|t| > 2.101$</li>
+        <li><strong>結論</strong>：$6.71 \gg 2.101$ → <strong>拒絕 H₀</strong>，A、B 兩組均值有顯著差異</li>
+      </ol>
+
+      <div class="punchline-box">
+        <strong>兩樣本 t 流程圖</strong>
+        <p>F 檢定通過（變異數相等）→ 合併 t，df = n₁+n₂−2</p>
+        <p>F 檢定不通過（變異數不等）→ Welch t，df 用近似公式（Satterthwaite）</p>
+      </div>
+    </div>
+
+    <section class="quiz-section">
+      <h3>練習：Z 信賴區間</h3>
+      <div id="quiz-ci-z"></div>
+    </section>
+    <section class="quiz-section">
+      <h3>練習：t 信賴區間</h3>
+      <div id="quiz-ci-t"></div>
+    </section>
+    <section class="quiz-section">
+      <h3>練習：單樣本 Z 檢定</h3>
+      <div id="quiz-hypo-z"></div>
+    </section>
+    <section class="quiz-section">
+      <h3>練習：單樣本 t 檢定</h3>
+      <div id="quiz-hypo-t"></div>
+    </section>
+    <section class="quiz-section">
+      <h3>練習：兩樣本 t 檢定</h3>
+      <div id="quiz-two-sample-t"></div>
+    </section>
+  </main>
+
+  <script src="../js/quiz.js"></script>
+  <script>
+    loadQuiz('conf-interval-z', 'quiz-ci-z');
+    loadQuiz('conf-interval-t', 'quiz-ci-t');
+    loadQuiz('hypo-z',          'quiz-hypo-z');
+    loadQuiz('hypo-t',          'quiz-hypo-t');
+    loadQuiz('two-sample-t',    'quiz-two-sample-t');
+  </script>
+</body>
+</html>

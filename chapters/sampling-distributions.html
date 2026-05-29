@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第 7 章 · 抽樣分配 · 統計學學習工具</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <a href="../" class="logo">統計學學習工具</a>
+      <ul>
+        <li><a href="../chapters/syllabus.html">課程目錄</a></li>
+        <li><a href="../chapters/mental-models.html">心智模型</a></li>
+        <li><a href="../chapters/glossary.html">速查</a></li>
+        <li><a href="../chapters/random-variables.html">隨機變數</a></li>
+        <li><a href="../chapters/continuous-distributions.html">連續型分配</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="../chapters/mental-models.html">← 心智模型</a>
+      <span> › M2 推論與概率模型</span>
+      <span> → M3</span>
+    </div>
+
+    <h1>第 7 章 · 抽樣分配</h1>
+
+    <div id="sampling-dist" class="concept">
+      <h3>觀念 1：抽樣分配（Sampling Distribution of x̄）</h3>
+      <p>想像你對一個母體進行<strong>無限次抽樣</strong>，每次抽 n 個、算一個樣本平均數 x̄。把所有這些 x̄ 排成一個分配，就是「<strong>x̄ 的抽樣分配</strong>」。</p>
+      <p>它不是原始資料的分配，而是<strong>統計量本身的機率分配</strong>。</p>
+
+      <h4>x̄ 的期望值與標準誤</h4>
+      <div class="formula">$$E(\bar{x}) = \mu$$</div>
+      <div class="formula">$$SE = \sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}}$$</div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$\bar{x}$</dt><dd>樣本平均數（讀作「x bar」），每次抽樣都會得到一個不同的值</dd>
+          <dt>$E(\bar{x})$</dt><dd>x̄ 的期望值——對無限次 x̄ 取平均，結果等於母體平均數 μ</dd>
+          <dt>$\mu$</dt><dd>母體平均數（希臘字 mu），固定不變</dd>
+          <dt>$SE$</dt><dd>標準誤（Standard Error），即 x̄ 的標準差，衡量樣本均值的抽樣變動大小</dd>
+          <dt>$\sigma$</dt><dd>母體標準差（希臘字 sigma）</dd>
+          <dt>$n$</dt><dd>每次抽樣的樣本數；n 越大，SE 越小，估計越精準</dd>
+        </dl>
+      </div>
+
+      <div class="punchline-box">
+        <strong>核心直覺</strong>
+        <p>x̄ 的中心位置 = μ（不偏估計）；x̄ 的分散程度 = σ/√n（樣本越大越集中）。</p>
+      </div>
+
+      <h4>白話理解</h4>
+      <p>調查全台灣平均薪資 μ。每次隨機抽 100 人算平均，重複抽一萬次，把一萬個 x̄ 畫成直方圖，這個直方圖就是「x̄ 的抽樣分配」。它的中心落在真正的 μ，分散程度等於 σ/√100 = σ/10。</p>
+    </div>
+
+    <div id="clt" class="concept">
+      <h3>觀念 2：中央極限定理（Central Limit Theorem，CLT）</h3>
+      <p>不管母體長什麼形狀（右偏、左偏、均勻……），只要<strong>樣本數 n 夠大</strong>，x̄ 的抽樣分配就會近似<strong>常態分配</strong>。</p>
+
+      <div class="formula">$$\bar{x} \xrightarrow{\;n \ge 30\;} N\!\left(\mu,\; \frac{\sigma^2}{n}\right)$$</div>
+      <div class="formula">$$\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}}$$</div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$\xrightarrow{n \ge 30}$</dt><dd>「當 n ≥ 30 時近似為」——CLT 的經驗門檻</dd>
+          <dt>$N\!\left(\mu,\, \sigma^2/n\right)$</dt><dd>常態分配，第一個參數是均值 μ，第二個是變異數 σ²/n</dd>
+          <dt>$\sigma^2/n$</dt><dd>x̄ 的變異數（注意：變異數是 σ²/n，標準誤是 σ/√n）</dd>
+        </dl>
+      </div>
+
+      <h4>計算範例：σ = 6，n = 9</h4>
+      <div class="formula">$$SE = \frac{\sigma}{\sqrt{n}} = \frac{6}{\sqrt{9}} = \frac{6}{3} = 2$$</div>
+
+      <table class="compare wide">
+        <thead>
+          <tr><th>樣本數 n</th><th>CLT 適用？</th><th>SE = σ/√n（σ=6）</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>n = 5</td>
+            <td class="bad">✗（需母體本身為常態）</td>
+            <td>6/√5 ≈ 2.68</td>
+          </tr>
+          <tr>
+            <td>n = 9</td>
+            <td class="bad">✗（n &lt; 30，需母體常態）</td>
+            <td>6/3 = <strong>2</strong></td>
+          </tr>
+          <tr>
+            <td>n = 30</td>
+            <td class="ok">✓</td>
+            <td>6/√30 ≈ 1.10</td>
+          </tr>
+          <tr>
+            <td>n = 100</td>
+            <td class="ok">✓</td>
+            <td>6/10 = 0.6</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="punchline-box">
+        <strong>CLT 的力量</strong>
+        <p>母體是任意形狀？沒關係——樣本夠大，x̄ 就變常態。這讓我們能用 Z 表做推論，是整個推論統計的基礎。</p>
+      </div>
+    </div>
+
+    <div id="std-error" class="concept">
+      <h3>觀念 3：標準誤（Standard Error，SE）</h3>
+      <p>「標準差 σ」衡量<strong>個別資料點</strong>圍繞母體平均 μ 的分散程度；「標準誤 SE」衡量<strong>樣本平均數 x̄</strong> 圍繞 μ 的分散程度。兩者都是標準差，但主角不同。</p>
+
+      <div class="formula">$$SE = \sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}}$$</div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$\sigma$</dt><dd>母體標準差，固定不變</dd>
+          <dt>$\sqrt{n}$</dt><dd>樣本數的平方根；n 越大，SE 越小</dd>
+          <dt>$\sigma_{\bar{x}}$</dt><dd>x̄ 的標準差，另一種寫法就是 SE</dd>
+        </dl>
+      </div>
+
+      <h4>計算範例</h4>
+      <table class="compare wide">
+        <thead>
+          <tr><th>情境</th><th>σ</th><th>n</th><th>SE = σ/√n</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>範例一</td>
+            <td>10</td>
+            <td>25</td>
+            <td>10/√25 = 10/5 = <strong>2</strong></td>
+          </tr>
+          <tr>
+            <td>範例二</td>
+            <td>6</td>
+            <td>9</td>
+            <td>6/√9 = 6/3 = <strong>2</strong></td>
+          </tr>
+          <tr>
+            <td>範例三</td>
+            <td>12</td>
+            <td>4</td>
+            <td>12/√4 = 12/2 = <strong>6</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>SE 與 n 的關係</h4>
+      <p>n 增大 4 倍，SE 縮小 2 倍（因為是 √n）。要把 SE 減半，需要把樣本數增加到 4 倍——這就是「精準度提升有成本」的統計現實。</p>
+
+      <table class="compare wide">
+        <thead>
+          <tr><th>n</th><th>√n</th><th>SE（σ=10）</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>4</td><td>2</td><td>5</td></tr>
+          <tr><td>25</td><td>5</td><td>2</td></tr>
+          <tr><td>100</td><td>10</td><td>1</td></tr>
+          <tr><td>400</td><td>20</td><td>0.5</td></tr>
+        </tbody>
+      </table>
+
+      <div class="punchline-box">
+        <strong>SE vs σ 一句話</strong>
+        <p>σ 是「一個人的變動」，SE 是「一群人平均值的變動」。平均會互相抵銷，所以 SE 永遠 ≤ σ（n ≥ 1 時）。</p>
+      </div>
+    </div>
+
+    <section class="quiz-section">
+      <h3>練習：抽樣分配概念</h3>
+      <div id="quiz-sampling-dist"></div>
+    </section>
+    <section class="quiz-section">
+      <h3>練習：中央極限定理</h3>
+      <div id="quiz-clt"></div>
+    </section>
+    <section class="quiz-section">
+      <h3>練習：標準誤</h3>
+      <div id="quiz-std-error"></div>
+    </section>
+  </main>
+
+  <script src="../js/quiz.js"></script>
+  <script>
+    loadQuiz('sampling-dist', 'quiz-sampling-dist');
+    loadQuiz('clt',           'quiz-clt');
+    loadQuiz('std-error',     'quiz-std-error');
+  </script>
+</body>
+</html>

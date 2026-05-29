@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第 11-15 章 · 進階分析 · 統計學學習工具</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <a href="../" class="logo">統計學學習工具</a>
+      <ul>
+        <li><a href="../chapters/syllabus.html">課程目錄</a></li>
+        <li><a href="../chapters/mental-models.html">心智模型</a></li>
+        <li><a href="../chapters/glossary.html">速查</a></li>
+        <li><a href="../chapters/random-variables.html">隨機變數</a></li>
+        <li><a href="../chapters/continuous-distributions.html">連續型分配</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <p class="breadcrumb"><a href="../chapters/mental-models.html">← 心智模型</a> › M4 系統與決策模型</p>
+    <h1>第 11-15 章 · 進階分析</h1>
+    <p class="section-intro">建立在假設檢定基礎上的三大進階工具：ANOVA 同時比較多組平均、線性迴歸建立預測模型、卡方檢定分析類別資料。</p>
+
+    <!-- ═══════════════════════════════════════════════════
+         Section 1: ANOVA
+    ════════════════════════════════════════════════════ -->
+    <h2 class="section-title" id="anova">ANOVA（F 檢定）</h2>
+    <p class="section-intro">想比較三組學生的平均成績，跑三次 t 檢定會累積型 I 誤差。ANOVA 一次搞定：把「總變異」拆成組間與組內，用 F 值判斷組間差異是否大到不像雜訊。</p>
+
+    <div class="concept" id="anova-concept">
+      <h3>核心邏輯：拆解總變異</h3>
+      <p>ANOVA 的核心想法：<strong>如果組間差異大，相對組內的隨機波動，F 值就會偏大，超過臨界值就拒絕 H₀。</strong></p>
+
+      <div class="formula">$$F = \frac{MS_{between}}{MS_{within}} = \frac{SSB/df_B}{SSW/df_W}$$</div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$SSB$</dt><dd>Sum of Squares Between groups，組間平方和——量每組平均與總平均的距離</dd>
+          <dt>$SSW$</dt><dd>Sum of Squares Within groups，組內平方和——量每個觀測值與該組平均的距離</dd>
+          <dt>$df_B = k - 1$</dt><dd>組間自由度，$k$ 為組數</dd>
+          <dt>$df_W = N - k$</dt><dd>組內自由度，$N$ 為總觀測數，$k$ 為組數</dd>
+          <dt>$MSB = SSB/df_B$</dt><dd>組間均方（Mean Square Between）——組間「每個自由度的變異」</dd>
+          <dt>$MSW = SSW/df_W$</dt><dd>組內均方（Mean Square Within）——相當於共同誤差的估計</dd>
+          <dt>$F$</dt><dd>F 統計量，服從 $F(df_B,\, df_W)$ 分配；$F$ 越大代表組間差異相對組內雜訊越顯著</dd>
+        </dl>
+      </div>
+
+      <h3>完整計算範例</h3>
+      <p>三組各 3 筆觀測，比較三組平均是否相同：</p>
+
+      <table class="compare wide">
+        <thead>
+          <tr><th>群組</th><th>觀測值</th><th>組平均 $\bar{x}_j$</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Group A</td><td>2, 4, 6</td><td>4</td></tr>
+          <tr><td>Group B</td><td>4, 6, 8</td><td>6</td></tr>
+          <tr><td>Group C</td><td>6, 8, 10</td><td>8</td></tr>
+        </tbody>
+      </table>
+
+      <p>總平均 $\bar{x} = (4 + 6 + 8)/3 = 6$，$k = 3$，$N = 9$。</p>
+
+      <h4>Step 1：計算 SSB（組間平方和）</h4>
+      <div class="formula">$$SSB = n_j \sum_{j=1}^{k}(\bar{x}_j - \bar{x})^2 = 3\times[(4-6)^2 + (6-6)^2 + (8-6)^2]$$</div>
+      <div class="formula">$$= 3 \times [4 + 0 + 4] = 3 \times 8 = 24, \quad df_B = k - 1 = 2, \quad MSB = 24/2 = 12$$</div>
+
+      <h4>Step 2：計算 SSW（組內平方和）</h4>
+      <div class="formula">$$SSW = \sum_{j}\sum_{i}(x_{ij} - \bar{x}_j)^2$$</div>
+      <div class="formula">$$= [(2-4)^2+(4-4)^2+(6-4)^2] + [(4-6)^2+(6-6)^2+(8-6)^2] + [(6-8)^2+(8-8)^2+(10-8)^2]$$</div>
+      <div class="formula">$$= [4+0+4] + [4+0+4] + [4+0+4] = 8 + 8 + 8 = 24, \quad df_W = N - k = 9 - 3 = 6, \quad MSW = 24/6 = 4$$</div>
+
+      <h4>Step 3：計算 F 值</h4>
+      <div class="formula">$$F = \frac{MSB}{MSW} = \frac{12}{4} = 3.0$$</div>
+
+      <p>查 F 表：$F_{0.05}(2, 6) \approx 5.14$。因為 $3.0 < 5.14$，<strong>未達顯著水準，無法拒絕 H₀</strong>（三組平均數沒有顯著差異的證據）。</p>
+
+      <div class="punchline-box">
+        <strong>ANOVA 公式速查</strong>
+        <table class="compare wide">
+          <thead>
+            <tr><th>來源</th><th>SS</th><th>df</th><th>MS</th><th>F</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>組間 Between</td><td>$SSB$</td><td>$k-1$</td><td>$SSB/(k-1)$</td><td>$MSB/MSW$</td></tr>
+            <tr><td>組內 Within</td><td>$SSW$</td><td>$N-k$</td><td>$SSW/(N-k)$</td><td>—</td></tr>
+            <tr><td>總計 Total</td><td>$SST$</td><td>$N-1$</td><td>—</td><td>—</td></tr>
+          </tbody>
+        </table>
+        <p>其中 $SST = SSB + SSW$（變異可加性）。</p>
+      </div>
+    </div>
+
+    <section class="quiz-section">
+      <h2>選擇題 · ANOVA</h2>
+      <div id="quiz-anova"></div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         Section 2: Simple Linear Regression
+    ════════════════════════════════════════════════════ -->
+    <h2 class="section-title" id="regression">簡單線性迴歸</h2>
+    <p class="section-intro">找一條最佳直線來描述兩個變數的關係——X 每增加 1 單位，Y 平均增加多少？目標是讓「殘差平方和」最小（最小平方法 OLS）。</p>
+
+    <div class="concept" id="regression-concept">
+      <h3>迴歸方程式</h3>
+
+      <div class="formula">$$\hat{y} = b_0 + b_1 x$$</div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$\hat{y}$</dt><dd>讀作「y hat」，模型預測的 y 值（不是真實觀測值）</dd>
+          <dt>$b_0$</dt><dd>截距（intercept）：當 $x = 0$ 時，$\hat{y}$ 的值</dd>
+          <dt>$b_1$</dt><dd>斜率（slope）：$x$ 每增加 1 單位，$\hat{y}$ 平均增加 $b_1$ 單位</dd>
+          <dt>$x$</dt><dd>自變數（predictor / independent variable），已知的輸入值</dd>
+          <dt>$R^2$</dt><dd>判定係數，代表迴歸模型解釋了多少比例的 y 變異（$0 \le R^2 \le 1$）</dd>
+        </dl>
+      </div>
+
+      <h3>OLS 估計公式</h3>
+
+      <div class="formula">$$b_1 = \frac{\sum(x_i - \bar{x})(y_i - \bar{y})}{\sum(x_i - \bar{x})^2}$$</div>
+
+      <div class="formula">$$b_0 = \bar{y} - b_1 \bar{x}$$</div>
+
+      <h3>完整計算範例</h3>
+      <p>資料：$(1, 2),\ (2, 4),\ (3, 6)$——完美線性關係。</p>
+
+      <table class="compare wide">
+        <thead>
+          <tr><th>$x_i$</th><th>$y_i$</th><th>$x_i - \bar{x}$</th><th>$y_i - \bar{y}$</th><th>$(x_i-\bar{x})(y_i-\bar{y})$</th><th>$(x_i-\bar{x})^2$</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>2</td><td>−1</td><td>−2</td><td>2</td><td>1</td></tr>
+          <tr><td>2</td><td>4</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>3</td><td>6</td><td>1</td><td>2</td><td>2</td><td>1</td></tr>
+          <tr><td colspan="4"><strong>合計</strong></td><td><strong>4</strong></td><td><strong>2</strong></td></tr>
+        </tbody>
+      </table>
+
+      <p>$\bar{x} = 2,\quad \bar{y} = 4$</p>
+
+      <div class="formula">$$b_1 = \frac{\sum(x_i-\bar{x})(y_i-\bar{y})}{\sum(x_i-\bar{x})^2} = \frac{4}{2} = 2$$</div>
+      <div class="formula">$$b_0 = \bar{y} - b_1\bar{x} = 4 - 2 \times 2 = 0$$</div>
+      <div class="formula">$$\hat{y} = 2x$$</div>
+
+      <p>$R^2 = 1.0$——模型完全解釋 y 的所有變異（完美線性關係）。</p>
+
+      <div class="punchline-box">
+        <strong>$R^2$ 的解讀</strong>
+        <ul>
+          <li>$R^2 = 0.80$：模型解釋了 80% 的 y 變異，剩下 20% 是其他因素或隨機誤差</li>
+          <li>$R^2 = 0$：迴歸線完全無用（斜率 = 0）</li>
+          <li>$R^2 = 1$：完美預測（如本例）——現實中幾乎不存在</li>
+        </ul>
+      </div>
+    </div>
+
+    <section class="quiz-section">
+      <h2>選擇題 · 簡單線性迴歸</h2>
+      <div id="quiz-regression"></div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         Section 3: Chi-Square Test
+    ════════════════════════════════════════════════════ -->
+    <h2 class="section-title" id="chi-square">卡方檢定</h2>
+    <p class="section-intro">觀察到的次數分配，與理論期望的次數分配，差距有多大？$\chi^2$ 量化這個差距，用於驗證分配是否吻合，或兩個類別變數是否獨立。</p>
+
+    <div class="concept" id="chi-square-concept">
+      <h3>卡方統計量公式</h3>
+
+      <div class="formula">$$\chi^2 = \sum \frac{(O - E)^2}{E}$$</div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$O$</dt><dd>Observed frequency，實際觀察到的次數</dd>
+          <dt>$E$</dt><dd>Expected frequency，在 H₀ 成立下的期望次數</dd>
+          <dt>$(O-E)^2$</dt><dd>差距平方（消除正負方向）</dd>
+          <dt>$(O-E)^2/E$</dt><dd>相對差距：同樣差 3 次，期望 10 vs 期望 100，嚴重程度完全不同</dd>
+          <dt>$\sum$</dt><dd>對所有類別加總</dd>
+        </dl>
+      </div>
+
+      <h3>兩種用途</h3>
+      <table class="compare wide">
+        <thead>
+          <tr><th>用途</th><th>問題</th><th>$df$</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>適合度檢定</strong><br>Goodness of Fit</td>
+            <td>資料是否符合某理論分配？（例：骰子是否公平？）</td>
+            <td>類別數 $k - 1$</td>
+          </tr>
+          <tr>
+            <td><strong>獨立性檢定</strong><br>Test of Independence</td>
+            <td>兩個類別變數是否獨立？（例：性別與偏好是否相關？）</td>
+            <td>$(r-1)(c-1)$，$r$ 列 $c$ 欄</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>完整計算範例（適合度檢定）</h3>
+      <p>丟一顆骰子 60 次，各面觀察次數如下。H₀：骰子公平（每面出現機率 1/6）。</p>
+
+      <table class="compare wide">
+        <thead>
+          <tr><th>骰子面</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>合計</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>觀察次數 $O$</td><td>8</td><td>10</td><td>9</td><td>11</td><td>12</td><td>10</td><td>60</td></tr>
+          <tr><td>期望次數 $E$</td><td>10</td><td>10</td><td>10</td><td>10</td><td>10</td><td>10</td><td>60</td></tr>
+          <tr><td>$(O-E)^2/E$</td><td>4/10</td><td>0</td><td>1/10</td><td>1/10</td><td>4/10</td><td>0</td><td>—</td></tr>
+        </tbody>
+      </table>
+
+      <div class="formula">$$\chi^2 = \frac{(8-10)^2}{10} + \frac{(10-10)^2}{10} + \frac{(9-10)^2}{10} + \frac{(11-10)^2}{10} + \frac{(12-10)^2}{10} + \frac{(10-10)^2}{10}$$</div>
+      <div class="formula">$$= \frac{4}{10} + 0 + \frac{1}{10} + \frac{1}{10} + \frac{4}{10} + 0 = \frac{10}{10} = 1.0$$</div>
+
+      <p>$df = k - 1 = 6 - 1 = 5$，臨界值 $\chi^2_{0.05, 5} = 11.07$。</p>
+      <p>因為 $1.0 < 11.07$，<strong>不拒絕 H₀</strong>——沒有顯著證據說明骰子不公平。</p>
+
+      <div class="punchline-box">
+        <strong>關鍵注意事項</strong>
+        <ul>
+          <li><strong>期望次數 ≥ 5</strong>：每格 $E$ 最好不低於 5，否則卡方近似不可靠</li>
+          <li><strong>單向檢定</strong>：卡方統計量永遠非負，只看右尾（拒絕域在右邊）</li>
+          <li><strong>獨立性檢定的期望值</strong>：$E_{ij} = (\text{第 }i\text{ 列總和} \times \text{第 }j\text{ 欄總和}) / n$</li>
+        </ul>
+      </div>
+    </div>
+
+    <section class="quiz-section">
+      <h2>選擇題 · 卡方檢定</h2>
+      <div id="quiz-chi-square"></div>
+    </section>
+  </main>
+
+  <script src="../js/quiz.js"></script>
+  <script>
+    loadQuiz('anova', 'quiz-anova');
+    loadQuiz('regression', 'quiz-regression');
+    loadQuiz('chi-square', 'quiz-chi-square');
+  </script>
+</body>
+</html>

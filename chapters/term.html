@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>專詞詳情 · 統計學學習工具</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    .breadcrumb {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .breadcrumb a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover { color: var(--text); }
+
+    .breadcrumb .sep { opacity: 0.4; }
+
+    .term-stage-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: 1px solid;
+      margin-bottom: 0.6rem;
+    }
+
+    .term-heading {
+      margin: 0 0 0.2rem;
+      font-size: 2rem;
+      font-weight: 800;
+    }
+
+    .term-en-label {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .easy-def-block {
+      background: var(--primary-dim);
+      border-left: 3px solid var(--primary);
+      border-radius: 0 8px 8px 0;
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .easy-def-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .easy-def-text {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .def-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .def-text {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--text);
+    }
+
+    .formula-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px 8px 0 0;
+      padding: 1rem 1.25rem;
+      text-align: center;
+      font-size: 1.1rem;
+      overflow-x: auto;
+    }
+
+    .symbols-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .symbols-table td {
+      padding: 0.35rem 0.7rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    .symbols-table tr:last-child td { border-bottom: none; }
+
+    .symbols-table .sym-cell {
+      width: 6rem;
+      color: var(--warning);
+      font-family: monospace;
+      white-space: nowrap;
+    }
+
+    .symbols-table .sym-desc { color: var(--muted); }
+
+    .symbols-table a {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .symbols-table a:hover { opacity: 1; }
+
+    .nav-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      text-decoration: none;
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    .nav-btn:hover { background: var(--surface-2); }
+
+    .nav-btn.disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    .back-link {
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .back-link:hover { color: var(--text); }
+
+    #not-found {
+      text-align: center;
+      padding: 4rem 0;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <a href="../" class="logo">統計學學習工具</a>
+      <ul>
+        <li><a href="../chapters/syllabus.html">課程目錄</a></li>
+        <li><a href="../chapters/mental-models.html">心智模型</a></li>
+        <li><a href="../chapters/glossary.html">速查</a></li>
+        <li><a href="../chapters/random-variables.html">隨機變數</a></li>
+        <li><a href="../chapters/continuous-distributions.html">連續型分配</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container" style="padding-top:2rem;padding-bottom:3rem;max-width:760px">
+    <div id="term-content"></div>
+    <div id="not-found" style="display:none">
+      <p style="font-size:1.2rem">找不到這個詞條。</p>
+      <a href="stages.html" class="nav-btn" style="display:inline-flex;margin-top:1rem">← 回到七階段地圖</a>
+    </div>
+  </main>
+
+  <script src="../js/terms-data.js"></script>
+  <script>
+    function hexToRgba(hex, alpha) {
+      const r = parseInt(hex.slice(1, 3), 16);
+      const g = parseInt(hex.slice(3, 5), 16);
+      const b = parseInt(hex.slice(5, 7), 16);
+      return `rgba(${r},${g},${b},${alpha})`;
+    }
+
+    function getStage(id) {
+      return STAGES.find(s => s.id === id) || null;
+    }
+
+    function render() {
+      const params = new URLSearchParams(location.search);
+      const id = params.get('id');
+
+      if (!id) { showNotFound(); return; }
+
+      const term = TERMS.find(t => t.id === id);
+      if (!term) { showNotFound(); return; }
+
+      const stage = getStage(term.stage);
+      const color = stage ? stage.color : '#94a3b8';
+
+      // Prev / next within same stage
+      const stageTerms = TERMS.filter(t => t.stage === term.stage);
+      const idx = stageTerms.findIndex(t => t.id === id);
+      const prev = idx > 0 ? stageTerms[idx - 1] : null;
+      const next = idx < stageTerms.length - 1 ? stageTerms[idx + 1] : null;
+
+      document.title = `${term.name} · 統計學學習工具`;
+
+      const breadcrumbStage = stage
+        ? `<a href="stages.html">七階段地圖</a>
+           <span class="sep">›</span>
+           <a href="stages.html" style="color:${color}">Stage ${stage.id}・${stage.name}</a>
+           <span class="sep">›</span>`
+        : `<a href="stages.html">七階段地圖</a><span class="sep">›</span>`;
+
+      const stageBadge = stage
+        ? `<span class="term-stage-badge" style="color:${color};border-color:${hexToRgba(color,0.4)};background:${hexToRgba(color,0.1)}">
+             Stage ${stage.id} · ${stage.name}
+           </span>`
+        : '';
+
+      const easyDefBlock = term.easyDef
+        ? `<div class="easy-def-block">
+             <div class="easy-def-label">白話速覽</div>
+             <div class="easy-def-text">${term.easyDef}</div>
+           </div>`
+        : '';
+
+      let formulaBlock = '';
+      if (term.formula) {
+        const symbolsRows = (term.symbols || []).map(s => `
+          <tr>
+            <td class="sym-cell">$${s.sym}$</td>
+            <td class="sym-desc">${s.desc}</td>
+            <td>${s.link ? `<a href="term.html?id=${s.link}">→ 詞條</a>` : ''}</td>
+          </tr>
+        `).join('');
+        const symbolsTable = symbolsRows
+          ? `<table class="symbols-table">${symbolsRows}</table>`
+          : '<div style="margin-bottom:1.5rem"></div>';
+        formulaBlock = `
+          <div class="section-label">公式</div>
+          <div class="formula-block">$$${term.formula}$$</div>
+          ${symbolsTable}
+        `;
+      }
+
+      const prevBtn = prev
+        ? `<a class="nav-btn" href="term.html?id=${prev.id}">← ${prev.name}</a>`
+        : `<span class="nav-btn disabled">← 無上一詞</span>`;
+
+      const nextBtn = next
+        ? `<a class="nav-btn" href="term.html?id=${next.id}">${next.name} →</a>`
+        : `<span class="nav-btn disabled">無下一詞 →</span>`;
+
+      document.getElementById('term-content').innerHTML = `
+        <nav class="breadcrumb">
+          ${breadcrumbStage}
+          <span>${term.name}</span>
+        </nav>
+
+        ${stageBadge}
+
+        <h1 class="term-heading">${term.name}</h1>
+        <span class="term-en-label">${term.en || ''}</span>
+
+        ${easyDefBlock}
+
+        ${formulaBlock}
+
+        <div class="def-section">
+          <div class="section-label">定義</div>
+          <div class="def-text">${term.def}</div>
+        </div>
+
+        <div class="nav-row">
+          ${prevBtn}
+          <a class="back-link" href="stages.html#stage-${term.stage}">↑ 回到 Stage ${term.stage}</a>
+          ${nextBtn}
+        </div>
+      `;
+
+      // Re-run MathJax after dynamic render
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise([document.getElementById('term-content')]);
+      }
+    }
+
+    function showNotFound() {
+      document.getElementById('not-found').style.display = 'block';
+    }
+
+    render();
+  </script>
+</body>
+</html>

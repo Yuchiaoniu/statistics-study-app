@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>心智模型地圖 · 統計學學習工具</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .mm-intro {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 680px;
+      margin-bottom: 2.5rem;
+      line-height: 1.75;
+    }
+
+    .mm-timeline {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 3rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+
+    .mm-tl-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      min-width: 120px;
+    }
+
+    .mm-tl-dot {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1rem;
+      border: 2px solid;
+    }
+
+    .mm-tl-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .mm-tl-era {
+      font-size: 0.7rem;
+      color: var(--muted);
+      opacity: 0.7;
+      text-align: center;
+    }
+
+    .mm-tl-arrow {
+      flex: 1;
+      height: 2px;
+      background: var(--border);
+      min-width: 2rem;
+      margin-top: -1.8rem;
+      position: relative;
+    }
+
+    .mm-tl-arrow::after {
+      content: '▶';
+      position: absolute;
+      right: -4px;
+      top: -0.6rem;
+      font-size: 0.65rem;
+      color: var(--border);
+    }
+
+    .mm-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+
+    .mm-card {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      text-decoration: none;
+      display: block;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .mm-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    }
+
+    .mm-card-header {
+      padding: 1.25rem 1.25rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mm-card-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      opacity: 0.8;
+    }
+
+    .mm-card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .mm-card-era {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .mm-card-body {
+      padding: 1rem 1.25rem;
+      background: var(--surface-2);
+    }
+
+    .mm-card-question {
+      font-size: 0.92rem;
+      font-style: italic;
+      margin-bottom: 0.85rem;
+      line-height: 1.6;
+    }
+
+    .mm-card-context {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .mm-card-tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .tool-chip {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 5px;
+      border: 1px solid;
+      font-weight: 600;
+    }
+
+    .mm-card-chapters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .ch-label {
+      font-size: 0.7rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background: var(--surface);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .mm-card-footer {
+      padding: 0.75rem 1.25rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.82rem;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mm-stages-link {
+      margin-top: 1rem;
+      padding: 1rem 1.25rem;
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      background: var(--surface);
+      transition: border-color 0.15s;
+    }
+
+    .mm-stages-link:hover { border-color: var(--muted); }
+
+    .mm-stages-link-text {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .mm-stages-link-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <a href="../" class="logo">統計學學習工具</a>
+      <ul>
+        <li><a href="../chapters/syllabus.html">課程目錄</a></li>
+        <li><a href="../chapters/mental-models.html" style="color:var(--primary)">心智模型</a></li>
+        <li><a href="../chapters/glossary.html">速查</a></li>
+        <li><a href="../chapters/random-variables.html">隨機變數</a></li>
+        <li><a href="../chapters/continuous-distributions.html">連續型分配</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container" style="padding-top:2rem;padding-bottom:3rem;">
+    <h1>心智模型地圖</h1>
+    <p class="mm-intro">
+      統計學不是一套同時發明好的公式集合，而是人類每次碰到新困境就打造出一個新工具的歷史。
+      這四個心智模型代表統計思維的四次進化——每一次都是為了回答一個更難的問題。
+    </p>
+
+    <!-- 時間軸 -->
+    <div class="mm-timeline">
+      <div class="mm-tl-node">
+        <div class="mm-tl-dot" style="background:rgba(251,146,60,0.15);color:#fb923c;border-color:rgba(251,146,60,0.5)">M1</div>
+        <div class="mm-tl-label">描述與分類</div>
+        <div class="mm-tl-era">遠古–1700s</div>
+      </div>
+      <div class="mm-tl-arrow"></div>
+      <div class="mm-tl-node">
+        <div class="mm-tl-dot" style="background:rgba(56,189,248,0.15);color:#38bdf8;border-color:rgba(56,189,248,0.5)">M2</div>
+        <div class="mm-tl-label">推論與概率</div>
+        <div class="mm-tl-era">1700–1800s</div>
+      </div>
+      <div class="mm-tl-arrow"></div>
+      <div class="mm-tl-node">
+        <div class="mm-tl-dot" style="background:rgba(251,191,36,0.15);color:#fbbf24;border-color:rgba(251,191,36,0.5)">M3</div>
+        <div class="mm-tl-label">實驗與審判</div>
+        <div class="mm-tl-era">1900–1930s</div>
+      </div>
+      <div class="mm-tl-arrow"></div>
+      <div class="mm-tl-node">
+        <div class="mm-tl-dot" style="background:rgba(148,163,184,0.15);color:#94a3b8;border-color:rgba(148,163,184,0.5)">M4</div>
+        <div class="mm-tl-label">系統與決策</div>
+        <div class="mm-tl-era">1950s–現在</div>
+      </div>
+    </div>
+
+    <!-- 四張模型卡 -->
+    <div class="mm-grid">
+
+      <!-- M1 -->
+      <div class="mm-card" style="border-color:rgba(251,146,60,0.35);">
+        <div class="mm-card-header" style="background:rgba(251,146,60,0.08);">
+          <div class="mm-card-tag" style="color:#fb923c;">M1 · 描述與分類模型</div>
+          <div class="mm-card-title" style="color:#fb923c;">人類的直覺整理術</div>
+          <div class="mm-card-era">遠古 → 18 世紀</div>
+        </div>
+        <div class="mm-card-body">
+          <div class="mm-card-question" style="color:#fb923c;">"我手上這堆數字，怎麼看出規律？"</div>
+          <div class="mm-card-context">
+            人類天生尋找規律。這個模型的核心動作是「整理」：
+            用平均數定位中心，用標準差描述散佈程度，用圖表把看不見的分佈變成看得見的形狀。
+            這是解題的起點，也是題目直接給你的輸入。
+          </div>
+          <div class="mm-card-tools">
+            <span class="tool-chip" style="color:#fb923c;border-color:rgba(251,146,60,0.4);background:rgba(251,146,60,0.1);">平均數 μ</span>
+            <span class="tool-chip" style="color:#fb923c;border-color:rgba(251,146,60,0.4);background:rgba(251,146,60,0.1);">標準差 σ</span>
+            <span class="tool-chip" style="color:#fb923c;border-color:rgba(251,146,60,0.4);background:rgba(251,146,60,0.1);">直方圖</span>
+            <span class="tool-chip" style="color:#fb923c;border-color:rgba(251,146,60,0.4);background:rgba(251,146,60,0.1);">變異數</span>
+          </div>
+          <div class="mm-card-chapters">
+            <span class="ch-label">Ch 1</span>
+            <span class="ch-label">Ch 2</span>
+            <span class="ch-label">Ch 3</span>
+          </div>
+        </div>
+        <a class="mm-card-footer" href="./descriptive-statistics.html" style="color:#fb923c;text-decoration:none;">
+          <span>敘述統計</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <!-- M2 -->
+      <div class="mm-card" style="border-color:rgba(56,189,248,0.35);">
+        <div class="mm-card-header" style="background:rgba(56,189,248,0.08);">
+          <div class="mm-card-tag" style="color:#38bdf8;">M2 · 推論與概率模型</div>
+          <div class="mm-card-title" style="color:#38bdf8;">賭徒與天文學家的崛起</div>
+          <div class="mm-card-era">17 世紀 → 19 世紀</div>
+        </div>
+        <div class="mm-card-body">
+          <div class="mm-card-question" style="color:#38bdf8;">"我看不見母體全貌，但我能猜嗎？"</div>
+          <div class="mm-card-context">
+            高斯觀測星體誤差時發現：測量值永遠有波動，但波動本身有規律——鐘形曲線。
+            這是革命性的心智轉變：誤差不是「錯誤」，而是數據的一種特性。
+            從此人類敢說「雖然我沒看過母體，但我能估計它的範圍」。
+          </div>
+          <div class="mm-card-tools">
+            <span class="tool-chip" style="color:#38bdf8;border-color:rgba(56,189,248,0.4);background:rgba(56,189,248,0.1);">常態分配</span>
+            <span class="tool-chip" style="color:#38bdf8;border-color:rgba(56,189,248,0.4);background:rgba(56,189,248,0.1);">Z 分數</span>
+            <span class="tool-chip" style="color:#38bdf8;border-color:rgba(56,189,248,0.4);background:rgba(56,189,248,0.1);">機率</span>
+            <span class="tool-chip" style="color:#38bdf8;border-color:rgba(56,189,248,0.4);background:rgba(56,189,248,0.1);">CLT</span>
+          </div>
+          <div class="mm-card-chapters">
+            <span class="ch-label">Ch 4</span>
+            <span class="ch-label">Ch 5</span>
+            <span class="ch-label">Ch 6</span>
+            <span class="ch-label">Ch 7</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:0;border-top:1px solid var(--border);">
+          <a class="mm-card-footer" href="./probability-discrete.html" style="color:#38bdf8;text-decoration:none;flex:1;border-right:1px solid var(--border);">
+            <span>機率與離散分配</span><span>→</span>
+          </a>
+          <a class="mm-card-footer" href="./continuous-distributions.html" style="color:#38bdf8;text-decoration:none;flex:1;border-right:1px solid var(--border);">
+            <span>連續型分配</span><span>→</span>
+          </a>
+          <a class="mm-card-footer" href="./sampling-distributions.html" style="color:#38bdf8;text-decoration:none;flex:1;">
+            <span>抽樣分配</span><span>→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- M3 -->
+      <div class="mm-card" style="border-color:rgba(251,191,36,0.35);">
+        <div class="mm-card-header" style="background:rgba(251,191,36,0.08);">
+          <div class="mm-card-tag" style="color:#fbbf24;">M3 · 實驗與審判模型</div>
+          <div class="mm-card-title" style="color:#fbbf24;">大科學時代的法庭</div>
+          <div class="mm-card-era">1900 → 1930s</div>
+        </div>
+        <div class="mm-card-body">
+          <div class="mm-card-question" style="color:#fbbf24;">"這個效果是真實的，還是剛好？"</div>
+          <div class="mm-card-context">
+            農學家費雪問：施肥後作物長高了，這是肥料有效，還是這塊地本來就比較肥？
+            這個問題催生了現代假設檢定——把科學實驗當成法庭辯論：
+            H₀ = 無罪推定，Z/t/F/χ² = 量化拒絕巧合的機率。
+          </div>
+          <div class="mm-card-tools">
+            <span class="tool-chip" style="color:#fbbf24;border-color:rgba(251,191,36,0.4);background:rgba(251,191,36,0.1);">Z 檢定</span>
+            <span class="tool-chip" style="color:#fbbf24;border-color:rgba(251,191,36,0.4);background:rgba(251,191,36,0.1);">t 檢定</span>
+            <span class="tool-chip" style="color:#fbbf24;border-color:rgba(251,191,36,0.4);background:rgba(251,191,36,0.1);">F 檢定</span>
+            <span class="tool-chip" style="color:#fbbf24;border-color:rgba(251,191,36,0.4);background:rgba(251,191,36,0.1);">χ² 檢定</span>
+            <span class="tool-chip" style="color:#fbbf24;border-color:rgba(251,191,36,0.4);background:rgba(251,191,36,0.1);">α / p 值</span>
+          </div>
+          <div class="mm-card-chapters">
+            <span class="ch-label">Ch 8</span>
+            <span class="ch-label">Ch 9</span>
+            <span class="ch-label">Ch 10</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:0;border-top:1px solid var(--border);">
+          <a class="mm-card-footer" href="./hypothesis-testing.html" style="color:#fbbf24;text-decoration:none;flex:1;border-right:1px solid var(--border);">
+            <span>假設檢定總覽</span><span>→</span>
+          </a>
+          <a class="mm-card-footer" href="./inference-testing.html" style="color:#fbbf24;text-decoration:none;flex:1;border-right:1px solid var(--border);">
+            <span>推論統計</span><span>→</span>
+          </a>
+          <a class="mm-card-footer" href="./test-evolution.html" style="color:#fbbf24;text-decoration:none;flex:1;">
+            <span>工具演化史</span><span>→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- M4 -->
+      <div class="mm-card" style="border-color:rgba(148,163,184,0.35);">
+        <div class="mm-card-header" style="background:rgba(148,163,184,0.08);">
+          <div class="mm-card-tag" style="color:#94a3b8;">M4 · 系統與決策模型</div>
+          <div class="mm-card-title" style="color:#94a3b8;">多變量的現代世界</div>
+          <div class="mm-card-era">1950s → 現在</div>
+        </div>
+        <div class="mm-card-body">
+          <div class="mm-card-question" style="color:#94a3b8;">"多個變數同時分析，哪個才真正有影響力？"</div>
+          <div class="mm-card-context">
+            資料爆炸時代。我們不再滿足於「比兩組均值」，而是要同時比較十組、
+            找出變數之間的關係、預測未來值。
+            ANOVA 讓 t 檢定擴展到多組，迴歸讓我們建立因果模型，
+            卡方讓類別資料也能接受嚴格的統計審判。
+          </div>
+          <div class="mm-card-tools">
+            <span class="tool-chip" style="color:#94a3b8;border-color:rgba(148,163,184,0.4);background:rgba(148,163,184,0.1);">ANOVA</span>
+            <span class="tool-chip" style="color:#94a3b8;border-color:rgba(148,163,184,0.4);background:rgba(148,163,184,0.1);">線性迴歸</span>
+            <span class="tool-chip" style="color:#94a3b8;border-color:rgba(148,163,184,0.4);background:rgba(148,163,184,0.1);">卡方檢定</span>
+            <span class="tool-chip" style="color:#94a3b8;border-color:rgba(148,163,184,0.4);background:rgba(148,163,184,0.1);">無母數</span>
+          </div>
+          <div class="mm-card-chapters">
+            <span class="ch-label">Ch 11</span>
+            <span class="ch-label">Ch 12</span>
+            <span class="ch-label">Ch 13</span>
+            <span class="ch-label">Ch 14</span>
+            <span class="ch-label">Ch 15</span>
+          </div>
+        </div>
+        <a class="mm-card-footer" href="./advanced-analysis.html" style="color:#94a3b8;text-decoration:none;">
+          <span>進階分析</span>
+          <span>→</span>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- 決策樹入口 -->
+    <h2 style="margin-bottom:0.75rem;">不知道要用哪個工具？</h2>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem;">
+      回答三個問題，自動導向對應的檢定方法。
+    </p>
+    <a href="./decision-tree.html" class="card card-full" style="text-decoration:none;display:block;">
+      <h3 style="color:var(--primary);margin-bottom:0.35rem;">統計決策樹</h3>
+      <p style="color:var(--muted);margin:0;font-size:0.9rem;">
+        數據是連續還是類別？比平均還是比變異？樣本大還是小？
+        三層問題，找到正確工具。
+      </p>
+    </a>
+
+    <div style="margin-top:1.5rem;">
+      <a href="./stages.html" class="mm-stages-link">
+        <div>
+          <div class="mm-stages-link-title">七階段學習地圖</div>
+          <div class="mm-stages-link-text">按學習流程瀏覽詞條，從描述資料一路走到進階建模</div>
+        </div>
+        <span style="color:var(--muted);">→</span>
+      </a>
+    </div>
+
+  </main>
+</body>
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第 4-5 章 · 機率與離散型分配 · 統計學學習工具</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <a href="../" class="logo">統計學學習工具</a>
+      <ul>
+        <li><a href="../chapters/syllabus.html">課程目錄</a></li>
+        <li><a href="../chapters/mental-models.html">心智模型</a></li>
+        <li><a href="../chapters/glossary.html">速查</a></li>
+        <li><a href="../chapters/random-variables.html">隨機變數</a></li>
+        <li><a href="../chapters/continuous-distributions.html">連續型分配</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <p class="breadcrumb">
+      <a href="../chapters/mental-models.html">← 心智模型</a>
+      <span class="bc-sep">›</span>
+      M2 推論與概率模型
+    </p>
+
+    <h1>第 4-5 章 · 機率與離散型分配</h1>
+
+    <!-- ═══════════════════════════════════════════════════════
+         觀念 1：基本機率
+    ═══════════════════════════════════════════════════════ -->
+    <div class="concept" id="basic-prob">
+      <h3>觀念 1：基本機率</h3>
+      <p>機率就是「某件事發生的可能性有多大」。最直觀的算法：<strong>把有利的結果數除以所有可能的結果數</strong>。</p>
+
+      <div class="formula">
+        $$P(A) = \frac{\text{有利結果數}}{\text{所有可能結果數}}$$
+      </div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$P(A)$</dt><dd>事件 $A$ 發生的機率，讀作「P of A」</dd>
+          <dt>有利結果</dt><dd>「讓 $A$ 成立」的那些結果</dd>
+          <dt>$0 \le P(A) \le 1$</dt><dd>機率一定介於 0（不可能）和 1（確定）之間</dd>
+        </dl>
+      </div>
+
+      <h4>範例：擲一顆公正六面骰</h4>
+      <p>問：出現偶數（2、4、6）的機率是多少？</p>
+      <ul>
+        <li>所有可能結果：{1, 2, 3, 4, 5, 6}，共 6 種</li>
+        <li>有利結果（偶數）：{2, 4, 6}，共 3 種</li>
+      </ul>
+      <div class="formula">
+        $$P(\text{偶數}) = \frac{3}{6} = \frac{1}{2} = 0.5$$
+      </div>
+      <p>直覺驗證：偶數佔六面的一半，答案合理。</p>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         觀念 2：互補法則
+    ═══════════════════════════════════════════════════════ -->
+    <div class="concept" id="complement">
+      <h3>觀念 2：互補法則</h3>
+      <p>「不發生」比「發生」更容易算時，<strong>用 1 減就好</strong>。</p>
+
+      <div class="formula">
+        $$P(A^c) = 1 - P(A)$$
+      </div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$A^c$</dt><dd>事件 $A$ 的「補集」（complement），也寫作 $\bar{A}$ 或 $A'$，意思是「$A$ 不發生」</dd>
+          <dt>$1 - P(A)$</dt><dd>因為 $P(A) + P(A^c) = 1$（所有機率加起來等於 1），所以兩邊移項</dd>
+        </dl>
+      </div>
+
+      <h4>範例：擲骰不出現 6</h4>
+      <p>直接算「出現 6」更簡單：$P(\text{出現 6}) = 1/6$。</p>
+      <div class="formula">
+        $$P(\text{不出現 6}) = 1 - \frac{1}{6} = \frac{5}{6}$$
+      </div>
+      <p>直覺驗證：六面中有五面不是 6，答案 5/6 符合。</p>
+
+      <h4>何時用互補</h4>
+      <p>當題目問「<strong>至少一次</strong>」或「<strong>不全是……</strong>」時，互補幾乎都是最省力的路：先算「一次都沒有」，再用 1 減。</p>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         觀念 3：加法法則
+    ═══════════════════════════════════════════════════════ -->
+    <div class="concept" id="addition">
+      <h3>觀念 3：加法法則</h3>
+      <p>計算「A 或 B 至少一個發生」的機率。直接把兩個機率相加，但重疊的部分（A 和 B 同時發生）會被加了兩次，要減掉一次。</p>
+
+      <div class="formula">
+        $$P(A \cup B) = P(A) + P(B) - P(A \cap B)$$
+      </div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$A \cup B$</dt><dd>「A 聯集 B」——A 或 B（至少一個）發生</dd>
+          <dt>$A \cap B$</dt><dd>「A 交集 B」——A 和 B 同時發生</dd>
+          <dt>$- P(A \cap B)$</dt><dd>避免重複計算：如果交集這塊區域加了兩次，就減回一次</dd>
+        </dl>
+      </div>
+
+      <h4>特殊情況：互斥事件</h4>
+      <p>若 A 和 B <strong>不可能同時發生</strong>（互斥，$P(A \cap B) = 0$），公式簡化為：</p>
+      <div class="formula">
+        $$P(A \cup B) = P(A) + P(B) \quad \text{（互斥時）}$$
+      </div>
+
+      <h4>範例：擲骰出現 1 或 2</h4>
+      <p>{出現 1} 和 {出現 2} 互斥（不能同時是 1 又是 2）：</p>
+      <div class="formula">
+        $$P(\text{1 或 2}) = \frac{1}{6} + \frac{1}{6} = \frac{2}{6} = \frac{1}{3}$$
+      </div>
+
+      <h4>範例：從 52 張牌抽一張，出現紅牌或 A</h4>
+      <p>$P(\text{紅牌}) = 26/52 = 1/2$，$P(\text{A}) = 4/52 = 1/13$，$P(\text{紅 A}) = 2/52 = 1/26$。</p>
+      <div class="formula">
+        $$P(\text{紅牌} \cup \text{A}) = \frac{1}{2} + \frac{1}{13} - \frac{1}{26} = \frac{13}{26} + \frac{2}{26} - \frac{1}{26} = \frac{14}{26} = \frac{7}{13}$$
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         觀念 4：條件機率
+    ═══════════════════════════════════════════════════════ -->
+    <div class="concept" id="conditional">
+      <h3>觀念 4：條件機率</h3>
+      <p>「已知 B 發生了，A 發生的機率」——知道新資訊後，<strong>縮小樣本空間</strong>再重新計算。</p>
+
+      <div class="formula">
+        $$P(A \mid B) = \frac{P(A \cap B)}{P(B)}$$
+      </div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$P(A \mid B)$</dt><dd>「在 B 已發生的條件下，A 的機率」，豎線讀作「given」（已知）</dd>
+          <dt>$P(A \cap B)$</dt><dd>A 和 B 同時發生的機率（分子：在新空間裡有利的部分）</dd>
+          <dt>$P(B)$</dt><dd>分母是「縮小後的新樣本空間」大小</dd>
+        </dl>
+      </div>
+
+      <h4>範例：2×2 列聯表</h4>
+      <p>一班 40 名學生，分為有無運動（行）和期末考過關（列）：</p>
+
+      <table class="compare">
+        <thead>
+          <tr><th></th><th>考試及格</th><th>考試不及格</th><th>小計</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>有運動</strong></td><td>18</td><td>6</td><td>24</td></tr>
+          <tr><td><strong>無運動</strong></td><td>10</td><td>6</td><td>16</td></tr>
+          <tr><td><strong>小計</strong></td><td>28</td><td>12</td><td>40</td></tr>
+        </tbody>
+      </table>
+
+      <p>問：已知某生有運動，考試及格的機率？</p>
+      <ul>
+        <li>「有運動」的樣本空間縮小為 24 人</li>
+        <li>其中及格 18 人</li>
+      </ul>
+      <div class="formula">
+        $$P(\text{及格} \mid \text{有運動}) = \frac{18/40}{24/40} = \frac{18}{24} = \frac{3}{4}$$
+      </div>
+      <p>對比「無運動及格率」= 10/16 = 5/8，有運動確實較高。</p>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         觀念 5：獨立事件
+    ═══════════════════════════════════════════════════════ -->
+    <div class="concept" id="independence">
+      <h3>觀念 5：獨立事件</h3>
+      <p>「A 發不發生，跟 B 完全沒有關係」——知道 B 的消息，對 A 的預測毫無幫助。</p>
+
+      <div class="formula">
+        $$P(A \cap B) = P(A) \times P(B) \quad \text{（當 A、B 獨立）}$$
+      </div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>獨立</dt><dd>$P(A \mid B) = P(A)$，知道 B 不改變 A 的機率</dd>
+          <dt>乘法規則</dt><dd>獨立事件同時發生 = 各自機率相乘</dd>
+          <dt>注意</dt><dd>「互斥」≠「獨立」；互斥事件（$P(A \cap B) = 0$）當兩個機率均不為 0 時，反而是負相關的</dd>
+        </dl>
+      </div>
+
+      <h4>範例：連續擲兩次公正硬幣</h4>
+      <p>第一次和第二次擲幣互不影響（獨立）。求兩次都正面：</p>
+      <div class="formula">
+        $$P(\text{正面} \cap \text{正面}) = \frac{1}{2} \times \frac{1}{2} = \frac{1}{4}$$
+      </div>
+
+      <h4>獨立的直覺驗證（列舉法）</h4>
+      <p>所有可能結果：{正正, 正反, 反正, 反反}，共 4 種，各等可能。兩次都正面 = 1 種，機率確實 1/4。</p>
+
+      <h4>三事件獨立</h4>
+      <p>若 A、B、C 兩兩獨立且整體獨立，則：</p>
+      <div class="formula">
+        $$P(A \cap B \cap C) = P(A) \times P(B) \times P(C)$$
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         觀念 6：二項分配
+    ═══════════════════════════════════════════════════════ -->
+    <div class="concept" id="binomial">
+      <h3>觀念 6：二項分配</h3>
+      <p>每次試驗只有「成功 / 失敗」兩種結果，做了 $n$ 次獨立試驗，計算<strong>剛好成功 $k$ 次</strong>的機率。</p>
+
+      <div class="formula">
+        $$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$
+      </div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$n$</dt><dd>試驗總次數（固定）</dd>
+          <dt>$k$</dt><dd>成功次數，$k = 0, 1, 2, \ldots, n$</dd>
+          <dt>$p$</dt><dd>每次成功的機率（固定，且各次獨立）</dd>
+          <dt>$1 - p$</dt><dd>每次失敗的機率，也常寫作 $q$</dd>
+          <dt>$\binom{n}{k}$</dt><dd>組合數，讀作「C(n, k)」或「n choose k」，代表從 $n$ 次試驗中選出 $k$ 次成功的排列方式有幾種</dd>
+          <dt>$p^k (1-p)^{n-k}$</dt><dd>某一種「$k$ 次成功、$n-k$ 次失敗」的排列機率</dd>
+        </dl>
+      </div>
+
+      <h4>期望值與變異數</h4>
+      <div class="formula">
+        $$\mu = np \qquad \sigma^2 = np(1-p)$$
+      </div>
+
+      <h4>C(4, k) 速查表</h4>
+      <p>以下是 $n = 4$ 時常用的組合數，熟記後算題快一倍：</p>
+      <table class="compare">
+        <thead>
+          <tr><th>$k$</th><th>$\binom{4}{k}$</th><th>計算方式</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>0</td><td>1</td><td>$4!/(0! \cdot 4!) = 1$</td></tr>
+          <tr><td>1</td><td>4</td><td>$4!/(1! \cdot 3!) = 4$</td></tr>
+          <tr><td>2</td><td>6</td><td>$4!/(2! \cdot 2!) = 6$（最常出現）</td></tr>
+          <tr><td>3</td><td>4</td><td>$4!/(3! \cdot 1!) = 4$</td></tr>
+          <tr><td>4</td><td>1</td><td>$4!/(4! \cdot 0!) = 1$</td></tr>
+        </tbody>
+      </table>
+
+      <h4>範例：投公正硬幣 4 次，剛好 2 次正面</h4>
+      <p>$n = 4,\ k = 2,\ p = 0.5$</p>
+      <div class="formula">
+        $$P(X = 2) = \binom{4}{2} \times (0.5)^2 \times (0.5)^2 = 6 \times 0.25 \times 0.25 = \frac{6}{16} = \frac{3}{8}$$
+      </div>
+
+      <h4>期望值驗算</h4>
+      <p>$\mu = np = 4 \times 0.5 = 2$，平均投 4 次會有 2 次正面，與直覺吻合。</p>
+
+      <h4>適用條件（缺一不可）</h4>
+      <ul>
+        <li>固定試驗次數 $n$</li>
+        <li>每次只有兩種結果（成功 / 失敗）</li>
+        <li>每次成功機率 $p$ 固定</li>
+        <li>各次試驗相互獨立</li>
+      </ul>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         觀念 7：波松分配
+    ═══════════════════════════════════════════════════════ -->
+    <div class="concept" id="poisson">
+      <h3>觀念 7：波松分配</h3>
+      <p>某段時間或某塊空間內，<strong>稀有事件平均發生 $\lambda$ 次</strong>，計算剛好發生 $k$ 次的機率。</p>
+
+      <div class="formula">
+        $$P(X = k) = \frac{e^{-\lambda}\,\lambda^k}{k!}, \quad k = 0, 1, 2, \ldots$$
+      </div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$\lambda$</dt><dd>希臘字 lambda，唯一參數，等於平均發生次數（每單位時間或空間）</dd>
+          <dt>$e$</dt><dd>自然常數，約 2.71828；$e^{-\lambda}$ 隨 $\lambda$ 增大而快速縮小</dd>
+          <dt>$k!$</dt><dd>$k$ 的階乘，$0! = 1,\ 1! = 1,\ 2! = 2,\ 3! = 6$</dd>
+          <dt>$\mu = \lambda$</dt><dd>期望值等於 $\lambda$</dd>
+          <dt>$\sigma^2 = \lambda$</dt><dd>變異數也等於 $\lambda$（期望值 = 變異數，是波松的獨特性質）</dd>
+        </dl>
+      </div>
+
+      <h4>兩個最重要的特殊值</h4>
+      <div class="formula">
+        $$P(X = 0) = e^{-\lambda} \qquad P(X = 1) = \lambda e^{-\lambda}$$
+      </div>
+      <p>這兩個不用算組合數，直接代入公式就好（$k = 0$ 時 $\lambda^0 / 0! = 1$；$k = 1$ 時 $\lambda^1 / 1! = \lambda$）。</p>
+
+      <h4>範例：電話中心，λ = 2 通/分鐘</h4>
+      <ul>
+        <li>某分鐘剛好 0 通：$P(X = 0) = e^{-2} \approx 0.135$</li>
+        <li>某分鐘剛好 1 通：$P(X = 1) = 2e^{-2} \approx 0.271$</li>
+        <li>某分鐘剛好 2 通：$P(X = 2) = \dfrac{e^{-2} \cdot 2^2}{2!} = \dfrac{4e^{-2}}{2} = 2e^{-2} \approx 0.271$</li>
+      </ul>
+
+      <h4>適用條件</h4>
+      <ul>
+        <li>事件在時間或空間中「隨機且獨立」發生</li>
+        <li>平均發生率 $\lambda$ 在整個觀測期間固定</li>
+        <li>兩個事件不能在完全相同的瞬間發生（不重疊）</li>
+      </ul>
+
+      <h4>與二項分配的關係</h4>
+      <p>當 $n \ge 20$ 且 $p \le 7/n$ 時，$B(n, p) \approx \text{Poisson}(\lambda = np)$，波松可作為二項的近似。</p>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         Quiz 區
+    ═══════════════════════════════════════════════════════ -->
+    <section class="quiz-section">
+      <h2>選擇題 · 基本機率</h2>
+      <div id="quiz-basic-prob"></div>
+    </section>
+
+    <section class="quiz-section">
+      <h2>選擇題 · 互補法則</h2>
+      <div id="quiz-complement"></div>
+    </section>
+
+    <section class="quiz-section">
+      <h2>選擇題 · 加法法則</h2>
+      <div id="quiz-addition"></div>
+    </section>
+
+    <section class="quiz-section">
+      <h2>選擇題 · 條件機率</h2>
+      <div id="quiz-conditional"></div>
+    </section>
+
+    <section class="quiz-section">
+      <h2>選擇題 · 獨立事件</h2>
+      <div id="quiz-independence"></div>
+    </section>
+
+    <section class="quiz-section">
+      <h2>選擇題 · 二項分配</h2>
+      <div id="quiz-binomial"></div>
+    </section>
+
+    <section class="quiz-section">
+      <h2>選擇題 · 波松分配</h2>
+      <div id="quiz-poisson"></div>
+    </section>
+  </main>
+
+  <script src="../js/quiz.js"></script>
+  <script>
+    loadQuiz('basic-prob',   'quiz-basic-prob',   '../data/questions.json');
+    loadQuiz('complement',   'quiz-complement',   '../data/questions.json');
+    loadQuiz('addition',     'quiz-addition',     '../data/questions.json');
+    loadQuiz('conditional',  'quiz-conditional',  '../data/questions.json');
+    loadQuiz('independence', 'quiz-independence', '../data/questions.json');
+    loadQuiz('binomial',     'quiz-binomial',     '../data/questions.json');
+    loadQuiz('poisson',      'quiz-poisson',      '../data/questions.json');
+  </script>
+</body>
+</html>

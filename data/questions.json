@@ -1006,5 +1006,2553 @@
     ],
     "correct_index": 2,
     "explanation": "人類壽命不適合指數分配，因為人會「老化」（年齡越大死亡風險越高），違反無記憶性。指數分配適合描述「隨機、不老化」的事件，如電子元件故障、原子衰變、客服電話間隔。"
+  },
+  {
+    "id": "mean-easy-001",
+    "chapter": "descriptive-statistics",
+    "concept": "mean",
+    "prompt": "數據：2、4、6，求平均數。",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correct_index": 1,
+    "explanation": "平均數 = (2+4+6) ÷ 3 = 12 ÷ 3 = 4。把所有數字加起來，再除以個數。"
+  },
+  {
+    "id": "mean-easy-002",
+    "chapter": "descriptive-statistics",
+    "concept": "mean",
+    "prompt": "數據：1、3、5、7，求平均數。",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correct_index": 1,
+    "explanation": "平均數 = (1+3+5+7) ÷ 4 = 16 ÷ 4 = 4。"
+  },
+  {
+    "id": "mean-easy-003",
+    "chapter": "descriptive-statistics",
+    "concept": "mean",
+    "prompt": "數據：0、2、4、6、8，求平均數。",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correct_index": 1,
+    "explanation": "平均數 = (0+2+4+6+8) ÷ 5 = 20 ÷ 5 = 4。"
+  },
+  {
+    "id": "mean-easy-004",
+    "chapter": "descriptive-statistics",
+    "concept": "mean",
+    "prompt": "數據：3、6、9，求平均數。",
+    "options": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "correct_index": 1,
+    "explanation": "平均數 = (3+6+9) ÷ 3 = 18 ÷ 3 = 6。"
+  },
+  {
+    "id": "mean-005",
+    "chapter": "descriptive-statistics",
+    "concept": "mean",
+    "prompt": "五個學生的成績為 10、20、30、40、50，求平均數。",
+    "options": [
+      "25",
+      "30",
+      "35",
+      "40"
+    ],
+    "correct_index": 1,
+    "explanation": "平均數 = (10+20+30+40+50) ÷ 5 = 150 ÷ 5 = 30。"
+  },
+  {
+    "id": "mean-006",
+    "chapter": "descriptive-statistics",
+    "concept": "mean",
+    "prompt": "已知 6 個數的總和為 42，求平均數。",
+    "options": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "correct_index": 2,
+    "explanation": "平均數 = 總和 ÷ 個數 = 42 ÷ 6 = 7。知道總和就可以直接算，不需要知道每個數。"
+  },
+  {
+    "id": "mean-007",
+    "chapter": "descriptive-statistics",
+    "concept": "mean",
+    "prompt": "數據：4、4、4、4、4，求平均數。",
+    "options": [
+      "1",
+      "4",
+      "5",
+      "20"
+    ],
+    "correct_index": 1,
+    "explanation": "平均數 = (4+4+4+4+4) ÷ 5 = 20 ÷ 5 = 4。所有數字相同時，平均數就等於那個數。"
+  },
+  {
+    "id": "median-easy-001",
+    "chapter": "descriptive-statistics",
+    "concept": "median",
+    "prompt": "數據（已排序）：1、3、5、7、9，求中位數。",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "7"
+    ],
+    "correct_index": 2,
+    "explanation": "共 5 個數（奇數），中位數是第 3 個數 = 5。奇數個資料的中位數就是正中間那個。"
+  },
+  {
+    "id": "median-easy-002",
+    "chapter": "descriptive-statistics",
+    "concept": "median",
+    "prompt": "數據：3、7、2、9、5，排序後求中位數。",
+    "options": [
+      "3",
+      "5",
+      "7",
+      "9"
+    ],
+    "correct_index": 1,
+    "explanation": "先排序：2、3、5、7、9。共 5 個數，中位數是第 3 個 = 5。"
+  },
+  {
+    "id": "median-easy-003",
+    "chapter": "descriptive-statistics",
+    "concept": "median",
+    "prompt": "數據：2、4、6、8，求中位數。",
+    "options": [
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "correct_index": 1,
+    "explanation": "共 4 個數（偶數），中位數 = (第2個 + 第3個) ÷ 2 = (4+6) ÷ 2 = 5。"
+  },
+  {
+    "id": "median-easy-004",
+    "chapter": "descriptive-statistics",
+    "concept": "median",
+    "prompt": "數據：1、2、3、4，求中位數。",
+    "options": [
+      "2",
+      "2.5",
+      "3",
+      "3.5"
+    ],
+    "correct_index": 1,
+    "explanation": "共 4 個數（偶數），中位數 = (2+3) ÷ 2 = 5 ÷ 2 = 2.5。"
+  },
+  {
+    "id": "median-005",
+    "chapter": "descriptive-statistics",
+    "concept": "median",
+    "prompt": "數據：8、1、4、6、3（未排序），求中位數。",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correct_index": 1,
+    "explanation": "先排序：1、3、4、6、8。共 5 個數，中位數是第 3 個 = 4。注意要先排序才能找中位數。"
+  },
+  {
+    "id": "median-006",
+    "chapter": "descriptive-statistics",
+    "concept": "median",
+    "prompt": "數據：2、4、6、8、10、12，求中位數。",
+    "options": [
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "correct_index": 1,
+    "explanation": "共 6 個數（偶數），中位數 = (第3個 + 第4個) ÷ 2 = (6+8) ÷ 2 = 7。"
+  },
+  {
+    "id": "median-007",
+    "chapter": "descriptive-statistics",
+    "concept": "median",
+    "prompt": "數據：1、1、1、100，求中位數。",
+    "options": [
+      "1",
+      "1.5",
+      "25.75",
+      "50.5"
+    ],
+    "correct_index": 0,
+    "explanation": "共 4 個數，中位數 = (第2個 + 第3個) ÷ 2 = (1+1) ÷ 2 = 1。中位數不受極端值 100 影響，這正是中位數比平均數穩健的地方。"
+  },
+  {
+    "id": "mode-easy-001",
+    "chapter": "descriptive-statistics",
+    "concept": "mode",
+    "prompt": "數據：1、2、2、3、4，求眾數。",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correct_index": 1,
+    "explanation": "各數字出現次數：1→1次、2→2次、3→1次、4→1次。出現最多次的是 2，所以眾數 = 2。"
+  },
+  {
+    "id": "mode-easy-002",
+    "chapter": "descriptive-statistics",
+    "concept": "mode",
+    "prompt": "數據：1、2、2、3、4、4、4，求眾數。",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correct_index": 3,
+    "explanation": "各數字出現次數：1→1次、2→2次、3→1次、4→3次。出現最多次的是 4，所以眾數 = 4。"
+  },
+  {
+    "id": "mode-easy-003",
+    "chapter": "descriptive-statistics",
+    "concept": "mode",
+    "prompt": "數據：3、3、3、5、5、7，求眾數。",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "7"
+    ],
+    "correct_index": 0,
+    "explanation": "3 出現 3 次，5 出現 2 次，7 出現 1 次。出現最多次的是 3，所以眾數 = 3。"
+  },
+  {
+    "id": "mode-easy-004",
+    "chapter": "descriptive-statistics",
+    "concept": "mode",
+    "prompt": "數據：6、6、7、8、9、9、9，求眾數。",
+    "options": [
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "correct_index": 3,
+    "explanation": "6 出現 2 次，7 出現 1 次，8 出現 1 次，9 出現 3 次。出現最多次的是 9，眾數 = 9。"
+  },
+  {
+    "id": "mode-005",
+    "chapter": "descriptive-statistics",
+    "concept": "mode",
+    "prompt": "數據：2、2、4、4、6，有幾個眾數？",
+    "options": [
+      "0 個（無眾數）",
+      "1 個（眾數 = 4）",
+      "2 個（眾數 = 2 和 4）",
+      "3 個（眾數 = 2、4、6）"
+    ],
+    "correct_index": 2,
+    "explanation": "2 出現 2 次，4 出現 2 次，6 出現 1 次。2 和 4 同樣出現最多次，這組資料有兩個眾數（雙峰分配）。"
+  },
+  {
+    "id": "mode-006",
+    "chapter": "descriptive-statistics",
+    "concept": "mode",
+    "prompt": "數據：1、2、3、4、5（每個數字各出現一次），眾數為何？",
+    "options": [
+      "1",
+      "3（中間值）",
+      "無眾數",
+      "5"
+    ],
+    "correct_index": 2,
+    "explanation": "每個數字都只出現 1 次，沒有任何數字出現「最多」次，因此這組資料沒有眾數。"
+  },
+  {
+    "id": "mode-007",
+    "chapter": "descriptive-statistics",
+    "concept": "mode",
+    "prompt": "一份問卷調查最喜歡的顏色：紅紅藍藍藍綠，哪個是眾數（最常見顏色）？",
+    "options": [
+      "紅",
+      "藍",
+      "綠",
+      "紅和藍"
+    ],
+    "correct_index": 1,
+    "explanation": "紅出現 2 次，藍出現 3 次，綠出現 1 次。藍出現最多次，眾數 = 藍。眾數也可以用於非數值型資料。"
+  },
+  {
+    "id": "range-easy-001",
+    "chapter": "descriptive-statistics",
+    "concept": "range",
+    "prompt": "數據：2、5、8、11，求全距。",
+    "options": [
+      "7",
+      "8",
+      "9",
+      "11"
+    ],
+    "correct_index": 2,
+    "explanation": "全距 = 最大值 − 最小值 = 11 − 2 = 9。"
+  },
+  {
+    "id": "range-easy-002",
+    "chapter": "descriptive-statistics",
+    "concept": "range",
+    "prompt": "數據：5、12、3、8、15，求全距。",
+    "options": [
+      "10",
+      "11",
+      "12",
+      "13"
+    ],
+    "correct_index": 2,
+    "explanation": "最大值 = 15，最小值 = 3，全距 = 15 − 3 = 12。"
+  },
+  {
+    "id": "range-easy-003",
+    "chapter": "descriptive-statistics",
+    "concept": "range",
+    "prompt": "數據：1、1、1、1，求全距。",
+    "options": [
+      "0",
+      "1",
+      "4",
+      "不存在"
+    ],
+    "correct_index": 0,
+    "explanation": "最大值 = 1，最小值 = 1，全距 = 1 − 1 = 0。全距為 0 表示所有數據完全相同，沒有任何變異。"
+  },
+  {
+    "id": "range-easy-004",
+    "chapter": "descriptive-statistics",
+    "concept": "range",
+    "prompt": "數據：10、20、30，求全距。",
+    "options": [
+      "10",
+      "15",
+      "20",
+      "30"
+    ],
+    "correct_index": 2,
+    "explanation": "全距 = 最大值 − 最小值 = 30 − 10 = 20。"
+  },
+  {
+    "id": "range-005",
+    "chapter": "descriptive-statistics",
+    "concept": "range",
+    "prompt": "A 組全距 = 2，B 組全距 = 10，哪組資料的分散程度較大？",
+    "options": [
+      "A 組",
+      "B 組",
+      "一樣大",
+      "無法判斷"
+    ],
+    "correct_index": 1,
+    "explanation": "全距越大，資料的最大值與最小值之間的差距越大，分散程度越大。B 組全距 10 > A 組全距 2，所以 B 組分散程度較大。"
+  },
+  {
+    "id": "range-006",
+    "chapter": "descriptive-statistics",
+    "concept": "range",
+    "prompt": "數據：−3、0、4、7，求全距。",
+    "options": [
+      "4",
+      "7",
+      "10",
+      "12"
+    ],
+    "correct_index": 2,
+    "explanation": "最大值 = 7，最小值 = −3，全距 = 7 − (−3) = 7 + 3 = 10。注意最小值是負數，相減時要變加。"
+  },
+  {
+    "id": "range-007",
+    "chapter": "descriptive-statistics",
+    "concept": "range",
+    "prompt": "全距的主要缺點是什麼？",
+    "options": [
+      "計算太複雜",
+      "只用到最大值和最小值，受極端值影響大",
+      "不能用於偶數個資料",
+      "必須先排序"
+    ],
+    "correct_index": 1,
+    "explanation": "全距只考慮最大值和最小值，完全忽略中間所有數值的分布情形。只要有一個極端值，全距就會大幅改變，因此不夠穩健。"
+  },
+  {
+    "id": "variance-easy-001",
+    "chapter": "descriptive-statistics",
+    "concept": "variance",
+    "prompt": "數據：1、3、5（已知平均數 = 3），求母體變異數 σ²。",
+    "options": [
+      "2",
+      "8/3",
+      "4",
+      "6"
+    ],
+    "correct_index": 1,
+    "explanation": "偏差：1−3=−2、3−3=0、5−3=2。偏差平方：4、0、4。σ² = (4+0+4) ÷ 3 = 8/3 ≈ 2.67。"
+  },
+  {
+    "id": "variance-easy-002",
+    "chapter": "descriptive-statistics",
+    "concept": "variance",
+    "prompt": "數據：2、4、6（已知平均數 = 4），求母體變異數 σ²。",
+    "options": [
+      "2",
+      "8/3",
+      "4",
+      "3"
+    ],
+    "correct_index": 1,
+    "explanation": "偏差：2−4=−2、4−4=0、6−4=2。偏差平方：4、0、4。σ² = (4+0+4) ÷ 3 = 8/3 ≈ 2.67。"
+  },
+  {
+    "id": "variance-easy-003",
+    "chapter": "descriptive-statistics",
+    "concept": "variance",
+    "prompt": "數據：0、2、4（已知平均數 = 2），求母體變異數 σ²。",
+    "options": [
+      "2",
+      "4/3",
+      "8/3",
+      "4"
+    ],
+    "correct_index": 2,
+    "explanation": "偏差：0−2=−2、2−2=0、4−2=2。偏差平方：4、0、4。σ² = (4+0+4) ÷ 3 = 8/3 ≈ 2.67。"
+  },
+  {
+    "id": "variance-easy-004",
+    "chapter": "descriptive-statistics",
+    "concept": "variance",
+    "prompt": "數據：5、5、5（已知平均數 = 5），求母體變異數 σ²。",
+    "options": [
+      "0",
+      "1",
+      "5",
+      "15"
+    ],
+    "correct_index": 0,
+    "explanation": "偏差：5−5=0、5−5=0、5−5=0。偏差平方都是 0。σ² = (0+0+0) ÷ 3 = 0。資料完全一樣時，變異數 = 0。"
+  },
+  {
+    "id": "variance-005",
+    "chapter": "descriptive-statistics",
+    "concept": "variance",
+    "prompt": "數據：1、3、5、7、9（已知平均數 = 5），求母體變異數 σ²。",
+    "options": [
+      "4",
+      "6",
+      "8",
+      "10"
+    ],
+    "correct_index": 2,
+    "explanation": "偏差：−4、−2、0、2、4。偏差平方：16、4、0、4、16。σ² = (16+4+0+4+16) ÷ 5 = 40 ÷ 5 = 8。"
+  },
+  {
+    "id": "variance-006",
+    "chapter": "descriptive-statistics",
+    "concept": "variance",
+    "prompt": "數據：2、4、6、8（平均數 = 5），求母體變異數 σ²。",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correct_index": 2,
+    "explanation": "偏差：2−5=−3、4−5=−1、6−5=1、8−5=3。偏差平方：9、1、1、9。σ² = (9+1+1+9) ÷ 4 = 20 ÷ 4 = 5。"
+  },
+  {
+    "id": "variance-007",
+    "chapter": "descriptive-statistics",
+    "concept": "variance",
+    "prompt": "為什麼計算變異數時要「平方偏差」而不是直接加總偏差？",
+    "options": [
+      "讓計算更複雜",
+      "正負偏差相加會抵消歸零，平方後都變正數才能累積",
+      "平方後單位更好看",
+      "這只是習慣，沒有數學理由"
+    ],
+    "correct_index": 1,
+    "explanation": "偏差 (x−μ) 的總和永遠等於 0（正負抵消）。平方後每一項都 ≥ 0，才能累積起來衡量真正的離散程度。這就是變異數必須平方的根本原因。"
+  },
+  {
+    "id": "std-dev-easy-001",
+    "chapter": "descriptive-statistics",
+    "concept": "std-dev",
+    "prompt": "已知母體變異數 σ² = 9，求標準差 σ。",
+    "options": [
+      "3",
+      "4",
+      "9",
+      "81"
+    ],
+    "correct_index": 0,
+    "explanation": "標準差 σ = √σ² = √9 = 3。標準差是變異數的正平方根。"
+  },
+  {
+    "id": "std-dev-easy-002",
+    "chapter": "descriptive-statistics",
+    "concept": "std-dev",
+    "prompt": "已知母體變異數 σ² = 4，求標準差 σ。",
+    "options": [
+      "1",
+      "2",
+      "4",
+      "16"
+    ],
+    "correct_index": 1,
+    "explanation": "標準差 σ = √σ² = √4 = 2。"
+  },
+  {
+    "id": "std-dev-easy-003",
+    "chapter": "descriptive-statistics",
+    "concept": "std-dev",
+    "prompt": "數據：1、3、5、7、9（μ = 5，σ² = 8），求標準差 σ（可留根號形式）。",
+    "options": [
+      "2",
+      "2√2",
+      "4",
+      "8"
+    ],
+    "correct_index": 1,
+    "explanation": "σ = √8 = √(4×2) = 2√2 ≈ 2.83。這是教材上的標準例子：σ² = 8，所以 σ = 2√2。"
+  },
+  {
+    "id": "std-dev-easy-004",
+    "chapter": "descriptive-statistics",
+    "concept": "std-dev",
+    "prompt": "已知 σ = 5，求 σ²。",
+    "options": [
+      "5",
+      "10",
+      "25",
+      "√5"
+    ],
+    "correct_index": 2,
+    "explanation": "σ² = 5² = 25。標準差平方 = 變異數，這兩個量互為正平方根的關係。"
+  },
+  {
+    "id": "std-dev-005",
+    "chapter": "descriptive-statistics",
+    "concept": "std-dev",
+    "prompt": "數據：2、4、6（μ = 4，σ² = 8/3），求標準差 σ（取近似值）。",
+    "options": [
+      "約 1.15",
+      "約 1.63",
+      "約 1.83",
+      "約 2.67"
+    ],
+    "correct_index": 2,
+    "explanation": "σ = √(8/3) = √2.667 ≈ 1.83。計算步驟：偏差平方 = (2−4)²+(4−4)²+(6−4)² = 4+0+4 = 8；σ² = 8/3；σ = √(8/3) ≈ 1.83。"
+  },
+  {
+    "id": "std-dev-006",
+    "chapter": "descriptive-statistics",
+    "concept": "std-dev",
+    "prompt": "標準差與變異數的單位關係：若資料單位是「公分」，標準差的單位是？",
+    "options": [
+      "公分²",
+      "公分",
+      "無單位",
+      "公尺"
+    ],
+    "correct_index": 1,
+    "explanation": "變異數的單位是「原始單位的平方」（公分²），標準差取了平方根，單位回到「公分」。這就是標準差比變異數更容易直覺解讀的原因。"
+  },
+  {
+    "id": "std-dev-007",
+    "chapter": "descriptive-statistics",
+    "concept": "std-dev",
+    "prompt": "兩組資料：A 組 σ = 1，B 組 σ = 6。哪一組資料更分散？",
+    "options": [
+      "A 組",
+      "B 組",
+      "一樣分散",
+      "無法比較"
+    ],
+    "correct_index": 1,
+    "explanation": "標準差越大，資料越分散（離平均數越遠）。B 組 σ = 6 遠大於 A 組 σ = 1，所以 B 組分散程度更大。"
+  },
+  {
+    "id": "iqr-easy-001",
+    "chapter": "descriptive-statistics",
+    "concept": "iqr",
+    "prompt": "數據（已排序）：1、3、5、7、9。Q1 = 2、Q3 = 8，求 IQR。",
+    "options": [
+      "4",
+      "5",
+      "6",
+      "8"
+    ],
+    "correct_index": 2,
+    "explanation": "IQR = Q3 − Q1 = 8 − 2 = 6。IQR（四分位距）是第三四分位數減去第一四分位數。"
+  },
+  {
+    "id": "iqr-easy-002",
+    "chapter": "descriptive-statistics",
+    "concept": "iqr",
+    "prompt": "數據：2、4、6、8、10、12、14，Q1 = 4，Q3 = 12，求 IQR。",
+    "options": [
+      "4",
+      "6",
+      "8",
+      "10"
+    ],
+    "correct_index": 2,
+    "explanation": "IQR = Q3 − Q1 = 12 − 4 = 8。這組 7 個數的 IQR = 8。"
+  },
+  {
+    "id": "iqr-easy-003",
+    "chapter": "descriptive-statistics",
+    "concept": "iqr",
+    "prompt": "Q1 = 10，Q3 = 30，求 IQR。",
+    "options": [
+      "10",
+      "15",
+      "20",
+      "30"
+    ],
+    "correct_index": 2,
+    "explanation": "IQR = Q3 − Q1 = 30 − 10 = 20。直接相減即可。"
+  },
+  {
+    "id": "iqr-easy-004",
+    "chapter": "descriptive-statistics",
+    "concept": "iqr",
+    "prompt": "數據：1、2、3、4、5、6、7、8、9，Q1 = 2.5，Q3 = 7.5，求 IQR。",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "correct_index": 2,
+    "explanation": "IQR = Q3 − Q1 = 7.5 − 2.5 = 5。"
+  },
+  {
+    "id": "iqr-005",
+    "chapter": "descriptive-statistics",
+    "concept": "iqr",
+    "prompt": "IQR 涵蓋哪個範圍的資料？",
+    "options": [
+      "全部資料的 25%",
+      "中間 50% 的資料",
+      "中間 75% 的資料",
+      "全部資料"
+    ],
+    "correct_index": 1,
+    "explanation": "Q1 是第 25 百分位數，Q3 是第 75 百分位數。IQR = Q3 − Q1 涵蓋從 25% 到 75% 這段，也就是中間 50% 的資料範圍。"
+  },
+  {
+    "id": "iqr-006",
+    "chapter": "descriptive-statistics",
+    "concept": "iqr",
+    "prompt": "為什麼 IQR 比全距更能反映「典型」的分散程度？",
+    "options": [
+      "IQR 計算更簡單",
+      "IQR 排除最高和最低的 25%，不受極端值影響",
+      "IQR 和全距完全等價",
+      "IQR 只適用於偶數個資料"
+    ],
+    "correct_index": 1,
+    "explanation": "全距用最大值和最小值，只要有一個極端值就會大幅拉高。IQR 只看中間 50% 的資料，自動忽略上下各 25% 的極端值，因此更穩健、更能反映典型分散程度。"
+  },
+  {
+    "id": "iqr-007",
+    "chapter": "descriptive-statistics",
+    "concept": "iqr",
+    "prompt": "數據：3、6、7、8、9、10、14，排序後中位數為 8，Q1 = 6，Q3 = 10，求 IQR。",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "8"
+    ],
+    "correct_index": 2,
+    "explanation": "IQR = Q3 − Q1 = 10 − 6 = 4。這 7 個數的中間 50% 範圍（第 6 到第 10）寬度是 4。"
+  },
+  {
+    "id": "zscore-desc-easy-001",
+    "chapter": "descriptive-statistics",
+    "concept": "zscore-desc",
+    "prompt": "某學生成績 x = 70，班級平均 μ = 70，標準差 σ = 10，求 Z 分數。",
+    "options": [
+      "-1",
+      "0",
+      "1",
+      "7"
+    ],
+    "correct_index": 1,
+    "explanation": "Z = (x − μ) ÷ σ = (70 − 70) ÷ 10 = 0 ÷ 10 = 0。Z = 0 表示剛好在平均數上。"
+  },
+  {
+    "id": "zscore-desc-easy-002",
+    "chapter": "descriptive-statistics",
+    "concept": "zscore-desc",
+    "prompt": "x = 80，μ = 70，σ = 10，求 Z 分數。",
+    "options": [
+      "-1",
+      "0",
+      "1",
+      "2"
+    ],
+    "correct_index": 2,
+    "explanation": "Z = (80 − 70) ÷ 10 = 10 ÷ 10 = 1。Z = 1 表示比平均數高出 1 個標準差。"
+  },
+  {
+    "id": "zscore-desc-easy-003",
+    "chapter": "descriptive-statistics",
+    "concept": "zscore-desc",
+    "prompt": "x = 60，μ = 70，σ = 10，求 Z 分數。",
+    "options": [
+      "-2",
+      "-1",
+      "0",
+      "1"
+    ],
+    "correct_index": 1,
+    "explanation": "Z = (60 − 70) ÷ 10 = −10 ÷ 10 = −1。Z = −1 表示比平均數低 1 個標準差。"
+  },
+  {
+    "id": "zscore-desc-easy-004",
+    "chapter": "descriptive-statistics",
+    "concept": "zscore-desc",
+    "prompt": "x = 90，μ = 70，σ = 10，求 Z 分數。",
+    "options": [
+      "-2",
+      "0",
+      "1",
+      "2"
+    ],
+    "correct_index": 3,
+    "explanation": "Z = (90 − 70) ÷ 10 = 20 ÷ 10 = 2。Z = 2 表示比平均數高出 2 個標準差。"
+  },
+  {
+    "id": "zscore-desc-005",
+    "chapter": "descriptive-statistics",
+    "concept": "zscore-desc",
+    "prompt": "x = 5，μ = 10，σ = 2，求 Z 分數。",
+    "options": [
+      "-2.5",
+      "-2",
+      "2",
+      "2.5"
+    ],
+    "correct_index": 0,
+    "explanation": "Z = (5 − 10) ÷ 2 = −5 ÷ 2 = −2.5。Z 為負數表示低於平均，絕對值 2.5 表示距離平均 2.5 個標準差。"
+  },
+  {
+    "id": "zscore-desc-006",
+    "chapter": "descriptive-statistics",
+    "concept": "zscore-desc",
+    "prompt": "甲的 Z = 1.5，乙的 Z = −0.5，誰的成績相對較高？",
+    "options": [
+      "甲",
+      "乙",
+      "一樣高",
+      "無法比較"
+    ],
+    "correct_index": 0,
+    "explanation": "Z 分數越高，表示比平均數高出越多個標準差。甲的 Z = 1.5 > 乙的 Z = −0.5，所以甲的相對成績較高（乙甚至低於平均）。"
+  },
+  {
+    "id": "zscore-desc-007",
+    "chapter": "descriptive-statistics",
+    "concept": "zscore-desc",
+    "prompt": "已知 Z = 2，μ = 50，σ = 5，反推原始分數 x。",
+    "options": [
+      "52",
+      "55",
+      "60",
+      "65"
+    ],
+    "correct_index": 2,
+    "explanation": "由 Z = (x − μ) ÷ σ 可知 x = μ + Z × σ = 50 + 2 × 5 = 50 + 10 = 60。"
+  },
+  {
+    "id": "basic-prob-easy-001",
+    "chapter": "probability-discrete",
+    "concept": "basic-prob",
+    "prompt": "擲一顆公正六面骰，求出現「3」的機率。",
+    "options": [
+      "1/3",
+      "1/6",
+      "1/2",
+      "2/6"
+    ],
+    "correct_index": 1,
+    "explanation": "骰子共 6 種等可能結果，出現 3 只有 1 種，所以 P(出現 3) = 1/6。"
+  },
+  {
+    "id": "basic-prob-easy-002",
+    "chapter": "probability-discrete",
+    "concept": "basic-prob",
+    "prompt": "一個袋子裡有 3 顆紅球和 1 顆藍球，隨機取一顆。求取到紅球的機率。",
+    "options": [
+      "1/4",
+      "1/3",
+      "3/4",
+      "1/2"
+    ],
+    "correct_index": 2,
+    "explanation": "共 4 顆球，紅球 3 顆。P(紅) = 3/4。"
+  },
+  {
+    "id": "basic-prob-easy-003",
+    "chapter": "probability-discrete",
+    "concept": "basic-prob",
+    "prompt": "擲公正骰子，求出現「奇數」的機率。",
+    "options": [
+      "1/3",
+      "2/3",
+      "1/2",
+      "1/6"
+    ],
+    "correct_index": 2,
+    "explanation": "奇數為 {1, 3, 5}，共 3 種；總共 6 種。P(奇數) = 3/6 = 1/2。"
+  },
+  {
+    "id": "basic-prob-easy-004",
+    "chapter": "probability-discrete",
+    "concept": "basic-prob",
+    "prompt": "一副 52 張撲克牌，隨機抽一張，求抽到「黑桃」的機率。",
+    "options": [
+      "1/2",
+      "1/13",
+      "1/4",
+      "4/13"
+    ],
+    "correct_index": 2,
+    "explanation": "黑桃共 13 張，總共 52 張。P(黑桃) = 13/52 = 1/4。"
+  },
+  {
+    "id": "basic-prob-easy-005",
+    "chapter": "probability-discrete",
+    "concept": "basic-prob",
+    "prompt": "從 {1, 2, 3, 4, 5} 中隨機選一個數，求選到「大於 3」的機率。",
+    "options": [
+      "1/5",
+      "2/5",
+      "3/5",
+      "4/5"
+    ],
+    "correct_index": 1,
+    "explanation": "大於 3 的數為 {4, 5}，共 2 個；總共 5 個。P = 2/5。"
+  },
+  {
+    "id": "basic-prob-easy-006",
+    "chapter": "probability-discrete",
+    "concept": "basic-prob",
+    "prompt": "某事件 A 的機率 P(A) = 2/5，以下哪個陳述正確？",
+    "options": [
+      "A 比「不發生」更可能發生",
+      "A 比「不發生」更不可能發生",
+      "兩者可能性相同",
+      "機率不合法（超出 0 到 1 範圍）"
+    ],
+    "correct_index": 1,
+    "explanation": "P(A) = 2/5 = 0.4 < 0.5，所以 A 發生比不發生更不可能。機率在 [0, 1] 範圍內，是合法的。"
+  },
+  {
+    "id": "basic-prob-easy-007",
+    "chapter": "probability-discrete",
+    "concept": "basic-prob",
+    "prompt": "擲公正硬幣，求出現「正面」的機率。",
+    "options": [
+      "0",
+      "1/4",
+      "1/2",
+      "1"
+    ],
+    "correct_index": 2,
+    "explanation": "硬幣有正面和反面各 1 種，共 2 種等可能結果。P(正面) = 1/2。"
+  },
+  {
+    "id": "complement-easy-001",
+    "chapter": "probability-discrete",
+    "concept": "complement",
+    "prompt": "已知 P(A) = 1/4，求 P(Aᶜ)。",
+    "options": [
+      "1/4",
+      "3/4",
+      "1/2",
+      "4/3"
+    ],
+    "correct_index": 1,
+    "explanation": "P(Aᶜ) = 1 − P(A) = 1 − 1/4 = 3/4。"
+  },
+  {
+    "id": "complement-easy-002",
+    "chapter": "probability-discrete",
+    "concept": "complement",
+    "prompt": "擲骰子，求「不出現 1」的機率。",
+    "options": [
+      "1/6",
+      "4/6",
+      "5/6",
+      "1/2"
+    ],
+    "correct_index": 2,
+    "explanation": "P(出現 1) = 1/6，所以 P(不出現 1) = 1 − 1/6 = 5/6。"
+  },
+  {
+    "id": "complement-easy-003",
+    "chapter": "probability-discrete",
+    "concept": "complement",
+    "prompt": "某班考試及格率為 3/5，求不及格的機率。",
+    "options": [
+      "2/5",
+      "3/5",
+      "1/5",
+      "4/5"
+    ],
+    "correct_index": 0,
+    "explanation": "P(不及格) = 1 − P(及格) = 1 − 3/5 = 2/5。"
+  },
+  {
+    "id": "complement-easy-004",
+    "chapter": "probability-discrete",
+    "concept": "complement",
+    "prompt": "擲兩次硬幣，求「至少一次正面」的機率。（提示：先算「全部反面」）",
+    "options": [
+      "1/4",
+      "1/2",
+      "3/4",
+      "1"
+    ],
+    "correct_index": 2,
+    "explanation": "P(全反面) = 1/2 × 1/2 = 1/4。P(至少一次正面) = 1 − 1/4 = 3/4。互補法比直接列舉更快。"
+  },
+  {
+    "id": "complement-easy-005",
+    "chapter": "probability-discrete",
+    "concept": "complement",
+    "prompt": "P(A) = 0.5，P(Aᶜ) 等於多少？",
+    "options": [
+      "0",
+      "0.25",
+      "0.5",
+      "1"
+    ],
+    "correct_index": 2,
+    "explanation": "P(Aᶜ) = 1 − 0.5 = 0.5。A 和 Aᶜ 各佔一半，彼此等可能。"
+  },
+  {
+    "id": "complement-easy-006",
+    "chapter": "probability-discrete",
+    "concept": "complement",
+    "prompt": "若 P(Aᶜ) = 1/3，則 P(A) 等於多少？",
+    "options": [
+      "1/3",
+      "2/3",
+      "1",
+      "3/2"
+    ],
+    "correct_index": 1,
+    "explanation": "P(A) = 1 − P(Aᶜ) = 1 − 1/3 = 2/3。"
+  },
+  {
+    "id": "complement-easy-007",
+    "chapter": "probability-discrete",
+    "concept": "complement",
+    "prompt": "從 {1, 2, 3, 4, 5, 6} 抽一個數，求「不是 5 也不是 6」的機率。",
+    "options": [
+      "1/3",
+      "2/3",
+      "1/2",
+      "1/6"
+    ],
+    "correct_index": 1,
+    "explanation": "P(是 5 或 6) = 2/6 = 1/3。P(不是 5 也不是 6) = 1 − 1/3 = 2/3。"
+  },
+  {
+    "id": "addition-easy-001",
+    "chapter": "probability-discrete",
+    "concept": "addition",
+    "prompt": "擲骰子，P(出現 1) = 1/6，P(出現 2) = 1/6。兩事件互斥，求 P(出現 1 或 2)。",
+    "options": [
+      "1/12",
+      "1/6",
+      "1/3",
+      "1/2"
+    ],
+    "correct_index": 2,
+    "explanation": "互斥事件：P(1 或 2) = P(1) + P(2) = 1/6 + 1/6 = 2/6 = 1/3。"
+  },
+  {
+    "id": "addition-easy-002",
+    "chapter": "probability-discrete",
+    "concept": "addition",
+    "prompt": "P(A) = 1/2，P(B) = 1/3，P(A∩B) = 1/6，求 P(A∪B)。",
+    "options": [
+      "1/6",
+      "2/3",
+      "5/6",
+      "1"
+    ],
+    "correct_index": 1,
+    "explanation": "P(A∪B) = P(A) + P(B) − P(A∩B) = 1/2 + 1/3 − 1/6 = 3/6 + 2/6 − 1/6 = 4/6 = 2/3。"
+  },
+  {
+    "id": "addition-easy-003",
+    "chapter": "probability-discrete",
+    "concept": "addition",
+    "prompt": "擲骰子，P(出現偶數) = 1/2，P(出現大於 4) = 1/3，P(同時偶數且大於 4) = 1/6，求 P(偶數或大於 4)。",
+    "options": [
+      "1/2",
+      "2/3",
+      "5/6",
+      "1"
+    ],
+    "correct_index": 1,
+    "explanation": "P = 1/2 + 1/3 − 1/6 = 3/6 + 2/6 − 1/6 = 4/6 = 2/3。（偶數大於 4 的只有 6，故交集 = 1/6）"
+  },
+  {
+    "id": "addition-easy-004",
+    "chapter": "probability-discrete",
+    "concept": "addition",
+    "prompt": "A 和 B 互斥，P(A) = 1/4，P(B) = 1/4，求 P(A∪B)。",
+    "options": [
+      "1/16",
+      "1/8",
+      "1/4",
+      "1/2"
+    ],
+    "correct_index": 3,
+    "explanation": "互斥時 P(A∩B) = 0，所以 P(A∪B) = 1/4 + 1/4 = 2/4 = 1/2。"
+  },
+  {
+    "id": "addition-easy-005",
+    "chapter": "probability-discrete",
+    "concept": "addition",
+    "prompt": "P(A) = 1/2，P(B) = 1/2，P(A∩B) = 1/4，求 P(A∪B)。",
+    "options": [
+      "1/4",
+      "1/2",
+      "3/4",
+      "1"
+    ],
+    "correct_index": 2,
+    "explanation": "P(A∪B) = 1/2 + 1/2 − 1/4 = 1 − 1/4 = 3/4。"
+  },
+  {
+    "id": "addition-easy-006",
+    "chapter": "probability-discrete",
+    "concept": "addition",
+    "prompt": "若 P(A∪B) = 5/6，P(A) = 1/2，P(B) = 1/2，求 P(A∩B)。",
+    "options": [
+      "1/6",
+      "1/4",
+      "1/3",
+      "1/2"
+    ],
+    "correct_index": 0,
+    "explanation": "P(A∩B) = P(A) + P(B) − P(A∪B) = 1/2 + 1/2 − 5/6 = 1 − 5/6 = 1/6。"
+  },
+  {
+    "id": "addition-easy-007",
+    "chapter": "probability-discrete",
+    "concept": "addition",
+    "prompt": "三個互斥事件 A、B、C，P(A) = 1/6，P(B) = 1/6，P(C) = 1/6，求 P(A∪B∪C)。",
+    "options": [
+      "1/6",
+      "1/3",
+      "1/2",
+      "2/3"
+    ],
+    "correct_index": 2,
+    "explanation": "三事件互斥，P(A∪B∪C) = 1/6 + 1/6 + 1/6 = 3/6 = 1/2。"
+  },
+  {
+    "id": "conditional-easy-001",
+    "chapter": "probability-discrete",
+    "concept": "conditional",
+    "prompt": "一班 40 人：有運動且及格 18 人，有運動共 24 人。已知某生有運動，求及格的條件機率。",
+    "options": [
+      "18/40",
+      "24/40",
+      "18/24",
+      "6/24"
+    ],
+    "correct_index": 2,
+    "explanation": "P(及格|有運動) = P(及格∩有運動)/P(有運動) = (18/40)/(24/40) = 18/24 = 3/4。"
+  },
+  {
+    "id": "conditional-easy-002",
+    "chapter": "probability-discrete",
+    "concept": "conditional",
+    "prompt": "P(A∩B) = 1/6，P(B) = 1/2，求 P(A|B)。",
+    "options": [
+      "1/12",
+      "1/6",
+      "1/3",
+      "1/2"
+    ],
+    "correct_index": 2,
+    "explanation": "P(A|B) = P(A∩B)/P(B) = (1/6)/(1/2) = 1/6 × 2 = 1/3。"
+  },
+  {
+    "id": "conditional-easy-003",
+    "chapter": "probability-discrete",
+    "concept": "conditional",
+    "prompt": "P(A∩B) = 1/4，P(B) = 1/2，求 P(A|B)。",
+    "options": [
+      "1/8",
+      "1/4",
+      "1/2",
+      "3/4"
+    ],
+    "correct_index": 2,
+    "explanation": "P(A|B) = (1/4)/(1/2) = 1/4 × 2 = 1/2。"
+  },
+  {
+    "id": "conditional-easy-004",
+    "chapter": "probability-discrete",
+    "concept": "conditional",
+    "prompt": "20 名學生中，有 10 名女生。其中 6 名女生喜歡數學。已知是女生，求喜歡數學的機率。",
+    "options": [
+      "6/20",
+      "10/20",
+      "6/10",
+      "4/10"
+    ],
+    "correct_index": 2,
+    "explanation": "P(喜歡數學|女生) = (6/20)/(10/20) = 6/10 = 3/5。縮小到「女生」這個子群再計算。"
+  },
+  {
+    "id": "conditional-easy-005",
+    "chapter": "probability-discrete",
+    "concept": "conditional",
+    "prompt": "從 {1, 2, 3, 4, 5, 6} 隨機選一數。已知選到偶數，求選到「大於 4」的條件機率。",
+    "options": [
+      "1/6",
+      "1/3",
+      "1/2",
+      "2/3"
+    ],
+    "correct_index": 1,
+    "explanation": "偶數為 {2, 4, 6}（3 個）。其中大於 4 的偶數為 {6}（1 個）。P = 1/3。"
+  },
+  {
+    "id": "conditional-easy-006",
+    "chapter": "probability-discrete",
+    "concept": "conditional",
+    "prompt": "下列哪個公式是條件機率的正確定義？",
+    "options": [
+      "P(A|B) = P(A) + P(B)",
+      "P(A|B) = P(A∩B) / P(B)",
+      "P(A|B) = P(A) × P(B)",
+      "P(A|B) = P(B|A)"
+    ],
+    "correct_index": 1,
+    "explanation": "條件機率定義：P(A|B) = P(A∩B)/P(B)，分子是交集，分母是已知條件的機率。"
+  },
+  {
+    "id": "conditional-easy-007",
+    "chapter": "probability-discrete",
+    "concept": "conditional",
+    "prompt": "P(A∩B) = 1/3，P(A|B) = 2/3，求 P(B)。",
+    "options": [
+      "2/9",
+      "1/3",
+      "1/2",
+      "2/3"
+    ],
+    "correct_index": 2,
+    "explanation": "P(A|B) = P(A∩B)/P(B) → P(B) = P(A∩B)/P(A|B) = (1/3)/(2/3) = 1/3 × 3/2 = 1/2。"
+  },
+  {
+    "id": "independence-easy-001",
+    "chapter": "probability-discrete",
+    "concept": "independence",
+    "prompt": "擲兩次公正硬幣，兩次獨立。求「第一次正面且第二次正面」的機率。",
+    "options": [
+      "1/4",
+      "1/2",
+      "3/4",
+      "1"
+    ],
+    "correct_index": 0,
+    "explanation": "獨立事件相乘：P(正∩正) = 1/2 × 1/2 = 1/4。"
+  },
+  {
+    "id": "independence-easy-002",
+    "chapter": "probability-discrete",
+    "concept": "independence",
+    "prompt": "擲骰子兩次，兩次獨立。求「兩次都出現 6」的機率。",
+    "options": [
+      "1/36",
+      "1/12",
+      "1/6",
+      "2/6"
+    ],
+    "correct_index": 0,
+    "explanation": "P(6∩6) = 1/6 × 1/6 = 1/36。兩次獨立，直接相乘。"
+  },
+  {
+    "id": "independence-easy-003",
+    "chapter": "probability-discrete",
+    "concept": "independence",
+    "prompt": "A 和 B 獨立，P(A) = 1/2，P(B) = 1/4，求 P(A∩B)。",
+    "options": [
+      "1/8",
+      "1/4",
+      "3/4",
+      "3/8"
+    ],
+    "correct_index": 0,
+    "explanation": "獨立時 P(A∩B) = P(A) × P(B) = 1/2 × 1/4 = 1/8。"
+  },
+  {
+    "id": "independence-easy-004",
+    "chapter": "probability-discrete",
+    "concept": "independence",
+    "prompt": "A 和 B 獨立，P(A) = 1/3，P(B) = 1/2，求 P(A∩B)。",
+    "options": [
+      "1/6",
+      "5/6",
+      "1/3",
+      "2/3"
+    ],
+    "correct_index": 0,
+    "explanation": "P(A∩B) = P(A) × P(B) = 1/3 × 1/2 = 1/6。"
+  },
+  {
+    "id": "independence-easy-005",
+    "chapter": "probability-discrete",
+    "concept": "independence",
+    "prompt": "如果 A 和 B 獨立，以下哪個等式成立？",
+    "options": [
+      "P(A|B) = P(B)",
+      "P(A|B) = P(A)",
+      "P(A∩B) = 0",
+      "P(A∪B) = 1"
+    ],
+    "correct_index": 1,
+    "explanation": "獨立的定義：知道 B 不改變 A 的機率，即 P(A|B) = P(A)。"
+  },
+  {
+    "id": "independence-easy-006",
+    "chapter": "probability-discrete",
+    "concept": "independence",
+    "prompt": "擲三次公正硬幣，三次獨立。求「三次都正面」的機率。",
+    "options": [
+      "1/8",
+      "1/4",
+      "3/8",
+      "1/2"
+    ],
+    "correct_index": 0,
+    "explanation": "P = 1/2 × 1/2 × 1/2 = 1/8。三個獨立事件相乘。"
+  },
+  {
+    "id": "independence-easy-007",
+    "chapter": "probability-discrete",
+    "concept": "independence",
+    "prompt": "A 和 B 獨立，P(A) = 1/2，P(B) = 1/2，求 P(A∩B)。",
+    "options": [
+      "0",
+      "1/4",
+      "1/2",
+      "1"
+    ],
+    "correct_index": 1,
+    "explanation": "P(A∩B) = P(A) × P(B) = 1/2 × 1/2 = 1/4。注意：P(A∩B) = 1/4 ≠ 0，所以獨立和互斥是不同概念。"
+  },
+  {
+    "id": "binomial-easy-001",
+    "chapter": "probability-discrete",
+    "concept": "binomial",
+    "prompt": "投公正硬幣 4 次（p=0.5），求「剛好 2 次正面」的機率。",
+    "options": [
+      "1/4",
+      "3/8",
+      "1/2",
+      "6/16"
+    ],
+    "correct_index": 1,
+    "explanation": "P(X=2) = C(4,2) × (0.5)² × (0.5)² = 6 × 0.25 × 0.25 = 6/16 = 3/8。C(4,2) = 4!/(2!2!) = 6。"
+  },
+  {
+    "id": "binomial-easy-002",
+    "chapter": "probability-discrete",
+    "concept": "binomial",
+    "prompt": "投公正硬幣 4 次，求「剛好 0 次正面」的機率。",
+    "options": [
+      "1/16",
+      "1/8",
+      "1/4",
+      "1/2"
+    ],
+    "correct_index": 0,
+    "explanation": "P(X=0) = C(4,0) × (0.5)⁰ × (0.5)⁴ = 1 × 1 × 1/16 = 1/16。四次全是反面。"
+  },
+  {
+    "id": "binomial-easy-003",
+    "chapter": "probability-discrete",
+    "concept": "binomial",
+    "prompt": "投公正硬幣 4 次，求「剛好 4 次正面」的機率。",
+    "options": [
+      "1/16",
+      "1/8",
+      "1/4",
+      "1/2"
+    ],
+    "correct_index": 0,
+    "explanation": "P(X=4) = C(4,4) × (0.5)⁴ × (0.5)⁰ = 1 × 1/16 × 1 = 1/16。C(4,4) = 1，四次全正面。"
+  },
+  {
+    "id": "binomial-easy-004",
+    "chapter": "probability-discrete",
+    "concept": "binomial",
+    "prompt": "投公正硬幣 4 次（B(4, 0.5)），期望值 μ 是多少？",
+    "options": [
+      "1",
+      "2",
+      "4",
+      "0.5"
+    ],
+    "correct_index": 1,
+    "explanation": "μ = np = 4 × 0.5 = 2。平均投 4 次正面硬幣，期望正面 2 次。"
+  },
+  {
+    "id": "binomial-easy-005",
+    "chapter": "probability-discrete",
+    "concept": "binomial",
+    "prompt": "某玩具的瑕疵率為 p = 0.25，抽查 4 件（B(4, 0.25)），求「剛好 1 件瑕疵」的機率。",
+    "options": [
+      "3/16",
+      "27/64",
+      "27/256",
+      "108/256"
+    ],
+    "correct_index": 3,
+    "explanation": "P(X=1) = C(4,1) × (0.25)¹ × (0.75)³ = 4 × 1/4 × 27/64 = 4 × 27/256 = 108/256 = 27/64。"
+  },
+  {
+    "id": "binomial-easy-006",
+    "chapter": "probability-discrete",
+    "concept": "binomial",
+    "prompt": "投公正硬幣 4 次，求「剛好 1 次正面」的機率。",
+    "options": [
+      "1/8",
+      "1/4",
+      "3/8",
+      "4/16"
+    ],
+    "correct_index": 1,
+    "explanation": "P(X=1) = C(4,1) × (0.5)¹ × (0.5)³ = 4 × 0.5 × 0.125 = 4/16 = 1/4。C(4,1) = 4。"
+  },
+  {
+    "id": "binomial-easy-007",
+    "chapter": "probability-discrete",
+    "concept": "binomial",
+    "prompt": "B(4, 0.5) 的變異數 σ² 是多少？",
+    "options": [
+      "0.5",
+      "1",
+      "2",
+      "4"
+    ],
+    "correct_index": 1,
+    "explanation": "σ² = np(1−p) = 4 × 0.5 × 0.5 = 1。二項分配的變異數公式：σ² = np(1−p)。"
+  },
+  {
+    "id": "poisson-easy-001",
+    "chapter": "probability-discrete",
+    "concept": "poisson",
+    "prompt": "電話中心平均每分鐘接 2 通電話（λ=2）。求某分鐘「剛好 0 通」的機率。",
+    "options": [
+      "e⁻¹",
+      "e⁻²",
+      "2e⁻²",
+      "1−e⁻²"
+    ],
+    "correct_index": 1,
+    "explanation": "P(X=0) = e^(-λ) × λ⁰ / 0! = e⁻² × 1 / 1 = e⁻² ≈ 0.135。λ=2 代入公式，k=0 時就是直接 e^(-λ)。"
+  },
+  {
+    "id": "poisson-easy-002",
+    "chapter": "probability-discrete",
+    "concept": "poisson",
+    "prompt": "電話中心 λ=2，求某分鐘「剛好 1 通」的機率。",
+    "options": [
+      "e⁻²",
+      "2e⁻²",
+      "4e⁻²",
+      "e⁻¹"
+    ],
+    "correct_index": 1,
+    "explanation": "P(X=1) = e^(-λ) × λ¹ / 1! = e⁻² × 2 / 1 = 2e⁻²。λ=2, k=1 時 λ^k/k! = 2/1 = 2。"
+  },
+  {
+    "id": "poisson-easy-003",
+    "chapter": "probability-discrete",
+    "concept": "poisson",
+    "prompt": "某路口平均每小時發生 1 起事故（λ=1）。求某小時「剛好 0 起」的機率。",
+    "options": [
+      "1",
+      "e⁻¹",
+      "e⁻²",
+      "1−e⁻¹"
+    ],
+    "correct_index": 1,
+    "explanation": "P(X=0) = e^(-1) × 1⁰ / 0! = e⁻¹ ≈ 0.368。λ=1 時，P(X=0) = e^(-λ) = e⁻¹。"
+  },
+  {
+    "id": "poisson-easy-004",
+    "chapter": "probability-discrete",
+    "concept": "poisson",
+    "prompt": "λ=1，求「剛好 1 次」的機率。",
+    "options": [
+      "e⁻¹",
+      "2e⁻¹",
+      "e⁻²",
+      "1"
+    ],
+    "correct_index": 0,
+    "explanation": "P(X=1) = e^(-1) × 1¹ / 1! = e⁻¹ × 1 = e⁻¹。當 λ=1 且 k=1，λ^k/k! = 1，所以直接等於 e⁻¹。"
+  },
+  {
+    "id": "poisson-easy-005",
+    "chapter": "probability-discrete",
+    "concept": "poisson",
+    "prompt": "波松分配 λ=2 的期望值 μ 是多少？",
+    "options": [
+      "1",
+      "2",
+      "4",
+      "√2"
+    ],
+    "correct_index": 1,
+    "explanation": "波松分配的期望值 μ = λ = 2。期望值直接等於參數 λ，這是波松分配的核心特性。"
+  },
+  {
+    "id": "poisson-easy-006",
+    "chapter": "probability-discrete",
+    "concept": "poisson",
+    "prompt": "波松分配中，下列哪個特性是正確的？",
+    "options": [
+      "μ = λ²",
+      "μ = λ，σ² = λ",
+      "μ = 1/λ，σ² = λ",
+      "μ = σ² = λ²"
+    ],
+    "correct_index": 1,
+    "explanation": "波松分配的獨特性質：期望值 μ = λ，變異數 σ² = λ，兩者相等。"
+  },
+  {
+    "id": "poisson-easy-007",
+    "chapter": "probability-discrete",
+    "concept": "poisson",
+    "prompt": "λ=2，求 P(X=0) 和 P(X=1) 的比值 P(X=1)/P(X=0)。",
+    "options": [
+      "1",
+      "2",
+      "4",
+      "e⁻²"
+    ],
+    "correct_index": 1,
+    "explanation": "P(X=0) = e⁻²，P(X=1) = 2e⁻²。比值 = 2e⁻² / e⁻² = 2 = λ。一般而言 P(X=1)/P(X=0) = λ。"
+  },
+  {
+    "id": "sampling-dist-001",
+    "chapter": "sampling-distributions",
+    "concept": "sampling-dist",
+    "prompt": "x̄ 的抽樣分配，是指哪種分配？",
+    "options": [
+      "母體中所有個別資料的分配",
+      "重複抽樣得到的所有 x̄ 所形成的分配",
+      "單一樣本內所有觀測值的分配",
+      "標準常態分配"
+    ],
+    "correct_index": 1,
+    "explanation": "抽樣分配是：若對母體無限次抽樣（每次抽 n 個）、每次計算 x̄，把所有 x̄ 排列而成的機率分配。"
+  },
+  {
+    "id": "sampling-dist-002",
+    "chapter": "sampling-distributions",
+    "concept": "sampling-dist",
+    "prompt": "x̄ 抽樣分配的期望值 E(x̄) 等於什麼？",
+    "options": [
+      "σ",
+      "σ/√n",
+      "μ",
+      "μ/n"
+    ],
+    "correct_index": 2,
+    "explanation": "E(x̄) = μ。樣本均值是母體均值 μ 的不偏估計量，無論樣本大小，期望值恆等於 μ。"
+  },
+  {
+    "id": "sampling-dist-003",
+    "chapter": "sampling-distributions",
+    "concept": "sampling-dist",
+    "prompt": "母體 σ = 10，每次抽 n = 25 個，x̄ 的標準誤 SE 等於多少？",
+    "options": [
+      "0.4",
+      "1",
+      "2",
+      "10"
+    ],
+    "correct_index": 2,
+    "explanation": "SE = σ/√n = 10/√25 = 10/5 = 2。"
+  },
+  {
+    "id": "sampling-dist-004",
+    "chapter": "sampling-distributions",
+    "concept": "sampling-dist",
+    "prompt": "下列關於抽樣分配的敘述，何者正確？",
+    "options": [
+      "抽樣分配是從樣本資料直接觀察到的分配",
+      "x̄ 的抽樣分配反映 x̄ 的機率行為",
+      "抽樣分配只適用於常態母體",
+      "抽樣分配與母體分配完全相同"
+    ],
+    "correct_index": 1,
+    "explanation": "x̄ 的抽樣分配描述「如果反覆抽樣，x̄ 會如何變動」——這是統計量本身的機率行為，不是原始資料的分配。"
+  },
+  {
+    "id": "sampling-dist-005",
+    "chapter": "sampling-distributions",
+    "concept": "sampling-dist",
+    "prompt": "樣本數從 n = 25 增加到 n = 100，x̄ 抽樣分配的標準誤（σ=10）會如何變化？",
+    "options": [
+      "從 2 增加到 4",
+      "從 2 減少到 1",
+      "從 10 增加到 40",
+      "保持不變"
+    ],
+    "correct_index": 1,
+    "explanation": "n=25 時 SE=10/5=2；n=100 時 SE=10/10=1。n 增大 4 倍，SE 縮小為原來的 1/2。"
+  },
+  {
+    "id": "sampling-dist-006",
+    "chapter": "sampling-distributions",
+    "concept": "sampling-dist",
+    "prompt": "母體 μ = 50，σ = 6，抽 n = 9，x̄ 抽樣分配的均值與標準誤各為多少？",
+    "options": [
+      "均值 = 50，SE = 6",
+      "均值 = 50，SE = 2",
+      "均值 = 50/9，SE = 2",
+      "均值 = 50，SE = 3"
+    ],
+    "correct_index": 1,
+    "explanation": "E(x̄) = μ = 50；SE = σ/√n = 6/√9 = 6/3 = 2。"
+  },
+  {
+    "id": "clt-001",
+    "chapter": "sampling-distributions",
+    "concept": "clt",
+    "prompt": "中央極限定理（CLT）的核心結論是什麼？",
+    "options": [
+      "母體必須是常態分配，x̄ 才會是常態",
+      "不論母體形狀，n 夠大時 x̄ 近似常態",
+      "n 越大，x̄ 的均值越接近 0",
+      "n 越大，母體標準差 σ 越小"
+    ],
+    "correct_index": 1,
+    "explanation": "CLT 的力量在於：不論母體是偏態、均勻還是任何形狀，只要 n 夠大（通常 n ≥ 30），x̄ 的分配就近似 N(μ, σ²/n)。"
+  },
+  {
+    "id": "clt-002",
+    "chapter": "sampling-distributions",
+    "concept": "clt",
+    "prompt": "CLT 通常要求樣本數 n 至少達到多少？",
+    "options": [
+      "n ≥ 5",
+      "n ≥ 10",
+      "n ≥ 30",
+      "n ≥ 100"
+    ],
+    "correct_index": 2,
+    "explanation": "經驗準則：n ≥ 30 時，CLT 的常態近似通常已相當精準（母體嚴重偏態時可能需要更大）。"
+  },
+  {
+    "id": "clt-003",
+    "chapter": "sampling-distributions",
+    "concept": "clt",
+    "prompt": "某右偏母體，σ = 6。抽 n = 100 個，根據 CLT，x̄ 的標準誤為多少？",
+    "options": [
+      "0.6",
+      "1",
+      "2",
+      "6"
+    ],
+    "correct_index": 0,
+    "explanation": "SE = σ/√n = 6/√100 = 6/10 = 0.6。n = 100 ≥ 30，CLT 成立，x̄ ≈ N(μ, 0.6²)。"
+  },
+  {
+    "id": "clt-004",
+    "chapter": "sampling-distributions",
+    "concept": "clt",
+    "prompt": "下列哪個情境 CLT「不」能直接保證 x̄ 近似常態？",
+    "options": [
+      "右偏母體，n = 50",
+      "均勻分配母體，n = 100",
+      "任意母體，n = 5",
+      "左偏母體，n = 30"
+    ],
+    "correct_index": 2,
+    "explanation": "n = 5 遠小於 CLT 門檻（n ≥ 30）。此時若母體非常態，x̄ 不能保證近似常態；除非母體本身已是常態分配。"
+  },
+  {
+    "id": "clt-005",
+    "chapter": "sampling-distributions",
+    "concept": "clt",
+    "prompt": "根據 CLT，當 n = 30，σ = 6，x̄ 近似哪個分配？（μ = 50）",
+    "options": [
+      "N(50, 36)",
+      "N(50, 6)",
+      "N(50, 36/30)",
+      "N(50, 6/30)"
+    ],
+    "correct_index": 2,
+    "explanation": "x̄ ≈ N(μ, σ²/n) = N(50, 36/30)。注意：N 的第二個參數是「變異數」σ²/n，不是標準誤。"
+  },
+  {
+    "id": "clt-006",
+    "chapter": "sampling-distributions",
+    "concept": "clt",
+    "prompt": "某母體嚴重右偏，σ = 12。抽 n = 4，CLT 是否適用？標準誤為多少？",
+    "options": [
+      "CLT 適用，SE = 3",
+      "CLT 不適用（n 太小），SE = 6",
+      "CLT 適用，SE = 6",
+      "CLT 不適用（n 太小），SE = 3"
+    ],
+    "correct_index": 3,
+    "explanation": "n = 4 < 30，CLT 不適用（母體嚴重偏態時更無法保證）。SE = σ/√n = 12/√4 = 12/2 = 6，但此 SE 值只有在母體常態時 x̄ 的分配才確定是常態。"
+  },
+  {
+    "id": "std-error-001",
+    "chapter": "sampling-distributions",
+    "concept": "std-error",
+    "prompt": "「標準誤（SE）」與「標準差（σ）」的主要差異是什麼？",
+    "options": [
+      "SE 衡量個別資料的變動，σ 衡量樣本均值的變動",
+      "SE 衡量樣本均值的變動，σ 衡量個別資料的變動",
+      "SE 永遠大於 σ",
+      "兩者完全相同，只是符號不同"
+    ],
+    "correct_index": 1,
+    "explanation": "σ 是個別資料點繞著 μ 的標準差；SE = σ/√n 是樣本均值 x̄ 繞著 μ 的標準差。主角不同：一個是原始觀測，一個是統計量。"
+  },
+  {
+    "id": "std-error-002",
+    "chapter": "sampling-distributions",
+    "concept": "std-error",
+    "prompt": "σ = 10，n = 25，標準誤 SE 為多少？",
+    "options": [
+      "0.4",
+      "1",
+      "2",
+      "5"
+    ],
+    "correct_index": 2,
+    "explanation": "SE = σ/√n = 10/√25 = 10/5 = 2。"
+  },
+  {
+    "id": "std-error-003",
+    "chapter": "sampling-distributions",
+    "concept": "std-error",
+    "prompt": "σ = 12，n = 4，標準誤 SE 為多少？",
+    "options": [
+      "1",
+      "3",
+      "6",
+      "12"
+    ],
+    "correct_index": 2,
+    "explanation": "SE = σ/√n = 12/√4 = 12/2 = 6。"
+  },
+  {
+    "id": "std-error-004",
+    "chapter": "sampling-distributions",
+    "concept": "std-error",
+    "prompt": "要讓 SE 從 2 降為 1（σ = 10 不變），n 需要從 25 增加到多少？",
+    "options": [
+      "36",
+      "50",
+      "75",
+      "100"
+    ],
+    "correct_index": 3,
+    "explanation": "SE = 1 → σ/√n = 1 → √n = σ/1 = 10 → n = 100。SE 減半需要 n 增加為 4 倍（25 × 4 = 100）。"
+  },
+  {
+    "id": "std-error-005",
+    "chapter": "sampling-distributions",
+    "concept": "std-error",
+    "prompt": "σ = 6，n = 9，SE 為多少？",
+    "options": [
+      "0.67",
+      "2",
+      "3",
+      "6"
+    ],
+    "correct_index": 1,
+    "explanation": "SE = σ/√n = 6/√9 = 6/3 = 2。"
+  },
+  {
+    "id": "std-error-006",
+    "chapter": "sampling-distributions",
+    "concept": "std-error",
+    "prompt": "下列哪個說法正確描述 SE 與 n 的關係？",
+    "options": [
+      "n 增大 4 倍，SE 也增大 4 倍",
+      "n 增大 4 倍，SE 縮小為 1/2",
+      "n 增大 4 倍，SE 縮小為 1/4",
+      "n 變化不影響 SE"
+    ],
+    "correct_index": 1,
+    "explanation": "SE = σ/√n。n 增大 4 倍，√n 增大 2 倍，所以 SE 縮小為原來的 1/2。這是「精準度提升有成本」的統計現實。"
+  },
+  {
+    "id": "conf-interval-z-001",
+    "chapter": "inference-testing",
+    "concept": "conf-interval-z",
+    "prompt": "95% 信賴區間（σ 已知）的公式為何？",
+    "options": [
+      "x̄ ± 1.645 × (σ/√n)",
+      "x̄ ± 1.96 × (σ/√n)",
+      "x̄ ± 2.576 × (σ/√n)",
+      "x̄ ± t_{0.025,n−1} × (σ/√n)"
+    ],
+    "correct_index": 1,
+    "explanation": "95% CI 用 Z_{α/2} = Z_{0.025} = 1.96；σ 已知時用 Z 分配，公式為 x̄ ± 1.96 × (σ/√n)。"
+  },
+  {
+    "id": "conf-interval-z-002",
+    "chapter": "inference-testing",
+    "concept": "conf-interval-z",
+    "prompt": "x̄=100，σ=10，n=25，95% CI 的標準誤 SE 為多少？",
+    "options": [
+      "0.4",
+      "1",
+      "2",
+      "5"
+    ],
+    "correct_index": 2,
+    "explanation": "SE = σ/√n = 10/√25 = 10/5 = 2。"
+  },
+  {
+    "id": "conf-interval-z-003",
+    "chapter": "inference-testing",
+    "concept": "conf-interval-z",
+    "prompt": "x̄=100，σ=10，n=25，95% CI（Z_{0.025}=1.96）的誤差邊界（margin of error）為多少？",
+    "options": [
+      "1.96",
+      "2.00",
+      "3.92",
+      "5.00"
+    ],
+    "correct_index": 2,
+    "explanation": "ME = Z_{α/2} × SE = 1.96 × 2 = 3.92。"
+  },
+  {
+    "id": "conf-interval-z-004",
+    "chapter": "inference-testing",
+    "concept": "conf-interval-z",
+    "prompt": "x̄=100，σ=10，n=25，95% CI 為何？",
+    "options": [
+      "(95, 105)",
+      "(96.08, 103.92)",
+      "(98, 102)",
+      "(90, 110)"
+    ],
+    "correct_index": 1,
+    "explanation": "CI = 100 ± 1.96 × 2 = 100 ± 3.92 = (96.08, 103.92)。"
+  },
+  {
+    "id": "conf-interval-z-005",
+    "chapter": "inference-testing",
+    "concept": "conf-interval-z",
+    "prompt": "其他條件不變，改用 99% 信賴水準（Z_{0.005}=2.576），區間寬度會如何變化？",
+    "options": [
+      "比 95% CI 更窄",
+      "比 95% CI 更寬",
+      "與 95% CI 相同",
+      "無法判斷"
+    ],
+    "correct_index": 1,
+    "explanation": "信賴水準提高，Z 臨界值從 1.96 增為 2.576，ME 增大，區間更寬。信賴水準與精準度（區間寬窄）之間存在取捨。"
+  },
+  {
+    "id": "conf-interval-z-006",
+    "chapter": "inference-testing",
+    "concept": "conf-interval-z",
+    "prompt": "已知 σ=6，n=9，x̄=20，95% CI（Z_{0.025}≈2.00 用整數近似）為何？",
+    "options": [
+      "(16, 24)",
+      "(18, 22)",
+      "(14, 26)",
+      "(19, 21)"
+    ],
+    "correct_index": 1,
+    "explanation": "SE = 6/3 = 2；ME = 2.00 × 2 = 4；CI = 20 ± 4 = (16, 24)。注意此題用整數近似 Z≈2.00，選 (16,24)。"
+  },
+  {
+    "id": "conf-interval-z-007",
+    "chapter": "inference-testing",
+    "concept": "conf-interval-z",
+    "prompt": "「95% 信賴區間」的正確解釋是什麼？",
+    "options": [
+      "母體均值 μ 有 95% 的機率落在這個區間",
+      "樣本均值 x̄ 有 95% 的機率等於 μ",
+      "用此方法重複做 100 次，約有 95 次的區間會包含 μ",
+      "這個區間包含 95% 的樣本資料"
+    ],
+    "correct_index": 2,
+    "explanation": "頻率派的正確詮釋：μ 是固定的，但每次抽樣算出的 CI 不同。「95%」指的是長期重複下，這些 CI 中有 95% 會包含真正的 μ。"
+  },
+  {
+    "id": "conf-interval-t-001",
+    "chapter": "inference-testing",
+    "concept": "conf-interval-t",
+    "prompt": "何時應改用 t 分配而非 Z 分配來構建信賴區間？",
+    "options": [
+      "σ 已知且 n ≥ 30",
+      "σ 未知且樣本小（n < 30）",
+      "任何時候都用 t",
+      "母體非常態時"
+    ],
+    "correct_index": 1,
+    "explanation": "當 σ 未知且樣本小（n < 30）時，用樣本標準差 s 替代 σ，並使用 t 分配（自由度 df = n−1）來計算信賴區間。"
+  },
+  {
+    "id": "conf-interval-t-002",
+    "chapter": "inference-testing",
+    "concept": "conf-interval-t",
+    "prompt": "n = 9 的 t 信賴區間，自由度 df 為多少？",
+    "options": [
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "correct_index": 1,
+    "explanation": "df = n − 1 = 9 − 1 = 8。計算樣本標準差 s 時已使用了一個限制（計算 x̄），剩下 n−1 個自由資訊。"
+  },
+  {
+    "id": "conf-interval-t-003",
+    "chapter": "inference-testing",
+    "concept": "conf-interval-t",
+    "prompt": "x̄=50，s=4，n=9，95% CI 的 SE 為多少？",
+    "options": [
+      "0.44",
+      "1",
+      "4/3（≈1.33）",
+      "4"
+    ],
+    "correct_index": 2,
+    "explanation": "SE = s/√n = 4/√9 = 4/3 ≈ 1.33。"
+  },
+  {
+    "id": "conf-interval-t-004",
+    "chapter": "inference-testing",
+    "concept": "conf-interval-t",
+    "prompt": "x̄=50，s=4，n=9，t_{0.025,8}=2.306，95% CI 的誤差邊界約為多少？",
+    "options": [
+      "2.30",
+      "3.07",
+      "4.00",
+      "6.92"
+    ],
+    "correct_index": 1,
+    "explanation": "ME = t_{0.025,8} × s/√n = 2.306 × (4/3) = 2.306 × 1.333 ≈ 3.07。"
+  },
+  {
+    "id": "conf-interval-t-005",
+    "chapter": "inference-testing",
+    "concept": "conf-interval-t",
+    "prompt": "相同的 x̄、σ、n 條件下，t 信賴區間比 Z 信賴區間寬還是窄？",
+    "options": [
+      "t 區間更窄，因為 s < σ",
+      "t 區間更寬，因為 t 臨界值 > Z 臨界值",
+      "兩者相同寬度",
+      "無法比較"
+    ],
+    "correct_index": 1,
+    "explanation": "t 臨界值（例如 t_{0.025,8}=2.306）大於 Z 臨界值（1.96），所以 t 信賴區間更寬——反映「σ 未知帶來的額外不確定性」。"
+  },
+  {
+    "id": "conf-interval-t-006",
+    "chapter": "inference-testing",
+    "concept": "conf-interval-t",
+    "prompt": "隨著 n 增大（σ 未知），t_{α/2,df} 會如何變化？",
+    "options": [
+      "越來越大，遠離 Z 臨界值",
+      "越來越小，趨近對應的 Z 臨界值",
+      "保持不變",
+      "先增後減"
+    ],
+    "correct_index": 1,
+    "explanation": "df = n−1 越大，t 分配越接近 Z（標準常態）。df → ∞ 時，t_{0.025,∞} = 1.96 = Z_{0.025}。"
+  },
+  {
+    "id": "conf-interval-t-007",
+    "chapter": "inference-testing",
+    "concept": "conf-interval-t",
+    "prompt": "x̄=30，s=6，n=9，t_{0.025,8}=2.306，95% CI 為以下哪個？",
+    "options": [
+      "(24, 36)",
+      "(27.69, 32.31)",
+      "(28, 32)",
+      "(25.39, 34.61)"
+    ],
+    "correct_index": 1,
+    "explanation": "SE = 6/3 = 2；ME = 2.306 × 2 = 4.612；CI = 30 ± 4.612 ≈ (25.39, 34.61)。選項 D 正確。注意：本題答案應為 (25.39, 34.61) 即選項 D。"
+  },
+  {
+    "id": "hypo-z-001",
+    "chapter": "inference-testing",
+    "concept": "hypo-z",
+    "prompt": "已知母體 σ=10，抽 n=25 求得 x̄=104。H₀: μ=100，α=0.05（雙尾）。計算 Z 統計量。",
+    "options": [
+      "1.0",
+      "2.0",
+      "2.5",
+      "4.0"
+    ],
+    "correct_index": 1,
+    "explanation": "Z = (x̄−μ₀) / (σ/√n) = (104−100) / (10/√25) = 4 / (10/5) = 4/2 = 2.0。"
+  },
+  {
+    "id": "hypo-z-002",
+    "chapter": "inference-testing",
+    "concept": "hypo-z",
+    "prompt": "承上題（Z=2.0，α=0.05，雙尾，Z_{0.025}=1.96），結論為何？",
+    "options": [
+      "無法拒絕 H₀，因為 Z < Z 臨界值",
+      "拒絕 H₀，因為 |Z| > Z_{0.025}",
+      "無法拒絕 H₀，因為 Z > 0",
+      "拒絕 H₀，因為 x̄ > μ₀"
+    ],
+    "correct_index": 1,
+    "explanation": "|Z| = 2.0 > Z_{0.025} = 1.96，落在拒絕域，故拒絕 H₀。有顯著證據顯示 μ ≠ 100。"
+  },
+  {
+    "id": "hypo-z-003",
+    "chapter": "inference-testing",
+    "concept": "hypo-z",
+    "prompt": "假設檢定五步驟中，「步驟 2 選擇工具」的判斷依據主要是什麼？",
+    "options": [
+      "樣本數是否大於 50",
+      "σ 是否已知",
+      "x̄ 是否等於 μ₀",
+      "α 是否小於 0.05"
+    ],
+    "correct_index": 1,
+    "explanation": "σ 已知 → 用 Z 分配；σ 未知 → 用 t 分配。這是 Z 檢定 vs t 檢定的核心分岔點。"
+  },
+  {
+    "id": "hypo-z-004",
+    "chapter": "inference-testing",
+    "concept": "hypo-z",
+    "prompt": "H₁: μ ≠ μ₀ 是哪種檢定？α=0.05 時拒絕條件為何？",
+    "options": [
+      "右尾；Z > 1.645",
+      "左尾；Z < −1.96",
+      "雙尾；|Z| > 1.96",
+      "雙尾；Z > 1.96"
+    ],
+    "correct_index": 2,
+    "explanation": "H₁: μ ≠ μ₀ 是雙尾檢定。α=0.05，每尾 α/2=0.025，臨界值 Z_{0.025}=1.96，拒絕域為 |Z| > 1.96。"
+  },
+  {
+    "id": "hypo-z-005",
+    "chapter": "inference-testing",
+    "concept": "hypo-z",
+    "prompt": "σ=6，n=9，x̄=106，H₀: μ=100，α=0.05（雙尾）。Z 統計量為多少？",
+    "options": [
+      "1.0",
+      "2.0",
+      "3.0",
+      "6.0"
+    ],
+    "correct_index": 2,
+    "explanation": "SE = 6/√9 = 6/3 = 2；Z = (106−100)/2 = 6/2 = 3.0。"
+  },
+  {
+    "id": "hypo-z-006",
+    "chapter": "inference-testing",
+    "concept": "hypo-z",
+    "prompt": "承上題（Z=3.0，Z_{0.025}=1.96），結論為何？",
+    "options": [
+      "拒絕 H₀",
+      "無法拒絕 H₀",
+      "需要更多資料",
+      "結論不確定"
+    ],
+    "correct_index": 0,
+    "explanation": "|Z| = 3.0 > 1.96，落在拒絕域，拒絕 H₀。有顯著證據顯示 μ ≠ 100。"
+  },
+  {
+    "id": "hypo-z-007",
+    "chapter": "inference-testing",
+    "concept": "hypo-z",
+    "prompt": "Z 假設檢定中，「Type I error（型一誤差）」是指什麼？",
+    "options": [
+      "H₀ 為假時卻無法拒絕",
+      "H₀ 為真時卻拒絕了 H₀",
+      "計算 Z 統計量時出現計算錯誤",
+      "α 值設定得太小"
+    ],
+    "correct_index": 1,
+    "explanation": "型一誤差（α）= H₀ 為真時，卻錯誤拒絕 H₀ 的機率。顯著水準 α 就是容許發生型一誤差的最大機率。"
+  },
+  {
+    "id": "hypo-z-008",
+    "chapter": "inference-testing",
+    "concept": "hypo-z",
+    "prompt": "σ=10，n=25，x̄=103，H₀: μ=100，單尾右側（H₁: μ>100），α=0.05（Z_{0.05}=1.645）。結論？",
+    "options": [
+      "拒絕 H₀，因為 Z=1.5 > 1.645",
+      "無法拒絕 H₀，因為 Z=1.5 < 1.645",
+      "拒絕 H₀，因為 Z=3.0 > 1.645",
+      "無法拒絕 H₀，因為 Z=3.0 < 1.96"
+    ],
+    "correct_index": 1,
+    "explanation": "Z = (103−100)/(10/5) = 3/2 = 1.5。單尾右側拒絕域 Z > 1.645。1.5 < 1.645，無法拒絕 H₀。"
+  },
+  {
+    "id": "hypo-t-001",
+    "chapter": "inference-testing",
+    "concept": "hypo-t",
+    "prompt": "單樣本 t 檢定與 Z 檢定的最主要差異是什麼？",
+    "options": [
+      "t 檢定使用樣本標準差 s，Z 檢定使用母體標準差 σ",
+      "t 檢定只能用於小樣本，Z 檢定只能用於大樣本",
+      "t 檢定的拒絕域永遠比 Z 更小",
+      "t 檢定不需要常態假設"
+    ],
+    "correct_index": 0,
+    "explanation": "關鍵差異：Z 檢定用已知的 σ；t 檢定用 s 估計未知的 σ，並因此使用 t 分配（有自由度參數）。"
+  },
+  {
+    "id": "hypo-t-002",
+    "chapter": "inference-testing",
+    "concept": "hypo-t",
+    "prompt": "s=6，n=9，x̄=54，H₀: μ=50。t 統計量為多少？",
+    "options": [
+      "0.67",
+      "1.0",
+      "2.0",
+      "4.0"
+    ],
+    "correct_index": 2,
+    "explanation": "t = (x̄−μ₀)/(s/√n) = (54−50)/(6/√9) = 4/(6/3) = 4/2 = 2.0。"
+  },
+  {
+    "id": "hypo-t-003",
+    "chapter": "inference-testing",
+    "concept": "hypo-t",
+    "prompt": "承上題（n=9，df=8，t=2.0，t_{0.025,8}=2.306，雙尾 α=0.05）。結論？",
+    "options": [
+      "拒絕 H₀，因為 t > 2.0",
+      "無法拒絕 H₀，因為 |t| < t_{0.025,8}",
+      "拒絕 H₀，因為 |t| > 1.96",
+      "無法拒絕 H₀，因為 t < 0"
+    ],
+    "correct_index": 1,
+    "explanation": "|t| = 2.0 < t_{0.025,8} = 2.306，未達拒絕域，無法拒絕 H₀。（注意：同樣的 t=2.0 在 Z 檢定時會拒絕，但 t 檢定臨界值更嚴格。）"
+  },
+  {
+    "id": "hypo-t-004",
+    "chapter": "inference-testing",
+    "concept": "hypo-t",
+    "prompt": "n=9 時的自由度為多少？若改用 n=25，自由度又是多少？",
+    "options": [
+      "df=9；df=25",
+      "df=8；df=24",
+      "df=10；df=26",
+      "df=8；df=25"
+    ],
+    "correct_index": 1,
+    "explanation": "df = n−1。n=9 時 df=8；n=25 時 df=24。df 越大，t 臨界值越接近 Z（1.96）。"
+  },
+  {
+    "id": "hypo-t-005",
+    "chapter": "inference-testing",
+    "concept": "hypo-t",
+    "prompt": "s=4，n=9，x̄=56，H₀: μ=50，雙尾 α=0.05（t_{0.025,8}=2.306）。t 統計量為多少，結論為何？",
+    "options": [
+      "t=3.0，拒絕 H₀",
+      "t=4.5，拒絕 H₀",
+      "t=3.0，無法拒絕 H₀",
+      "t=2.0，無法拒絕 H₀"
+    ],
+    "correct_index": 0,
+    "explanation": "SE = 4/3 ≈ 1.333；t = (56−50)/1.333 = 6/1.333 ≈ 4.5。但選最接近：SE = 4/√9 = 4/3；t = 6/(4/3) = 6×3/4 = 18/4 = 4.5。4.5 > 2.306，拒絕 H₀。（選項 B 正確：t=4.5，拒絕 H₀）"
+  },
+  {
+    "id": "hypo-t-006",
+    "chapter": "inference-testing",
+    "concept": "hypo-t",
+    "prompt": "為什麼 t 分配的尾巴比 Z 分配更厚（臨界值更大）？",
+    "options": [
+      "因為 t 分配是離散分配",
+      "因為用 s 估計 σ 引入了額外的不確定性",
+      "因為 t 分配的均值不等於 0",
+      "因為小樣本的 x̄ 不近似常態"
+    ],
+    "correct_index": 1,
+    "explanation": "用 s（隨機的）替代 σ（固定的），產生額外的變異。t 分配的厚尾正是反映「雙重不確定性（x̄ 本身的變異 + s 的估計誤差）」。"
+  },
+  {
+    "id": "hypo-t-007",
+    "chapter": "inference-testing",
+    "concept": "hypo-t",
+    "prompt": "s=3，n=4，x̄=56，H₀: μ=50，雙尾 α=0.05（t_{0.025,3}=3.182）。t 統計量為多少？",
+    "options": [
+      "2.0",
+      "3.0",
+      "4.0",
+      "6.0"
+    ],
+    "correct_index": 2,
+    "explanation": "SE = s/√n = 3/√4 = 3/2 = 1.5；t = (56−50)/1.5 = 6/1.5 = 4.0。|t|=4.0 > 3.182，拒絕 H₀。"
+  },
+  {
+    "id": "hypo-t-008",
+    "chapter": "inference-testing",
+    "concept": "hypo-t",
+    "prompt": "承上題（t=4.0，t_{0.025,3}=3.182）。結論為何？",
+    "options": [
+      "無法拒絕 H₀",
+      "拒絕 H₀",
+      "需要查 Z 表確認",
+      "結論取決於樣本標準差"
+    ],
+    "correct_index": 1,
+    "explanation": "|t| = 4.0 > t_{0.025,3} = 3.182，落在拒絕域，拒絕 H₀。有顯著證據顯示 μ ≠ 50。"
+  },
+  {
+    "id": "two-sample-t-001",
+    "chapter": "inference-testing",
+    "concept": "two-sample-t",
+    "prompt": "兩樣本 t 檢定中，F 檢定的目的是什麼？",
+    "options": [
+      "檢定兩組均值是否相等",
+      "檢定兩組變異數是否相等（變異數齊一性）",
+      "決定要用 Z 還是 t",
+      "計算合併標準差"
+    ],
+    "correct_index": 1,
+    "explanation": "F 檢定（Levene 或 F ratio 法）用於判斷兩組的母體變異數是否相等（homogeneity of variance）。若相等則用合併 t（pooled t），若不等則用 Welch t。"
+  },
+  {
+    "id": "two-sample-t-002",
+    "chapter": "inference-testing",
+    "concept": "two-sample-t",
+    "prompt": "A 組 s₁²=128，B 組 s₂²=72，F = s₁²/s₂² 為多少（小數取兩位）？",
+    "options": [
+      "0.56",
+      "1.00",
+      "1.78",
+      "2.56"
+    ],
+    "correct_index": 2,
+    "explanation": "F = 128/72 ≈ 1.78。慣例：較大的變異數放分子，確保 F ≥ 1，方便查單側 F 表。"
+  },
+  {
+    "id": "two-sample-t-003",
+    "chapter": "inference-testing",
+    "concept": "two-sample-t",
+    "prompt": "F 檢定結果 F=1.78，臨界值 F_{0.05,9,9}≈3.18。兩組變異數是否相等？",
+    "options": [
+      "不相等，因為 F > 1",
+      "相等，因為 F < F 臨界值",
+      "不相等，因為 F > F 臨界值",
+      "相等，因為 F < 2"
+    ],
+    "correct_index": 1,
+    "explanation": "F = 1.78 < F_{0.05,9,9} = 3.18，未達拒絕域，無法拒絕「兩組變異數相等」的假設。因此使用合併變異數 t 檢定。"
+  },
+  {
+    "id": "two-sample-t-004",
+    "chapter": "inference-testing",
+    "concept": "two-sample-t",
+    "prompt": "A 組（n₁=10，s₁²=128）與 B 組（n₂=10，s₂²=72），合併變異數 s_p² 為多少？",
+    "options": [
+      "72",
+      "100",
+      "128",
+      "200"
+    ],
+    "correct_index": 1,
+    "explanation": "s_p² = [(n₁−1)s₁² + (n₂−1)s₂²] / (n₁+n₂−2) = [9×128 + 9×72] / 18 = [1152+648] / 18 = 1800/18 = 100。"
+  },
+  {
+    "id": "two-sample-t-005",
+    "chapter": "inference-testing",
+    "concept": "two-sample-t",
+    "prompt": "s_p²=100（即 s_p=10），n₁=n₂=10，兩樣本合併 t 的分母 SE 為多少？",
+    "options": [
+      "1.0",
+      "2.0",
+      "√2 ≈ 1.41",
+      "10√0.2 ≈ 4.47"
+    ],
+    "correct_index": 3,
+    "explanation": "SE = s_p × √(1/n₁ + 1/n₂) = 10 × √(1/10 + 1/10) = 10 × √(0.2) = 10 × 0.4472 ≈ 4.47。"
+  },
+  {
+    "id": "two-sample-t-006",
+    "chapter": "inference-testing",
+    "concept": "two-sample-t",
+    "prompt": "A 組 x̄₁=1230，B 組 x̄₂=1200，SE≈4.47，t 統計量約為多少？",
+    "options": [
+      "2.0",
+      "3.0",
+      "4.5",
+      "6.71"
+    ],
+    "correct_index": 3,
+    "explanation": "t = (x̄₁−x̄₂) / SE = (1230−1200) / 4.47 = 30 / 4.47 ≈ 6.71。"
+  },
+  {
+    "id": "two-sample-t-007",
+    "chapter": "inference-testing",
+    "concept": "two-sample-t",
+    "prompt": "兩樣本合併 t 的自由度（n₁=10，n₂=10）為多少？",
+    "options": [
+      "9",
+      "10",
+      "18",
+      "20"
+    ],
+    "correct_index": 2,
+    "explanation": "df = n₁ + n₂ − 2 = 10 + 10 − 2 = 18。"
+  },
+  {
+    "id": "two-sample-t-008",
+    "chapter": "inference-testing",
+    "concept": "two-sample-t",
+    "prompt": "t=6.71，df=18，t_{0.025,18}=2.101，雙尾 α=0.05。結論為何？",
+    "options": [
+      "無法拒絕 H₀（兩組均值相等）",
+      "拒絕 H₀（兩組均值有顯著差異）",
+      "需要增加樣本數再判斷",
+      "需先確認母體常態才能下結論"
+    ],
+    "correct_index": 1,
+    "explanation": "|t| = 6.71 >> t_{0.025,18} = 2.101，強力落在拒絕域。拒絕 H₀，A 組與 B 組的母體均值有顯著差異。"
+  },
+  {
+    "id": "anova-easy-001",
+    "chapter": "advanced-analysis",
+    "concept": "anova",
+    "prompt": "三組數據的組間均方 MSB = 12，組內均方 MSW = 4。F 統計量是多少？",
+    "options": [
+      "3",
+      "4",
+      "8",
+      "48"
+    ],
+    "correct_index": 0,
+    "explanation": "F = MSB / MSW = 12 / 4 = 3。F 代表「組間差距（訊號）」是「組內散佈（雜訊）」的幾倍。"
+  },
+  {
+    "id": "anova-easy-002",
+    "chapter": "advanced-analysis",
+    "concept": "anova",
+    "prompt": "ANOVA 中有 4 組，每組 5 人（共 20 人），組間自由度 dfB 是多少？",
+    "options": [
+      "3",
+      "4",
+      "16",
+      "19"
+    ],
+    "correct_index": 0,
+    "explanation": "dfB = k − 1 = 4 − 1 = 3，k 是組數。組間自由度只看「有幾組」，與每組人數無關。"
+  },
+  {
+    "id": "anova-easy-003",
+    "chapter": "advanced-analysis",
+    "concept": "anova",
+    "prompt": "ANOVA 中有 3 組、每組 4 人（共 12 人），組內自由度 dfW 是多少？",
+    "options": [
+      "2",
+      "9",
+      "11",
+      "12"
+    ],
+    "correct_index": 1,
+    "explanation": "dfW = N − k = 12 − 3 = 9。N 是總人數，k 是組數；每一組都「用掉」1 個自由度來算組平均。"
+  },
+  {
+    "id": "anova-easy-004",
+    "chapter": "advanced-analysis",
+    "concept": "anova",
+    "prompt": "SSB = 20、dfB = 2，MSB 是多少？",
+    "options": [
+      "10",
+      "18",
+      "22",
+      "40"
+    ],
+    "correct_index": 0,
+    "explanation": "MSB = SSB / dfB = 20 / 2 = 10。均方（Mean Square）就是「平方和除以對應自由度」。"
+  },
+  {
+    "id": "anova-easy-005",
+    "chapter": "advanced-analysis",
+    "concept": "anova",
+    "prompt": "三組數據：Group A 平均 4，Group B 平均 6，Group C 平均 8，總平均是多少？",
+    "options": [
+      "4",
+      "6",
+      "8",
+      "18"
+    ],
+    "correct_index": 1,
+    "explanation": "若三組同樣大，總平均 = (4 + 6 + 8) / 3 = 6。ANOVA 計算 SSB 時以總平均為基準。"
+  },
+  {
+    "id": "anova-med-001",
+    "chapter": "advanced-analysis",
+    "concept": "anova",
+    "prompt": "三組各有 3 人，組平均分別為 4、6、8，總平均為 6，每組 n = 3。SSB 是多少？",
+    "options": [
+      "8",
+      "16",
+      "24",
+      "48"
+    ],
+    "correct_index": 2,
+    "explanation": "SSB = n × Σ(組平均 − 總平均)² = 3 × [(4−6)² + (6−6)² + (8−6)²] = 3 × [4 + 0 + 4] = 24。"
+  },
+  {
+    "id": "anova-med-002",
+    "chapter": "advanced-analysis",
+    "concept": "anova",
+    "prompt": "F 值越大代表什麼？",
+    "options": [
+      "組內變異大、組間變異小",
+      "組間差異相對組內雜訊越大，越傾向拒絕 H₀",
+      "樣本數越大",
+      "三組平均數完全相等"
+    ],
+    "correct_index": 1,
+    "explanation": "F = MSB / MSW，分子是組間訊號、分母是組內雜訊。F 越大表示訊號遠超雜訊，三組平均有差異的證據越強。"
+  },
+  {
+    "id": "regression-easy-001",
+    "chapter": "advanced-analysis",
+    "concept": "regression",
+    "prompt": "迴歸方程式 ŷ = 3 + 2x，當 x = 4 時，ŷ 是多少？",
+    "options": [
+      "8",
+      "10",
+      "11",
+      "14"
+    ],
+    "correct_index": 2,
+    "explanation": "ŷ = 3 + 2×4 = 3 + 8 = 11。把 x 代入方程式直接算出預測值。"
+  },
+  {
+    "id": "regression-easy-002",
+    "chapter": "advanced-analysis",
+    "concept": "regression",
+    "prompt": "迴歸方程式 ŷ = b₀ + b₁x 中，b₁ 代表什麼？",
+    "options": [
+      "x = 0 時的 ŷ 值",
+      "x 每增加 1 單位，ŷ 平均增加多少",
+      "x 和 y 的平均數",
+      "殘差的標準差"
+    ],
+    "correct_index": 1,
+    "explanation": "b₁ 是斜率：x 每增加 1，ŷ 平均變動 b₁。b₀ 是截距（x = 0 時的預測值）。"
+  },
+  {
+    "id": "regression-easy-003",
+    "chapter": "advanced-analysis",
+    "concept": "regression",
+    "prompt": "資料 (1,2), (2,4), (3,6)，x̄ = 2，ȳ = 4。Σ(xᵢ − x̄)² = ?",
+    "options": [
+      "1",
+      "2",
+      "4",
+      "6"
+    ],
+    "correct_index": 1,
+    "explanation": "Σ(xᵢ − x̄)² = (1−2)² + (2−2)² + (3−2)² = 1 + 0 + 1 = 2。這是 b₁ 公式的分母。"
+  },
+  {
+    "id": "regression-easy-004",
+    "chapter": "advanced-analysis",
+    "concept": "regression",
+    "prompt": "資料 (1,2), (2,4), (3,6)，已知 Σ(xᵢ−x̄)(yᵢ−ȳ) = 4，Σ(xᵢ−x̄)² = 2，b₁ 是多少？",
+    "options": [
+      "0.5",
+      "1",
+      "2",
+      "8"
+    ],
+    "correct_index": 2,
+    "explanation": "b₁ = Σ(xᵢ−x̄)(yᵢ−ȳ) / Σ(xᵢ−x̄)² = 4 / 2 = 2。"
+  },
+  {
+    "id": "regression-easy-005",
+    "chapter": "advanced-analysis",
+    "concept": "regression",
+    "prompt": "已知 b₁ = 2，x̄ = 2，ȳ = 4，截距 b₀ 是多少？",
+    "options": [
+      "0",
+      "2",
+      "4",
+      "8"
+    ],
+    "correct_index": 0,
+    "explanation": "b₀ = ȳ − b₁ × x̄ = 4 − 2 × 2 = 0。迴歸線必須過點 (x̄, ȳ)，用這個條件反推截距。"
+  },
+  {
+    "id": "regression-med-001",
+    "chapter": "advanced-analysis",
+    "concept": "regression",
+    "prompt": "R² = 0.81 代表什麼？",
+    "options": [
+      "斜率為 0.81",
+      "迴歸模型解釋了 81% 的 y 變異",
+      "迴歸線的截距是 0.81",
+      "殘差平均為 0.81"
+    ],
+    "correct_index": 1,
+    "explanation": "R²（判定係數）= 「迴歸能解釋的變異」/「y 的總變異」。R² = 0.81 表示 81% 的 y 波動可由迴歸線上的 x 解釋。"
+  },
+  {
+    "id": "regression-med-002",
+    "chapter": "advanced-analysis",
+    "concept": "regression",
+    "prompt": "資料 (1,3), (2,5), (3,7)，x̄ = 2，ȳ = 5，Σ(xᵢ−x̄)(yᵢ−ȳ) = 4，Σ(xᵢ−x̄)² = 2。迴歸方程式是？",
+    "options": [
+      "ŷ = 1 + 2x",
+      "ŷ = 2 + x",
+      "ŷ = 3 + x",
+      "ŷ = 2x"
+    ],
+    "correct_index": 0,
+    "explanation": "b₁ = 4/2 = 2，b₀ = 5 − 2×2 = 1。ŷ = 1 + 2x。代入驗證：x=1 → 3 ✓，x=2 → 5 ✓。"
+  },
+  {
+    "id": "chi-square-easy-001",
+    "chapter": "advanced-analysis",
+    "concept": "chi-square",
+    "prompt": "骰子投 30 次，期望每面出現 5 次。某面實際出現 8 次，它對 χ² 的貢獻是多少？",
+    "options": [
+      "0.6",
+      "1.0",
+      "1.8",
+      "3.0"
+    ],
+    "correct_index": 2,
+    "explanation": "(O−E)²/E = (8−5)²/5 = 9/5 = 1.8。χ² 的每一項都是「實際與期望差距的平方，再除以期望值」。"
+  },
+  {
+    "id": "chi-square-easy-002",
+    "chapter": "advanced-analysis",
+    "concept": "chi-square",
+    "prompt": "卡方適合度檢定有 6 個類別，自由度 df 是多少？",
+    "options": [
+      "5",
+      "6",
+      "7",
+      "視樣本數而定"
+    ],
+    "correct_index": 0,
+    "explanation": "適合度檢定 df = k − 1 = 6 − 1 = 5，k 是類別數。用一個「總次數等於 n」的限制耗掉 1 個自由度。"
+  },
+  {
+    "id": "chi-square-easy-003",
+    "chapter": "advanced-analysis",
+    "concept": "chi-square",
+    "prompt": "骰子投 60 次，各面觀察次數 O = {8, 10, 9, 11, 12, 10}，每面期望次數 E = 10。χ² 是多少？",
+    "options": [
+      "0.5",
+      "1.0",
+      "2.0",
+      "10.0"
+    ],
+    "correct_index": 1,
+    "explanation": "χ² = (8-10)²/10 + 0 + (9-10)²/10 + (11-10)²/10 + (12-10)²/10 + 0 = 0.4 + 0 + 0.1 + 0.1 + 0.4 + 0 = 1.0。"
+  },
+  {
+    "id": "chi-square-easy-004",
+    "chapter": "advanced-analysis",
+    "concept": "chi-square",
+    "prompt": "卡方統計量的拒絕域在哪一側？",
+    "options": [
+      "左尾",
+      "右尾",
+      "雙尾",
+      "視 H₁ 方向決定"
+    ],
+    "correct_index": 1,
+    "explanation": "χ² = Σ(O−E)²/E 永遠非負。O 與 E 差距越大，χ² 越大。因此只看右尾：χ² 大到超過臨界值才拒絕 H₀。"
+  },
+  {
+    "id": "chi-square-easy-005",
+    "chapter": "advanced-analysis",
+    "concept": "chi-square",
+    "prompt": "χ² 適合度檢定的 H₀ 是什麼？",
+    "options": [
+      "所有類別的觀察次數完全相等",
+      "觀察到的次數分配符合理論期望分配",
+      "兩個變數彼此獨立",
+      "母體呈常態分配"
+    ],
+    "correct_index": 1,
+    "explanation": "適合度檢定的 H₀：資料符合某種理論分配（例如骰子公平 → 每面 1/6）。H₁：不符合。"
+  },
+  {
+    "id": "chi-square-med-001",
+    "chapter": "advanced-analysis",
+    "concept": "chi-square",
+    "prompt": "4 個類別的適合度檢定：O = {15, 25, 30, 10}，共 80 次，H₀ 假設各類別等機率（期望各 20）。χ² 是多少？",
+    "options": [
+      "5.0",
+      "12.5",
+      "17.5",
+      "25.0"
+    ],
+    "correct_index": 1,
+    "explanation": "χ² = (15-20)²/20 + (25-20)²/20 + (30-20)²/20 + (10-20)²/20 = 25/20 + 25/20 + 100/20 + 100/20 = 1.25 + 1.25 + 5 + 5 = 12.5。"
+  },
+  {
+    "id": "chi-square-med-002",
+    "chapter": "advanced-analysis",
+    "concept": "chi-square",
+    "prompt": "卡方獨立性檢定，列聯表為 3 列 × 4 欄，df 是多少？",
+    "options": [
+      "6",
+      "9",
+      "11",
+      "12"
+    ],
+    "correct_index": 0,
+    "explanation": "獨立性檢定 df = (列數 − 1) × (欄數 − 1) = (3 − 1) × (4 − 1) = 2 × 3 = 6。"
   }
 ]

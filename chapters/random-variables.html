@@ -19,6 +19,7 @@
       <a href="../" class="logo">統計學學習工具</a>
       <ul>
         <li><a href="../chapters/syllabus.html">課程目錄</a></li>
+        <li><a href="../chapters/mental-models.html">心智模型</a></li>
         <li><a href="../chapters/glossary.html">速查</a></li>
         <li><a href="../chapters/random-variables.html">隨機變數</a></li>
         <li><a href="../chapters/continuous-distributions.html">連續型分配</a></li>
@@ -57,7 +58,66 @@
     </div>
 
     <div class="concept">
-      <h3>觀念 2：PMF / PDF / CDF</h3>
+      <h3>觀念 2：波松分配逼近二項分配</h3>
+      <p>二項分配 $B(n, p)$ 的機率公式需要算組合數 $\binom{n}{k}$，當 $n$ 很大時計算非常繁瑣。
+      統計學家發現：當事件夠「罕見」時，可以改用波松分配來近似，答案幾乎一樣，計算卻簡單得多。</p>
+
+      <h4>適用條件</h4>
+      <div class="formula">$$B(n,\,p) \approx \mathrm{Poisson}(\lambda = np) \quad \text{當 } n \ge 20 \text{ 且 } np \le 7$$</div>
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$n$</dt><dd>試驗次數（要夠大，≥ 20）</dd>
+          <dt>$p$</dt><dd>每次成功的機率（要夠小，讓 np ≤ 7）</dd>
+          <dt>$\lambda$</dt><dd>希臘字 lambda，波松分配的唯一參數，等於 np（平均成功次數）</dd>
+          <dt>$np \le 7$</dt><dd>確保「成功事件」夠罕見，近似才精準；若 p 接近 0.5 則不適用</dd>
+        </dl>
+      </div>
+
+      <h4>白話理解</h4>
+      <p>想像你要算「10000 人裡有幾人中獎（p = 0.0003）」。二項分配要算 $\binom{10000}{k}$，數字龐大；
+      換成波松分配，只需要 $\lambda = 10000 \times 0.0003 = 3$，公式變成 $e^{-3} \cdot 3^k / k!$，手算或查表都可以。
+      <strong>本質：n 很大但 p 很小，個別事件發生「稀稀落落」，這正是波松分配擅長描述的情境。</strong></p>
+
+      <h4>波松分配的機率公式（供參）</h4>
+      <div class="formula">$$P(X = k) = \frac{e^{-\lambda}\,\lambda^k}{k!}, \quad k = 0, 1, 2, \ldots$$</div>
+      <div class="symbol-legend">
+        <dl>
+          <dt>$e$</dt><dd>自然常數，約 2.71828</dd>
+          <dt>$k!$</dt><dd>$k$ 的階乘，例如 $3! = 3 \times 2 \times 1 = 6$</dd>
+          <dt>$\lambda$</dt><dd>平均發生次數（代入 $np$ 即可）</dd>
+        </dl>
+      </div>
+
+      <div class="misconception">
+        <strong>條件不滿足時不能用</strong>
+        <table class="compare">
+          <thead>
+            <tr><th>情境</th><th>可以近似？</th><th>原因</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>$n = 500,\ p = 0.01$（$np = 5$）</td>
+              <td class="ok">✓</td>
+              <td>n ≥ 20 且 np = 5 ≤ 7，符合條件</td>
+            </tr>
+            <tr>
+              <td>$n = 50,\ p = 0.3$（$np = 15$）</td>
+              <td class="bad">✗</td>
+              <td>np = 15 &gt; 7，p 不夠小，近似誤差大</td>
+            </tr>
+            <tr>
+              <td>$n = 10,\ p = 0.001$（$np = 0.01$）</td>
+              <td class="bad">✗</td>
+              <td>n &lt; 20，樣本太小，直接算二項更準確</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="concept">
+      <h3>觀念 3：PMF / PDF / CDF</h3>
       <p><strong>三個英文縮寫的全名：</strong></p>
       <ul>
         <li><strong>PMF</strong> = Probability <strong>M</strong>ass Function（機率質量函數，離散用）</li>
@@ -142,7 +202,7 @@
     </div>
 
     <div class="concept">
-      <h3>觀念 3：Σ 與 ∫ 的統一性</h3>
+      <h3>觀念 4：Σ 與 ∫ 的統一性</h3>
       <p>積分本質就是「<strong>無限多個無限薄條的加總</strong>」。</p>
       <div class="formula">$$\int_a^b f(x)\,dx = \lim_{n\to\infty} \sum_{i=1}^{n} f(x_i)\,\Delta x$$</div>
       <div class="symbol-legend">
@@ -184,7 +244,7 @@
     </div>
 
     <div class="concept">
-      <h3>觀念 4：機率「藏在面積裡」（連續型專屬）</h3>
+      <h3>觀念 5：機率「藏在面積裡」（連續型專屬）</h3>
       <p>離散型的 PMF 值「就是」機率；但連續型的 PDF 值不是機率——機率藏在<strong>曲線下的面積</strong>。下圖把這件事畫出來：</p>
 
       <div class="area-viz">

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>統計工具演化史 · 統計學學習工具</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .ev-intro {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 680px;
+      margin-bottom: 2.5rem;
+      line-height: 1.75;
+    }
+
+    /* 垂直時間軸 */
+    .timeline {
+      position: relative;
+      padding-left: 3rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 1.1rem;
+      top: 0.5rem;
+      bottom: 0.5rem;
+      width: 2px;
+      background: linear-gradient(to bottom,
+        rgba(56,189,248,0.6),
+        rgba(163,230,53,0.6),
+        rgba(251,146,60,0.6),
+        rgba(251,191,36,0.6));
+    }
+
+    .tl-item {
+      position: relative;
+      margin-bottom: 3rem;
+    }
+
+    .tl-dot {
+      position: absolute;
+      left: -2.35rem;
+      top: 0.25rem;
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 50%;
+      border: 2px solid;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 800;
+    }
+
+    .tl-era {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.4rem;
+      opacity: 0.8;
+    }
+
+    .tl-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 0.2rem;
+    }
+
+    .tl-subtitle {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .tl-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .tl-card-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .tl-info-cell {
+      padding: 0.85rem 1rem;
+      background: var(--surface);
+    }
+
+    .tl-info-label {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.3rem;
+    }
+
+    .tl-info-value {
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .tl-story {
+      padding: 1rem;
+      background: var(--surface-2);
+      border-top: 1px solid var(--border);
+    }
+
+    .tl-story-label {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.5rem;
+    }
+
+    .tl-story-text {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    .tl-formula-block {
+      padding: 0.85rem 1rem;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+
+    .tl-formula-label {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.5rem;
+    }
+
+    .formula-line {
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      color: var(--warning);
+      background: rgba(251,191,36,0.07);
+      padding: 0.5rem 0.85rem;
+      border-radius: 6px;
+      border-left: 3px solid var(--warning);
+      margin-bottom: 0.4rem;
+    }
+
+    .tl-use-when {
+      padding: 0.85rem 1rem;
+      background: var(--surface-2);
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      align-items: flex-start;
+    }
+
+    .use-label {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      width: 100%;
+      margin-bottom: 0.2rem;
+    }
+
+    .use-chip {
+      font-size: 0.78rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 5px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    /* 演化順序摘要 */
+    .ev-summary {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 2.5rem;
+      overflow-x: auto;
+    }
+
+    .ev-sum-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      min-width: 80px;
+    }
+
+    .ev-sum-badge {
+      font-size: 1rem;
+      font-weight: 800;
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+    }
+
+    .ev-sum-year {
+      font-size: 0.68rem;
+      color: var(--muted);
+    }
+
+    .ev-sum-arrow {
+      flex: 1;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      min-width: 1.5rem;
+      padding-bottom: 1rem;
+    }
+
+    .decision-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.25rem;
+      border: 1px solid rgba(251,191,36,0.35);
+      border-radius: 10px;
+      background: rgba(251,191,36,0.06);
+      text-decoration: none;
+      margin-top: 2rem;
+    }
+
+    .decision-link:hover { border-color: rgba(251,191,36,0.6); }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <a href="../" class="logo">統計學學習工具</a>
+      <ul>
+        <li><a href="../chapters/syllabus.html">課程目錄</a></li>
+        <li><a href="../chapters/mental-models.html">心智模型</a></li>
+        <li><a href="../chapters/glossary.html">速查</a></li>
+        <li><a href="../chapters/random-variables.html">隨機變數</a></li>
+        <li><a href="../chapters/continuous-distributions.html">連續型分配</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container" style="padding-top:2rem;padding-bottom:3rem;">
+
+    <div style="margin-bottom:0.5rem;">
+      <a href="mental-models.html" style="font-size:0.82rem;color:var(--muted);text-decoration:none;">← 心智模型</a>
+      <span style="color:var(--border);margin:0 0.4rem;">›</span>
+      <span style="font-size:0.82rem;color:#fbbf24;">M3 實驗與審判模型</span>
+    </div>
+
+    <h1>統計工具演化史</h1>
+    <p class="ev-intro">
+      Z、χ²、t、F 並不是同時發明的。它們是人類每次遇到新困境才打造的新工具，
+      先後順序反映了統計思維從「理想假設」走向「真實世界」的過程。
+    </p>
+
+    <!-- 演化順序摘要條 -->
+    <div class="ev-summary">
+      <div class="ev-sum-node">
+        <span class="ev-sum-badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;">Z</span>
+        <span class="ev-sum-year">1800s</span>
+      </div>
+      <div class="ev-sum-arrow">→</div>
+      <div class="ev-sum-node">
+        <span class="ev-sum-badge" style="background:rgba(163,230,53,0.15);color:#a3e635;">χ²</span>
+        <span class="ev-sum-year">1900</span>
+      </div>
+      <div class="ev-sum-arrow">→</div>
+      <div class="ev-sum-node">
+        <span class="ev-sum-badge" style="background:rgba(251,146,60,0.15);color:#fb923c;">t</span>
+        <span class="ev-sum-year">1908</span>
+      </div>
+      <div class="ev-sum-arrow">→</div>
+      <div class="ev-sum-node">
+        <span class="ev-sum-badge" style="background:rgba(251,191,36,0.15);color:#fbbf24;">F</span>
+        <span class="ev-sum-year">1920s</span>
+      </div>
+    </div>
+
+    <!-- 時間軸 -->
+    <div class="timeline">
+
+      <!-- Z -->
+      <div class="tl-item">
+        <div class="tl-dot" style="background:rgba(56,189,248,0.15);color:#38bdf8;border-color:#38bdf8;">Z</div>
+        <div class="tl-era" style="color:#38bdf8;">1800s · 誕生最早</div>
+        <div class="tl-title" style="color:#38bdf8;">Z 統計量 / 常態分配</div>
+        <div class="tl-subtitle">Carl Friedrich Gauss · Pierre-Simon Laplace</div>
+        <div class="tl-card" style="border-color:rgba(56,189,248,0.3);">
+          <div class="tl-card-header">
+            <div class="tl-info-cell">
+              <div class="tl-info-label">歷史情境</div>
+              <div class="tl-info-value">天文觀測誤差分析</div>
+            </div>
+            <div class="tl-info-cell">
+              <div class="tl-info-label">解決的困境</div>
+              <div class="tl-info-value">測量值為何每次不同？</div>
+            </div>
+          </div>
+          <div class="tl-story">
+            <div class="tl-story-label">故事</div>
+            <div class="tl-story-text">
+              天文學家反覆觀測同一顆星，每次記錄的位置都稍有不同。
+              高斯意識到：這些「誤差」不是隨機的廢棄物，它們有結構——
+              大多數誤差靠近真實值，極大誤差極少出現，整體形成一條對稱的鐘形曲線。
+              <br><br>
+              這是一個革命性的轉變：<strong>誤差不是「錯誤」，而是數據的一種特性。</strong>
+              既然誤差有規律，我們就可以把它標準化，用「距離平均值幾個標準差」（Z 分數）來比較任何尺度的數據。
+            </div>
+          </div>
+          <div class="tl-formula-block">
+            <div class="tl-formula-label">核心公式</div>
+            <div class="formula-line">Z = (x̄ − μ₀) / (σ / √n)</div>
+            <div style="font-size:0.8rem;color:var(--muted);margin-top:0.4rem;">分子：觀測值偏離假設的距離　分母：抽樣誤差的大小</div>
+          </div>
+          <div class="tl-use-when">
+            <span class="use-label">適用條件</span>
+            <span class="use-chip">大樣本（n ≥ 30）</span>
+            <span class="use-chip">已知母體標準差 σ</span>
+            <span class="use-chip">比較平均數</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- χ² -->
+      <div class="tl-item">
+        <div class="tl-dot" style="background:rgba(163,230,53,0.15);color:#a3e635;border-color:#a3e635;">χ²</div>
+        <div class="tl-era" style="color:#a3e635;">1900 · 突破類別資料</div>
+        <div class="tl-title" style="color:#a3e635;">卡方檢定 χ²</div>
+        <div class="tl-subtitle">Karl Pearson</div>
+        <div class="tl-card" style="border-color:rgba(163,230,53,0.3);">
+          <div class="tl-card-header">
+            <div class="tl-info-cell">
+              <div class="tl-info-label">歷史情境</div>
+              <div class="tl-info-value">生物學與遺傳學</div>
+            </div>
+            <div class="tl-info-cell">
+              <div class="tl-info-label">解決的困境</div>
+              <div class="tl-info-value">類別數據如何檢定？</div>
+            </div>
+          </div>
+          <div class="tl-story">
+            <div class="tl-story-label">故事</div>
+            <div class="tl-story-text">
+              Z 統計量只能處理「量測出來的數字」（身高、收入、溫度）。
+              但 Pearson 面對的問題是：孟德爾豌豆的顏色比例符合遺傳規律嗎？
+              他數出來的是「個數」——皺豌豆 315 顆、圓豌豆 108 顆……
+              <br><br>
+              這類數據無法套用 Z 公式。Pearson 發明了卡方統計量，
+              測量「<strong>實際觀測次數</strong>」與「<strong>理論期望次數</strong>」之間的差距。
+              這讓統計學從「量測數值的世界」突破進入「數人頭、數類別的世界」。
+            </div>
+          </div>
+          <div class="tl-formula-block">
+            <div class="tl-formula-label">核心公式</div>
+            <div class="formula-line">χ² = Σ (觀測值 − 期望值)² / 期望值</div>
+            <div style="font-size:0.8rem;color:var(--muted);margin-top:0.4rem;">偏差越大 → χ² 越大 → 越不符合假設中的分佈</div>
+          </div>
+          <div class="tl-use-when">
+            <span class="use-label">適用條件</span>
+            <span class="use-chip">類別（計數）資料</span>
+            <span class="use-chip">適合度檢定</span>
+            <span class="use-chip">獨立性檢定（列聯表）</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- t -->
+      <div class="tl-item">
+        <div class="tl-dot" style="background:rgba(251,146,60,0.15);color:#fb923c;border-color:#fb923c;">t</div>
+        <div class="tl-era" style="color:#fb923c;">1908 · 啤酒廠的救援</div>
+        <div class="tl-title" style="color:#fb923c;">t 統計量</div>
+        <div class="tl-subtitle">William Sealy Gosset（筆名 Student）</div>
+        <div class="tl-card" style="border-color:rgba(251,146,60,0.3);">
+          <div class="tl-card-header">
+            <div class="tl-info-cell">
+              <div class="tl-info-label">歷史情境</div>
+              <div class="tl-info-value">Guinness 啤酒廠品質管制</div>
+            </div>
+            <div class="tl-info-cell">
+              <div class="tl-info-label">解決的困境</div>
+              <div class="tl-info-value">小樣本時 Z 誤差太大</div>
+            </div>
+          </div>
+          <div class="tl-story">
+            <div class="tl-story-label">故事</div>
+            <div class="tl-story-text">
+              Gosset 在 Guinness 啤酒廠做品質研究。
+              天文學家可以取幾千筆觀測值，但他每次只能抽測幾批麥芽、幾個酵母樣本——樣本數少到 Z 公式失靈。
+              <br><br>
+              問題出在分母：Z 的分母用的是母體標準差 σ，但 Gosset 不知道 σ，只能用樣本標準差 s 代替。
+              當樣本數小，s 的估計誤差很大，導致 Z 值不穩定——曲線的<strong>尾巴比正常更胖</strong>。
+              <br><br>
+              Gosset 發現了一個新的分配（t 分配），它的形狀隨自由度變化：
+              樣本越小尾巴越胖，樣本越大越接近 Z 的常態曲線。
+              （他用筆名發表，因為 Guinness 不允許員工公開研究成果。）
+            </div>
+          </div>
+          <div class="tl-formula-block">
+            <div class="tl-formula-label">核心公式</div>
+            <div class="formula-line">t = (x̄ − μ₀) / (s / √n)</div>
+            <div style="font-size:0.8rem;color:var(--muted);margin-top:0.4rem;">與 Z 幾乎相同，差別是分母用樣本標準差 s，不是母體 σ</div>
+          </div>
+          <div class="tl-use-when">
+            <span class="use-label">適用條件</span>
+            <span class="use-chip">小樣本（n &lt; 30）</span>
+            <span class="use-chip">σ 未知，用 s 估計</span>
+            <span class="use-chip">母體常態分配</span>
+            <span class="use-chip">比較平均數</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- F -->
+      <div class="tl-item">
+        <div class="tl-dot" style="background:rgba(251,191,36,0.15);color:#fbbf24;border-color:#fbbf24;">F</div>
+        <div class="tl-era" style="color:#fbbf24;">1920s · 現代實驗設計之父</div>
+        <div class="tl-title" style="color:#fbbf24;">F 統計量 / ANOVA</div>
+        <div class="tl-subtitle">Ronald A. Fisher</div>
+        <div class="tl-card" style="border-color:rgba(251,191,36,0.3);">
+          <div class="tl-card-header">
+            <div class="tl-info-cell">
+              <div class="tl-info-label">歷史情境</div>
+              <div class="tl-info-value">農業實驗站的肥料研究</div>
+            </div>
+            <div class="tl-info-cell">
+              <div class="tl-info-label">解決的困境</div>
+              <div class="tl-info-value">t 只能比兩組，多組怎麼辦？</div>
+            </div>
+          </div>
+          <div class="tl-story">
+            <div class="tl-story-label">故事</div>
+            <div class="tl-story-text">
+              Fisher 在農業實驗站研究肥料效果。他有 A、B、C、D 四種肥料，
+              想同時比較哪種最有效。
+              <br><br>
+              如果用 t 檢定兩兩比較，就要做 6 次檢定。
+              每次多一次檢定，「犯型 I 錯誤的機率」就累積一次，
+              最後總錯誤率會遠超過設定的 α。這叫做<strong>多重比較問題</strong>。
+              <br><br>
+              Fisher 的解法是：不比較個別平均數，而是<strong>分解變異</strong>。
+              把所有數據的波動拆成兩部分：「組與組之間的差距（訊號）」和「組內部的個別差異（雜訊）」。
+              F 值就是這兩者的比例。訊號越大於雜訊，F 越大，代表至少有一組平均數顯著不同。
+            </div>
+          </div>
+          <div class="tl-formula-block">
+            <div class="tl-formula-label">核心公式</div>
+            <div class="formula-line">F = 組間變異（MSB）/ 組內變異（MSW）</div>
+            <div class="formula-line" style="margin-top:0.4rem;">F = s₁² / s₂²　（兩樣本等變異數檢定）</div>
+            <div style="font-size:0.8rem;color:var(--muted);margin-top:0.4rem;">F &gt;&gt; 1 → 組間差異大於個體差異 → 拒絕 H₀</div>
+          </div>
+          <div class="tl-use-when">
+            <span class="use-label">適用條件</span>
+            <span class="use-chip">三組以上的均值比較（ANOVA）</span>
+            <span class="use-chip">兩樣本變異數相等假設檢定</span>
+            <span class="use-chip">母體常態分配</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /timeline -->
+
+    <!-- 底部導覽 -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem;">
+      <a href="./hypothesis-testing.html" class="decision-link" style="border-color:rgba(251,191,36,0.35);background:rgba(251,191,36,0.06);">
+        <div>
+          <div style="font-size:0.78rem;color:#fbbf24;font-weight:700;margin-bottom:0.2rem;">下一步</div>
+          <div style="font-size:0.95rem;font-weight:600;color:var(--text);">假設檢定總覽</div>
+          <div style="font-size:0.8rem;color:var(--muted);">法庭隱喻 · H₀/H₁ · α/p 值</div>
+        </div>
+        <span style="color:#fbbf24;font-size:1.2rem;">→</span>
+      </a>
+      <a href="./decision-tree.html" class="decision-link" style="border-color:rgba(251,191,36,0.35);background:rgba(251,191,36,0.06);">
+        <div>
+          <div style="font-size:0.78rem;color:#fbbf24;font-weight:700;margin-bottom:0.2rem;">工具選擇</div>
+          <div style="font-size:0.95rem;font-weight:600;color:var(--text);">統計決策樹</div>
+          <div style="font-size:0.8rem;color:var(--muted);">三個問題，找到正確工具</div>
+        </div>
+        <span style="color:#fbbf24;font-size:1.2rem;">→</span>
+      </a>
+    </div>
+
+  </main>
+</body>
+</html>

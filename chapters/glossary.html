@@ -19,6 +19,7 @@
       <a href="../" class="logo">統計學學習工具</a>
       <ul>
         <li><a href="../chapters/syllabus.html">課程目錄</a></li>
+        <li><a href="../chapters/mental-models.html">心智模型</a></li>
         <li><a href="../chapters/glossary.html">速查</a></li>
         <li><a href="../chapters/random-variables.html">隨機變數</a></li>
         <li><a href="../chapters/continuous-distributions.html">連續型分配</a></li>
@@ -103,11 +104,30 @@
         <dt>期望值 <span class="en">Expected Value</span></dt>
         <dd>$E(X)$ 或 $\mu$，分配的「平均位置」。離散型 $E(X) = \sum x \cdot P(X=x)$；連續型 $E(X) = \int x f(x)\, dx$。</dd>
 
+        <dt>母體平均數 $\mu$ <span class="en">Population Mean</span></dt>
+        <dd><span class="easy-def">全體資料的真實平均——如果你能量到所有人的身高，算出來那個平均就是 μ。現實中幾乎永遠不知道，只能用樣本平均數 x̄ 去猜它。</span>母體分配的期望值，通常未知。記為 $\mu$（mu）；在假設檢定中寫成 $\mu_0$（虛無假設的假定值）。與樣本平均數的關係：$E(\bar X) = \mu$（不偏性）。</dd>
+
         <dt>變異數 <span class="en">Variance</span></dt>
-        <dd>$\mathrm{Var}(X)$ 或 $\sigma^2$，衡量分配的「離散程度」。值越大代表資料越分散。</dd>
+        <dd>
+          <span class="easy-def">每個資料點偏離平均值的距離，平方後取平均——代表資料的混亂程度。變異數越大，資料越散亂，越難從樣本看出真實規律。</span>
+          $\mathrm{Var}(X)$ 或 $\sigma^2$（母體）、$s^2$（樣本），衡量分配的離散程度。值越大代表資料越分散。
+          <table class="calc-flow">
+            <thead>
+              <tr><th>步驟</th><th>操作</th><th>結果</th><th>說明</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>原始數據</td><td>$x_1, x_2, \ldots, x_n$</td><td>題目給的或自己收集</td></tr>
+              <tr><td>2</td><td>計算偏差</td><td>$x_i - \bar X$</td><td>每個點距離平均值多遠（有正有負）</td></tr>
+              <tr><td>3</td><td>偏差平方</td><td>$(x_i - \bar X)^2$</td><td>消除負號，讓大偏差更明顯</td></tr>
+              <tr class="highlight-row"><td>4</td><td>取平均</td><td>$s^2 = \dfrac{\sum(x_i-\bar X)^2}{n-1}$</td><td><strong>變異數</strong>：混亂程度，單位為原單位²</td></tr>
+              <tr><td>5</td><td>開根號</td><td>$s = \sqrt{s^2}$</td><td><strong>標準差</strong>：混亂程度，還原為原單位</td></tr>
+              <tr><td>6</td><td>除以 $\sqrt{n}$</td><td>$SE = s/\sqrt{n}$</td><td><strong>標準誤</strong>：放進 Z 或 t 公式的分母</td></tr>
+            </tbody>
+          </table>
+        </dd>
 
         <dt>標準差 <span class="en">Standard Deviation, SD</span></dt>
-        <dd>$\sigma = \sqrt{\mathrm{Var}(X)}$，變異數的平方根，<strong>跟原始資料同單位</strong>，比變異數更好詮釋。<br>
+        <dd><span class="easy-def">「資料有多分散」的感受。σ = 10 意思是：大多數個別資料距離平均值大概差 10 個單位——就像 GPS 定位誤差 10 公尺。</span>$\sigma = \sqrt{\mathrm{Var}(X)}$，變異數的平方根，<strong>跟原始資料同單位</strong>，比變異數更好詮釋。<br>
         <strong>注意分母不同</strong>：母體標準差 $\sigma$ 分母為 $N$；樣本標準差 $s$ 分母為 $n-1$（不偏估計）。<br>
         $s = \sqrt{\frac{1}{n-1}\sum (x_i - \bar X)^2}$</dd>
 
@@ -254,24 +274,34 @@
         <dd>樣本統計量（如 $\bar X$）本身的機率分配。是統計推論的核心。</dd>
 
         <dt>標準誤 <span class="en">Standard Error, SE</span></dt>
-        <dd>「<strong>樣本平均數 $\bar X$ 的標準差</strong>」，<strong>不是</strong>個別資料的標準差！<br>
+        <dd><span class="easy-def">「我估算的那個樣本平均值，本身能差多遠？」——抽 100 人算平均薪資，這個平均值的誤差比抽 1 人小 10 倍。</span>「<strong>樣本平均數 $\bar X$ 的標準差</strong>」，<strong>不是</strong>個別資料的標準差！<br>
         $SE = \sigma/\sqrt n$（σ 已知）或 $SE = s/\sqrt n$（σ 未知）。<br>
         除以 $\sqrt n$ 的直覺：抽 100 人算平均，誤差會比抽 1 人少 10 倍（$\sqrt{100}=10$）。</dd>
+
+        <dt>標準差 vs 標準誤 <span class="en">SD vs SE — Key Distinction</span></dt>
+        <dd><span class="easy-def">標準差：每個跑者的速度有多分散。標準誤：100 人平均速度的估計本身有多不準。人越多（n 越大），平均值越穩，標準誤越小；但標準差不隨 n 縮小。</span>
+        <strong>標準差 $\sigma$（或 $s$）</strong>：描述<strong>個別資料點</strong>的分散程度，不隨 $n$ 改變。<br>
+        <strong>標準誤 $SE = s/\sqrt n$</strong>：描述<strong>樣本平均數</strong>的不確定性，$n$ 越大越小。<br>
+        口訣：「差」問個別資料、「誤」問平均估計。</dd>
 
         <dt>中央極限定理 <span class="en">Central Limit Theorem (CLT)</span></dt>
         <dd>當 $n$ 夠大（一般 $n \ge 30$），無論母體分配，$\bar X$ 近似服從 $N(\mu, \sigma^2/n)$。讓常態變得「處處可用」。</dd>
 
+        <dt>母體常態假設 <span class="en">Normality Assumption</span></dt>
+        <dd><span class="easy-def">小樣本做 t 檢定有個隱藏前提：原始資料來自常態分配。大樣本（n ≥ 30）靠 CLT 不需要這個假設；小樣本若母體嚴重偏斜，t 檢定就不可靠。</span>使用 t 分配的先決條件：「母體資料服從（或近似）常態分配」。<br>
+        與 CLT 的關係：大樣本（$n \ge 30$）即使母體非常態，$\bar X$ 也近似常態，可用 Z 檢定；小樣本（$n &lt; 30$）<strong>必須</strong>依賴母體常態假設，否則 t 統計量不服從 t 分配，結論不可靠。</dd>
+
         <dt>自由度 <span class="en">Degrees of Freedom, $\nu$ or df</span></dt>
-        <dd>樣本中「獨立資訊個數」。單樣本平均數推論時 $\nu = n - 1$（因為平均數已用掉一個自由度）。查 t 表必備的參數。</dd>
+        <dd><span class="easy-def">5 個人的身高，知道平均值後，只有 4 個人的身高可以「自由」是任意數——最後一個已被算死（平均值已固定）。所以 n = 5 時自由度 = 4。</span>樣本中「獨立資訊個數」。單樣本平均數推論時 $\nu = n - 1$（因為平均數已用掉一個自由度）。查 t 表必備的參數。</dd>
 
         <dt>t 分配 <span class="en">Student's t-distribution, $t_\nu$</span></dt>
-        <dd>由 W. S. Gosset 以筆名「Student」發表。當小樣本（$n &lt; 30$）且母體 σ 未知時，用樣本標準差 $S$ 取代 σ 後的統計量服從 t 分配。形狀像常態但尾巴較胖；自由度 $\nu \to \infty$ 時 $t \to Z$。</dd>
+        <dd><span class="easy-def">小樣本（人少）時不確定性更高，所以曲線尾巴比常態更胖、臨界值更嚴格。樣本越多（ν 越大）越接近標準常態，最終兩者完全吻合。</span>由 W. S. Gosset 以筆名「Student」發表。當小樣本（$n &lt; 30$）且母體 σ 未知時，用樣本標準差 $S$ 取代 σ 後的統計量服從 t 分配。形狀像常態但尾巴較胖；自由度 $\nu \to \infty$ 時 $t \to Z$。</dd>
 
         <dt>臨界值 <span class="en">Critical Value, $t_{\nu, \alpha}$</span></dt>
-        <dd>在 t 分配（自由度 ν）下，右尾面積為 α 對應的 t 值。即 $P(t \ge t_{\nu, \alpha}) = \alpha$。例：$t_{10, 0.05} = 1.8125$ 表示「自由度 10 時，5% 機率落在 t > 1.8125」。</dd>
+        <dd><span class="easy-def">「超過這條線就算太極端了」的門檻——就像及格線。比這更極端的統計量，代表資料很難只靠運氣（H₀ 成立）來解釋。</span>在 t 分配（自由度 ν）下，右尾面積為 α 對應的 t 值。即 $P(t \ge t_{\nu, \alpha}) = \alpha$。例：$t_{10, 0.05} = 1.8125$ 表示「自由度 10 時，5% 機率落在 t > 1.8125」。</dd>
 
         <dt>信賴水準 <span class="en">Confidence Level, $1-\alpha$</span></dt>
-        <dd>建構信賴區間時所選的把握度。常見 95%（$\alpha = 0.05$）、99%（$\alpha = 0.01$）。雙尾檢定時 α 平均分配到兩側，故查表用 $\alpha/2$。</dd>
+        <dd><span class="easy-def">「我有幾成把握」。95% 信賴水準 = 用這個方法重複估計 100 次，平均有 95 次的區間會包住真實值 μ。</span>建構信賴區間時所選的把握度。常見 95%（$\alpha = 0.05$）、99%（$\alpha = 0.01$）。雙尾檢定時 α 平均分配到兩側，故查表用 $\alpha/2$。</dd>
       </dl>
     </details>
 
@@ -282,7 +312,7 @@
         <dd>樣本中「第 $i$ 個」資料點。下標 $i$ 是編號（1, 2, ..., n），不是次方。例：5 位學生身高 170, 165, 178, 172, 169，則 $x_1=170, x_2=165, \ldots, x_5=169$。寫公式時用 $\sum x_i$ 比寫 $x_1+x_2+\ldots+x_n$ 簡潔。</dd>
 
         <dt>假設檢定 <span class="en">Hypothesis Testing</span></dt>
-        <dd>用樣本資料判斷母體是否符合某假設的統計流程，標準五步驟：（1）設假設、（2）選 α、（3）算檢定統計量、（4）查臨界值、（5）作結論。</dd>
+        <dd><span class="easy-def">用少量樣本替整個母體「打官司」——先預設無罪（H₀），再問「如果真的無罪，看到這份資料的機率有多低？」低到超過門檻（α）就推翻預設。</span>用樣本資料判斷母體是否符合某假設的統計流程，標準五步驟：（1）設假設、（2）選 α、（3）算檢定統計量、（4）查臨界值、（5）作結論。</dd>
 
         <dt>虛無假設 <span class="en">Null Hypothesis, $H_0$</span></dt>
         <dd>「<strong>沒有變化、沒有效果、沒有差異</strong>」的保守預設立場——是檢定「想推翻」的對象。<br>
@@ -308,8 +338,14 @@
         <dd>顯著水準的對立面，「<strong>有把握的程度</strong>」。$\alpha + (1-\alpha) = 1$。例：α = 0.05 ⇔ 信賴水準 = 0.95（95% 把握）。信賴區間是「用這個方法做 100 次，長期下來會有 (1−α)×100% 次包住真值」。</dd>
 
         <dt>檢定統計量 <span class="en">Test Statistic</span></dt>
-        <dd><strong>不是單位，是「一個數字」</strong>——用樣本算出的「分數」，用來決定是否拒絕 $H_0$。<br>
+        <dd><span class="easy-def">把「樣本均值偏離猜測值多少個標準誤」換算成一個純數字。就像把溫差換成「熱指數評分」——容易比較也好查表。</span><strong>不是單位，是「一個數字」</strong>——用樣本算出的「分數」，用來決定是否拒絕 $H_0$。<br>
         常見類型：Z 統計量、t 統計量、卡方統計量、F 統計量。例：$Z = (\bar X - \mu_0)/(s/\sqrt n)$ 算出的值（如 2.5）就是檢定統計量。</dd>
+
+        <dt>Z 公式邏輯 <span class="en">Why Z = (x̄ − μ₀) / SE</span></dt>
+        <dd><span class="easy-def">想知道「樣本均值偏離假設值有多誇張」，把偏差量除以「正常應有的誤差範圍（SE）」，得到純數字：「偏了幾個誤差單位」。Z = 2 表示偏了 2 個 SE，已相當少見；Z = 0.3 表示偏差正常。</span>
+        分子 $\bar X - \mu_0$：樣本均值與假設值的差距（有方向、有單位）。<br>
+        分母 $SE = s/\sqrt n$：樣本均值理論上應有的標準誤（把差距標準化的尺規）。<br>
+        結果 $Z$：「這次偏差是標準誤的幾倍」——落在 $(-1.96,\ 1.96)$ 外才算「超出雙尾 95% 臨界值」。</dd>
 
         <dt>拒絕域 <span class="en">Rejection Region / Critical Region</span></dt>
         <dd>「<strong>檢定統計量落在這裡就拒絕 $H_0$</strong>」的範圍，由臨界值與檢定方向決定。<br>
@@ -320,16 +356,16 @@
         <strong>⚠ 重要</strong>：「保留 $H_0$」<strong>不等於「接受 $H_0$ 是真的」</strong>！只是「證據不足以推翻」。類似法庭：判「無罪」不代表「無辜」，可能只是證據不足。</dd>
 
         <dt>單尾檢定 <span class="en">One-tailed / One-sided Test</span></dt>
-        <dd>$H_1$ 寫成 $&gt;$ 或 $&lt;$（單向關心）。拒絕域只在一邊。題目關鍵字：「增加 / 減少 / 提升 / 超過 / 不足」。α=0.05 時臨界值 $Z = \pm 1.645$。</dd>
+        <dd><span class="easy-def">只關心「有沒有超過」或「有沒有低於」，不在意另一邊。就像驗血只問「血壓有沒有太高」，不管太低。</span>$H_1$ 寫成 $&gt;$ 或 $&lt;$（單向關心）。拒絕域只在一邊。題目關鍵字：「增加 / 減少 / 提升 / 超過 / 不足」。α=0.05 時臨界值 $Z = \pm 1.645$。</dd>
 
         <dt>雙尾檢定 <span class="en">Two-tailed / Two-sided Test</span></dt>
-        <dd>$H_1$ 寫成 $\neq$（兩向都關心）。拒絕域分在兩邊各 α/2。題目關鍵字：「改變 / 不同」。α=0.05 時臨界值 $Z = \pm 1.96$（每側分 2.5%）。</dd>
+        <dd><span class="easy-def">關心「有沒有改變（任何方向都算）」。就像藥物測試——藥效可能太強也可能太弱，兩邊都要防。</span>$H_1$ 寫成 $\neq$（兩向都關心）。拒絕域分在兩邊各 α/2。題目關鍵字：「改變 / 不同」。α=0.05 時臨界值 $Z = \pm 1.96$（每側分 2.5%）。</dd>
 
         <dt>Z 檢定 <span class="en">Z-test</span></dt>
-        <dd>用 Z 統計量做的假設檢定，適用：（a）σ 已知，或（b）大樣本 $n \ge 30$（用 $s$ 近似 σ）。</dd>
+        <dd><span class="easy-def">資料夠多（n ≥ 30）時用的標準版本。鐘形曲線對稱好查表，臨界值固定（1.645 或 1.96），不需要每次根據自由度另查。</span>用 Z 統計量做的假設檢定，適用：（a）σ 已知，或（b）大樣本 $n \ge 30$（用 $s$ 近似 σ）。</dd>
 
         <dt>t 檢定 <span class="en">t-test</span></dt>
-        <dd>用 t 統計量做的假設檢定，適用：σ 未知且小樣本 $n &lt; 30$。臨界值要查 t 表（看自由度 $\nu = n-1$）。</dd>
+        <dd><span class="easy-def">資料太少（n &lt; 30）時的謹慎版本。因為樣本小、不確定性高，臨界值比 Z 更嚴格（尾巴更胖），防誤判的保護更多。</span>用 t 統計量做的假設檢定，適用：σ 未知且小樣本 $n &lt; 30$。臨界值要查 t 表（看自由度 $\nu = n-1$）。</dd>
 
         <dt>p-value <span class="en">p-value</span></dt>
         <dd>「如果 $H_0$ 真的成立，看到目前樣本（或更極端）的機率」。p 越小代表證據越強。<br>

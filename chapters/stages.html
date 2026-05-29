@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>七階段學習地圖 · 統計學學習工具</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .stages-intro {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    .stage-card {
+      margin-bottom: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .stage-card summary {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      background: var(--surface);
+      list-style: none;
+      user-select: none;
+    }
+
+    .stage-card summary::-webkit-details-marker { display: none; }
+
+    .stage-card[open] summary {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stage-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .stage-header-text {
+      flex: 1;
+    }
+
+    .stage-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .stage-en {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-left: 0.4rem;
+    }
+
+    .stage-chapters {
+      display: flex;
+      gap: 0.35rem;
+      margin-top: 0.2rem;
+      flex-wrap: wrap;
+    }
+
+    .ch-badge {
+      font-size: 0.7rem;
+      padding: 0.1rem 0.45rem;
+      border-radius: 4px;
+      background: var(--surface-2);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .stage-chevron {
+      font-size: 0.75rem;
+      color: var(--muted);
+      transition: transform 0.2s;
+    }
+
+    .stage-card[open] .stage-chevron { transform: rotate(90deg); }
+
+    .stage-body {
+      padding: 1rem 1.25rem 1.25rem;
+      background: var(--surface-2);
+    }
+
+    .stage-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .term-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .term-chip {
+      display: inline-block;
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      text-decoration: none;
+      border: 1px solid;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+
+    .term-chip:hover {
+      opacity: 0.85;
+      transform: translateY(-1px);
+    }
+
+    .adv-section {
+      margin-top: 2rem;
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      background: var(--surface);
+    }
+
+    .adv-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .adv-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 0.75rem;
+      background: #94a3b822;
+      color: #94a3b8;
+      border: 1px solid #94a3b8;
+      flex-shrink: 0;
+    }
+
+    .adv-title {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .adv-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .adv-topics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .adv-topic {
+      font-size: 0.82rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 6px;
+      background: var(--surface-2);
+      color: #94a3b8;
+      border: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <a href="../" class="logo">統計學學習工具</a>
+      <ul>
+        <li><a href="../chapters/syllabus.html">課程目錄</a></li>
+        <li><a href="../chapters/mental-models.html">心智模型</a></li>
+        <li><a href="../chapters/glossary.html">速查</a></li>
+        <li><a href="../chapters/random-variables.html">隨機變數</a></li>
+        <li><a href="../chapters/continuous-distributions.html">連續型分配</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container" style="padding-top:2rem;padding-bottom:3rem;">
+
+    <!-- 心智模型框架橫幅 -->
+    <div style="display:flex;gap:0.5rem;margin-bottom:1.75rem;overflow-x:auto;padding-bottom:0.25rem;">
+      <a href="mental-models.html" style="text-decoration:none;flex-shrink:0;display:flex;align-items:center;gap:0.5rem;padding:0.55rem 1rem;border-radius:8px;border:1px solid rgba(251,191,36,0.35);background:rgba(251,191,36,0.06);font-size:0.82rem;">
+        <span style="font-size:0.75rem;color:#fbbf24;font-weight:700;">心智模型框架</span>
+        <span style="color:var(--muted);">← 這七個階段屬於四大心智模型演化的一部分</span>
+        <span style="color:#fbbf24;">查看地圖 →</span>
+      </a>
+    </div>
+
+    <h1>七階段學習地圖</h1>
+    <p class="stages-intro">
+      統計學的完整流程可以拆成七個線性階段，從描述手上的資料出發，一路走到假設檢定的最終結論，再進入進階建模工具。
+      點選任一階段展開詞條，再點詞條進入詳細說明頁面。
+    </p>
+
+    <div id="stages-container"></div>
+  </main>
+
+  <script src="../js/terms-data.js"></script>
+  <script>
+    function hexToRgba(hex, alpha) {
+      const r = parseInt(hex.slice(1, 3), 16);
+      const g = parseInt(hex.slice(3, 5), 16);
+      const b = parseInt(hex.slice(5, 7), 16);
+      return `rgba(${r},${g},${b},${alpha})`;
+    }
+
+    function buildStages() {
+      const container = document.getElementById('stages-container');
+
+      STAGES.forEach((stage, idx) => {
+        const stageTerms = TERMS.filter(t => t.stage === stage.id);
+        const color = stage.color;
+
+        const details = document.createElement('details');
+        details.className = 'stage-card';
+        if (idx === 0) details.open = true;
+
+        const summary = document.createElement('summary');
+        summary.innerHTML = `
+          <span class="stage-badge" style="background:${hexToRgba(color, 0.18)};color:${color};border:1px solid ${hexToRgba(color, 0.5)}">${stage.id}</span>
+          <div class="stage-header-text">
+            <div>
+              <span class="stage-title" style="color:${color}">${stage.name}</span>
+              <span class="stage-en">${stage.en}</span>
+            </div>
+            <div class="stage-chapters">
+              ${stage.chapters.map(c => `<span class="ch-badge">${c}</span>`).join('')}
+            </div>
+          </div>
+          <span class="stage-chevron">▶</span>
+        `;
+
+        const body = document.createElement('div');
+        body.className = 'stage-body';
+        body.innerHTML = `
+          <p class="stage-desc">${stage.desc}</p>
+          <div class="term-chips">
+            ${stageTerms.map(t => `
+              <a class="term-chip" href="term.html?id=${t.id}"
+                 style="background:${hexToRgba(color, 0.1)};color:${color};border-color:${hexToRgba(color, 0.35)}">
+                ${t.name}
+                ${t.en ? `<span style="font-size:0.75em;opacity:0.65;margin-left:0.3em">${t.en}</span>` : ''}
+              </a>
+            `).join('')}
+          </div>
+        `;
+
+        details.appendChild(summary);
+        details.appendChild(body);
+        container.appendChild(details);
+      });
+    }
+
+    buildStages();
+  </script>
+</body>
+</html>
