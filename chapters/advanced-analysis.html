@@ -33,6 +33,24 @@
     <h1>第 11-15 章 · 進階分析</h1>
     <p class="section-intro">建立在假設檢定基礎上的三大進階工具：ANOVA 同時比較多組平均、線性迴歸建立預測模型、卡方檢定分析類別資料。</p>
 
+    <div class="concept" id="multiple-comparison-problem">
+      <h3>⚠️ M3 → M4：為什麼不能做多次 t 檢定？</h3>
+      <p>面對三組以上的資料，直覺做法是跑多次 t 檢定（A vs B、A vs C、B vs C……）。但每次額外的檢定都讓「至少一次誤判」的機率膨脹：</p>
+      <div class="formula">$$P(\text{至少一次誤判}) = 1 - (1-\alpha)^k$$</div>
+      <p>設 α = 0.05：</p>
+      <table style="width:100%;font-size:0.85rem;border-collapse:collapse;margin:0.8rem 0 1rem">
+        <tr style="border-bottom:1px solid var(--border)">
+          <th style="text-align:left;padding:0.3rem 0.7rem;color:var(--muted)">組數</th>
+          <th style="text-align:left;padding:0.3rem 0.7rem;color:var(--muted)">t 檢定次數</th>
+          <th style="text-align:left;padding:0.3rem 0.7rem;color:var(--muted)">實際誤判機率</th>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.3rem 0.7rem">3 組</td><td style="padding:0.3rem 0.7rem">3 次</td><td style="padding:0.3rem 0.7rem;color:var(--warning)">14.3%</td></tr>
+        <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.3rem 0.7rem">4 組</td><td style="padding:0.3rem 0.7rem">6 次</td><td style="padding:0.3rem 0.7rem;color:var(--warning)">26.5%</td></tr>
+        <tr><td style="padding:0.3rem 0.7rem">5 組</td><td style="padding:0.3rem 0.7rem">10 次</td><td style="padding:0.3rem 0.7rem;color:var(--warning)">40.1%</td></tr>
+      </table>
+      <p>原本說好的 5% 風險，三組時已膨脹到 14.3%。<strong>M4 的解法是「一次比完」</strong>：ANOVA 用一次 F 檢定同時比較所有組，整體只冒一次 α = 0.05 的風險。</p>
+    </div>
+
     <!-- ═══════════════════════════════════════════════════
          Section 1: ANOVA
     ════════════════════════════════════════════════════ -->
