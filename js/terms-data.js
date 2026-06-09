@@ -176,6 +176,11 @@ const TERMS = [
     en: 'Conditional Probability',
     stage: 2,
     formula: 'P(A \\mid B) = \\dfrac{P(A \\cap B)}{P(B)}',
+    symbols: [
+      { sym: 'P(A \\mid B)', desc: '在 B 發生的條件下，A 發生的機率（讀作「A given B」）' },
+      { sym: 'P(A \\cap B)', desc: 'A 與 B 同時發生的機率（交集、聯合機率）' },
+      { sym: 'P(B)', desc: 'B 自行發生的機率，必須 > 0 才能定義條件機率' }
+    ],
     def: '在 $B$ 發生的條件下，$A$ 發生的機率。'
   },
   {
@@ -198,6 +203,12 @@ const TERMS = [
     en: "Bayes' Theorem",
     stage: 2,
     formula: "P(A \\mid B) = \\dfrac{P(B \\mid A)\\, P(A)}{P(B)}",
+    symbols: [
+      { sym: 'P(A \\mid B)', desc: '後驗機率（posterior）：已知 B 後，對 A 的更新估計' },
+      { sym: 'P(B \\mid A)', desc: '似然度（likelihood）：A 為真時看到 B 的機率' },
+      { sym: 'P(A)', desc: '先驗機率（prior）：不知道 B 前對 A 的初始估計' },
+      { sym: 'P(B)', desc: '邊際機率（marginal）：常用全機率公式展開', link: 'total-prob' }
+    ],
     def: '用「事後條件」反推「事前機率」。'
   },
   {
@@ -206,6 +217,12 @@ const TERMS = [
     en: 'Law of Total Probability',
     stage: 2,
     formula: 'P(B) = \\sum_i P(B \\mid A_i)\\, P(A_i)',
+    symbols: [
+      { sym: 'P(B)', desc: '事件 B 的總機率（想求的目標）' },
+      { sym: 'A_i', desc: '樣本空間的一個分割（各 Ai 互斥且聯集 = 全集 Ω）' },
+      { sym: 'P(B \\mid A_i)', desc: '在各情境 Ai 下 B 發生的機率（條件機率）', link: 'conditional-prob' },
+      { sym: 'P(A_i)', desc: '各情境的機率（加權係數，所有 P(Ai) 加總為 1）' }
+    ],
     def: '把 $B$ 的機率拆解為各種情境的加權和。'
   },
 
@@ -266,6 +283,12 @@ const TERMS = [
     en: 'Cumulative Distribution Function (CDF)',
     stage: 3,
     formula: 'F(x) = P(X \\le x) = \\int_{-\\infty}^{x} f(t)\\,dt',
+    symbols: [
+      { sym: 'F(x)', desc: '累積分配函數值，代表「X 不超過 x」的機率' },
+      { sym: 'x', desc: '查詢點，可以是任意實數' },
+      { sym: 'f(t)', desc: 'PDF（機率密度函數），被積分的對象', link: 'pdf' },
+      { sym: '\\int_{-\\infty}^{x}', desc: '從負無窮積分到 x，面積即機率' }
+    ],
     def: '「到 $x$ 為止累積了多少機率」。離散型是階梯函數，連續型是平滑曲線。'
   },
   {
@@ -288,6 +311,11 @@ const TERMS = [
     en: 'Jump Point',
     stage: 3,
     formula: 'P(X = x_i) = F(x_i) - F(x_i^-)',
+    symbols: [
+      { sym: 'F(x_i)', desc: 'CDF 在 xi 處的值（含跳點本身的機率）', link: 'cdf' },
+      { sym: 'F(x_i^-)', desc: 'xi 的左極限值（就在 xi 左邊一點點的 CDF 值，不含 xi）' },
+      { sym: 'P(X = x_i)', desc: '離散型在 xi 點的機率質量，等於跳躍高度' }
+    ],
     def: '離散型 CDF 在可能值 $x_i$ 處的不連續位置。'
   },
   {
@@ -310,6 +338,13 @@ const TERMS = [
     en: 'Expected Value',
     stage: 3,
     formula: 'E(X) = \\sum x \\cdot P(X=x) \\quad \\text{（離散）}\\qquad E(X) = \\int x\\, f(x)\\,dx \\quad \\text{（連續）}',
+    symbols: [
+      { sym: 'E(X)', desc: '期望值（expected value），分配的「重心」，也記為 μ' },
+      { sym: 'x', desc: '隨機變數 X 的可能取值' },
+      { sym: 'P(X=x)', desc: '離散型：取值 x 的機率（PMF）', link: 'pmf' },
+      { sym: 'f(x)', desc: '連續型：取值 x 處的機率密度（PDF）', link: 'pdf' },
+      { sym: '\\sum / \\int', desc: '離散型用加總（Σ），連續型用積分（∫）' }
+    ],
     def: '$E(X)$ 或 $\\mu$，分配的「平均位置」。'
   },
   {
@@ -326,6 +361,12 @@ const TERMS = [
     en: 'Moment Generating Function (MGF)',
     stage: 3,
     formula: 'M(t) = E(e^{tX})',
+    symbols: [
+      { sym: 'M(t)', desc: '動差母函數（moment generating function）' },
+      { sym: 't', desc: '輔助參數（通常在 0 附近的某區間內有定義）' },
+      { sym: 'e^{tX}', desc: '以 tX 為指數的隨機函數' },
+      { sym: 'E(\\cdot)', desc: '期望值算子；M\'(0) = E(X)，M\'\'(0) = E(X²)', link: 'expected-value' }
+    ],
     def: '是個「生成器」：對它求 1 階導數得 $E(X)$、2 階導數得 $E(X^2)$。'
   },
   {
@@ -334,6 +375,12 @@ const TERMS = [
     en: 'Linearity of Expectation',
     stage: 3,
     formula: 'E(aX+b) = aE(X)+b \\qquad \\mathrm{Var}(aX+b) = a^2\\mathrm{Var}(X)',
+    symbols: [
+      { sym: 'a', desc: '線性係數（乘法縮放），同時影響期望值與變異數' },
+      { sym: 'b', desc: '常數偏移（加法平移），只影響期望值，不影響變異數' },
+      { sym: 'E(X)', desc: '期望值', link: 'expected-value' },
+      { sym: 'a^2', desc: '注意：a 進入變異數時要平方，因為變異數衡量「偏差的平方」', link: 'variance' }
+    ],
     def: '注意變異數中「$+b$」不影響，但「$a$」要平方。'
   },
   // 離散分配族
@@ -428,6 +475,12 @@ const TERMS = [
     en: 'Z-score Transformation',
     stage: 3,
     formula: 'Z = \\dfrac{X - \\mu}{\\sigma}',
+    symbols: [
+      { sym: 'Z', desc: '標準化後的新變數，服從 N(0,1)（標準常態）' },
+      { sym: 'X', desc: '原始隨機變數（服從 N(μ,σ²)）' },
+      { sym: '\\mu', desc: '原始分配的均值（先減 μ 完成「中心化」）', link: 'population-mean' },
+      { sym: '\\sigma', desc: '原始分配的標準差（再除 σ 完成「縮放」）', link: 'std-dev' }
+    ],
     def: '把 $X \\sim N(\\mu, \\sigma^2)$ 轉成 $Z \\sim N(0,1)$ 的過程。先中心化（$-\\mu$）再縮放（$\\div\\sigma$）。'
   },
   {
@@ -500,6 +553,12 @@ const TERMS = [
     en: 'Memoryless Property',
     stage: 3,
     formula: 'P(X > s+t \\mid X > s) = P(X > t)',
+    symbols: [
+      { sym: 'X', desc: '等待時間隨機變數（服從指數或幾何分配）' },
+      { sym: 's', desc: '「已等了 s」的已知條件（過去資訊）' },
+      { sym: 't', desc: '「還要再等 t」（待求的未來等待長度）' },
+      { sym: 'P(X > s+t \\mid X > s)', desc: '在已等 s 的條件下，總等待超過 s+t 的機率——等於從頭開始等 t 的機率' }
+    ],
     def: '「過去多久不影響未來等待時間」。只有指數分配與幾何分配具有此性質。'
   },
   {
@@ -526,6 +585,13 @@ const TERMS = [
     en: 'Standard Error (SE)',
     stage: 4,
     formula: 'SE = \\dfrac{\\sigma}{\\sqrt{n}} \\approx \\dfrac{s}{\\sqrt{n}}',
+    symbols: [
+      { sym: 'SE', desc: '標準誤（Standard Error），樣本平均數 x̄ 的標準差' },
+      { sym: '\\sigma', desc: '母體標準差（通常未知，用 s 估計）', link: 'std-dev' },
+      { sym: 'n', desc: '樣本個數（n 越大，SE 越小，估計越精準）' },
+      { sym: 's', desc: '樣本標準差（σ 未知時的替代品）', link: 'std-dev' },
+      { sym: '\\sqrt{n}', desc: '分母開根號：n 增加 4 倍，SE 只縮小 2 倍（平方根關係）' }
+    ],
     easyDef: '「我估算的那個樣本平均值，本身能差多遠？」——抽 100 人算平均薪資，這個平均值的誤差比抽 1 人小 10 倍（√100 = 10）。',
     def: '樣本平均數 $\\bar X$ 的標準差，不是個別資料的標準差。$\\mathrm{Var}(\\bar X) = \\sigma^2/n$，開根號後得 $SE = \\sigma/\\sqrt{n}$。'
   },
@@ -543,6 +609,13 @@ const TERMS = [
     en: 'Central Limit Theorem (CLT)',
     stage: 4,
     formula: '\\bar X \\xrightarrow{d} N\\!\\left(\\mu,\\, \\frac{\\sigma^2}{n}\\right) \\quad (n \\ge 30)',
+    symbols: [
+      { sym: '\\bar X', desc: '樣本平均數（本身是個隨機變數）', link: 'sample-mean' },
+      { sym: '\\xrightarrow{d}', desc: '「依分配收斂」（distributional convergence）：n→∞ 時分配形狀趨近' },
+      { sym: '\\mu', desc: '母體均值（x̄ 的期望值）', link: 'population-mean' },
+      { sym: '\\sigma^2/n', desc: 'x̄ 的變異數；n 越大，x̄ 越集中在 μ 附近', link: 'var-xbar' },
+      { sym: 'n \\ge 30', desc: '實務上的大樣本門檻，確保常態近似足夠準確' }
+    ],
     easyDef: '不管原始資料是什麼形狀，只要樣本夠大（n ≥ 30），樣本平均數的分配就會接近常態分配。這是幾乎所有推論統計的核心基礎。',
     def: '當 $n$ 夠大（一般 $n \\ge 30$），無論母體分配為何，$\\bar X$ 近似服從 $N(\\mu, \\sigma^2/n)$。讓常態分配在推論中無處不在。'
   },
@@ -552,6 +625,13 @@ const TERMS = [
     en: 'Variance of Sample Mean',
     stage: 4,
     formula: '\\mathrm{Var}(\\bar X) = \\mathrm{Var}\\!\\left(\\frac{X_1+\\cdots+X_n}{n}\\right) = \\frac{1}{n^2} \\cdot n\\sigma^2 = \\frac{\\sigma^2}{n}',
+    symbols: [
+      { sym: '\\mathrm{Var}(\\bar X)', desc: '樣本平均數的變異數（x̄ 有多不穩定）' },
+      { sym: 'X_1, \\ldots, X_n', desc: 'n 個獨立同分配（i.i.d.）的觀測值，各自變異數為 σ²' },
+      { sym: '\\frac{1}{n^2}', desc: '取平均後，常數 1/n 讓變異數縮小 n² 倍' },
+      { sym: 'n\\sigma^2', desc: 'n 個獨立 Xi 的變異數相加（各為 σ²）' },
+      { sym: '\\sigma^2/n', desc: '最終結果：n 越大，x̄ 越穩定、越集中' }
+    ],
     easyDef: 'x̄ 是 n 個獨立觀測值的平均，除以 n 讓變異數縮小 n² 倍，但 n 個獨立量的總變異是 nσ²，相除後剩下 σ²/n。',
     def: '推導：$\\bar X = \\frac{1}{n}\\sum X_i$，常數 $\\frac{1}{n}$ 讓變異數乘以 $\\frac{1}{n^2}$；$n$ 個獨立 $X_i$ 的變異數相加得 $n\\sigma^2$；兩者相乘得 $\\sigma^2/n$。'
   },
@@ -744,6 +824,15 @@ const TERMS = [
     stage: 7,
     easyDef: '同時比較三組以上的平均數是否有差異——比跑很多次 t 檢定更嚴謹，不會因為重複比較累積誤判機率。',
     formula: 'F = \\dfrac{MS_{between}}{MS_{within}} = \\dfrac{SSB/(k-1)}{SSW/(N-k)}',
+    symbols: [
+      { sym: 'F', desc: 'F 統計量：訊號（組間）對雜訊（組內）的比值；F 越大代表組間差異越顯著' },
+      { sym: 'MS_{between}', desc: '組間均方（Mean Square Between）= SSB ÷ (k−1)，代表訊號強度' },
+      { sym: 'MS_{within}', desc: '組內均方（Mean Square Within）= SSW ÷ (N−k)，代表背景雜訊' },
+      { sym: 'SSB', desc: '組間平方和（Sum of Squares Between）：各組均值距離總均值的離差加總' },
+      { sym: 'SSW', desc: '組內平方和（Sum of Squares Within）：各組內部個別資料的離差加總' },
+      { sym: 'k', desc: '組數（treatments / groups）' },
+      { sym: 'N', desc: '所有組的總樣本數' }
+    ],
     def: '用來檢定多個母體平均數是否相等（$H_0: \\mu_1 = \\mu_2 = \\cdots = \\mu_k$）。核心思路：把總變異拆成「組間變異」與「組內變異」，計算 F 統計量。（Ch 11）'
   },
   {
@@ -753,6 +842,13 @@ const TERMS = [
     stage: 7,
     easyDef: '用一條直線描述兩個變數之間的關係——X 每增加 1 單位，Y 平均增加多少。',
     formula: 'y = \\beta_0 + \\beta_1 x + \\varepsilon',
+    symbols: [
+      { sym: 'y', desc: '應變數（dependent variable），要預測或解釋的結果' },
+      { sym: '\\beta_0', desc: '截距（intercept）：當 x = 0 時 y 的預期值' },
+      { sym: '\\beta_1', desc: '斜率（slope）：x 每增加 1 單位，y 平均增加的量' },
+      { sym: 'x', desc: '自變數（independent variable / predictor），用來預測的變數' },
+      { sym: '\\varepsilon', desc: '誤差項（error / residual）：無法被模型解釋的隨機波動，假設服從 N(0,σ²)' }
+    ],
     def: '建立一個自變數 $x$ 與一個應變數 $y$ 的線性模型。$\\beta_0$ 是截距、$\\beta_1$ 是斜率、$\\varepsilon$ 是誤差項。用最小平方法（OLS）估計參數。（Ch 12）'
   },
   {
@@ -762,6 +858,14 @@ const TERMS = [
     stage: 7,
     easyDef: '用多個變數同時預測一個結果——比簡單迴歸更強大，但也需要更嚴格的假設檢查。',
     formula: 'y = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\cdots + \\beta_k x_k + \\varepsilon',
+    symbols: [
+      { sym: 'y', desc: '應變數（要預測的結果）' },
+      { sym: '\\beta_0', desc: '截距：所有 xi = 0 時 y 的基準值' },
+      { sym: '\\beta_i', desc: '第 i 個偏迴歸係數：控制其他變數不變時，xi 增加 1 對 y 的影響' },
+      { sym: 'x_i', desc: '第 i 個自變數（共 k 個）' },
+      { sym: 'k', desc: '自變數個數' },
+      { sym: '\\varepsilon', desc: '誤差項，假設服從 N(0,σ²)' }
+    ],
     def: '納入多個自變數的迴歸模型。每個 $\\beta_i$ 是「控制其他變數不變時，$x_i$ 增加 1 單位對 $y$ 的影響」。（Ch 13）'
   },
   {
@@ -771,6 +875,13 @@ const TERMS = [
     stage: 7,
     easyDef: '專門用來分析類別資料（不是連續數字）的檢定——看「觀察到的次數分配」與「期望的次數分配」差多遠。',
     formula: '\\chi^2 = \\sum \\frac{(O - E)^2}{E}',
+    symbols: [
+      { sym: '\\chi^2', desc: '卡方統計量，衡量觀察與期望之間的整體偏差量' },
+      { sym: 'O', desc: '觀察次數（observed count）：資料裡實際數到的次數' },
+      { sym: 'E', desc: '期望次數（expected count）：H₀ 成立時理論上應有的次數' },
+      { sym: '(O-E)^2', desc: '偏差平方：消除正負號，放大大偏差' },
+      { sym: '\\div E', desc: '除以期望次數做標準化：相同偏差量在 E 小時更顯著' }
+    ],
     def: '用於適合度檢定與獨立性檢定。$O$ 是觀察次數、$E$ 是期望次數。統計量服從卡方分配，自由度視表格大小而定。（Ch 14）'
   },
   {
