@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
@@ -263,6 +263,7 @@
       <ul>
         <li><a href="../chapters/syllabus.html">課程目錄</a></li>
         <li><a href="../chapters/mental-models.html">心智模型</a></li>
+        <li><a href="../chapters/distribution-selection.html">分配選擇</a></li>
         <li><a href="../chapters/glossary.html">速查</a></li>
         <li><a href="../chapters/random-variables.html">隨機變數</a></li>
         <li><a href="../chapters/continuous-distributions.html">連續型分配</a></li>
@@ -356,12 +357,16 @@
         <div class="dt-question-card">
           <div class="dt-q-header">
             <div class="dt-q-step">問題三 · 幾組比較</div>
-            <div class="dt-q-text">你要比較幾組的平均數？</div>
+            <div class="dt-q-text">你要比較幾組的平均數？兩組樣本之間是否獨立？</div>
           </div>
           <div class="dt-choices">
             <button class="dt-choice-btn" onclick="choose('q3b','t-two')">
-              <span class="dt-choice-label">2️⃣ 兩組（A vs B）</span>
-              <span class="dt-choice-desc">先用 F 檢定確認等變異，<br>再用合併 t 或 Welch t</span>
+              <span class="dt-choice-label">2️⃣ 兩組（獨立）</span>
+              <span class="dt-choice-desc">A、B 組由不同受試者組成<br>先 F 檢定等變異，再合併 t</span>
+            </button>
+            <button class="dt-choice-btn" onclick="choose('q3b','t-paired')">
+              <span class="dt-choice-label">🔗 兩組（配對）</span>
+              <span class="dt-choice-desc">同一受試者測兩次<br>（前後測、左右手、雙胞胎）</span>
             </button>
             <button class="dt-choice-btn" onclick="choose('q3b','anova')">
               <span class="dt-choice-label">3️⃣⁺ 三組以上</span>
@@ -430,6 +435,37 @@
               因為 s 本身也有估計誤差，t 分配的尾巴比常態分配更胖，臨界值比 Z 更嚴格。
               自由度越大（樣本越大），t 分配越接近 Z 分配。
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 配對 t -->
+      <div class="dt-result" id="result-t-paired" style="border-color:rgba(251,146,60,0.5);">
+        <div class="dt-result-header" style="background:rgba(251,146,60,0.1);">
+          <div class="dt-result-tool" style="color:#fb923c;">配對 t 檢定</div>
+          <div class="dt-result-name">Paired t-test</div>
+          <div class="dt-result-inventor">Gosset (Student) · 1908</div>
+        </div>
+        <div class="dt-result-body">
+          <div class="dt-result-section">
+            <div class="dt-result-label">適用條件</div>
+            <div class="dt-conditions">
+              <span class="dt-cond-chip">同一受試者兩次測量</span>
+              <span class="dt-cond-chip">前後測 / 左右手 / 雙胞胎</span>
+              <span class="dt-cond-chip">差值常態分配</span>
+            </div>
+          </div>
+          <div class="dt-result-section">
+            <div class="dt-result-label">核心邏輯</div>
+            <div class="dt-result-text">
+              先計算每對差值 dᵢ = x₁ᵢ − x₂ᵢ，再對差值做單樣本 t 檢定。<br>
+              配對設計消除個體基準差異，比兩樣本 t 的統計檢定力更高。
+            </div>
+          </div>
+          <div class="dt-result-section">
+            <div class="dt-result-label">公式</div>
+            <div class="dt-formula">t = d̄ / (s_d / √n)　　df = n − 1</div>
+            <div style="margin-top:0.35rem;font-size:0.8rem;color:var(--muted);">d̄ = 差值平均數，s_d = 差值標準差，n = 對數</div>
           </div>
         </div>
       </div>
@@ -586,8 +622,14 @@
         <tr>
           <td><span class="tool-badge" style="color:#fb923c;background:rgba(251,146,60,0.12);">t</span></td>
           <td>連續</td>
-          <td>平均數（1組或2組）</td>
+          <td>平均數（1組或2組獨立）</td>
           <td>n&lt;30，σ 未知，母體常態</td>
+        </tr>
+        <tr>
+          <td><span class="tool-badge" style="color:#fb923c;background:rgba(251,146,60,0.12);">配對 t</span></td>
+          <td>連續</td>
+          <td>平均數（2組配對）</td>
+          <td>同一受試者兩次測量，差值常態</td>
         </tr>
         <tr>
           <td><span class="tool-badge" style="color:#fbbf24;background:rgba(251,191,36,0.12);">F</span></td>
@@ -645,7 +687,8 @@
       variance: '比變異數',
       z: '大樣本/已知σ',
       't-one': '小樣本/σ未知',
-      't-two': '兩組',
+      't-two': '兩組獨立',
+      't-paired': '兩組配對',
       anova: '三組以上'
     };
 
@@ -689,6 +732,8 @@
       } else if (question === 'q3b') {
         if (answer === 't-two') {
           showResult('t-two');
+        } else if (answer === 't-paired') {
+          showResult('t-paired');
         } else {
           showResult('anova');
         }

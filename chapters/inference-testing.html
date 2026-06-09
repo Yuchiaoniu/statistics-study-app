@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
@@ -20,6 +20,7 @@
       <ul>
         <li><a href="../chapters/syllabus.html">課程目錄</a></li>
         <li><a href="../chapters/mental-models.html">心智模型</a></li>
+        <li><a href="../chapters/distribution-selection.html">分配選擇</a></li>
         <li><a href="../chapters/glossary.html">速查</a></li>
         <li><a href="../chapters/random-variables.html">隨機變數</a></li>
         <li><a href="../chapters/continuous-distributions.html">連續型分配</a></li>
@@ -261,6 +262,100 @@
         <strong>兩樣本 t 流程圖</strong>
         <p>F 檢定通過（變異數相等）→ 合併 t，df = n₁+n₂−2</p>
         <p>F 檢定不通過（變異數不等）→ Welch t，df 用近似公式（Satterthwaite）</p>
+      </div>
+    </div>
+
+    <div id="paired-t" class="concept">
+      <h3>觀念 6：配對 t 檢定（Paired t-test）</h3>
+      <p>兩筆數據來自<strong>同一受試者的兩次測量</strong>（前測／後測、左右手、雙胞胎），資料本身不獨立，不能套用兩樣本 t。做法是先把每對的差值 $d_i$ 算出來，再對差值做一次<strong>單樣本 t 檢定</strong>。</p>
+
+      <h4>配對 vs 獨立：先判斷，再選工具</h4>
+      <table class="compare wide">
+        <thead>
+          <tr><th>情境描述</th><th>判斷依據</th><th>正確工具</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>同一批人接受訓練前後測驗</td>
+            <td>同一受試者，兩個時間點</td>
+            <td><strong>配對 t</strong></td>
+          </tr>
+          <tr>
+            <td>A 班與 B 班各自受測</td>
+            <td>不同受試者，互相獨立</td>
+            <td>兩樣本 t</td>
+          </tr>
+          <tr>
+            <td>同一批機器維修前後的效率</td>
+            <td>同一對象，兩個時間點</td>
+            <td><strong>配對 t</strong></td>
+          </tr>
+          <tr>
+            <td>左手與右手的握力（同一人量兩次）</td>
+            <td>同一受試者的兩種條件</td>
+            <td><strong>配對 t</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>計算步驟</h4>
+      <ol class="numbered-list">
+        <li>對每一對計算差值（順序要固定，全程一致）：$d_i = x_{1i} - x_{2i}$</li>
+        <li>計算差值的平均數：$$\bar{d} = \frac{\sum_{i=1}^{n} d_i}{n}$$</li>
+        <li>計算差值的標準差：$$s_d = \sqrt{\frac{\sum_{i=1}^{n}(d_i - \bar{d})^2}{n-1}}$$</li>
+        <li>代入 t 統計量：</li>
+      </ol>
+
+      <div class="formula">$$t = \frac{\bar{d}}{s_d / \sqrt{n}}, \quad df = n - 1$$</div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$d_i$</dt><dd>第 $i$ 對的差值（條件 A 減條件 B，順序自訂但全程統一）</dd>
+          <dt>$\bar{d}$</dt><dd>n 個差值的平均數，H₀ 要檢定的是 $\mu_d = 0$</dd>
+          <dt>$s_d$</dt><dd>差值的樣本標準差</dd>
+          <dt>$s_d / \sqrt{n}$</dt><dd>差值的標準誤（SE of differences）</dd>
+          <dt>$df = n - 1$</dt><dd>自由度以「對數 n」計算，不是受試者總人次</dd>
+        </dl>
+      </div>
+
+      <h4>完整範例：訓練是否降低靜止心率？</h4>
+      <p>6 名受試者，訓練前後各量一次靜止心率（bpm）。H₀: $\mu_d = 0$（訓練無效），H₁: $\mu_d > 0$（前高後低），α = 0.05（右尾）。</p>
+
+      <table class="compare wide">
+        <thead>
+          <tr><th>受試者</th><th>訓練前 $x_1$</th><th>訓練後 $x_2$</th><th>差值 $d_i = x_1 - x_2$</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>78</td><td>72</td><td>6</td></tr>
+          <tr><td>2</td><td>80</td><td>76</td><td>4</td></tr>
+          <tr><td>3</td><td>74</td><td>68</td><td>6</td></tr>
+          <tr><td>4</td><td>86</td><td>82</td><td>4</td></tr>
+          <tr><td>5</td><td>82</td><td>75</td><td>7</td></tr>
+          <tr><td>6</td><td>76</td><td>71</td><td>5</td></tr>
+        </tbody>
+      </table>
+
+      <ol class="numbered-list">
+        <li>
+          <strong>差值平均</strong>：
+          <div class="formula">$$\bar{d} = \frac{6+4+6+4+7+5}{6} = \frac{32}{6} \approx 5.33$$</div>
+        </li>
+        <li>
+          <strong>差值標準差</strong>（各差值減去 5.33 後平方加總再除以 n−1=5）：
+          <div class="formula">$$s_d = \sqrt{\frac{(0.67)^2+(-1.33)^2+(0.67)^2+(-1.33)^2+(1.67)^2+(-0.33)^2}{5}} = \sqrt{\frac{7.33}{5}} \approx 1.21$$</div>
+        </li>
+        <li>
+          <strong>t 統計量</strong>：
+          <div class="formula">$$t = \frac{5.33}{1.21 / \sqrt{6}} = \frac{5.33}{0.494} \approx 10.79, \quad df = 5$$</div>
+        </li>
+        <li><strong>臨界值</strong>：$t_{0.05,\,5} = 2.015$（右尾，查 t 表）</li>
+        <li><strong>結論</strong>：$10.79 \gg 2.015$ → <strong>拒絕 H₀</strong>，訓練顯著降低靜止心率</li>
+      </ol>
+
+      <div class="punchline-box">
+        <strong>為什麼配對設計比兩樣本 t 更有效率？</strong>
+        <p>兩樣本 t 的分母包含「個體差異」——基準心率本就高的人，前後都高；基準低的人前後都低。這個個體差異會讓合併標準差變大，t 值縮小，更難顯著。配對 t 把每個人自己的前後差值相減，個體基準自動抵消，分母 $s_d$ 只反映「差值本身的變異」，不受個體差異污染。同樣 n 個受試者，配對設計的統計檢定力（power）更高。</p>
       </div>
     </div>
 

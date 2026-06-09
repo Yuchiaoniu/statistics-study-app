@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>分配選擇指南 · 統計學學習工具</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <a href="../" class="logo">統計學學習工具</a>
+      <ul>
+        <li><a href="../chapters/syllabus.html">課程目錄</a></li>
+        <li><a href="../chapters/mental-models.html">心智模型</a></li>
+        <li><a href="../chapters/distribution-selection.html" style="color:var(--primary)">分配選擇</a></li>
+        <li><a href="../chapters/glossary.html">速查</a></li>
+        <li><a href="../chapters/random-variables.html">隨機變數</a></li>
+        <li><a href="../chapters/continuous-distributions.html">連續型分配</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="../chapters/mental-models.html">← 心智模型</a>
+    </div>
+
+    <h1>分配選擇指南</h1>
+    <p style="color:var(--muted);font-size:0.95rem;line-height:1.75;max-width:680px;margin-bottom:2rem;">
+      面對一道統計題，第一步不是算公式，而是判斷：<strong style="color:var(--text)">這個情境適合哪種分配？</strong>
+      選錯分配，計算再正確也沒用。本頁提供兩套決策流程：離散分配（計數資料）與連續分配（量測資料）。
+    </p>
+
+    <!-- ── 一、離散分配 ── -->
+    <h2>一、離散分配選擇</h2>
+    <p>離散隨機變數的值是可數整數（0, 1, 2, 3, …），代表「數出來的」東西：不良品數、顧客到達次數、答對題數。</p>
+
+    <div class="punchline-box">
+      <strong>快速判斷流程</strong>
+      <pre style="font-family:monospace;line-height:1.9;margin:0.5rem 0;font-size:0.88rem;">
+試驗次數 n 固定嗎？
+  ├─ 是 → 每次有明確「成功／失敗」，p 固定，各次獨立？
+  │         └─ 是 → <strong>二項分配 B(n, p)</strong>
+  └─ 否 → 在固定單位（時間／面積／長度）內計算罕見事件次數？
+            └─ 是 → <strong>波松分配 Poisson(λ)</strong></pre>
+    </div>
+
+    <div id="binomial" class="concept">
+      <h3>二項分配 $B(n,\,p)$</h3>
+      <p>在 n 次<strong>獨立</strong>試驗中，每次成功機率固定為 p，計算「恰好成功 k 次」的機率。</p>
+
+      <div class="formula">$$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}, \quad k = 0, 1, \ldots, n$$</div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$n$</dt><dd>固定的試驗次數（必須是固定的，不是隨機的）</dd>
+          <dt>$p$</dt><dd>每次試驗的成功機率（每次必須相同）</dd>
+          <dt>$\binom{n}{k}$</dt><dd>組合數：從 n 次中選 k 次成功的方法數，$= \dfrac{n!}{k!(n-k)!}$</dd>
+          <dt>$E(X) = np$</dt><dd>期望值：n 次試驗平均成功幾次</dd>
+          <dt>$Var(X) = np(1-p)$</dt><dd>變異數</dd>
+        </dl>
+      </div>
+
+      <h4>使用條件（四個缺一不可）</h4>
+      <table class="compare wide">
+        <thead><tr><th>條件</th><th>說明</th><th>反例（不符合時改用）</th></tr></thead>
+        <tbody>
+          <tr><td>固定試驗次數 n</td><td>事先確定要試幾次</td><td>「直到成功才停」→ 幾何分配</td></tr>
+          <tr><td>每次只有兩種結果</td><td>成功 or 失敗（二元）</td><td>骰子出現點數（六種） → 不適用</td></tr>
+          <tr><td>各次獨立</td><td>前一次不影響後一次</td><td>不放回抽樣（有影響）→ 超幾何分配</td></tr>
+          <tr><td>p 固定</td><td>每次成功機率相同</td><td>疲勞效應導致 p 遞減 → 不適用</td></tr>
+        </tbody>
+      </table>
+
+      <h4>典型情境</h4>
+      <ul>
+        <li>一批 20 個零件，每個不良率 5%，問不良品總數</li>
+        <li>拋 10 次硬幣，正面出現幾次</li>
+        <li>100 人接種疫苗，產生抗體的人數（成功率 90%）</li>
+        <li>答 15 題是非題全靠猜，答對幾題（p = 0.5）</li>
+      </ul>
+    </div>
+
+    <div id="poisson" class="concept">
+      <h3>波松分配 $\text{Poisson}(\lambda)$</h3>
+      <p>在固定的<strong>單位（時間、面積、長度）</strong>內，計算罕見事件發生次數。不需要知道「試驗了幾次」，只需要知道平均發生率 λ。</p>
+
+      <div class="formula">$$P(X = k) = \frac{e^{-\lambda} \lambda^k}{k!}, \quad k = 0, 1, 2, \ldots$$</div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$\lambda$</dt><dd>單位內的平均發生次數（rate），$\lambda > 0$</dd>
+          <dt>$e$</dt><dd>自然常數 ≈ 2.718</dd>
+          <dt>$E(X) = \lambda$</dt><dd>期望值等於 λ</dd>
+          <dt>$Var(X) = \lambda$</dt><dd>變異數也等於 λ（波松分配的特徵：均值 = 變異數）</dd>
+        </dl>
+      </div>
+
+      <h4>使用條件</h4>
+      <table class="compare wide">
+        <thead><tr><th>條件</th><th>說明</th></tr></thead>
+        <tbody>
+          <tr><td>事件罕見</td><td>每次「機會」發生的機率很小，但觀察單位很大</td></tr>
+          <tr><td>各事件獨立</td><td>一次事件不影響另一次</td></tr>
+          <tr><td>λ 固定</td><td>同一單位內的平均發生率不隨時間改變</td></tr>
+          <tr><td>不能同時發生兩件</td><td>同一個瞬間只能有一個事件</td></tr>
+        </tbody>
+      </table>
+
+      <h4>典型情境</h4>
+      <ul>
+        <li>每小時到達便利商店的顧客數（平均 30 人）</li>
+        <li>一本 500 頁書的錯字數（平均每頁 0.3 個）</li>
+        <li>一週內某路口的車禍次數（平均 2.5 件）</li>
+        <li>1 mL 樣品中的細菌數（平均 4 個）</li>
+      </ul>
+    </div>
+
+    <div class="concept">
+      <h3>二項 vs 波松：快速比較</h3>
+      <table class="compare wide">
+        <thead>
+          <tr><th></th><th>二項分配</th><th>波松分配</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>試驗次數</td><td>固定（n 已知）</td><td>不需要（沒有「幾次試驗」）</td></tr>
+          <tr><td>參數</td><td>n 和 p</td><td>只有 λ</td></tr>
+          <tr><td>X 的範圍</td><td>0 到 n</td><td>0 到 ∞</td></tr>
+          <tr><td>$E(X)$</td><td>$np$</td><td>$\lambda$</td></tr>
+          <tr><td>$Var(X)$</td><td>$np(1-p)$</td><td>$\lambda$（均值 = 變異數）</td></tr>
+          <tr><td>典型場景</td><td>固定批次抽樣、問卷回答</td><td>時間／空間內的事件計數</td></tr>
+        </tbody>
+      </table>
+
+      <div class="punchline-box">
+        <strong>波松近似二項：何時可以互換？</strong>
+        <p>當 n 很大（≥ 20）且 p 很小（≤ 0.05），可以用 <strong>Poisson(λ = np)</strong> 近似 <strong>B(n, p)</strong>——計算更簡單，精度足夠。</p>
+        <p>直覺：n 極大、p 極小，每次「成功」就像一個罕見事件，整體計數行為收斂到波松。</p>
+        <table class="compare wide" style="margin-top:0.75rem;">
+          <thead><tr><th>例子</th><th>n</th><th>p</th><th>λ = np</th><th>建議</th></tr></thead>
+          <tbody>
+            <tr><td>10000 人中的罕見病患者（患病率 0.002）</td><td>10000</td><td>0.002</td><td>20</td><td>用 Poisson(20)</td></tr>
+            <tr><td>抽 10 個零件，不良率 30%</td><td>10</td><td>0.30</td><td>3</td><td>n 小 p 不小，用 B(10, 0.3)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── 二、連續分配 ── -->
+    <h2>二、連續分配選擇</h2>
+    <p>連續隨機變數代表「量測出來的」東西：身高、重量、時間、溫度。機率是面積（不是點的高度），用 PDF 描述形狀，用 CDF 計算累積機率。</p>
+
+    <div class="punchline-box">
+      <strong>快速判斷流程</strong>
+      <pre style="font-family:monospace;line-height:1.9;margin:0.5rem 0;font-size:0.88rem;">
+資料是什麼形狀的情境？
+  ├─ 等待時間、零件壽命、事件間隔（無記憶性）→ <strong>指數分配 Exp(λ)</strong>
+  ├─ 在某區間內完全均勻（每個值等機率）       → <strong>均勻分配 U(a, b)</strong>
+  └─ 量測值（身高／體重／誤差）或大樣本均值   → 常態家族
+        ├─ σ 已知，或 n ≥ 30（CLT）           → <strong>常態分配 N(μ, σ²)，用 Z 統計量</strong>
+        └─ σ 未知，且 n &lt; 30                 → <strong>t 分配 t(df)，df = n − 1</strong></pre>
+    </div>
+
+    <div id="normal" class="concept">
+      <h3>常態分配 $N(\mu,\,\sigma^2)$</h3>
+      <p>統計學最重要的分配。鐘形、對稱，由均值 μ 和標準差 σ 完全決定形狀。</p>
+
+      <div class="formula">$$f(x) = \frac{1}{\sigma\sqrt{2\pi}}\, e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$</div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$\mu$</dt><dd>均值（分配的中心，也是對稱軸）</dd>
+          <dt>$\sigma$</dt><dd>標準差（控制分配的寬窄：σ 大→寬，σ 小→窄）</dd>
+          <dt>$\sigma^2$</dt><dd>變異數</dd>
+        </dl>
+      </div>
+
+      <h4>何時使用常態分配？</h4>
+      <table class="compare wide">
+        <thead><tr><th>情境</th><th>理由</th></tr></thead>
+        <tbody>
+          <tr><td>自然量測值（身高、體重、血壓）</td><td>多個微小誤差加總後趨近常態（自然版 CLT）</td></tr>
+          <tr><td>大樣本的樣本均值（n ≥ 30）</td><td>CLT 保證 $\bar{X}$ 近似常態，無論母體形狀</td></tr>
+          <tr><td>σ 已知的推論</td><td>直接用 Z 統計量，查標準常態表</td></tr>
+        </tbody>
+      </table>
+
+      <div class="punchline-box">
+        <strong>68–95–99.7 法則（經驗法則）</strong>
+        <p>$\mu \pm 1\sigma$ 覆蓋 68%；$\mu \pm 2\sigma$ 覆蓋 95%；$\mu \pm 3\sigma$ 覆蓋 99.7%。</p>
+        <p>「超出 2σ 以外」的機率只有 5%，這就是假設檢定 α = 0.05 的直覺來源。</p>
+      </div>
+    </div>
+
+    <div id="t-dist" class="concept">
+      <h3>t 分配 $t(df)$</h3>
+      <p>常態分配的「小樣本替代版」。對稱、鐘形，但<strong>尾巴比常態更厚</strong>——為「用 s 估計未知 σ 的不確定性」付出代價。</p>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$df$</dt><dd>自由度（degrees of freedom）：決定 t 分配的形狀；df 越小，尾巴越厚</dd>
+          <dt>$df = n-1$</dt><dd>單樣本推論時的自由度（用一個限制計算 $\bar{x}$ 後，剩 n−1 個自由資料點）</dd>
+          <dt>$df \to \infty$</dt><dd>t 分配收斂到標準常態 Z（大樣本時 t ≈ Z）</dd>
+        </dl>
+      </div>
+
+      <h4>常態 vs t：何時切換？</h4>
+      <table class="compare wide">
+        <thead><tr><th>條件</th><th>使用工具</th><th>理由</th></tr></thead>
+        <tbody>
+          <tr><td>σ 已知，任何 n</td><td>Z（標準常態）</td><td>不需估計 σ，無額外不確定性</td></tr>
+          <tr><td>σ 未知，n ≥ 30</td><td>t（但此時 t ≈ Z）</td><td>大樣本時 s ≈ σ，t 分配幾乎等同 Z</td></tr>
+          <tr><td>σ 未知，n &lt; 30，母體常態</td><td>t（必須用 t）</td><td>s 估計 σ 的誤差不可忽略，需厚尾補償</td></tr>
+          <tr><td>σ 未知，n &lt; 30，母體非常態</td><td>無母數方法</td><td>前提不成立，參數 t 不適用</td></tr>
+        </tbody>
+      </table>
+
+      <div class="punchline-box">
+        <strong>直覺：t 分配的尾巴為什麼更厚？</strong>
+        <p>用 s 估計 σ 本身就有誤差，n 越小，s 越不穩定。t 分配的厚尾「吸收」了這個不確定性——要達到統計顯著，t 統計量需要比 Z 更極端的值，所以 t 臨界值永遠 &gt; Z 臨界值。隨著 df 增大（樣本增大），這個額外懲罰越來越小，最終消失。</p>
+      </div>
+    </div>
+
+    <div id="uniform" class="concept">
+      <h3>均勻分配 $U(a,\,b)$</h3>
+      <p>在區間 $[a, b]$ 內，每個值出現的機率密度完全相同（PDF 是一條水平線）。核心概念：「不偏好任何值」。</p>
+
+      <div class="formula">$$f(x) = \frac{1}{b-a}, \quad a \le x \le b$$</div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$a,\, b$</dt><dd>分配的下界與上界</dd>
+          <dt>$E(X) = \dfrac{a+b}{2}$</dt><dd>均值在區間正中間</dd>
+          <dt>$Var(X) = \dfrac{(b-a)^2}{12}$</dt><dd>變異數</dd>
+        </dl>
+      </div>
+
+      <h4>典型情境</h4>
+      <ul>
+        <li>電腦亂數生成（理想隨機數 ~ U(0,1)）</li>
+        <li>四捨五入誤差（~ U(−0.5, 0.5)）</li>
+        <li>公車在 a 到 b 分鐘之間到達，等待時間</li>
+        <li>在某段路上隨機選取一個位置</li>
+      </ul>
+
+      <div class="punchline-box">
+        <strong>注意：均勻分配在現實中很少見</strong>
+        <p>「完全均勻」是強烈假設。現實中的等待時間通常是指數分配（有記憶的不均勻），現實中的測量值通常是常態。只有在明確知道「任何值等機率」的情況下才用均勻。</p>
+      </div>
+    </div>
+
+    <div id="exponential" class="concept">
+      <h3>指數分配 $\text{Exp}(\lambda)$</h3>
+      <p>描述「等待下一個事件發生的時間」。只要波松分配描述某過程的事件計數，指數分配就描述事件之間的等待時間——兩者是同一個隨機過程的兩個面向。</p>
+
+      <div class="formula">$$f(x) = \lambda e^{-\lambda x}, \quad x \ge 0$$</div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$\lambda$</dt><dd>事件發生率（與波松的 λ 相同；λ 大 → 等越短）</dd>
+          <dt>$E(X) = 1/\lambda$</dt><dd>平均等待時間（發生率越高，平均等越短）</dd>
+          <dt>$Var(X) = 1/\lambda^2$</dt><dd>變異數</dd>
+        </dl>
+      </div>
+
+      <h4>無記憶性（Memoryless Property）</h4>
+      <div class="punchline-box">
+        <div class="formula" style="margin-bottom:0.75rem;">$$P(X > s+t \mid X > s) = P(X > t)$$</div>
+        <p>「已經等了 s 分鐘」<strong>完全不影響</strong>「還要再等 t 分鐘的機率」。等公車已等 10 分鐘，剩餘等待時間的分配和一開始完全一樣——指數分配沒有記憶。</p>
+        <p>這是連續分配中<strong>唯一</strong>具備無記憶性的分配。（離散版對應是幾何分配。）</p>
+      </div>
+
+      <h4>典型情境</h4>
+      <ul>
+        <li>等候下一位顧客到達的時間（顧客到達服從波松）</li>
+        <li>電子零件的使用壽命（失效是隨機的，非老化型）</li>
+        <li>客服電話的通話間隔時間</li>
+        <li>放射性原子衰變的等待時間</li>
+      </ul>
+
+      <h4>波松 vs 指數：同一過程的兩個問題</h4>
+      <table class="compare wide">
+        <thead><tr><th></th><th>波松分配</th><th>指數分配</th></tr></thead>
+        <tbody>
+          <tr><td>問的問題</td><td>固定時間內發生幾次？</td><td>下一次要等多久？</td></tr>
+          <tr><td>變數類型</td><td>離散（計次數）</td><td>連續（計時間）</td></tr>
+          <tr><td>參數</td><td>λ（單位內平均次數）</td><td>λ（同一個發生率）</td></tr>
+          <tr><td>均值</td><td>$\lambda$</td><td>$1/\lambda$</td></tr>
+          <tr><td>例子</td><td>每小時平均 3 通電話 → X ~ Poisson(3)</td><td>通話間隔 ~ Exp(3)，平均等 1/3 小時</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ── 三、情境快查表 ── -->
+    <h2>三、情境快查表</h2>
+    <table class="compare wide">
+      <thead>
+        <tr><th>情境關鍵字</th><th>選用分配</th><th>關鍵參數</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>固定 n 次試驗，每次成功／失敗，p 固定，各次獨立</td>
+          <td><strong>二項 $B(n,p)$</strong></td>
+          <td>n, p</td>
+        </tr>
+        <tr>
+          <td>單位時間／空間的事件計數，罕見事件，已知平均率</td>
+          <td><strong>波松 $\text{Poisson}(\lambda)$</strong></td>
+          <td>λ</td>
+        </tr>
+        <tr>
+          <td>n 大（≥20）且 p 小（≤0.05）的二項，可近似</td>
+          <td>Poisson(λ = np)</td>
+          <td>λ = np</td>
+        </tr>
+        <tr>
+          <td>等待下一個事件的時間，無記憶性</td>
+          <td><strong>指數 $\text{Exp}(\lambda)$</strong></td>
+          <td>λ（= 1 ÷ 平均等待）</td>
+        </tr>
+        <tr>
+          <td>在區間 [a, b] 內完全均勻，沒有偏好</td>
+          <td><strong>均勻 $U(a,b)$</strong></td>
+          <td>a, b</td>
+        </tr>
+        <tr>
+          <td>自然量測值（身高／體重），或 n ≥ 30 的樣本均值（CLT）</td>
+          <td><strong>常態 $N(\mu,\sigma^2)$</strong></td>
+          <td>μ, σ</td>
+        </tr>
+        <tr>
+          <td>σ 未知，n &lt; 30，需要用 s 估計 σ</td>
+          <td><strong>t 分配 $t(df)$</strong></td>
+          <td>df = n − 1</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </main>
+</body>
+</html>
