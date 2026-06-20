@@ -3554,5 +3554,355 @@
     ],
     "correct_index": 0,
     "explanation": "獨立性檢定 df = (列數 − 1) × (欄數 − 1) = (3 − 1) × (4 − 1) = 2 × 3 = 6。"
+  },
+  {
+    "id": "anova-context-001",
+    "chapter": "advanced-analysis",
+    "concept": "anova",
+    "prompt": "研究員想比較三種教學法（傳統、翻轉、線上）對學生成績的影響，每組各抽 10 名學生。應該用哪個統計方法？",
+    "options": [
+      "t 檢定，因為比較兩組平均數",
+      "ANOVA，因為同時比較三組平均數",
+      "卡方檢定，因為比較類別資料",
+      "Z 檢定，因為樣本夠大"
+    ],
+    "correct_index": 1,
+    "explanation": "ANOVA 用於三組以上的平均數比較。t 檢定只能比較兩組，卡方用於類別資料，Z 檢定用於已知母體標準差的情況。"
+  },
+  {
+    "id": "anova-context-002",
+    "chapter": "advanced-analysis",
+    "concept": "anova",
+    "prompt": "ANOVA 算出 F = 0.8，這代表什麼？",
+    "options": [
+      "組間差異是組內雜訊的 0.8 倍，差異不顯著，不拒絕 H₀",
+      "組間差異很大，拒絕 H₀",
+      "樣本數不夠，需要再抽",
+      "三組平均數完全相等"
+    ],
+    "correct_index": 0,
+    "explanation": "F = MSB ÷ MSW。F < 1 代表訊號（組間）比雜訊（組內）還小，三組差異完全可以用隨機誤差解釋，不拒絕 H₀。"
+  },
+  {
+    "id": "anova-context-003",
+    "chapter": "advanced-analysis",
+    "concept": "anova",
+    "prompt": "實驗甲：三組平均差很遠，每組內部數字很整齊。實驗乙：三組平均差不多，每組內部數字很散。哪個 F 值比較大？",
+    "options": [
+      "甲的 F 比較大",
+      "乙的 F 比較大",
+      "一樣大",
+      "無法判斷"
+    ],
+    "correct_index": 0,
+    "explanation": "F = MSB ÷ MSW。甲的 MSB 大（組間差距遠）且 MSW 小（組內整齊），所以 F 大。乙的 MSB 小且 MSW 大，F 小。組間越大、組內越整齊，F 越大。"
+  },
+  {
+    "id": "anova-context-004",
+    "chapter": "advanced-analysis",
+    "concept": "anova",
+    "prompt": "研究者做了 ANOVA，H₀ 是「三種藥物效果相同」，F 值很大因此拒絕了 H₀。這代表什麼？",
+    "options": [
+      "三種藥物效果全部不同",
+      "至少有一種藥物和其他藥物效果不同",
+      "第一種藥物效果最好",
+      "需要再做一次實驗確認"
+    ],
+    "correct_index": 1,
+    "explanation": "ANOVA 拒絕 H₀ 只代表「不是所有組都一樣」，即至少一組不同。哪幾組不同需要再做事後比較（Post-hoc test）才能確認，ANOVA 本身無法告訴你。"
+  },
+  {
+    "id": "anova-context-005",
+    "chapter": "advanced-analysis",
+    "concept": "anova",
+    "prompt": "SSW 很大代表什麼？對 F 值有什麼影響？",
+    "options": [
+      "組內資料很整齊，F 會變大",
+      "組內資料很散亂，F 會變小",
+      "組間差距很大，F 會變大",
+      "組間差距很小，F 會變小"
+    ],
+    "correct_index": 1,
+    "explanation": "SSW 大 → MSW 大 → F = MSB ÷ MSW 變小 → 更難拒絕 H₀。組內越散亂，雜訊越大，訊號越難被看見。"
+  },
+  {
+    "id": "anova-context-006",
+    "chapter": "advanced-analysis",
+    "concept": "anova",
+    "prompt": "下列哪個情況最適合用 ANOVA？",
+    "options": [
+      "比較男生和女生的平均身高",
+      "比較四個城市的平均房價",
+      "調查有無運動習慣和健康狀況的關係",
+      "預測身高和體重的線性關係"
+    ],
+    "correct_index": 1,
+    "explanation": "四個城市是四組，比較平均數用 ANOVA。兩組比平均數用 t 檢定，類別資料關聯用卡方檢定，線性關係用迴歸分析。"
+  },
+  {
+    "id": "anova-context-007",
+    "chapter": "advanced-analysis",
+    "concept": "anova",
+    "prompt": "兩個實驗的 F 值：甲 = 1.2，乙 = 8.5。哪個比較有可能拒絕 H₀？",
+    "options": [
+      "甲，因為 F > 1",
+      "乙，因為 F 遠大於 1，訊號遠超雜訊",
+      "兩個都會拒絕",
+      "兩個都不會拒絕"
+    ],
+    "correct_index": 1,
+    "explanation": "F = 8.5 代表組間差距是組內雜訊的 8.5 倍，很難用巧合解釋。F = 1.2 只比 1 稍大，訊號和雜訊差不多，不足以拒絕 H₀。"
+  },
+  {
+    "id": "anova-context-008",
+    "chapter": "advanced-analysis",
+    "concept": "anova",
+    "prompt": "SSB 增加但 SSW 不變，F 值會怎麼變？",
+    "options": [
+      "F 變大，因為分子變大",
+      "F 變小，因為分子變大",
+      "F 不變",
+      "無法判斷"
+    ],
+    "correct_index": 0,
+    "explanation": "F = MSB ÷ MSW。SSB 增加 → MSB 增加 → 分子變大、分母不變 → F 變大。組間差距越大，F 越大。"
+  },
+  {
+    "id": "anova-context-009",
+    "chapter": "advanced-analysis",
+    "concept": "anova",
+    "prompt": "五種飲食法各抽 20 人（共 100 人）做 ANOVA，dfB 和 dfW 各是多少？",
+    "options": [
+      "dfB=4，dfW=95",
+      "dfB=5，dfW=95",
+      "dfB=4，dfW=100",
+      "dfB=5，dfW=100"
+    ],
+    "correct_index": 0,
+    "explanation": "dfB = 組數 − 1 = 5 − 1 = 4。dfW = 總人數 − 組數 = 100 − 5 = 95。"
+  },
+  {
+    "id": "anova-context-010",
+    "chapter": "advanced-analysis",
+    "concept": "anova",
+    "prompt": "H₀ 為真時，F 值理論上應該接近多少？",
+    "options": [
+      "0",
+      "1",
+      "2",
+      "無法預測"
+    ],
+    "correct_index": 1,
+    "explanation": "H₀ 為真代表各組平均數真的相同，組間差距只是隨機波動，和組內雜訊來自同一個來源。這時訊號 ≈ 雜訊，F = MSB ÷ MSW ≈ 1。"
+  },
+  {
+    "id": "anova-context-011",
+    "chapter": "advanced-analysis",
+    "concept": "anova",
+    "prompt": "每組人數從 3 人增加到 10 人，SSB 和 SSW 會怎麼變？",
+    "options": [
+      "SSB 變大，SSW 不變",
+      "SSB 不變，SSW 變大",
+      "SSB 和 SSW 都變大",
+      "SSB 和 SSW 都不變"
+    ],
+    "correct_index": 2,
+    "explanation": "SSB = 每組人數 × Σ(組平均−總平均)²，人數增加所以 SSB 變大。SSW 是各組離差平方和加總，每組人數增加，SSW 也變大。但 F 不一定等比例放大，因為 MS 都有除以自由度。"
+  },
+  {
+    "id": "inftest-0513-q1",
+    "chapter": "inference-testing",
+    "concept": "hypo-z",
+    "prompt": "某校男生平均體重 65 kg。隨機抽查 49 位，x̄ = 70 kg，s = 14 kg，α = 0.05，檢定男生平均體重是否增加。Z 統計量為多少？",
+    "options": [
+      "2.5",
+      "1.5",
+      "3.5",
+      "2.0"
+    ],
+    "correct_index": 0,
+    "explanation": "σ 未知但 n=49≥30（Case 2），以 s 替代 σ 用 Z 近似。SE = 14/√49 = 2；Z = (70−65)/2 = 2.5。右尾臨界值 Z₀.₀₅=1.645，2.5>1.645 → 拒絕 H₀，男生體重顯著增加。"
+  },
+  {
+    "id": "inftest-0513-q2",
+    "chapter": "inference-testing",
+    "concept": "hypo-t",
+    "prompt": "廠商宣稱筆電待機時間不低於 180 分鐘。隨機抽 9 台（母體常態），x̄ = 177.94，s = 2.74，α = 0.05。以下哪組假設設定正確？",
+    "options": [
+      "H₀: μ ≥ 180，H₁: μ < 180（左尾 t 檢定）",
+      "H₀: μ ≤ 180，H₁: μ > 180（右尾 t 檢定）",
+      "H₀: μ = 180，H₁: μ ≠ 180（雙尾 t 檢定）",
+      "H₀: μ < 180，H₁: μ ≥ 180（左尾 t 檢定）"
+    ],
+    "correct_index": 0,
+    "explanation": "廠商宣稱 μ ≥ 180 是保守立場，放 H₀；想推翻的方向是「待機不足」（μ < 180），放 H₁，構成左尾檢定。t = (177.94−180)/0.91 ≈ −2.25；臨界值 −t₀.₀₅,₈ = −1.8595；−2.25 < −1.8595 → 拒絕 H₀，廠商說法不能接受。"
+  },
+  {
+    "id": "inftest-0513-q3",
+    "chapter": "inference-testing",
+    "concept": "hypo-t",
+    "prompt": "抽 16 名大學生，測得夜間睡眠 x̄ = 7.25 小時，s = 0.157 小時。欲檢定大學生睡眠是否等於死亡危險因子最低的 7 小時（母體常態，α = 0.05，雙尾）。t 統計量約為多少？",
+    "options": [
+      "6.39",
+      "2.13",
+      "1.60",
+      "4.50"
+    ],
+    "correct_index": 0,
+    "explanation": "SE = s/√n = 0.157/√16 = 0.0392；t = (7.25−7)/0.0392 ≈ 6.39。雙尾臨界值 t₀.₀₂₅,₁₅ = 2.1314；6.39 >> 2.1314 → 拒絕 H₀，大學生睡眠時間顯著不等於 7 小時（睡較多，仍非最低風險族群）。"
+  },
+  {
+    "id": "inftest-0513-q4",
+    "chapter": "inference-testing",
+    "concept": "hypo-z",
+    "prompt": "冷飲專賣店去年全台平均月營業額 45 萬，今年隨機抽 36 家，x̄ = 50 萬，s = 15 萬，α = 0.05。以下結論何者正確？",
+    "options": [
+      "Z = 2.0 > Z₀.₀₅ = 1.645，拒絕 H₀，今年生意顯著比去年好",
+      "Z = 2.0 > Z₀.₀₂₅ = 1.96，拒絕 H₀，今年生意顯著比去年好",
+      "Z = 1.5 < 1.645，無法拒絕 H₀，今年與去年無顯著差異",
+      "Z = 2.0 < 1.96，無法拒絕 H₀，今年與去年無顯著差異"
+    ],
+    "correct_index": 0,
+    "explanation": "Case 2（σ 未知，n=36≥30）用 Z 近似。SE = 15/√36 = 2.5；Z = (50−45)/2.5 = 2.0。右尾（H₁: μ>45），臨界值 Z₀.₀₅ = 1.645；2.0 > 1.645 → 拒絕 H₀。"
+  },
+  {
+    "id": "twosamp-0520-q1",
+    "chapter": "inference-testing",
+    "concept": "two-sample-t",
+    "prompt": "A市（n₁=35，x̄₁=401,800，s₁=20,000）vs B市（n₂=40，x̄₂=388,000，s₂=22,000）。α=0.05 下檢定兩市家庭平均收入有無差異，應使用哪種工具？",
+    "options": [
+      "Z 近似（Case 2，兩組均為大樣本）",
+      "Pooled t（Case 3，需先做 F 檢定確認等變異）",
+      "Welch t（Case 4，不等變異）",
+      "配對 t（兩組資料來自同一受試者）"
+    ],
+    "correct_index": 0,
+    "explanation": "n₁=35≥30 且 n₂=40≥30，兩組均為大樣本，符合 Case 2。以 s₁、s₂ 替代未知 σ，使用 Z 近似，不需先做 F 等變異檢定。Z = (401800−388000)/√(20000²/35+22000²/40) ≈ 2.85 > Z₀.₀₂₅=1.96 → 拒絕 H₀。"
+  },
+  {
+    "id": "twosamp-0520-q2",
+    "chapter": "inference-testing",
+    "concept": "two-sample-t",
+    "prompt": "A型冷氣（n₁=10，x̄₁=123 千瓦，s₁²=128）；B型冷氣（n₂=10，x̄₂=120 千瓦，s₂²=72）。α=0.1，先執行 F 檢定。F 統計量約為多少，且應走 Case 3 還是 Case 4？",
+    "options": [
+      "F ≈ 1.78，未超過臨界值 3.18，走 Case 3（Pooled t）",
+      "F ≈ 1.78，超過臨界值 1.96，走 Case 4（Welch t）",
+      "F ≈ 0.56，未超過臨界值，走 Case 3（Pooled t）",
+      "F ≈ 1.78，直接走 Case 1（σ 已知 Z 檢定）"
+    ],
+    "correct_index": 0,
+    "explanation": "令大變異數在分子：F = 128/72 ≈ 1.78，df₁=df₂=9。α=0.1 雙尾，F 表臨界值 F₀.₀₅,₉,₉ ≈ 3.18；1.78 < 3.18 → 不拒絕等變異假設 → Case 3。Sp² = (9×128+9×72)/18 = 100；t = (123−120)/(10×√(1/10+1/10)) ≈ 0.67；t₀.₀₅,₁₈ = 1.734；0.67 < 1.734 → 無法拒絕 H₀，兩型耗電量無顯著差異。"
+  },
+  {
+    "id": "anova-0527-q1",
+    "chapter": "advanced-analysis",
+    "concept": "anova",
+    "prompt": "資管系比較三種實習課程（電視教學、講師講習、實地觀摩）的學習效果是否不同。以下 ANOVA 假設設定何者正確？",
+    "options": [
+      "H₀: μ₁=μ₂=μ₃，H₁: 至少一個 μᵢ 不相等",
+      "H₀: μ₁≠μ₂≠μ₃，H₁: μ₁=μ₂=μ₃",
+      "H₀: μ₁=μ₂=μ₃，H₁: μ₁≠μ₂ 且 μ₂≠μ₃ 且 μ₁≠μ₃",
+      "H₀: 至少一個 μᵢ 不相等，H₁: μ₁=μ₂=μ₃"
+    ],
+    "correct_index": 0,
+    "explanation": "ANOVA 的 H₀ 是「所有組母體均值相等」；H₁ 只需「至少一組不同」即可，不必指定哪兩組不同。若 F₀ 超過臨界值，拒絕 H₀ 後需再做 Post-hoc Test（事後檢定）才能找出哪兩組有差異。"
+  },
+  {
+    "id": "anova-0527-q2",
+    "chapter": "advanced-analysis",
+    "concept": "anova",
+    "prompt": "對 IDF、F16、幻象 2000 三種戰機速度執行 ANOVA，F₀ 超過臨界值，拒絕了 H₀。下一步應該怎麼做？",
+    "options": [
+      "執行 Post-hoc Test（事後檢定），對所有組進行兩兩比較",
+      "直接結論三組平均速度全部不相同",
+      "只用配對 t 比較最快與最慢兩組",
+      "提高 α 值重新執行 ANOVA"
+    ],
+    "correct_index": 0,
+    "explanation": "拒絕 H₀ 只代表「至少有一組不同」，並不告訴我們是哪兩組有差異。必須用 Post-hoc Test（如 LSD 或 Tukey 法）對所有兩兩組合逐一比較，才能找出差異點。直接說「三組全部不同」是過度推論。"
+  },
+  {
+    "id": "corr-001",
+    "chapter": "correlation",
+    "concept": "pearson-r",
+    "prompt": "Pearson 相關係數 r 的取值範圍是？",
+    "options": [
+      "−1 ≤ r ≤ +1",
+      "0 ≤ r ≤ 1",
+      "−∞ < r < +∞",
+      "0 ≤ r ≤ ∞"
+    ],
+    "correct_index": 0,
+    "explanation": "r 是標準化後的共變異量，分子是兩變數的共同偏差乘積加總，分母是兩組離差平方和的幾何平均。標準化後 r 的範圍固定在 [−1, +1]。r = +1 代表完全正相關，r = −1 代表完全負相關，r = 0 代表無線性關聯。"
+  },
+  {
+    "id": "corr-002",
+    "chapter": "correlation",
+    "concept": "pearson-r",
+    "prompt": "計算出 r = −0.85，以下哪個描述最正確？",
+    "options": [
+      "強負相關：X 愈大，Y 傾向愈小，線性趨勢明顯",
+      "強正相關：X 愈大，Y 傾向愈大",
+      "弱負相關：X 與 Y 幾乎沒有線性關聯",
+      "無相關：|r| = 0.85 代表剛好一半"
+    ],
+    "correct_index": 0,
+    "explanation": "r = −0.85 的解讀分兩步：①方向看正負號，負號代表負相關（X 增加，Y 減少）；②強度看絕對值，|r| = 0.85 ≥ 0.7，屬於強相關。因此是「強負相關」。r 的正負代表方向，|r| 的大小代表強度，這兩個維度各自獨立。"
+  },
+  {
+    "id": "corr-003",
+    "chapter": "correlation",
+    "concept": "pearson-r",
+    "prompt": "研究者想分析身高（cm）和體重（kg）的關聯性，應該使用什麼工具？",
+    "options": [
+      "Pearson 相關係數 r（量量 → 兩個連續變數）",
+      "卡方檢定 χ²（質質 → 兩個類別變數）",
+      "點二系列相關（量質 → 一連續一類別）",
+      "ANOVA（比較多組均值差異）"
+    ],
+    "correct_index": 0,
+    "explanation": "身高和體重都是連續變數（量），屬於「量量」組合，適合用 Pearson 相關係數 r 分析線性關聯。卡方適合「質質」（如性別 vs 是否及格），ANOVA 比較多組均值差異（不是分析兩連續變數的線性關聯），點二系列相關適合「量質」（如體重 vs 性別）。"
+  },
+  {
+    "id": "corr-004",
+    "chapter": "correlation",
+    "concept": "pearson-r",
+    "prompt": "某研究計算出 X 和 Y 的 r = 0.02，以下哪個描述最精確？",
+    "options": [
+      "X 和 Y 之間沒有顯著的線性關聯，但不排除非線性關係存在",
+      "X 和 Y 完全無關，可以確定沒有任何關聯",
+      "樣本數不夠，r 才會如此接近 0",
+      "X 和 Y 有微弱的正向因果關係"
+    ],
+    "correct_index": 0,
+    "explanation": "r ≈ 0 只代表「沒有線性關聯」，不代表「完全無關」。例如 X 和 Y 可能存在 U 型或其他非線性關係，散佈圖的正負偏差剛好抵消，使 r 接近 0，但兩者的關係其實很強。Pearson r 的根本限制是只能偵測線性趨勢，對非線性關係視而不見。"
+  },
+  {
+    "id": "corr-005",
+    "chapter": "correlation",
+    "concept": "pearson-r",
+    "prompt": "對樣本相關係數 r 進行顯著性檢定時，虛無假設 H₀ 應設為？",
+    "options": [
+      "ρ = 0（母體中不存在線性相關）",
+      "r = 0（樣本相關係數等於零）",
+      "ρ ≠ 0（母體中存在線性相關）",
+      "μ₁ = μ₂（兩組均值相同）"
+    ],
+    "correct_index": 0,
+    "explanation": "r 是樣本統計量，ρ（rho）才是母體參數。假設檢定的目標是推論母體，所以 H₀ 設 ρ = 0（母體中無線性相關），而非 r = 0。H₁: ρ ≠ 0（雙尾）代表母體中存在線性相關。檢定統計量：t = r√(n−2) / √(1−r²)，df = n−2，用 t 表查臨界值。"
+  },
+  {
+    "id": "corr-006",
+    "chapter": "correlation",
+    "concept": "pearson-r",
+    "prompt": "研究發現夏季「冰淇淋銷量」與「溺水人數」的 r = 0.88，以下哪個結論最正確？",
+    "options": [
+      "兩者都與夏季高溫有關，屬於「共同原因」造成的虛假相關，吃冰淇淋不導致溺水",
+      "冰淇淋銷量高導致溺水人數增加，應禁止夏季販售冰淇淋",
+      "溺水事件使人們心情沮喪，因此購買更多冰淇淋",
+      "r = 0.88 不夠大，還不能判斷兩者關係"
+    ],
+    "correct_index": 0,
+    "explanation": "r = 0.88 確實是強正相關，但相關不等於因果。高溫讓更多人去游泳（溺水↑），同時讓更多人買冰淇淋（銷量↑），夏季高溫是「共同原因（common cause）」，也叫「混淆變數（confounding variable）」。冰淇淋與溺水之間的相關是「虛假相關（spurious correlation）」，並不代表任何因果關係。"
   }
 ]

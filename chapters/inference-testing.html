@@ -214,55 +214,109 @@
     </div>
 
     <div id="two-sample-t" class="concept">
-      <h3>觀念 5：兩樣本 t 檢定</h3>
-      <p>比較兩組的母體均值是否相同。需要先用 <strong>F 檢定</strong>判斷兩組變異數是否相等，再決定用「合併變異數 t」或「非合併 t」。</p>
+      <h3>觀念 5：兩母體平均數檢定（四種 Case）</h3>
+      <p>比較兩組的母體均值是否相同。根據「σ 是否已知」與「樣本大小」決定用 Z 或 t，再視等變異與否選擇 Pooled t 或 Welch t。</p>
 
-      <h4>步驟一：F 檢定（變異數齊一性）</h4>
-      <div class="formula">$$F = \frac{s_1^2}{s_2^2} \quad (\text{令 } s_1^2 \ge s_2^2)$$</div>
-      <div class="formula">$$df_1 = n_1 - 1, \quad df_2 = n_2 - 1$$</div>
+      <h4>四種 Case 決策框架</h4>
+      <table class="compare wide">
+        <thead>
+          <tr><th>Case</th><th>條件</th><th>工具</th><th>自由度</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Case 1</strong></td>
+            <td>σ₁²、σ₂² 都已知</td>
+            <td>Z 檢定</td>
+            <td>—（標準常態）</td>
+          </tr>
+          <tr>
+            <td><strong>Case 2</strong></td>
+            <td>σ 未知，n₁ ≥ 30 且 n₂ ≥ 30</td>
+            <td>Z 近似（以 s 替代 σ）</td>
+            <td>—（標準常態）</td>
+          </tr>
+          <tr>
+            <td><strong>Case 3</strong></td>
+            <td>小樣本，σ₁² = σ₂²（F 檢定確認）</td>
+            <td>Pooled t</td>
+            <td>n₁ + n₂ − 2</td>
+          </tr>
+          <tr>
+            <td><strong>Case 4</strong></td>
+            <td>小樣本，σ₁² ≠ σ₂²（F 檢定顯著）</td>
+            <td>Welch t</td>
+            <td>Satterthwaite 近似（四捨五入）</td>
+          </tr>
+        </tbody>
+      </table>
 
-      <h4>步驟二：合併變異數（Equal Variance）</h4>
+      <div class="punchline-box">
+        <strong>決策流程</strong>
+        <p>① σ₁²、σ₂² 都已知？→ <strong>Case 1</strong>（Z）</p>
+        <p>② n₁ ≥ 30 且 n₂ ≥ 30？→ <strong>Case 2</strong>（Z 近似）</p>
+        <p>③ 小樣本 → 先跑 F 檢定判斷等變異：</p>
+        <p>&nbsp;&nbsp;&nbsp;等變異（F 不顯著）→ <strong>Case 3</strong>（Pooled t）</p>
+        <p>&nbsp;&nbsp;&nbsp;不等變異（F 顯著）→ <strong>Case 4</strong>（Welch t）</p>
+      </div>
+
+      <h4>Case 1：σ₁²、σ₂² 都已知 → Z 檢定</h4>
+      <div class="formula">$$Z = \frac{(\bar{x}_1 - \bar{x}_2) - (\mu_1 - \mu_2)}{\sqrt{\dfrac{\sigma_1^2}{n_1} + \dfrac{\sigma_2^2}{n_2}}}$$</div>
+      <p>H₀ 通常設 μ₁ − μ₂ = 0，代入後分子就是 $\bar{x}_1 - \bar{x}_2$。</p>
+
+      <h4>Case 2：σ 未知，大樣本（n₁ ≥ 30 且 n₂ ≥ 30）→ Z 近似</h4>
+      <div class="formula">$$Z = \frac{(\bar{x}_1 - \bar{x}_2) - (\mu_1 - \mu_2)}{\sqrt{\dfrac{s_1^2}{n_1} + \dfrac{s_2^2}{n_2}}}$$</div>
+      <p>σ 未知但樣本夠大，以 s 替代 σ，CLT 保證 Z ≈ 標準常態分配。</p>
+
+      <h4>Case 3 前置：F 檢定（變異數齊一性）</h4>
+      <div class="formula">$$F = \frac{s_1^2}{s_2^2} \quad (\text{令 } s_1^2 \ge s_2^2), \quad df_1 = n_1 - 1,\ df_2 = n_2 - 1$$</div>
+      <p>若 $F_0 \leq F_{\alpha/2,\,df_1,\,df_2}$（不顯著）→ 走 Case 3；若超過臨界值（顯著）→ 走 Case 4。</p>
+
+      <h4>Case 3：小樣本，σ₁² = σ₂² → Pooled t</h4>
       <div class="formula">$$s_p^2 = \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2}$$</div>
-      <div class="formula">$$t = \frac{\bar{x}_1 - \bar{x}_2}{s_p\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}, \quad df = n_1 + n_2 - 2$$</div>
+      <div class="formula">$$t = \frac{(\bar{x}_1 - \bar{x}_2) - (\mu_1 - \mu_2)}{s_p\sqrt{\dfrac{1}{n_1}+\dfrac{1}{n_2}}}, \quad df = n_1 + n_2 - 2$$</div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$s_p^2$</dt><dd>合併變異數（pooled variance）——對兩組 s² 做加權平均</dd>
+          <dt>$s_p$</dt><dd>合併標準差，$s_p = \sqrt{s_p^2}$</dd>
+          <dt>$df = n_1+n_2-2$</dt><dd>合併 t 的自由度（兩組各用掉 1 個自由度）</dd>
+        </dl>
+      </div>
+
+      <h4>Case 4：小樣本，σ₁² ≠ σ₂² → Welch t</h4>
+      <div class="formula">$$t = \frac{(\bar{x}_1 - \bar{x}_2) - (\mu_1 - \mu_2)}{\sqrt{\dfrac{s_1^2}{n_1} + \dfrac{s_2^2}{n_2}}}$$</div>
+      <p>自由度用 Satterthwaite 近似公式（結果四捨五入取整數）：</p>
+      <div class="formula">$$df = \frac{\left(\dfrac{s_1^2}{n_1} + \dfrac{s_2^2}{n_2}\right)^2}{\dfrac{\left(\dfrac{s_1^2}{n_1}\right)^2}{n_1-1} + \dfrac{\left(\dfrac{s_2^2}{n_2}\right)^2}{n_2-1}}$$</div>
 
       <div class="symbol-legend">
         <strong>符號解釋</strong>
         <dl>
           <dt>$s_1^2,\ s_2^2$</dt><dd>兩組的樣本變異數</dd>
-          <dt>$F$</dt><dd>F 統計量：兩個變異數之比；若兩組變異數相等，F ≈ 1</dd>
-          <dt>$s_p^2$</dt><dd>合併變異數（pooled variance）——對兩組的 s² 做加權平均</dd>
-          <dt>$s_p$</dt><dd>合併標準差，$s_p = \sqrt{s_p^2}$</dd>
-          <dt>$df = n_1+n_2-2$</dt><dd>合併 t 的自由度</dd>
+          <dt>$df$</dt><dd>Welch t 的近似自由度（Satterthwaite 公式），計算後四捨五入</dd>
         </dl>
       </div>
 
-      <h4>完整範例：A 組 vs B 組</h4>
+      <h4>完整範例（Case 3）：A 組 vs B 組</h4>
       <p>A 組：$n_1=10,\ \bar{x}_1=1230,\ s_1^2=128$；B 組：$n_2=10,\ \bar{x}_2=1200,\ s_2^2=72$。H₀: μ₁ = μ₂，α = 0.05（雙尾）。</p>
 
       <ol class="numbered-list">
         <li>
           <strong>F 檢定</strong>（先令大的在分子）：
           <div class="formula">$$F = \frac{128}{72} \approx 1.78, \quad df_1 = 9,\ df_2 = 9$$</div>
-          查 F 表（α=0.05，df₁=9，df₂=9），臨界值 ≈ 3.18。1.78 &lt; 3.18 → <strong>不拒絕等變異數假設</strong>，使用合併 t。
+          查 F 表（α=0.05，df₁=9，df₂=9），臨界值 ≈ 3.18。1.78 &lt; 3.18 → <strong>不顯著，走 Case 3</strong>。
         </li>
         <li>
           <strong>合併變異數</strong>：
-          <div class="formula">$$s_p^2 = \frac{9 \times 128 + 9 \times 72}{10 + 10 - 2} = \frac{1152 + 648}{18} = \frac{1800}{18} = 100$$</div>
-          <div class="formula">$$s_p = \sqrt{100} = 10$$</div>
+          <div class="formula">$$s_p^2 = \frac{9 \times 128 + 9 \times 72}{18} = \frac{1800}{18} = 100, \quad s_p = 10$$</div>
         </li>
         <li>
           <strong>t 統計量</strong>：
-          <div class="formula">$$t = \frac{1230 - 1200}{10\sqrt{\frac{1}{10}+\frac{1}{10}}} = \frac{30}{10\sqrt{0.2}} = \frac{30}{10 \times 0.4472} = \frac{30}{4.472} \approx 6.71$$</div>
+          <div class="formula">$$t = \frac{1230 - 1200}{10\sqrt{\frac{1}{10}+\frac{1}{10}}} = \frac{30}{10 \times 0.4472} \approx 6.71$$</div>
         </li>
         <li><strong>臨界值</strong>：$t_{0.025,\,18} = 2.101$；拒絕域 $|t| > 2.101$</li>
         <li><strong>結論</strong>：$6.71 \gg 2.101$ → <strong>拒絕 H₀</strong>，A、B 兩組均值有顯著差異</li>
       </ol>
-
-      <div class="punchline-box">
-        <strong>兩樣本 t 流程圖</strong>
-        <p>F 檢定通過（變異數相等）→ 合併 t，df = n₁+n₂−2</p>
-        <p>F 檢定不通過（變異數不等）→ Welch t，df 用近似公式（Satterthwaite）</p>
-      </div>
     </div>
 
     <div id="paired-t" class="concept">

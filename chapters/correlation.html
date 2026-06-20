@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>關聯分析 · Pearson 相關係數 · 統計學學習工具</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <a href="../" class="logo">統計學學習工具</a>
+      <ul>
+        <li><a href="../chapters/syllabus.html">課程目錄</a></li>
+        <li><a href="../chapters/mental-models.html">心智模型</a></li>
+        <li><a href="../chapters/distribution-selection.html">分配選擇</a></li>
+        <li><a href="../chapters/glossary.html">速查</a></li>
+        <li><a href="../chapters/random-variables.html">隨機變數</a></li>
+        <li><a href="../chapters/continuous-distributions.html">連續型分配</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="../chapters/mental-models.html">← 心智模型</a>
+      <span> › M4 系統與決策</span>
+    </div>
+
+    <h1>關聯分析 · Pearson 相關係數</h1>
+
+    <div class="punchline-box">
+      <p>關聯分析回答的核心問題：兩個變數之間有沒有關係？關係的方向是什麼？關係有多強？</p>
+    </div>
+
+    <!-- 觀念 1 -->
+    <div id="correlation-types" class="concept">
+      <h3>觀念 1：三種變數組合</h3>
+      <p>分析兩個變數的關聯，首先看它們各自的「尺度（Scale）」——量（連續）還是質（類別）。不同組合使用不同工具。</p>
+
+      <table class="compare wide">
+        <thead>
+          <tr><th>變數 X</th><th>變數 Y</th><th>稱為</th><th>工具</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>量（連續）</td><td>量（連續）</td><td><strong>量量</strong></td><td>Pearson 相關係數 r</td></tr>
+          <tr><td>量（連續）</td><td>質（類別）</td><td><strong>量質</strong></td><td>點二系列相關 / ANOVA</td></tr>
+          <tr><td>質（類別）</td><td>質（類別）</td><td><strong>質質</strong></td><td>χ² 檢定 / Cramér's V</td></tr>
+        </tbody>
+      </table>
+
+      <div class="punchline-box">
+        <p><strong>量 vs 質 的判斷方式</strong></p>
+        <p><strong>量（連續變數）</strong>：「量出來的」，有大小、可做加減。例：身高、體重、溫度、成績。</p>
+        <p><strong>質（類別變數）</strong>：「數出來的」，只有分類標籤、無大小意義。例：性別、科系、品牌、是否通過。</p>
+      </div>
+    </div>
+
+    <!-- 觀念 2 -->
+    <div id="pearson-r" class="concept">
+      <h3>觀念 2：Pearson 相關係數 r</h3>
+      <p>衡量兩個連續變數之間<strong>線性關係</strong>的強度與方向。r 介於 −1 到 +1 之間，不帶任何單位。</p>
+
+      <h4>公式</h4>
+      <div class="formula">
+        $$r = \frac{\displaystyle\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\displaystyle\sum_{i=1}^{n}(x_i - \bar{x})^2 \;\cdot\; \displaystyle\sum_{i=1}^{n}(y_i - \bar{y})^2}}$$
+      </div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$(x_i - \bar{x})(y_i - \bar{y})$</dt>
+          <dd>X 偏離均值 × Y 偏離均值的乘積；兩偏差同向為正，反向為負</dd>
+          <dt>分子 $\sum(x_i-\bar{x})(y_i-\bar{y})$</dt>
+          <dd>共變異量（covariance）加總，反映兩變數「一起變動」的方向與程度</dd>
+          <dt>分母 $\sqrt{S_{xx} \cdot S_{yy}}$</dt>
+          <dd>各自離差平方和的幾何平均，做標準化使 r 不受原始單位影響</dd>
+          <dt>$r$</dt>
+          <dd>標準化後的共變異量，範圍固定在 [−1, +1]</dd>
+        </dl>
+      </div>
+
+      <h4>r 的範圍與解讀</h4>
+      <table class="compare wide">
+        <thead>
+          <tr><th>r 值範圍</th><th>強度</th><th>解讀</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>r = +1</td><td>完全正相關</td><td>X 增加，Y 完全等比例增加</td></tr>
+          <tr><td>+0.7 ≤ r &lt; +1</td><td>強正相關</td><td>X 增加，Y 明顯傾向增加</td></tr>
+          <tr><td>+0.3 ≤ r &lt; +0.7</td><td>中等正相關</td><td>趨勢存在，但資料較分散</td></tr>
+          <tr><td>|r| &lt; 0.3</td><td>弱或無線性關聯</td><td>X 變動對 Y 幾乎沒有線性預測力</td></tr>
+          <tr><td>−0.7 &lt; r ≤ −0.3</td><td>中等負相關</td><td>X 增加，Y 傾向減少</td></tr>
+          <tr><td>−1 &lt; r ≤ −0.7</td><td>強負相關</td><td>X 增加，Y 明顯傾向減少</td></tr>
+          <tr><td>r = −1</td><td>完全負相關</td><td>X 增加，Y 完全等比例減少</td></tr>
+        </tbody>
+      </table>
+
+      <div class="punchline-box">
+        <p><strong>r 描述兩個維度</strong></p>
+        <p><strong>方向</strong>：看正負號。正 → X 大 Y 大；負 → X 大 Y 小。</p>
+        <p><strong>強度</strong>：看絕對值 |r|。r = +0.85 與 r = −0.85 強度相同，方向相反。</p>
+      </div>
+    </div>
+
+    <!-- 觀念 3 -->
+    <div id="pearson-example" class="concept">
+      <h3>觀念 3：計算範例</h3>
+      <p>5 名學生的讀書時數（X）與考試成績（Y）如下，計算 Pearson r：</p>
+
+      <table class="compare wide">
+        <thead>
+          <tr><th>學生</th><th>X（時數）</th><th>Y（成績）</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>A</td><td>2</td><td>60</td></tr>
+          <tr><td>B</td><td>3</td><td>70</td></tr>
+          <tr><td>C</td><td>5</td><td>80</td></tr>
+          <tr><td>D</td><td>6</td><td>85</td></tr>
+          <tr><td>E</td><td>4</td><td>75</td></tr>
+        </tbody>
+      </table>
+
+      <ol class="numbered-list">
+        <li>
+          <strong>計算均值</strong>
+          <div class="formula">$$\bar{x} = \frac{2+3+5+6+4}{5} = 4,\quad \bar{y} = \frac{60+70+80+85+75}{5} = 74$$</div>
+        </li>
+        <li>
+          <strong>計算偏差與乘積</strong>
+          <table class="compare wide">
+            <thead>
+              <tr><th>$x_i$</th><th>$y_i$</th><th>$x_i-\bar{x}$</th><th>$y_i-\bar{y}$</th><th>乘積</th><th>$(x_i-\bar{x})^2$</th><th>$(y_i-\bar{y})^2$</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>2</td><td>60</td><td>−2</td><td>−14</td><td>28</td><td>4</td><td>196</td></tr>
+              <tr><td>3</td><td>70</td><td>−1</td><td>−4</td><td>4</td><td>1</td><td>16</td></tr>
+              <tr><td>5</td><td>80</td><td>+1</td><td>+6</td><td>6</td><td>1</td><td>36</td></tr>
+              <tr><td>6</td><td>85</td><td>+2</td><td>+11</td><td>22</td><td>4</td><td>121</td></tr>
+              <tr><td>4</td><td>75</td><td>0</td><td>+1</td><td>0</td><td>0</td><td>1</td></tr>
+              <tr><td colspan="4"><strong>Σ</strong></td><td><strong>60</strong></td><td><strong>10</strong></td><td><strong>370</strong></td></tr>
+            </tbody>
+          </table>
+        </li>
+        <li>
+          <strong>代入公式</strong>
+          <div class="formula">$$r = \frac{60}{\sqrt{10 \times 370}} = \frac{60}{\sqrt{3700}} = \frac{60}{60.83} \approx 0.986$$</div>
+        </li>
+        <li>
+          <strong>解讀</strong>：r ≈ 0.986，強正相關，讀書時數愈多考試成績愈高，線性趨勢非常明顯。
+        </li>
+      </ol>
+    </div>
+
+    <!-- 觀念 4 -->
+    <div id="pearson-test" class="concept">
+      <h3>觀念 4：r 的顯著性檢定</h3>
+      <p>樣本算出的 r ≠ 0，不代表母體真的有相關——可能只是抽樣巧合。
+         需要假設檢定確認相關是否真實存在。</p>
+
+      <h4>假設設定（以雙尾為例）</h4>
+      <p>用 ρ（rho）代表<strong>母體</strong>相關係數：</p>
+      <div class="formula">$$H_0: \rho = 0 \quad \text{（母體中無線性相關）}$$</div>
+      <div class="formula">$$H_1: \rho \neq 0 \quad \text{（母體中有線性相關）}$$</div>
+
+      <h4>檢定統計量</h4>
+      <div class="formula">$$t = \frac{r\sqrt{n-2}}{\sqrt{1-r^2}}, \quad df = n - 2$$</div>
+
+      <div class="symbol-legend">
+        <strong>符號解釋</strong>
+        <dl>
+          <dt>$r$</dt><dd>樣本 Pearson 相關係數</dd>
+          <dt>$n-2$</dt><dd>自由度，估計了 $\bar{x}$ 和 $\bar{y}$ 兩個參數，各消耗一個自由度</dd>
+          <dt>$\sqrt{1-r^2}$</dt><dd>|r| 愈大，分母愈小，t 愈大——相關越強，越容易達到顯著</dd>
+        </dl>
+      </div>
+
+      <h4>範例（接上例）</h4>
+      <p>r = 0.986，n = 5，α = 0.05（雙尾）。</p>
+      <ol class="numbered-list">
+        <li><strong>假設</strong>：H₀: ρ = 0；H₁: ρ ≠ 0</li>
+        <li>
+          <strong>t 統計量</strong>
+          <div class="formula">$$t = \frac{0.986\sqrt{3}}{\sqrt{1-0.986^2}} = \frac{0.986 \times 1.732}{\sqrt{0.028}} = \frac{1.708}{0.167} \approx 10.24$$</div>
+        </li>
+        <li><strong>臨界值</strong>：$t_{0.025,\;3} = 3.182$</li>
+        <li><strong>結論</strong>：10.24 ≫ 3.182 → 拒絕 H₀，讀書時數與考試成績之間存在顯著線性相關。</li>
+      </ol>
+    </div>
+
+    <!-- 觀念 5 -->
+    <div id="correlation-causation" class="concept">
+      <h3>觀念 5：相關 ≠ 因果</h3>
+      <p>r 只衡量兩變數「一起變動」的程度，不代表一個「導致」另一個。</p>
+
+      <table class="compare wide">
+        <thead>
+          <tr><th>現象</th><th>r</th><th>直覺誤解</th><th>真正原因</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>溺水人數 vs 冰淇淋銷量</td>
+            <td>強正相關</td>
+            <td>吃冰淇淋導致溺水？</td>
+            <td>兩者都跟夏季高溫有關（共同原因）</td>
+          </tr>
+          <tr>
+            <td>兒童鞋號 vs 閱讀能力</td>
+            <td>正相關</td>
+            <td>腳大讀書好？</td>
+            <td>兩者都跟年齡有關（共同原因）</td>
+          </tr>
+          <tr>
+            <td>讀書時數 vs 成績</td>
+            <td>強正相關</td>
+            <td>讀書一定導致高分？</td>
+            <td>可能有混淆變數（如學習能力、自律性）</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="punchline-box">
+        <p><strong>r 的三大限制</strong></p>
+        <ol>
+          <li><strong>只偵測線性關係</strong>：r ≈ 0 不代表「完全無關」，可能存在非線性（如 U 型）關係</li>
+          <li><strong>容易受極端值影響</strong>：一個離群點就能讓 r 從 0.9 掉到 0.3</li>
+          <li><strong>不代表因果</strong>：相關是推論因果的必要條件，但不是充分條件</li>
+        </ol>
+      </div>
+    </div>
+
+    <section class="quiz-section">
+      <h2>選擇題 · Pearson 相關係數</h2>
+      <div id="quiz-pearson"></div>
+    </section>
+  </main>
+
+  <script src="../js/quiz.js"></script>
+  <script>
+    loadQuiz('pearson-r', 'quiz-pearson');
+  </script>
+</body>
+</html>
