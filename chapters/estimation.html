@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>估計理論 · 點估計與區間估計 · 統計學學習工具</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <a href="../" class="logo">統計學學習工具</a>
+      <ul>
+        <li><a href="../chapters/syllabus.html">課程目錄</a></li>
+        <li><a href="../chapters/mental-models.html">心智模型</a></li>
+        <li><a href="../chapters/distribution-selection.html">分配選擇</a></li>
+        <li><a href="../chapters/glossary.html">速查</a></li>
+        <li><a href="../chapters/random-variables.html">隨機變數</a></li>
+        <li><a href="../chapters/continuous-distributions.html">連續型分配</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="../chapters/mental-models.html">← 心智模型</a>
+      <span> › M3 實驗與審判</span>
+    </div>
+
+    <h1>估計理論 · 點估計與區間估計</h1>
+
+    <div class="punchline-box">
+      <p>推論統計的第一個問題：「我只有樣本，怎麼猜母體的參數？」估計理論回答「猜什麼」和「猜得好不好」。</p>
+    </div>
+
+    <!-- 觀念 1 -->
+    <div id="point-vs-interval" class="concept">
+      <h3>觀念 1：點估計 vs 區間估計</h3>
+
+      <table class="compare wide">
+        <thead>
+          <tr><th>方式</th><th>給出的答案</th><th>例子</th><th>優缺點</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>點估計</strong></td>
+            <td>一個數字</td>
+            <td>「母體均值估計是 70 kg」</td>
+            <td>簡單直觀，但沒說明誤差有多大</td>
+          </tr>
+          <tr>
+            <td><strong>區間估計</strong></td>
+            <td>一個範圍</td>
+            <td>「母體均值在 68～72 kg 之間（95% 信心）」</td>
+            <td>含不確定性資訊，但範圍寬度受 n 影響</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="punchline-box">
+        <p>點估計告訴你「最佳猜測是什麼」，區間估計告訴你「這個猜測有多可靠」。兩者互補，不是替代關係。</p>
+      </div>
+
+      <h4>常用點估計量</h4>
+      <table class="compare wide">
+        <thead>
+          <tr><th>母體參數</th><th>符號</th><th>樣本估計量</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>母體均值</td><td>μ</td><td>樣本均值 x̄</td></tr>
+          <tr><td>母體變異數</td><td>σ²</td><td>樣本變異數 s²（分母 n−1）</td></tr>
+          <tr><td>母體比例</td><td>p</td><td>樣本比例 p̂ = x/n</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 觀念 2 -->
+    <div id="estimator-properties" class="concept">
+      <h3>觀念 2：估計量的三大性質</h3>
+      <p>同一個母體參數可以有很多種估計量，哪種比較「好」？統計學用三個標準評分。</p>
+
+      <h4>性質一：不偏性（Unbiasedness）</h4>
+      <p>估計量的期望值等於母體真值——平均來說不會高估也不會低估。</p>
+
+      <div class="formula-box">
+        <strong>定義：</strong>
+        <pre>E(θ̂) = θ</pre>
+        θ̂（theta hat）是估計量，θ 是母體真值
+      </div>
+
+      <p><strong>範例：</strong>x̄ 是 μ 的不偏估計量，因為 E(x̄) = μ。</p>
+      <p><strong>反例：</strong>用 n 當分母算的「有偏變異數」，E 值會比 σ² 小，所以改用 n−1 修正。</p>
+
+      <div class="punchline-box">
+        <p><strong>反常識點</strong>：不偏估計量每次猜的不一定準，只是「多次抽樣的平均」剛好等於真值。單次猜測可能偏很多，不偏性是長期平均的保證，不是單次的保證。</p>
+      </div>
+
+      <h4>性質二：一致性（Consistency）</h4>
+      <p>樣本量 n 越大，估計量越接近母體真值——n → ∞ 時估計量收斂到 θ。</p>
+
+      <pre>n 越大 → 估計誤差越小 → 估計量越可靠</pre>
+
+      <p>x̄ 同時具備不偏性與一致性，這是它被廣泛使用的原因。</p>
+
+      <h4>性質三：有效性（Efficiency）</h4>
+      <p>在所有不偏估計量中，變異數最小的那個最有效——猜測結果最集中、波動最小。</p>
+
+      <table class="compare wide">
+        <thead>
+          <tr><th>性質</th><th>白話意義</th><th>數學定義</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>不偏性</td><td>平均來說不偏左也不偏右</td><td>E(θ̂) = θ</td></tr>
+          <tr><td>一致性</td><td>樣本越多越準</td><td>n↑ → θ̂ → θ</td></tr>
+          <tr><td>有效性</td><td>猜測結果最集中</td><td>Var(θ̂) 最小</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 觀念 3 -->
+    <div id="mle" class="concept">
+      <h3>觀念 3：最大概似估計（MLE）</h3>
+      <p>MLE 是點估計的另一種方法：「哪個參數值，最能讓我觀察到手上這筆資料？」</p>
+
+      <h4>核心邏輯</h4>
+      <pre>
+觀察到資料 x₁, x₂, ..., xₙ
+假設來自某個分配，參數是 θ（未知）
+
+概似函數 L(θ) = P(觀察到這筆資料 | 參數是 θ)
+
+MLE 的答案：選讓 L(θ) 最大的那個 θ̂
+      </pre>
+
+      <div class="punchline-box">
+        <p>白話類比：射箭後看箭落在哪裡，反推「射手的準心最可能在哪個位置」——從結果反推最合理的原因。</p>
+      </div>
+
+      <h4>對數概似函數</h4>
+      <p>直接對 L(θ) 求最大值計算複雜（連乘），實務上改對 ln L(θ)（對數概似函數）求最大值，結果相同但計算簡單。</p>
+
+      <pre>
+ln L(θ) = Σ ln f(xᵢ | θ)
+
+對 θ 微分後令等於 0，解出 θ̂_MLE
+      </pre>
+
+      <h4>MLE 的重要性質</h4>
+      <table class="compare wide">
+        <thead>
+          <tr><th>性質</th><th>說明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>一致性</td><td>n → ∞ 時，θ̂_MLE → θ（真值）</td></tr>
+          <tr><td>漸近常態性</td><td>n 夠大時，θ̂_MLE 近似常態分配，可用來建立信賴區間</td></tr>
+          <tr><td>漸近有效性</td><td>大樣本下，MLE 在所有一致估計量中變異數最小</td></tr>
+        </tbody>
+      </table>
+
+      <div class="punchline-box">
+        <p><strong>MLE vs x̄</strong>：對常態母體估計 μ，MLE 算出來的答案就是 x̄。但 MLE 的優勢在於可以推廣到任何分配（不限常態），是統計學最通用的估計方法。</p>
+      </div>
+    </div>
+
+    <!-- 觀念 4 -->
+    <div id="ci-width" class="concept">
+      <h3>觀念 4：信賴區間寬度與樣本量</h3>
+      <p>信賴區間的公式：</p>
+
+      <div class="formula-box">
+        <pre>
+         s
+x̄ ± Z · ──
+        √n
+        </pre>
+        誤差範圍（Margin of Error）= Z · s/√n
+      </div>
+
+      <h4>影響區間寬度的三個因素</h4>
+
+      <table class="compare wide">
+        <thead>
+          <tr><th>因素</th><th>變大時</th><th>區間寬度</th><th>原因</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>n（樣本量）</td><td>↑ 增加</td><td>↓ 變窄</td><td>√n 變大，SE 縮小，估計更精準</td></tr>
+          <tr><td>s（樣本標準差）</td><td>↑ 增加</td><td>↑ 變寬</td><td>資料本身更分散，估計更不確定</td></tr>
+          <tr><td>信賴水準（1−α）</td><td>↑ 增加（如 95%→99%）</td><td>↑ 變寬</td><td>Z 值變大（1.96→2.575），要框住更大範圍</td></tr>
+        </tbody>
+      </table>
+
+      <div class="punchline-box">
+        <p><strong>反常識點</strong>：信賴水準越高，區間反而越寬——99% 信賴區間比 95% 更寬。要「更有把握」的代價是「說得更模糊」。精準和信心是互相拉扯的。</p>
+      </div>
+
+      <h4>要讓誤差範圍縮小一半，n 需要變成 4 倍</h4>
+
+      <pre>
+誤差範圍 = Z · s/√n
+
+n → 4n 時：Z · s/√(4n) = Z · s/(2√n) = 原本的一半
+      </pre>
+
+      <p>這解釋了為什麼大型調查（如選舉民調）需要上千個樣本：多收 100 份問卷，精準度的改善其實很有限。</p>
+    </div>
+
+    <section class="quiz-section">
+      <h2>選擇題 · 估計理論</h2>
+      <div id="quiz-estimation"></div>
+    </section>
+  </main>
+
+  <script src="../js/quiz.js"></script>
+  <script>
+    loadQuiz('estimation', 'quiz-estimation');
+  </script>
+</body>
+</html>
