@@ -47,6 +47,34 @@
       </ol>
     </div>
 
+    <div class="concept">
+      <h3>統一 Case 框架總覽（Case 1~8）</h3>
+      <p>單母體與雙母體的所有情境，統一用 Case 1~8 編號，考試前只需對照這張表。</p>
+      <table class="compare wide">
+        <thead>
+          <tr><th>Case</th><th>母體數</th><th>條件</th><th>工具</th><th>df</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Case 1</strong></td><td>單</td><td>σ 已知</td><td>Z</td><td>—</td></tr>
+          <tr><td><strong>Case 2</strong></td><td>單</td><td>σ 未知，n ≥ 30</td><td>Z 近似</td><td>—</td></tr>
+          <tr><td><strong>Case 3</strong></td><td>單</td><td>σ 未知，n &lt; 30，常態</td><td>t</td><td>n − 1</td></tr>
+          <tr><td><strong>Case 4</strong></td><td>雙（獨立）</td><td>σ₁、σ₂ 已知</td><td>Z</td><td>—</td></tr>
+          <tr><td><strong>Case 5</strong></td><td>雙（獨立）</td><td>σ 未知，n₁ ≥ 30 且 n₂ ≥ 30</td><td>Z 近似</td><td>—</td></tr>
+          <tr><td><strong>Case 6</strong></td><td>雙（獨立）</td><td>小樣本，F 檢定 → 等變異</td><td>Pooled t</td><td>n₁ + n₂ − 2</td></tr>
+          <tr><td><strong>Case 7</strong></td><td>雙（獨立）</td><td>小樣本，F 檢定 → 不等變異</td><td>Welch t</td><td>Satterthwaite</td></tr>
+          <tr><td><strong>Case 8</strong></td><td>雙（配對）</td><td>同一受試者兩次測量</td><td>Paired t</td><td>n − 1（配對組數）</td></tr>
+        </tbody>
+      </table>
+      <div class="punchline-box">
+        <strong>判斷順序</strong>
+        <p>① 幾個母體？單母體 → Case 1~3；雙母體 → 繼續</p>
+        <p>② 配對設計？是 → Case 8；獨立樣本 → 繼續</p>
+        <p>③ σ₁、σ₂ 已知？是 → Case 4；否 → 繼續</p>
+        <p>④ n₁ ≥ 30 且 n₂ ≥ 30？是 → Case 5；否 → 繼續</p>
+        <p>⑤ F 檢定等變異？等變異 → Case 6；不等變異 → Case 7</p>
+      </div>
+    </div>
+
     <div id="conf-interval-z" class="concept">
       <h3>觀念 1：信賴區間（Z）— σ 已知</h3>
       <p>「95% 信賴區間」的意思是：用這個方法反覆做 100 次，有 95 次的區間會包含真正的 μ。<strong>不是「μ 有 95% 機率在這個區間」</strong>——μ 是固定的，只有區間在變。</p>
@@ -214,64 +242,22 @@
     </div>
 
     <div id="two-sample-t" class="concept">
-      <h3>觀念 5：兩母體平均數檢定（四種 Case）</h3>
+      <h3>觀念 5：雙母體獨立樣本檢定（Case 4~7）</h3>
       <p>比較兩組的母體均值是否相同。根據「σ 是否已知」與「樣本大小」決定用 Z 或 t，再視等變異與否選擇 Pooled t 或 Welch t。</p>
 
-      <h4>四種 Case 決策框架</h4>
-      <table class="compare wide">
-        <thead>
-          <tr><th>Case</th><th>條件</th><th>工具</th><th>自由度</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Case 1</strong></td>
-            <td>σ₁²、σ₂² 都已知</td>
-            <td>Z 檢定</td>
-            <td>—（標準常態）</td>
-          </tr>
-          <tr>
-            <td><strong>Case 2</strong></td>
-            <td>σ 未知，n₁ ≥ 30 且 n₂ ≥ 30</td>
-            <td>Z 近似（以 s 替代 σ）</td>
-            <td>—（標準常態）</td>
-          </tr>
-          <tr>
-            <td><strong>Case 3</strong></td>
-            <td>小樣本，σ₁² = σ₂²（F 檢定確認）</td>
-            <td>Pooled t</td>
-            <td>n₁ + n₂ − 2</td>
-          </tr>
-          <tr>
-            <td><strong>Case 4</strong></td>
-            <td>小樣本，σ₁² ≠ σ₂²（F 檢定顯著）</td>
-            <td>Welch t</td>
-            <td>Satterthwaite 近似（四捨五入）</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="punchline-box">
-        <strong>決策流程</strong>
-        <p>① σ₁²、σ₂² 都已知？→ <strong>Case 1</strong>（Z）</p>
-        <p>② n₁ ≥ 30 且 n₂ ≥ 30？→ <strong>Case 2</strong>（Z 近似）</p>
-        <p>③ 小樣本 → 先跑 F 檢定判斷等變異：</p>
-        <p>&nbsp;&nbsp;&nbsp;等變異（F 不顯著）→ <strong>Case 3</strong>（Pooled t）</p>
-        <p>&nbsp;&nbsp;&nbsp;不等變異（F 顯著）→ <strong>Case 4</strong>（Welch t）</p>
-      </div>
-
-      <h4>Case 1：σ₁²、σ₂² 都已知 → Z 檢定</h4>
+      <h4>Case 4：σ₁²、σ₂² 都已知 → Z 檢定</h4>
       <div class="formula">$$Z = \frac{(\bar{x}_1 - \bar{x}_2) - (\mu_1 - \mu_2)}{\sqrt{\dfrac{\sigma_1^2}{n_1} + \dfrac{\sigma_2^2}{n_2}}}$$</div>
       <p>H₀ 通常設 μ₁ − μ₂ = 0，代入後分子就是 $\bar{x}_1 - \bar{x}_2$。</p>
 
-      <h4>Case 2：σ 未知，大樣本（n₁ ≥ 30 且 n₂ ≥ 30）→ Z 近似</h4>
+      <h4>Case 5：σ 未知，大樣本（n₁ ≥ 30 且 n₂ ≥ 30）→ Z 近似</h4>
       <div class="formula">$$Z = \frac{(\bar{x}_1 - \bar{x}_2) - (\mu_1 - \mu_2)}{\sqrt{\dfrac{s_1^2}{n_1} + \dfrac{s_2^2}{n_2}}}$$</div>
       <p>σ 未知但樣本夠大，以 s 替代 σ，CLT 保證 Z ≈ 標準常態分配。</p>
 
-      <h4>Case 3 前置：F 檢定（變異數齊一性）</h4>
+      <h4>Case 6/7 前置：F 檢定（變異數齊一性）</h4>
       <div class="formula">$$F = \frac{s_1^2}{s_2^2} \quad (\text{令 } s_1^2 \ge s_2^2), \quad df_1 = n_1 - 1,\ df_2 = n_2 - 1$$</div>
-      <p>若 $F_0 \leq F_{\alpha/2,\,df_1,\,df_2}$（不顯著）→ 走 Case 3；若超過臨界值（顯著）→ 走 Case 4。</p>
+      <p>若 $F_0 \leq F_{\alpha/2,\,df_1,\,df_2}$（不顯著）→ 走 Case 6；若超過臨界值（顯著）→ 走 Case 7。</p>
 
-      <h4>Case 3：小樣本，σ₁² = σ₂² → Pooled t</h4>
+      <h4>Case 6：小樣本，σ₁² = σ₂² → Pooled t</h4>
       <div class="formula">$$s_p^2 = \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2}$$</div>
       <div class="formula">$$t = \frac{(\bar{x}_1 - \bar{x}_2) - (\mu_1 - \mu_2)}{s_p\sqrt{\dfrac{1}{n_1}+\dfrac{1}{n_2}}}, \quad df = n_1 + n_2 - 2$$</div>
 
@@ -284,7 +270,7 @@
         </dl>
       </div>
 
-      <h4>Case 4：小樣本，σ₁² ≠ σ₂² → Welch t</h4>
+      <h4>Case 7：小樣本，σ₁² ≠ σ₂² → Welch t</h4>
       <div class="formula">$$t = \frac{(\bar{x}_1 - \bar{x}_2) - (\mu_1 - \mu_2)}{\sqrt{\dfrac{s_1^2}{n_1} + \dfrac{s_2^2}{n_2}}}$$</div>
       <p>自由度用 Satterthwaite 近似公式（結果四捨五入取整數）：</p>
       <div class="formula">$$df = \frac{\left(\dfrac{s_1^2}{n_1} + \dfrac{s_2^2}{n_2}\right)^2}{\dfrac{\left(\dfrac{s_1^2}{n_1}\right)^2}{n_1-1} + \dfrac{\left(\dfrac{s_2^2}{n_2}\right)^2}{n_2-1}}$$</div>
@@ -297,14 +283,14 @@
         </dl>
       </div>
 
-      <h4>完整範例（Case 3）：A 組 vs B 組</h4>
+      <h4>完整範例（Case 6）：A 組 vs B 組</h4>
       <p>A 組：$n_1=10,\ \bar{x}_1=1230,\ s_1^2=128$；B 組：$n_2=10,\ \bar{x}_2=1200,\ s_2^2=72$。H₀: μ₁ = μ₂，α = 0.05（雙尾）。</p>
 
       <ol class="numbered-list">
         <li>
           <strong>F 檢定</strong>（先令大的在分子）：
           <div class="formula">$$F = \frac{128}{72} \approx 1.78, \quad df_1 = 9,\ df_2 = 9$$</div>
-          查 F 表（α=0.05，df₁=9，df₂=9），臨界值 ≈ 3.18。1.78 &lt; 3.18 → <strong>不顯著，走 Case 3</strong>。
+          查 F 表（α=0.05，df₁=9，df₂=9），臨界值 ≈ 3.18。1.78 &lt; 3.18 → <strong>不顯著，走 Case 6</strong>。
         </li>
         <li>
           <strong>合併變異數</strong>：
@@ -320,7 +306,7 @@
     </div>
 
     <div id="paired-t" class="concept">
-      <h3>觀念 6：配對 t 檢定（Paired t-test）</h3>
+      <h3>觀念 6：Case 8 — 配對 t 檢定（Paired t-test）</h3>
       <p>兩筆數據來自<strong>同一受試者的兩次測量</strong>（前測／後測、左右手、雙胞胎），資料本身不獨立，不能套用兩樣本 t。做法是先把每對的差值 $d_i$ 算出來，再對差值做一次<strong>單樣本 t 檢定</strong>。</p>
 
       <h4>配對 vs 獨立：先判斷，再選工具</h4>
