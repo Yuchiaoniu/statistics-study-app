@@ -505,6 +505,152 @@
       </tbody>
     </table>
 
+    <!-- 三種決策方法 -->
+    <h2 style="margin-top:2.5rem;margin-bottom:0.75rem;">三種決策方法</h2>
+    <p style="color:var(--muted);margin-bottom:1.25rem;">拒絕 H₀ 有三種等價方法，結論完全一致，切入角度不同：</p>
+
+    <table class="error-table">
+      <thead>
+        <tr><th>方法</th><th>決策規則</th><th>優勢</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>① 臨界值法</strong></td>
+          <td>|檢定統計量| &gt; 臨界值 → 拒絕 H₀</td>
+          <td>圖形直觀，容易理解</td>
+        </tr>
+        <tr>
+          <td><strong>② p 值法</strong></td>
+          <td>p 值 &lt; α → 拒絕 H₀</td>
+          <td>統計軟體標準輸出，可跨研究比較</td>
+        </tr>
+        <tr>
+          <td><strong>③ 信賴區間法</strong></td>
+          <td>μ₀ 落在 (1−α) CI 外 → 拒絕 H₀</td>
+          <td>同時提供估計範圍，資訊最豐富</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- p 值法 -->
+    <div class="concept-block" style="background:var(--card);border-radius:12px;padding:1.5rem;margin:1.5rem 0;border-left:4px solid #60a5fa;">
+      <h3 style="margin-top:0;color:#60a5fa;">方法 ②：p 值法（p-value Method）</h3>
+
+      <p><strong>p 值定義</strong>：假設 H₀ 為真，觀察到目前樣本結果（或更極端的結果）的機率。</p>
+
+      <table class="error-table" style="margin:1rem 0;">
+        <thead><tr><th>尾別</th><th>p 值計算</th></tr></thead>
+        <tbody>
+          <tr><td>右尾（H₁: μ &gt; μ₀）</td><td>p = P(Z ≥ z₀) = 1 − Φ(z₀)</td></tr>
+          <tr><td>左尾（H₁: μ &lt; μ₀）</td><td>p = P(Z ≤ z₀) = Φ(z₀)</td></tr>
+          <tr><td>雙尾（H₁: μ ≠ μ₀）</td><td>p = 2 × P(Z ≥ |z₀|) = 2(1 − Φ(|z₀|))</td></tr>
+        </tbody>
+      </table>
+
+      <div class="alert-box" style="background:rgba(96,165,250,0.12);border-left:3px solid #60a5fa;padding:0.75rem 1rem;border-radius:6px;margin:1rem 0;">
+        <strong>決策規則：</strong><br>
+        p 值 &lt; α &nbsp;→ 拒絕 H₀（結果在 H₀ 下太稀有，顯著）<br>
+        p 值 ≥ α &nbsp;→ 不拒絕 H₀（結果在 H₀ 下屬合理範圍，不顯著）
+      </div>
+
+      <h4>計算範例</h4>
+      <p>右尾檢定：z₀ = 2.35，α = 0.05</p>
+      <pre>p 值 = P(Z ≥ 2.35) = 1 − Φ(2.35) ≈ 1 − 0.9906 = 0.0094
+
+p = 0.0094 &lt; α = 0.05 → 拒絕 H₀（與臨界值法結論相同）</pre>
+
+      <p style="margin-top:0.75rem;color:var(--muted);font-size:0.88rem;"><strong>反常識點：</strong>p 值越小，越有理由拒絕 H₀；p = 0.001 遠比 p = 0.04 更強烈地反對 H₀。</p>
+    </div>
+
+    <!-- 信賴區間法 -->
+    <div class="concept-block" style="background:var(--card);border-radius:12px;padding:1.5rem;margin:1.5rem 0;border-left:4px solid #a3e635;">
+      <h3 style="margin-top:0;color:#a3e635;">方法 ③：信賴區間法（CI Method）</h3>
+
+      <p>建立 (1−α) 信賴區間，觀察 H₀ 所設定的 μ₀ 是否落在區間內：</p>
+      <ul>
+        <li>μ₀ 落在 CI 之外 → 拒絕 H₀</li>
+        <li>μ₀ 落在 CI 之內 → 不拒絕 H₀</li>
+      </ul>
+
+      <pre>
+Case 1（σ 已知）95% 信賴區間：
+
+        σ
+x̄ ± 1.96 · ──
+       √n
+
+Case 3（σ 未知，n &lt; 30）95% 信賴區間：
+
+        s
+x̄ ± t_{α/2, df} · ──
+        √n
+      </pre>
+
+      <h4>計算範例</h4>
+      <p>x̄ = 172，σ = 10，n = 36，μ₀ = 170，α = 0.05</p>
+      <pre>SE = 10/√36 ≈ 1.667
+
+95% CI：172 ± 1.96 × 1.667 = (168.73, 175.27)
+
+μ₀ = 170 落在 (168.73, 175.27) 內 → 不拒絕 H₀</pre>
+
+      <div class="alert-box" style="background:rgba(163,230,53,0.10);border-left:3px solid #a3e635;padding:0.75rem 1rem;border-radius:6px;margin-top:1rem;">
+        <strong>等價性：</strong>信賴區間法（雙尾）與雙尾臨界值法在同一 α 下結論完全相同。
+        信賴區間的附加價值：不只是「拒絕/不拒絕」，還能看出 μ 可能的合理範圍。
+      </div>
+    </div>
+
+    <!-- 型 II 誤差深入說明 -->
+    <h2 style="margin-top:2.5rem;margin-bottom:0.75rem;">型 II 誤差 β 與檢定力（Power）</h2>
+
+    <div class="concept-block" style="background:var(--card);border-radius:12px;padding:1.5rem;margin:1.5rem 0;border-left:4px solid #fb923c;">
+      <h3 style="margin-top:0;color:#fb923c;">型 II 誤差 β 深入說明</h3>
+
+      <pre>β = P(不拒絕 H₀ | H₀ 為假，真實 μ = μₐ)</pre>
+      <p>白話：效果真的存在，但實驗沒有抓到它的機率。需要指定「真實的 μ 是多少（μₐ）」才能計算。</p>
+
+      <h4>影響 β 的四個因素</h4>
+      <table class="error-table">
+        <thead><tr><th>因素</th><th>變動</th><th>β 的變化</th><th>原因</th></tr></thead>
+        <tbody>
+          <tr><td>樣本量 n</td><td>↑ 增大</td><td>↓ 減小</td><td>SE 縮小，更容易偵測差異</td></tr>
+          <tr><td>顯著水準 α</td><td>↑ 放寬</td><td>↓ 減小</td><td>拒絕域變大，更容易拒絕 H₀</td></tr>
+          <tr><td>真實差距 |μₐ − μ₀|</td><td>↑ 增大</td><td>↓ 減小</td><td>差距越大越容易偵測</td></tr>
+          <tr><td>母體標準差 σ</td><td>↑ 增大</td><td>↑ 增大</td><td>雜訊增加，訊號更難浮現</td></tr>
+        </tbody>
+      </table>
+
+      <div class="alert-box" style="background:rgba(251,146,60,0.12);border-left:3px solid #fb923c;padding:0.75rem 1rem;border-radius:6px;margin-top:1rem;">
+        <strong>α 與 β 的拉扯：</strong>降低 α（更嚴格）→ 型 I 錯誤減少，但 β 上升（型 II 錯誤增加）。
+        兩者無法同時無限縮小——唯一的辦法是增大 n。
+      </div>
+    </div>
+
+    <div class="concept-block" style="background:var(--card);border-radius:12px;padding:1.5rem;margin:1.5rem 0;border-left:4px solid #c084fc;">
+      <h3 style="margin-top:0;color:#c084fc;">檢定力（Power = 1 − β）</h3>
+
+      <pre>Power = 1 − β = P(正確拒絕 H₀ | H₀ 為假)</pre>
+      <p>白話：「我的實驗有多大把握能抓到真實的效果？」學術研究通常要求 Power ≥ 0.80。</p>
+
+      <table class="error-table" style="margin:1rem 0;">
+        <thead><tr><th>Power 值</th><th>意義</th></tr></thead>
+        <tbody>
+          <tr><td>0.20</td><td>極弱：五次只有一次抓到，幾乎靠運氣</td></tr>
+          <tr><td>0.50</td><td>猜硬幣水準，不適合用於研究</td></tr>
+          <tr><td>0.80</td><td>一般學術研究的最低門檻（APA 建議）</td></tr>
+          <tr><td>0.95+</td><td>高檢定力，適合醫學試驗等高風險決策</td></tr>
+        </tbody>
+      </table>
+
+      <h4>提高 Power 的四個方法</h4>
+      <ol>
+        <li><strong>增大樣本 n</strong>（最常用，SE = σ/√n 縮小）</li>
+        <li><strong>放寬 α</strong>（從 0.01 改為 0.05，但型 I 錯誤機率上升）</li>
+        <li><strong>選擇效果更大的介入</strong>（μₐ 與 μ₀ 差距越大越好偵測）</li>
+        <li><strong>減少量測雜訊 σ</strong>（改進實驗設計、使用精確量測工具）</li>
+      </ol>
+    </div>
+
     <!-- 底部導覽 -->
     <div class="nav-footer">
       <a href="./test-evolution.html" class="nav-btn-card">
