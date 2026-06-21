@@ -49,23 +49,79 @@
 
     <div class="concept">
       <h3>統一 Case 框架總覽（Case 1~8）</h3>
-      <p>單母體與雙母體的所有情境，統一用 Case 1~8 編號，考試前只需對照這張表。</p>
+      <p>單母體與雙母體的所有情境，統一用 Case 1~8 編號。每個 Case 的檢定統計量結構相同：</p>
+      <div class="formula">$$\text{統計量} = \frac{\text{分子（觀察值} - \text{H}_0\text{主張值）}}{\text{分母（SE，觀察量的抖動幅度）}}$$</div>
+
       <table class="compare wide">
         <thead>
-          <tr><th>Case</th><th>母體數</th><th>條件</th><th>工具</th><th>df</th></tr>
+          <tr><th>Case</th><th>情境</th><th>條件</th><th>分子</th><th>分母（SE）</th><th>工具</th><th>df</th></tr>
         </thead>
         <tbody>
-          <tr><td><strong>Case 1</strong></td><td>單</td><td>σ 已知</td><td>Z</td><td>—</td></tr>
-          <tr><td><strong>Case 2</strong></td><td>單</td><td>σ 未知，n ≥ 30</td><td>Z 近似</td><td>—</td></tr>
-          <tr><td><strong>Case 3</strong></td><td>單</td><td>σ 未知，n &lt; 30，常態</td><td>t</td><td>n − 1</td></tr>
-          <tr><td><strong>Case 4</strong></td><td>雙（獨立）</td><td>σ₁、σ₂ 已知</td><td>Z</td><td>—</td></tr>
-          <tr><td><strong>Case 5</strong></td><td>雙（獨立）</td><td>σ 未知，n₁ ≥ 30 且 n₂ ≥ 30</td><td>Z 近似</td><td>—</td></tr>
-          <tr><td><strong>Case 6</strong></td><td>雙（獨立）</td><td>小樣本，F 檢定 → 等變異</td><td>Pooled t</td><td>n₁ + n₂ − 2</td></tr>
-          <tr><td><strong>Case 7</strong></td><td>雙（獨立）</td><td>小樣本，F 檢定 → 不等變異</td><td>Welch t</td><td>Satterthwaite</td></tr>
-          <tr><td><strong>Case 8</strong></td><td>雙（配對）</td><td>同一受試者兩次測量</td><td>Paired t</td><td>n − 1（配對組數）</td></tr>
+          <tr>
+            <td><strong>Case 1</strong></td><td>單母體</td><td>σ <strong>已知</strong></td>
+            <td>$\bar{x} - \mu_0$</td><td>$\sigma/\sqrt{n}$</td><td>Z</td><td>—</td>
+          </tr>
+          <tr>
+            <td><strong>Case 2</strong></td><td>單母體</td><td>σ 未知，<strong>n ≥ 30</strong></td>
+            <td>$\bar{x} - \mu_0$</td><td>$s/\sqrt{n}$</td><td>Z 近似</td><td>—</td>
+          </tr>
+          <tr>
+            <td><strong>Case 3</strong></td><td>單母體</td><td>σ 未知，<strong>n &lt; 30</strong>，常態</td>
+            <td>$\bar{x} - \mu_0$</td><td>$s/\sqrt{n}$</td><td>t</td><td>n − 1</td>
+          </tr>
+          <tr>
+            <td><strong>Case 4</strong></td><td>雙母體獨立</td><td>σ₁、σ₂ <strong>已知</strong>（任意 n）</td>
+            <td>$(\bar{x}_1 - \bar{x}_2) - 0$</td><td>$\sqrt{\sigma_1^2/n_1 + \sigma_2^2/n_2}$</td><td>Z</td><td>—</td>
+          </tr>
+          <tr>
+            <td><strong>Case 5</strong></td><td>雙母體獨立</td><td>σ 未知，n₁ ≥ 30 且 n₂ ≥ 30</td>
+            <td>$(\bar{x}_1 - \bar{x}_2) - 0$</td><td>$\sqrt{s_1^2/n_1 + s_2^2/n_2}$</td><td>Z 近似</td><td>—</td>
+          </tr>
+          <tr>
+            <td><strong>Case 6</strong></td><td>雙母體獨立</td><td>小樣本，F 檢定 → <strong>等變異</strong></td>
+            <td>$(\bar{x}_1 - \bar{x}_2) - 0$</td><td>$s_p\sqrt{1/n_1 + 1/n_2}$</td><td>Pooled t</td><td>n₁ + n₂ − 2</td>
+          </tr>
+          <tr>
+            <td><strong>Case 7</strong></td><td>雙母體獨立</td><td>小樣本，F 檢定 → <strong>不等變異</strong></td>
+            <td>$(\bar{x}_1 - \bar{x}_2) - 0$</td><td>$\sqrt{s_1^2/n_1 + s_2^2/n_2}$</td><td>Welch t</td><td>Satterthwaite</td>
+          </tr>
+          <tr>
+            <td><strong>Case 8</strong></td><td>雙母體配對</td><td>同一受試者兩次測量，算差值 d</td>
+            <td>$\bar{d} - 0$</td><td>$s_d/\sqrt{n}$</td><td>t</td><td>n − 1（配對組數）</td>
+          </tr>
         </tbody>
       </table>
-      <div class="punchline-box">
+
+      <!-- 常見混淆 1 -->
+      <div class="punchline-box" style="margin-top:1.2rem;">
+        <strong>⚠ 常見混淆 1：Case 1 是已知 σ，不是已知 μ</strong>
+        <p>假設檢定永遠不知道 μ——如果知道了，就不需要檢定。Case 1 的特別之處是知道母體<strong>標準差 σ</strong>（現實中極少見），因此分母直接用 σ 而非 s。</p>
+        <p>Case 2 和 Case 3 只差樣本量：<strong>n ≥ 30 → Case 2（Z 近似）；n &lt; 30 → Case 3（t）</strong>。兩者分子、分母公式一樣，只差查的表不同。</p>
+      </div>
+
+      <!-- 常見混淆 2 -->
+      <div class="punchline-box" style="margin-top:1rem;">
+        <strong>⚠ 常見混淆 2：變異數 ≠ 標準差，兩者差一個平方</strong>
+        <p>變異數 $\sigma^2$（variance）= 標準差 $\sigma$（standard deviation）的平方。知道其中一個就能算另一個。Case 4 說「σ₁、σ₂ 已知」等同於「$\sigma_1^2$、$\sigma_2^2$ 已知」。</p>
+        <p>SE 的公式 $\sigma/\sqrt{n}$ 來自：$\text{Var}(\bar{x}) = \sigma^2/n$，兩邊開根號得 $\text{SD}(\bar{x}) = \sigma/\sqrt{n}$。√n 代表「樣本量 n 的穩定效益」——n 翻四倍，SE 只縮一半。</p>
+      </div>
+
+      <!-- 常見混淆 3 -->
+      <div class="punchline-box" style="margin-top:1rem;">
+        <strong>⚠ 常見混淆 3：Case 4~7 為什麼分母要先平方再相加？</strong>
+        <p>因為<strong>標準差不能直接相加，變異數才能</strong>：$\sqrt{a^2+b^2} \neq a+b$（同畢氏定理）。兩組各自的 $s^2/n$ 相加後再開根號，才是 $\bar{x}_1 - \bar{x}_2$ 的真實抖動幅度。</p>
+        <p><strong>Case 6 的 $s_p$（合併標準差）</strong>：當假設兩組變異數相等（$\sigma_1^2 = \sigma_2^2$），把兩組 s² 加權合併成一個更精準的估計值 $s_p^2$，再代入公式，可以從 $\sqrt{s_p^2/n_1 + s_p^2/n_2}$ 提出 $s_p$ 變成 $s_p\sqrt{1/n_1+1/n_2}$。</p>
+        <p><strong>Case 5 和 Case 7 的 SE 公式相同</strong>，但 Case 5 是大樣本（n ≥ 30，查 Z 表），Case 7 是小樣本不等變異（查 t 表，df 用 Satterthwaite 公式）。</p>
+      </div>
+
+      <!-- 常見混淆 4 -->
+      <div class="punchline-box" style="margin-top:1rem;">
+        <strong>⚠ 常見混淆 4：Case 8 本質上是單樣本，n 是配對組數</strong>
+        <p>算出每對的差值 $d_i$（如：減重後 − 減重前）之後，Case 8 就變成對 $d_1, d_2, \ldots, d_n$ 做單樣本 t 檢定，和 Case 3 完全一樣。分母 $s_d/\sqrt{n}$ 就是 $s/\sqrt{n}$，s 換成 $s_d$ 而已。</p>
+        <p>n = 配對<strong>組數</strong>（幾個人），不是每人測量次數（每人固定兩次）。30 對的 Case 8 仍用 t 表（df = 29），因為 $\sigma_d$ 幾乎不會已知。</p>
+      </div>
+
+      <div class="punchline-box" style="margin-top:1rem;">
         <strong>判斷順序</strong>
         <p>① 幾個母體？單母體 → Case 1~3；雙母體 → 繼續</p>
         <p>② 配對設計？是 → Case 8；獨立樣本 → 繼續</p>
